@@ -8,6 +8,8 @@ const cookieParser = require('cookie-parser');
 const { environment } = require('./config');
 const isProduction = environment === 'production';
 const app = express();
+// routes folder
+const routes = require('./routes');
 // morgan middleware
 app.use(morgan('dev'));
 // cookies (parsing) middleware
@@ -35,6 +37,8 @@ app.use(
       }
     })
   );
+// use routes folder
+app.use(routes);
 // morgan middleware
 // morgan middleware
-// morgan middleware
+module.exports = app;
