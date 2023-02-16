@@ -5,11 +5,13 @@ const cors = require('cors');
 const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
+
 const { environment } = require('./config');
 const isProduction = environment === 'production';
-const app = express();
 // routes folder
 const routes = require('./routes');
+
+const app = express();
 // catch sequelize errors and format them before sending error response
 const { ValidationError } = require('sequelize');
 // morgan middleware
@@ -39,8 +41,10 @@ app.use(
     }
   })
 );
+
 // use routes folder
 app.use(routes);
+
 // ----------error handler : resource not found-------------------
 // Catch unhandled requests and forward to error handler.
 app.use((_req, _res, next) => {
@@ -60,7 +64,7 @@ app.use((err, _req, _res, next) => {
   }
   next(err);
 });
-// --------------error handler : Error formatter------------------
+// -------------- Error formatter------------------
 app.use((err, _req, res, _next) => {
   res.status(err.status || 500);
   console.error(err);
@@ -71,5 +75,4 @@ app.use((err, _req, res, _next) => {
     stack: isProduction ? null : err.stack
   });
 });
-
 module.exports = app;
