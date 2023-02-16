@@ -1,16 +1,10 @@
-const router = require('express').Router();
-// testing api router:
-// GET /api/set-token-cookie
-const { setTokenCookie } = require('../../utils/auth.js');
-const { User } = require('../../db/models');
-router.get('/set-token-cookie', async (_req, res) => {
-  const user = await User.findOne({
-      where: {
-        username: 'Demo-user'
-      }
-    });
-  setTokenCookie(res, user);
-  return res.json({ user: user });
-});
+
+const router = require("express").Router();
+const { restoreUser } = require("../../utils/auth.js");
+
+// Connect restoreUser middleware to the API router
+  // If current user session is valid, set req.user to the user in the database
+  // If current user session is not valid, set req.user to null
+router.use(restoreUser);
 
 module.exports = router;
