@@ -3,6 +3,7 @@ const {Op} = require('sequelize');
 const { Spot,Review,Booking,SpotImage, ReviewImage} = require('../../db/models');
 const {handleValidationErrors} = require('../../utils/validation');
 const {requireAuth} = require('../../utils/auth');
+const TokenExpiredError = require('jsonwebtoken/lib/TokenExpiredError');
 
 const router = express.Router();
 // Create a spot
@@ -136,6 +137,7 @@ router.get('/', async(req,res) => {
     res.status(200).json({Spots,page,size});
 
 });
+// FIXME:
 // ---------------------------------------------------------------------------------
 //                              ~~~~~~       BUG        ~~~~~~
 // ---------------------------------------------------------------------------------
@@ -176,23 +178,26 @@ router.get('/:spotId/reviews',requireAuth,handleValidationErrors, async(req,res)
     res.status(200).json(Reviews);
 });
 // Get bookings of a Spot from an id
-router.get('/:spotId/bookings', async(req,res) => {
+router.get('/:spotId/bookings',requireAuth,handleValidationErrors,  async(req,res) => {
     const {spotId} = req.params;
     const Bookings = await Booking.findAll({
         where:{
             spotId:spotId
         }
     });
+    // TODO:
+    // implement scopes for logged in user (see Kanban)
+    // FIXME:
     // --------BUG ---------
     // need to return error message if spotId does not match
-    if(Bookings){
-        res.status(200).json(Bookings);
-    }else{
-        res.status(400).json({
-            "message": "Spot couldn't be found",
-            "statusCode": 404
-          });
-    }
+    // if(Bookings){
+    //     res.status(200).json(Bookings);
+    // }else{
+    //     res.status(400).json({
+    //         "message": "Spot couldn't be found",
+    //         "statusCode": 404
+    //       });
+    // }
      // --------BUG ---------
 });
 // ---------------------------------------------------------------------------------
