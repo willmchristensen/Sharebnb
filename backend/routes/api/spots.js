@@ -1,6 +1,6 @@
 const express = require('express');
 const {Op} = require('sequelize');
-const { Spot,Review,Booking,SpotImage} = require('../../db/models');
+const { Spot,Review,Booking,SpotImage, ReviewImage} = require('../../db/models');
 const {handleValidationErrors} = require('../../utils/validation');
 const {requireAuth} = require('../../utils/auth');
 
@@ -162,25 +162,38 @@ router.get('/:spotId', async(req,res) => {
 });
 // ---------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------
-// Get reviews of a Spot from an id
-router.get('/:spotId/reviews', async(req,res) => {
+// Get all Reviews by a Spot's id
+router.get('/:spotId/reviews',requireAuth,handleValidationErrors, async(req,res) => {
     const {spotId} = req.params;
-    const result = await Review.findAll({
+    const Reviews = await Review.findAll({
         where:{
             spotId:spotId
+        },
+        include:{
+            model: ReviewImage,
         }
     });
-    res.status(200).json(result);
+    res.status(200).json(Reviews);
 });
 // Get bookings of a Spot from an id
 router.get('/:spotId/bookings', async(req,res) => {
     const {spotId} = req.params;
-    const result = await Booking.findAll({
+    const Bookings = await Booking.findAll({
         where:{
             spotId:spotId
         }
     });
-    res.status(200).json(result);
+    // --------BUG ---------
+    // need to return error message if spotId does not match
+    if(Bookings){
+        res.status(200).json(Bookings);
+    }else{
+        res.status(400).json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+          });
+    }
+     // --------BUG ---------
 });
 // ---------------------------------------------------------------------------------
 //                              ~~~~~~       BUG        ~~~~~~

@@ -16,8 +16,12 @@ router.post('/:reviewId/images', async(req,res) => {
 // Get details of a review from an id
 router.get('/:spotId', async(req,res) => {
     const {spotId} = req.params;
-    const result = await Review.findByPk(spotId);
-    res.status(200).json(result);
+    const Review = await Review.findByPk(spotId, {
+        include:{
+            model: ReviewImage,
+        }
+    });
+    res.status(200).json(Review);
 });
 // ---------------------------------------------------------------------------------
 //                              ~~~~~~       BUG        ~~~~~~
