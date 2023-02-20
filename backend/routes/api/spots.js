@@ -158,7 +158,7 @@ router.get('/:spotId', async(req,res) => {
         ],
     });
     console.log(numReviews.count);
-    res.status(200).json(result);
+    res.status(200).json({result});
 });
 // ---------------------------------------------------------------------------------
 //                          ------------end of bug------------
