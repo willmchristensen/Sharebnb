@@ -23,10 +23,8 @@ module.exports = {
         "name": "Cabby by the Beachy",
         "description": "Where the wild things are",
         "price": 123,
-        "createdAt": "2021-11-19 20:39:36",
-        "updatedAt": "2021-11-19 20:39:36",
-        "avgRating": 5,
-        "previewImage": "image url"
+        "avgRating": 4.3,
+        "previewImage": 'www.image.com',
       },
       {
         "id": 2,
@@ -40,10 +38,8 @@ module.exports = {
         "name": "Sandy",
         "description": "Sally sells seashells here",
         "price": 200,
-        "createdAt": "2021-11-19 20:39:36",
-        "updatedAt": "2021-11-19 20:39:36",
-        "avgRating": 4.5,
-        "previewImage": "image url"
+        "avgRating": 4.1,
+        "previewImage": 'www.imagine.com',
       },
       {
         "id": 3,
@@ -57,12 +53,9 @@ module.exports = {
         "name": "Rainy",
         "description": "It rains here",
         "price": 999,
-        "createdAt": "2021-11-19 20:39:36",
-        "updatedAt": "2021-11-19 20:39:36",
         "avgRating": 4.4,
-        "previewImage": "image url"
+        "previewImage": 'www.images.com',
       }
-
     ], {});
   },
 

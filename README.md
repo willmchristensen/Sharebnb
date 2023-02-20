@@ -296,7 +296,7 @@ Returns all the spots owned (created) by the current user.
 * Require Authentication: true
 * Request
   * Method: GET
-  * URL: /spots/:userId
+  * URL: /session
   * Body: none
 
 * Successful Response
@@ -477,7 +477,7 @@ Create and return a new image for a spot specified by id.
 * Require proper authorization: Spot must belong to the current user
 * Request
   * Method: POST
-  * URL: /spotimages/:spotID OR /spot/:spotId/images OR 
+  * URL: /spotimages/:spotID OR /spot/:spotId/images OR
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -902,7 +902,7 @@ Update and return an existing review.
 * Require proper authorization: Review must belong to the current user
 * Request
   * Method: PUT       ? /POST/PATCH
-  * URL: /reviews/:reviewId  
+  * URL: /reviews/:reviewId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1121,7 +1121,7 @@ Create and return a new booking from a spot specified by id.
 * Require Authentication: true
 * Require proper authorization: Spot must NOT belong to the current user
 * Request
-  * Method: POST 
+  * Method: POST
   * URL: /booking/:spotId
   * Body:
 
