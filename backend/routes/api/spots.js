@@ -138,9 +138,7 @@ router.get('/', async(req,res) => {
 
 });
 // FIXME:
-// ---------------------------------------------------------------------------------
-//                              ~~~~~~       BUG        ~~~~~~
-// ---------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------///                                       BUG      ---------------------------------------------------------------------------------
 
 // Get details of a Spot from an id
 router.get('/:spotId', async(req,res) => {
@@ -163,9 +161,10 @@ router.get('/:spotId', async(req,res) => {
     res.status(200).json(result);
 });
 // ---------------------------------------------------------------------------------
-// ---------------------------------------------------------------------------------
+//                          ------------end of bug------------
+// ------------------------------------------------------------------------------
 // Get all Reviews by a Spot's id
-router.get('/:spotId/reviews',requireAuth,handleValidationErrors, async(req,res) => {
+router.get('/:spotId/reviews', async(req,res) => {
     const {spotId} = req.params;
     const Reviews = await Review.findAll({
         where:{
@@ -175,7 +174,14 @@ router.get('/:spotId/reviews',requireAuth,handleValidationErrors, async(req,res)
             model: ReviewImage,
         }
     });
-    res.status(200).json(Reviews);
+    let userData;
+    if(req.user){
+        userData = req.user;
+    }
+    // TODO:
+    // error handler
+    // format userData
+    res.status(200).json({Reviews,userData});
 });
 // Get bookings of a Spot from an id
 router.get('/:spotId/bookings',requireAuth,handleValidationErrors,  async(req,res) => {
@@ -200,9 +206,7 @@ router.get('/:spotId/bookings',requireAuth,handleValidationErrors,  async(req,re
     // }
      // --------BUG ---------
 });
-// ---------------------------------------------------------------------------------
-//                              ~~~~~~       BUG        ~~~~~~
-// ---------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------///                                       BUG      ---------------------------------------------------------------------------------
 
 // Get all Spots owned by the Current User
 // router.get('/:currentUserID',requireAuth,handleValidationErrors, async(req,res) => {
@@ -215,7 +219,8 @@ router.get('/:spotId/bookings',requireAuth,handleValidationErrors,  async(req,re
 //     res.status(200).json(result);
 // });
 // ---------------------------------------------------------------------------------
-// ---------------------------------------------------------------------------------
+//                          ------------end of bug------------
+// ------------------------------------------------------------------------------
 
 // Delete a spot
 router.delete('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
