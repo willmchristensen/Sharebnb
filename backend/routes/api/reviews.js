@@ -7,11 +7,18 @@ const router = express.Router();
 // Create a Image for a Review based on the Review's id
 router.post('/:reviewId/images', async(req,res) => {
     const {url} = req.body;
-    let newReview = await ReviewImage.create({
-        reviewId: req.params.reviewId,
-        url: url
-    })
-    res.status(200).json(newReview);
+    // TODO:
+    // ------------bug!!----------------
+    // attach reviewimage to existing review, not create one with req params
+    // let newReview = await ReviewImage.create({
+    //     reviewId: req.params.reviewId,
+    //     url: url
+    // })
+    // if(newReview){
+    //     res.status(200).json(newReview);
+    // }else{
+    //     res.status(404).json({message: "Spot couldn't be found"})
+    // }
 });
 // Get details of a review from an id
 router.get('/:spotId', async(req,res) => {
