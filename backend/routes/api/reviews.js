@@ -4,21 +4,21 @@ const {handleValidationErrors} = require('../../utils/validation');
 const {requireAuth} = require('../../utils/auth');
 const router = express.Router();
 
+// TODO:
+// 400 error for max images
 // Create a Image for a Review based on the Review's id
 router.post('/:reviewId/images', async(req,res) => {
     const {url} = req.body;
-    // TODO:
-    // ------------bug!!----------------
-    // attach reviewimage to existing review, not create one with req params
-    // let newReview = await ReviewImage.create({
-    //     reviewId: req.params.reviewId,
-    //     url: url
-    // })
-    // if(newReview){
-    //     res.status(200).json(newReview);
-    // }else{
-    //     res.status(404).json({message: "Spot couldn't be found"})
-    // }
+    let review = await Review.findByPk(req.params.reviewId);
+    if(review){
+        let newImage = await ReviewImage.create({
+            reviewId: review.id,
+            url: url
+        })
+        res.status(200).json(newImage);
+    }else{
+        res.status(404).json({message: "Review couldn't be found"})
+    }
 });
 // Get details of a review from an id
 router.get('/:spotId', async(req,res) => {
