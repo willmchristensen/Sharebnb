@@ -52,6 +52,8 @@ router.put('/:reviewId',requireAuth,handleValidationErrors, async(req,res) => {
         result.stars = stars;
         await result.save();
         res.status(200).json(result);
+        // TODO:
+        // possibly change error response for body validations, specs say 400, my console said 500.
     }else{
         res.status(404).json({message: "Spot couldn't be found"})
     }

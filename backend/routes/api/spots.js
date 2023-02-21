@@ -7,7 +7,7 @@ const TokenExpiredError = require('jsonwebtoken/lib/TokenExpiredError');
 
 const router = express.Router();
 // Create a spot
-router.post('/',req\uireAuth,handleValidationErrors, async(req,res) => {
+router.post('/',requireAuth,handleValidationErrors, async(req,res) => {
 
     const {address,city,state,country,lat,lng,name,description,price} = req.body;
     // process user input
@@ -73,6 +73,8 @@ router.post('/:spotId/reviews', async(req,res) => {
 });
 // Create a Booking for a Spot based on the Spot's id
 router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,res) => {
+    // TODO:
+    // errors: 403,404, - Kanban
     const {startDate,endDate} = req.body;
     let newBooking= await Booking.create({
         userId: req.user.id,
