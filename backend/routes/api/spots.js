@@ -6,11 +6,12 @@ const {requireAuth} = require('../../utils/auth');
 const TokenExpiredError = require('jsonwebtoken/lib/TokenExpiredError');
 
 const router = express.Router();
+// -----------------TODO: (most routes need ERROR HANDLERS)---------------------
+
 // Create a spot
 router.post('/',requireAuth,handleValidationErrors, async(req,res) => {
 
     const {address,city,state,country,lat,lng,name,description,price} = req.body;
-    // process user input
 
     const newSpot = await Spot.create({
         address,
@@ -28,6 +29,7 @@ router.post('/',requireAuth,handleValidationErrors, async(req,res) => {
     res.status(201).json(newSpot)
 
 });
+// TODO: (IMPLEMENT AGGREGATE DATA, ask about what to do with preview image.)
 // Edit a spot by ID
 router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
     const {spotId} = req.params;
@@ -42,6 +44,8 @@ router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
             name,
             description,
             price,
+            avgRating,
+            previewImage,
             ownerId} = req.body;
 
             result.address =address ;
@@ -54,17 +58,21 @@ router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
             result.description =description ;
             result.price =price ;
             result.ownerId =ownerId;
+            result.avgRating = avgRating;
+            result.previewImage = previewImage;
+
             await result.save();
+
         res.status(200).json(result);
     }else{
         res.status(404).json({message: "Spot couldn't be found"})
     }
 });
+
+// TODO: (ERRORS: 400,404,403 - Kanban) && (DOUBLE CHECK: were sending back a token right?)
 // Create a Review for a Spot based on the Spot's id
 router.post('/:spotId/reviews', async(req,res) => {
     const {review,stars} = req.body;
-    // TODO:
-    // ERRORS: 400,404,403 - Kanban
     let newReview = await Review.create({
         userId: req.user.id,
         spotId: req.params.spotId,
@@ -73,8 +81,12 @@ router.post('/:spotId/reviews', async(req,res) => {
     })
     res.status(200).json(newReview);
 });
+<<<<<<< HEAD
 // TODO:
 // errors: 403,404, - Kanban
+=======
+// TODO: (errors: 403,404, - Kanban)
+>>>>>>> create-review-image-from-review-id
 // Create a Booking for a Spot based on the Spot's id
 router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,res) => {
     const {startDate,endDate} = req.body;
@@ -87,7 +99,7 @@ router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,re
     res.status(200).json(newBooking);
 });
 // Create a SpotImage for a Spot based on the Spot's id
-router.post('/:spotId/images', async(req,res) => {
+router.post('/:spotId/images',requireAuth,handleValidationErrors, async(req,res) => {
     const {url,preview} = req.body;
     let newSpotImage = await SpotImage.create({
         userId: req.user.id,
@@ -97,6 +109,7 @@ router.post('/:spotId/images', async(req,res) => {
     });
     res.status(200).json(newSpotImage);
 });
+
 // Get all spots
 router.get('/', async(req,res) => {
 
@@ -141,9 +154,7 @@ router.get('/', async(req,res) => {
     res.status(200).json({Spots,page,size});
 
 });
-// FIXME:
-// ---------------------------------------------------------------------------------///                                       BUG      ---------------------------------------------------------------------------------
-
+// FIXME: [include associated data and aggregate data]
 // Get details of a Spot from an id
 router.get('/:spotId', async(req,res) => {
     const {spotId} = req.params;
@@ -164,9 +175,7 @@ router.get('/:spotId', async(req,res) => {
     console.log(numReviews.count);
     res.status(200).json({result});
 });
-// ---------------------------------------------------------------------------------
-//                          ------------end of bug------------
-// ------------------------------------------------------------------------------
+// TODO: (error handlers) && (format userData)
 // Get all Reviews by a Spot's id
 router.get('/:spotId/reviews', async(req,res) => {
     const {spotId} = req.params;
@@ -182,50 +191,37 @@ router.get('/:spotId/reviews', async(req,res) => {
     if(req.user){
         userData = req.user;
     }
-    // TODO:
-    // error handler
-    // format userData
     res.status(200).json({Reviews,userData});
 });
+// TODO: implement scope for logged in user (see Kanban)
 // Get bookings of a Spot from an id
 router.get('/:spotId/bookings',requireAuth,handleValidationErrors,  async(req,res) => {
     const {spotId} = req.params;
-    const Bookings = await Booking.findAll({
-        where:{
-            spotId:spotId
+    const spot = await Spot.findByPk(spotId,{
+        include:{
+            model:Booking
         }
     });
-    // TODO:
-    // implement scopes for logged in user (see Kanban)
-    // FIXME:
-    // --------BUG ---------
-    // need to return error message if spotId does not match
-    // if(Bookings){
-    //     res.status(200).json(Bookings);
-    // }else{
-    //     res.status(400).json({
-    //         "message": "Spot couldn't be found",
-    //         "statusCode": 404
-    //       });
-    // }
-     // --------BUG ---------
+    if(spot){
+        res.status(200).json(spot.Bookings);
+    }else{
+        res.status(400).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        });
+    }
 });
-// ---------------------------------------------------------------------------------///                                       BUG      ---------------------------------------------------------------------------------
-
+// FIXME: [CURRENT USER]
 // Get all Spots owned by the Current User
-// router.get('/:currentUserID',requireAuth,handleValidationErrors, async(req,res) => {
-//     const currentUserID = req.user.id;
-//     const result = await Spot.findAll({
-//         where: {
-//             ownerId: currentUserID
-//         }
-//     });
-//     res.status(200).json(result);
-// });
-// ---------------------------------------------------------------------------------
-//                          ------------end of bug------------
-// ------------------------------------------------------------------------------
-
+router.get('/:currentUserID',requireAuth,handleValidationErrors, async(req,res) => {
+    const currentUserID = req.user.id;
+    const result = await Spot.findAll({
+        where: {
+            ownerId: currentUserID
+        }
+    });
+    res.status(200).json(result);
+});
 // Delete a spot
 router.delete('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
     const {spotId} = req.params;
@@ -237,7 +233,4 @@ router.delete('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
         res.status(404).json({message: "Spot couldn't be found"})
     }
 });
-
-
-
 module.exports = router;

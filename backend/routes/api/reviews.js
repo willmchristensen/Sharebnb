@@ -4,25 +4,8 @@ const {handleValidationErrors} = require('../../utils/validation');
 const {requireAuth} = require('../../utils/auth');
 const router = express.Router();
 
-// Create a Image for a Review based on the Review's id
-router.post('/:reviewId/images', async(req,res) => {
-    const {url} = req.body;
-    let newReview = await ReviewImage.create({
-        reviewId: req.params.reviewId,
-        url: url
-    })
-    res.status(200).json(newReview);
-});
-// Get details of a review from an id
-router.get('/:spotId', async(req,res) => {
-    const {spotId} = req.params;
-    const Review = await Review.findByPk(spotId, {
-        include:{
-            model: ReviewImage,
-        }
-    });
-    res.status(200).json(Review);
-});
+// TODO: *
+// remove this entirely cuz moved into spots?
 // ---------------------------------------------------------------------------------
 //                              ~~~~~~       BUG        ~~~~~~
 // ---------------------------------------------------------------------------------
@@ -39,6 +22,32 @@ router.get('/:spotId', async(req,res) => {
 // });
 // ---------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------
+// TODO:
+// 400 error for max images
+// Create a Image for a Review based on the Review's id
+router.post('/:reviewId/images', async(req,res) => {
+    const {url} = req.body;
+    let review = await Review.findByPk(req.params.reviewId);
+    if(review){
+        let newImage = await ReviewImage.create({
+            reviewId: review.id,
+            url: url
+        })
+        res.status(200).json(newImage);
+    }else{
+        res.status(404).json({message: "Review couldn't be found"})
+    }
+});
+// Get details of a review from an id
+router.get('/:spotId', async(req,res) => {
+    const {spotId} = req.params;
+    const Review = await Review.findByPk(spotId, {
+        include:{
+            model: ReviewImage,
+        }
+    });
+    res.status(200).json(Review);
+});
 
 // Edit a review by ID
 router.put('/:reviewId',requireAuth,handleValidationErrors, async(req,res) => {
