@@ -6,7 +6,8 @@ const {requireAuth} = require('../../utils/auth');
 const TokenExpiredError = require('jsonwebtoken/lib/TokenExpiredError');
 
 const router = express.Router();
-// TODO: (most routes need ERROR HANDLERS)
+// -----------------TODO: (most routes need ERROR HANDLERS)---------------------
+
 // Create a spot
 router.post('/',requireAuth,handleValidationErrors, async(req,res) => {
 
@@ -168,6 +169,7 @@ router.get('/:spotId', async(req,res) => {
     console.log(numReviews.count);
     res.status(200).json({result});
 });
+// TODO: (error handlers) && (format userData)
 // Get all Reviews by a Spot's id
 router.get('/:spotId/reviews', async(req,res) => {
     const {spotId} = req.params;
@@ -183,33 +185,25 @@ router.get('/:spotId/reviews', async(req,res) => {
     if(req.user){
         userData = req.user;
     }
-    // TODO:
-    // error handler
-    // format userData
     res.status(200).json({Reviews,userData});
 });
+// TODO: implement scope for logged in user (see Kanban)
 // Get bookings of a Spot from an id
 router.get('/:spotId/bookings',requireAuth,handleValidationErrors,  async(req,res) => {
     const {spotId} = req.params;
-    const Bookings = await Booking.findAll({
-        where:{
-            spotId:spotId
+    const spot = await Spot.findByPk(spotId,{
+        include:{
+            model:Booking
         }
     });
-    // TODO:
-    // implement scopes for logged in user (see Kanban)
-    // FIXME:
-    // --------BUG ---------
-    // need to return error message if spotId does not match
-    // if(Bookings){
-    //     res.status(200).json(Bookings);
-    // }else{
-    //     res.status(400).json({
-    //         "message": "Spot couldn't be found",
-    //         "statusCode": 404
-    //       });
-    // }
-     // --------BUG ---------
+    if(spot){
+        res.status(200).json(spot.Bookings);
+    }else{
+        res.status(400).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        });
+    }
 });
 // FIXME: [CURRENT USER]
 // Get all Spots owned by the Current User

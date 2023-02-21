@@ -19,6 +19,10 @@ router.put('/:bookingId',requireAuth,handleValidationErrors, async(req,res) => {
         res.status(404).json({message: "Spot couldn't be found"})
     }
 });
+// ----------------------------------------------------------------------------------------
+// TODO: Error response with status 400 is given when it is past the booking's
+//       startDate (no deleting of current or past bookings)
+// -----------------------------------------------------------------------------------------
 // Delete a Booking
 router.delete('/:bookingId',requireAuth,handleValidationErrors, async(req,res) => {
     const {bookingId} = req.params;
