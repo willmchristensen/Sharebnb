@@ -75,10 +75,20 @@ router.get('/', async(req,res) => {
 });
 // TODO: OWNER SCOPE
 // Get Spots of Current User
-// router.get('/current', async(req,res) => {
-//     // if(req.user){
-//     // }
-// });
+router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
+    let User = req.user;
+    console.log(User.id);
+    let Spots = await Spot.findAll({
+        where: {
+            ownerId: User.id
+        }
+    })
+    if(Spots){
+        res.status(200).json(Spots);
+    }else{
+        res.status(400).json({message: "Spot couldn't be found"});
+    }
+});
 
 // TODO: (IMPLEMENT AGGREGATE DATA, ask about what to do with preview image.)
 // Edit a spot by ID
@@ -207,22 +217,8 @@ router.get('/:spotId/bookings',requireAuth,handleValidationErrors,  async(req,re
     if(spot){
         res.status(200).json(spot.Bookings);
     }else{
-        res.status(400).json({
-            message: "Spot couldn't be found",
-            statusCode: 404
-        });
+        res.status(404).json({message: "Spot couldn't be found"});
     }
-});
-// FIXME: [CURRENT USER]
-// Get all Spots owned by the Current User
-router.get('/:currentUserID',requireAuth,handleValidationErrors, async(req,res) => {
-    const currentUserID = req.user.id;
-    const result = await Spot.findAll({
-        where: {
-            ownerId: currentUserID
-        }
-    });
-    res.status(200).json(result);
 });
 // Delete a spot
 router.delete('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {

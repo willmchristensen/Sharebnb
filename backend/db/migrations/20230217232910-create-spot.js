@@ -68,9 +68,11 @@ module.exports = {
       },
       avgRating: {
         type: Sequelize.DECIMAL,
+        defaultValue: 0.0,
       },
       previewImage:{
         type: Sequelize.STRING,
+        defaultValue: null,
       }
     }, options);
   },
