@@ -1,5 +1,5 @@
 const express = require('express');
-const { Review, ReviewImage } = require('../../db/models');
+const { Review, ReviewImage, Spot} = require('../../db/models');
 const {handleValidationErrors} = require('../../utils/validation');
 const {requireAuth} = require('../../utils/auth');
 const router = express.Router();
@@ -22,23 +22,29 @@ const router = express.Router();
 // });
 // ---------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------
+// TODO: im assuming we want to include the user model but not sure if grabbing from req will suffice.
 // Get Reviews of Current User
-router.get('/current', async(req,res) => {
+router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
     if(req.user){
         let reviews = await Review.findAll({
             where:{
                 userId: req.user.id
-            }
+            },
+            include:[
+                {model: Spot},
+                {model: ReviewImage},
+            ],
         });
+        let User = req.user;
         if(reviews){
-            res.status(200).json(reviews);
+            res.status(200).json({reviews,User});
         }else{
             res.status(404).json({message: "Reviews couldn't be found"})
         }
     }else{
         res.status(404).json({message: "User couldn't be found"})
     }
-})
+});
 // TODO:
 // 400 error for max images
 // Create a Image for a Review based on the Review's id
