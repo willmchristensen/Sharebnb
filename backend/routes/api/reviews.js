@@ -23,7 +23,22 @@ const router = express.Router();
 // ---------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------
 // Get Reviews of Current User
-
+router.get('/current', async(req,res) => {
+    if(req.user){
+        let reviews = await Review.findAll({
+            where:{
+                userId: req.user.id
+            }
+        });
+        if(reviews){
+            res.status(200).json(reviews);
+        }else{
+            res.status(404).json({message: "Reviews couldn't be found"})
+        }
+    }else{
+        res.status(404).json({message: "User couldn't be found"})
+    }
+})
 // TODO:
 // 400 error for max images
 // Create a Image for a Review based on the Review's id
