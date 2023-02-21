@@ -63,6 +63,8 @@ router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
 // Create a Review for a Spot based on the Spot's id
 router.post('/:spotId/reviews', async(req,res) => {
     const {review,stars} = req.body;
+    // TODO:
+    // ERRORS: 400,404,403 - Kanban
     let newReview = await Review.create({
         userId: req.user.id,
         spotId: req.params.spotId,
