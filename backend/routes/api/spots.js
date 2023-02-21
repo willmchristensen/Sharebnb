@@ -29,8 +29,9 @@ router.post('/',requireAuth,handleValidationErrors, async(req,res) => {
     res.status(201).json(newSpot)
 
 });
+// TODO: !!!!!!!!!!!check that current error message is incorrect!!!!!!!!!!!!!!!!
 // Get all spots
-router.get('/', async(req,res) => {
+router.get('/',handleValidationErrors, async(req,res) => {
 
     let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
 
@@ -70,10 +71,12 @@ router.get('/', async(req,res) => {
         ...pagination,
     });
 
-    res.status(200).json({Spots,page,size});
+    if(Spots){
+        res.status(200).json({Spots,page,size});
+    }
 
 });
-// TODO: OWNER SCOPE??
+// TODO: owner scope??
 // Get Spots of Current User
 router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
     let User = req.user;
