@@ -30,6 +30,8 @@ router.post('/',requireAuth,handleValidationErrors, async(req,res) => {
 });
 // Edit a spot by ID
 router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
+    // TODO:
+    // IMPLEMENT AGGREGATE DATA, ask about what to do with preview image.
     const {spotId} = req.params;
     const result = await Spot.findByPk(spotId);
     if(result){
@@ -42,6 +44,8 @@ router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
             name,
             description,
             price,
+            avgRating,
+            previewImage,
             ownerId} = req.body;
 
             result.address =address ;
@@ -54,7 +58,11 @@ router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
             result.description =description ;
             result.price =price ;
             result.ownerId =ownerId;
+            result.avgRating = avgRating;
+            result.previewImage = previewImage;
+
             await result.save();
+
         res.status(200).json(result);
     }else{
         res.status(404).json({message: "Spot couldn't be found"})
@@ -65,6 +73,7 @@ router.post('/:spotId/reviews', async(req,res) => {
     const {review,stars} = req.body;
     // TODO:
     // ERRORS: 400,404,403 - Kanban
+    // were sending back a token right?
     let newReview = await Review.create({
         userId: req.user.id,
         spotId: req.params.spotId,
@@ -87,7 +96,7 @@ router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,re
     res.status(200).json(newBooking);
 });
 // Create a SpotImage for a Spot based on the Spot's id
-router.post('/:spotId/images', async(req,res) => {
+router.post('/:spotId/images',requireAuth,handleValidationErrors, async(req,res) => {
     const {url,preview} = req.body;
     let newSpotImage = await SpotImage.create({
         userId: req.user.id,
@@ -142,7 +151,9 @@ router.get('/', async(req,res) => {
 
 });
 // FIXME:
-// ---------------------------------------------------------------------------------///                                       BUG      ---------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------///
+//                                     BUG
+// ---------------------------------------------------------------------------------
 
 // Get details of a Spot from an id
 router.get('/:spotId', async(req,res) => {
@@ -210,8 +221,10 @@ router.get('/:spotId/bookings',requireAuth,handleValidationErrors,  async(req,re
     // }
      // --------BUG ---------
 });
-// ---------------------------------------------------------------------------------///                                       BUG      ---------------------------------------------------------------------------------
-
+// FIXME:
+// ---------------------------------------------------------------------------------///
+//                                     BUG
+// ---------------------------------------------------------------------------------
 // Get all Spots owned by the Current User
 // router.get('/:currentUserID',requireAuth,handleValidationErrors, async(req,res) => {
 //     const currentUserID = req.user.id;
