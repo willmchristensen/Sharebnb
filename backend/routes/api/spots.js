@@ -12,7 +12,6 @@ const router = express.Router();
 router.post('/',requireAuth,handleValidationErrors, async(req,res) => {
 
     const {address,city,state,country,lat,lng,name,description,price} = req.body;
-    // process user input
 
     const newSpot = await Spot.create({
         address,
@@ -69,6 +68,7 @@ router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
         res.status(404).json({message: "Spot couldn't be found"})
     }
 });
+
 // TODO: (ERRORS: 400,404,403 - Kanban) && (DOUBLE CHECK: were sending back a token right?)
 // Create a Review for a Spot based on the Spot's id
 router.post('/:spotId/reviews', async(req,res) => {
@@ -104,6 +104,7 @@ router.post('/:spotId/images',requireAuth,handleValidationErrors, async(req,res)
     });
     res.status(200).json(newSpotImage);
 });
+
 // Get all spots
 router.get('/', async(req,res) => {
 
