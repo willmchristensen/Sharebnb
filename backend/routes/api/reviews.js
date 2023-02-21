@@ -30,9 +30,10 @@ router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
             where:{
                 userId: req.user.id
             },
-            include:{
-                model: Spot,
-            },
+            include:[
+                {model: Spot},
+                {model: ReviewImage},
+            ],
         });
         let User = req.user;
         if(reviews){
