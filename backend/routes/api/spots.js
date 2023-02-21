@@ -6,6 +6,7 @@ const {requireAuth} = require('../../utils/auth');
 const TokenExpiredError = require('jsonwebtoken/lib/TokenExpiredError');
 
 const router = express.Router();
+// TODO: most routes need
 // Create a spot
 router.post('/',requireAuth,handleValidationErrors, async(req,res) => {
 
@@ -28,10 +29,9 @@ router.post('/',requireAuth,handleValidationErrors, async(req,res) => {
     res.status(201).json(newSpot)
 
 });
+//      TODO:     IMPLEMENT AGGREGATE DATA, ask about what to do with preview image.
 // Edit a spot by ID
 router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
-    // TODO:
-    // IMPLEMENT AGGREGATE DATA, ask about what to do with preview image.
     const {spotId} = req.params;
     const result = await Spot.findByPk(spotId);
     if(result){
@@ -68,12 +68,12 @@ router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
         res.status(404).json({message: "Spot couldn't be found"})
     }
 });
+// TODO:
+// ERRORS: 400,404,403 - Kanban
+// were sending back a token right?
 // Create a Review for a Spot based on the Spot's id
 router.post('/:spotId/reviews', async(req,res) => {
     const {review,stars} = req.body;
-    // TODO:
-    // ERRORS: 400,404,403 - Kanban
-    // were sending back a token right?
     let newReview = await Review.create({
         userId: req.user.id,
         spotId: req.params.spotId,
@@ -82,10 +82,10 @@ router.post('/:spotId/reviews', async(req,res) => {
     })
     res.status(200).json(newReview);
 });
+// TODO:
+// errors: 403,404, - Kanban
 // Create a Booking for a Spot based on the Spot's id
 router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,res) => {
-    // TODO:
-    // errors: 403,404, - Kanban
     const {startDate,endDate} = req.body;
     let newBooking= await Booking.create({
         userId: req.user.id,
