@@ -29,6 +29,57 @@ router.post('/',requireAuth,handleValidationErrors, async(req,res) => {
     res.status(201).json(newSpot)
 
 });
+// Get all spots
+router.get('/', async(req,res) => {
+
+    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+
+    let where = {};
+
+    if(minLat){
+        where.lat = { [Op.gte]: minLat }
+    }
+    if(maxLat){
+        where.lat = { [Op.lte]: maxLat }
+    }
+    if(minLng){
+        where.lng = { [Op.gte]: minLng }
+    }
+    if(maxLng){
+        where.lng = { [Op.lte]: maxLng }
+    }
+    if(minPrice){
+        where.price = { [Op.gte]: minPrice }
+    }
+    if(maxPrice){
+        where.price = { [Op.lte]: maxPrice }
+    }
+
+    let pagination = {};
+    page = parseInt(page);
+    size = parseInt(size);
+    if(isNaN(page)) page = 0;
+    if(isNaN(size)) size = 20;
+    if (page > 10) page = 10
+    if (size > 20) size = 20
+    pagination.limit = size;
+    pagination.offset = size * (page - 1)
+
+    const Spots = await Spot.findAll({
+        where,
+        ...pagination,
+    });
+
+    res.status(200).json({Spots,page,size});
+
+});
+// TODO: OWNER SCOPE
+// Get Spots of Current User
+// router.get('/current', async(req,res) => {
+//     // if(req.user){
+//     // }
+// });
+
 // TODO: (IMPLEMENT AGGREGATE DATA, ask about what to do with preview image.)
 // Edit a spot by ID
 router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
@@ -105,50 +156,6 @@ router.post('/:spotId/images',requireAuth,handleValidationErrors, async(req,res)
     res.status(200).json(newSpotImage);
 });
 
-// Get all spots
-router.get('/', async(req,res) => {
-
-    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
-
-    let where = {};
-
-    if(minLat){
-        where.lat = { [Op.gte]: minLat }
-    }
-    if(maxLat){
-        where.lat = { [Op.lte]: maxLat }
-    }
-    if(minLng){
-        where.lng = { [Op.gte]: minLng }
-    }
-    if(maxLng){
-        where.lng = { [Op.lte]: maxLng }
-    }
-    if(minPrice){
-        where.price = { [Op.gte]: minPrice }
-    }
-    if(maxPrice){
-        where.price = { [Op.lte]: maxPrice }
-    }
-
-    let pagination = {};
-    page = parseInt(page);
-    size = parseInt(size);
-    if(isNaN(page)) page = 0;
-    if(isNaN(size)) size = 20;
-    if (page > 10) page = 10
-    if (size > 20) size = 20
-    pagination.limit = size;
-    pagination.offset = size * (page - 1)
-
-    const Spots = await Spot.findAll({
-        where,
-        ...pagination,
-    });
-
-    res.status(200).json({Spots,page,size});
-
-});
 // FIXME: [include associated data and aggregate data]
 // Get details of a Spot from an id
 router.get('/:spotId', async(req,res) => {

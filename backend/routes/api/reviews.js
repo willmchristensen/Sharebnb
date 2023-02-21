@@ -22,6 +22,8 @@ const router = express.Router();
 // });
 // ---------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------
+// Get Reviews of Current User
+
 // TODO:
 // 400 error for max images
 // Create a Image for a Review based on the Review's id
