@@ -73,11 +73,10 @@ router.get('/', async(req,res) => {
     res.status(200).json({Spots,page,size});
 
 });
-// TODO: OWNER SCOPE
+// TODO: OWNER SCOPE??
 // Get Spots of Current User
 router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
     let User = req.user;
-    console.log(User.id);
     let Spots = await Spot.findAll({
         where: {
             ownerId: User.id

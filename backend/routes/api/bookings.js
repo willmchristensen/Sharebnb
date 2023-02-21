@@ -1,8 +1,28 @@
 const express = require('express');
-const { Booking } = require('../../db/models');
+const { Booking , Spot} = require('../../db/models');
 const {handleValidationErrors} = require('../../utils/validation');
 const {requireAuth} = require('../../utils/auth');
 const router = express.Router();
+
+// Get Bookings of Current User
+router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
+    let User = req.user;
+    let Bookings = await Booking.findAll({
+        where: {
+            userId: User.id
+        },
+        include: {
+            model: Spot,
+        }
+    })
+    if(Bookings){
+        res.status(200).json(Bookings);
+    }else{
+        res.status(400).json({message: "Booking couldn't be found"});
+    }
+});
+
+
 // Edit a booking by ID
 router.put('/:bookingId',requireAuth,handleValidationErrors, async(req,res) => {
     const {bookingId} = req.params;
