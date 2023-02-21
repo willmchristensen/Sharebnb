@@ -81,12 +81,7 @@ router.post('/:spotId/reviews', async(req,res) => {
     })
     res.status(200).json(newReview);
 });
-<<<<<<< HEAD
-// TODO:
-// errors: 403,404, - Kanban
-=======
 // TODO: (errors: 403,404, - Kanban)
->>>>>>> create-review-image-from-review-id
 // Create a Booking for a Spot based on the Spot's id
 router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,res) => {
     const {startDate,endDate} = req.body;
