@@ -3,10 +3,9 @@ const { ReviewImage } = require('../../db/models');
 const {handleValidationErrors} = require('../../utils/validation');
 const {requireAuth} = require('../../utils/auth');
 const router = express.Router();
+// TODO: implement owner scope
 // Delete a Spot Image
 router.delete('/:reviewImageId',requireAuth,handleValidationErrors, async(req,res) => {
-    // TODO:
-    // implement owner scope
     const {reviewImageId} = req.params;
     const result = await ReviewImage.findByPk(reviewImageId);
     if(result){

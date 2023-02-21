@@ -4,6 +4,24 @@ const {handleValidationErrors} = require('../../utils/validation');
 const {requireAuth} = require('../../utils/auth');
 const router = express.Router();
 
+// TODO: *
+// remove this entirely cuz moved into spots?
+// ---------------------------------------------------------------------------------
+//                              ~~~~~~       BUG        ~~~~~~
+// ---------------------------------------------------------------------------------
+// Create a Review for a Spot based on the Spot's id
+// router.post('/:spotId', async(req,res) => {
+//     const {review,stars} = req.body;
+//     let newReview = await Review.create({
+//         userId: req.user.id,
+//         spotId: req.params.spotId,
+//         review,
+//         stars
+//     })
+//     res.status(200).json(newReview);
+// });
+// ---------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------
 // TODO:
 // 400 error for max images
 // Create a Image for a Review based on the Review's id
@@ -30,22 +48,6 @@ router.get('/:spotId', async(req,res) => {
     });
     res.status(200).json(Review);
 });
-// ---------------------------------------------------------------------------------
-//                              ~~~~~~       BUG        ~~~~~~
-// ---------------------------------------------------------------------------------
-// Create a Review for a Spot based on the Spot's id
-// router.post('/:spotId', async(req,res) => {
-//     const {review,stars} = req.body;
-//     let newReview = await Review.create({
-//         userId: req.user.id,
-//         spotId: req.params.spotId,
-//         review,
-//         stars
-//     })
-//     res.status(200).json(newReview);
-// });
-// ---------------------------------------------------------------------------------
-// ---------------------------------------------------------------------------------
 
 // Edit a review by ID
 router.put('/:reviewId',requireAuth,handleValidationErrors, async(req,res) => {

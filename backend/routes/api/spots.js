@@ -6,7 +6,7 @@ const {requireAuth} = require('../../utils/auth');
 const TokenExpiredError = require('jsonwebtoken/lib/TokenExpiredError');
 
 const router = express.Router();
-// TODO: most routes need
+// TODO: (most routes need ERROR HANDLERS)
 // Create a spot
 router.post('/',requireAuth,handleValidationErrors, async(req,res) => {
 
@@ -29,7 +29,7 @@ router.post('/',requireAuth,handleValidationErrors, async(req,res) => {
     res.status(201).json(newSpot)
 
 });
-//      TODO:     IMPLEMENT AGGREGATE DATA, ask about what to do with preview image.
+// TODO: (IMPLEMENT AGGREGATE DATA, ask about what to do with preview image.)
 // Edit a spot by ID
 router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
     const {spotId} = req.params;
@@ -68,9 +68,7 @@ router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
         res.status(404).json({message: "Spot couldn't be found"})
     }
 });
-// TODO:
-// ERRORS: 400,404,403 - Kanban
-// were sending back a token right?
+// TODO: (ERRORS: 400,404,403 - Kanban) && (DOUBLE CHECK: were sending back a token right?)
 // Create a Review for a Spot based on the Spot's id
 router.post('/:spotId/reviews', async(req,res) => {
     const {review,stars} = req.body;
@@ -82,8 +80,7 @@ router.post('/:spotId/reviews', async(req,res) => {
     })
     res.status(200).json(newReview);
 });
-// TODO:
-// errors: 403,404, - Kanban
+// TODO: (errors: 403,404, - Kanban)
 // Create a Booking for a Spot based on the Spot's id
 router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,res) => {
     const {startDate,endDate} = req.body;
@@ -150,11 +147,7 @@ router.get('/', async(req,res) => {
     res.status(200).json({Spots,page,size});
 
 });
-// FIXME:
-// ---------------------------------------------------------------------------------///
-//                                     BUG
-// ---------------------------------------------------------------------------------
-
+// FIXME: [include associated data and aggregate data]
 // Get details of a Spot from an id
 router.get('/:spotId', async(req,res) => {
     const {spotId} = req.params;
@@ -175,9 +168,6 @@ router.get('/:spotId', async(req,res) => {
     console.log(numReviews.count);
     res.status(200).json({result});
 });
-// ---------------------------------------------------------------------------------
-//                          ------------end of bug------------
-// ------------------------------------------------------------------------------
 // Get all Reviews by a Spot's id
 router.get('/:spotId/reviews', async(req,res) => {
     const {spotId} = req.params;
@@ -221,24 +211,17 @@ router.get('/:spotId/bookings',requireAuth,handleValidationErrors,  async(req,re
     // }
      // --------BUG ---------
 });
-// FIXME:
-// ---------------------------------------------------------------------------------///
-//                                     BUG
-// ---------------------------------------------------------------------------------
+// FIXME: [CURRENT USER]
 // Get all Spots owned by the Current User
-// router.get('/:currentUserID',requireAuth,handleValidationErrors, async(req,res) => {
-//     const currentUserID = req.user.id;
-//     const result = await Spot.findAll({
-//         where: {
-//             ownerId: currentUserID
-//         }
-//     });
-//     res.status(200).json(result);
-// });
-// ---------------------------------------------------------------------------------
-//                          ------------end of bug------------
-// ------------------------------------------------------------------------------
-
+router.get('/:currentUserID',requireAuth,handleValidationErrors, async(req,res) => {
+    const currentUserID = req.user.id;
+    const result = await Spot.findAll({
+        where: {
+            ownerId: currentUserID
+        }
+    });
+    res.status(200).json(result);
+});
 // Delete a spot
 router.delete('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
     const {spotId} = req.params;
@@ -250,7 +233,4 @@ router.delete('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
         res.status(404).json({message: "Spot couldn't be found"})
     }
 });
-
-
-
 module.exports = router;
