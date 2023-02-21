@@ -31,7 +31,7 @@ router.delete('/:bookingId',requireAuth,handleValidationErrors, async(req,res) =
         await result.destroy()
         res.status(200).json({message: "Successfully deleted"});
     }else{
-        res.status(404).json({message: "Spot couldn't be found"})
+        res.status(404).json({message: "Booking couldn't be found"})
     }
 });
 module.exports = router;
