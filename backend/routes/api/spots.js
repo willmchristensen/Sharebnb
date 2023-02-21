@@ -76,7 +76,7 @@ router.get('/',handleValidationErrors, async(req,res) => {
     }
 
 });
-// TODO: owner scope??
+// TODO: owner scope?
 // Get Spots of Current User
 router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
     let User = req.user;
@@ -92,12 +92,12 @@ router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
     }
 });
 
-// TODO: (IMPLEMENT AGGREGATE DATA, ask about what to do with preview image.)
+// TODO: (previewImage & avgRating: keep in edit? still confused on what to do with these.)
 // Edit a spot by ID
 router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
     const {spotId} = req.params;
-    const result = await Spot.findByPk(spotId);
-    if(result){
+    const Spot = await Spot.findByPk(spotId);
+    if(Spot){
         const {address,
             city,
             state,
@@ -111,22 +111,22 @@ router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
             previewImage,
             ownerId} = req.body;
 
-            result.address =address ;
-            result.city =city ;
-            result.state =state ;
-            result.country =country ;
-            result.lat =lat ;
-            result.lng =lng ;
-            result.name =name ;
-            result.description =description ;
-            result.price =price ;
-            result.ownerId =ownerId;
-            result.avgRating = avgRating;
-            result.previewImage = previewImage;
+            Spot.address =address ;
+            Spot.city =city ;
+            Spot.state =state ;
+            Spot.country =country ;
+            Spot.lat =lat ;
+            Spot.lng =lng ;
+            Spot.name =name ;
+            Spot.description =description ;
+            Spot.price =price ;
+            Spot.ownerId =ownerId;
+            Spot.avgRating = avgRating;
+            Spot.previewImage = previewImage;
 
-            await result.save();
+            await Spot.save();
 
-        res.status(200).json(result);
+        res.status(200).json(Spot);
     }else{
         res.status(404).json({message: "Spot couldn't be found"})
     }
