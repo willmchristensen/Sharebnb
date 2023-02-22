@@ -30,6 +30,7 @@ router.post('/',requireAuth,handleValidationErrors, async(req,res) => {
 
 });
 // TODO: !!!!!!!!!!!check that current error message is incorrect!!!!!!!!!!!!!!!!
+// TODO: avg review and preview image
 // Get all spots
 router.get('/',handleValidationErrors, async(req,res) => {
 
@@ -66,10 +67,36 @@ router.get('/',handleValidationErrors, async(req,res) => {
     pagination.limit = size;
     pagination.offset = size * (page - 1)
 
-    const Spots = await Spot.findAll({
+    const allSpots = await Spot.findAll({
         where,
+        include:[
+            {model: Review},
+            {model: SpotImage},
+        ],
         ...pagination,
     });
+
+    const Spots = [];
+
+    for(let i = 0; i < allSpots.length; i++){
+        let spot = allSpots[i];
+        Spots.push(spot.toJSON());
+    }
+
+    for(let i = 0; i < Spots.length; i++){
+
+        let spot = Spots[i];
+        if(spot.SpotImages.length > 0){
+            for(let j = 0; j < spot.SpotImages.length; j++){
+                const spotImage = spot.SpotImages[j];
+                if(spotImage.preview){
+                    spot.previewImage
+                }
+            }
+        }
+    }
+
+    console.log(Spots);
 
     if(Spots){
         res.status(200).json({Spots,page,size});
@@ -142,6 +169,14 @@ router.post('/:spotId/reviews', async(req,res) => {
         review,
         stars
     })
+    // spot cant be found
+    // if(){
+
+    // }
+    // // review from current user already exists
+    // if(){
+
+    // }
     res.status(200).json(newReview);
 });
 // TODO: (errors: 403,404, - Kanban)
