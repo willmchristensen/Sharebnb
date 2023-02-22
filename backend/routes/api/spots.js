@@ -216,27 +216,44 @@ router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
         res.status(404).json({message: "Spot couldn't be found"})
     }
 });
-
+// FIXME: validate stars?
+const validateReview = [
+    check('review')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Review text is required'),
+    // check('stars')
+    //   .exists({ checkFalsy: true })
+    //   .notEmpty()
+    //   .withMessage('City is required'),
+    handleValidationErrors
+];
+// FIXME: errors
 // TODO: (ERRORS: 400,403 - Kanban) && (DOUBLE CHECK: were sending back a token right?)
 // Create a Review for a Spot based on the Spot's id
 router.post('/:spotId/reviews',requireAuth,handleValidationErrors, async(req,res) => {
     const {review,stars} = req.body;
 
-    // spot cant be found
-    if(!Spot.findByPk(req.params.spotId)){
-        return res.status(404).json({message: "Spot couldn't be found"})
-    }
-
+    // let spot = Spot.findByPk(req.params.spotId);
+    // let reviews = spot.Reviews;
+    // // spot cant be found
+    // if(!spot){
+    //     return res.status(404).json({message: "Spot couldn't be found"})
+    // }
     // review from current user already exists
-    let revi = Review.findByPk(req.user.id,{
-        where: {
-            spotId: req.params.spotId
-        }
-    });
-    let json = revi.toJSON();
-    if(revi){
-        return res.status(403).json({message: "User already has a review for this spot", revi, json})
-    };
+    // let revi = Review.findByPk(req.user.id,{
+    //     where: {
+    //         spotId: req.params.spotId
+    //     }
+    // });
+    // spot.Reviews.forEach(review => {
+    //     if(review.userId === req.user.id){
+    //         return res.status(403).json({message: "User already has a review for this spot", revi})
+    //     }
+    // })
+    // if(revi){
+    //     return res.status(403).json({message: "User already has a review for this spot", revi})
+    // };
 
     let newReview = await Review.create({
         userId: req.user.id,
@@ -244,7 +261,7 @@ router.post('/:spotId/reviews',requireAuth,handleValidationErrors, async(req,res
         review,
         stars
     })
-    return res.status(200).json(newReview);
+    return res.status(200).json({newReview, spot});
 });
 // TODO: (errors: 403,404, - Kanban)
 // Create a Booking for a Spot based on the Spot's id
