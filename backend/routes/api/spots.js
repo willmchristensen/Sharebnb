@@ -144,11 +144,9 @@ router.get('/',handleValidationErrors, async(req,res) => {
             where: {
                 spotId: spot.id
             },
-            attributes: {
-                include: [
-                    [Sequelize.fn('AVG',Sequelize.col('stars')), 'avgRating']
-                ]
-            }
+            attributes: [
+                [Sequelize.fn('AVG',Sequelize.col('stars')), 'avgRating']
+            ]
         })
 
         spot.avgRating = reviewData.toJSON().avgRating;
