@@ -71,7 +71,7 @@ router.post('/',requireAuth,validateSpot, async(req,res) => {
 
 });
 // TODO: !!!!!!!!!!!check that current error message is incorrect!!!!!!!!!!!!!!!!
-// TODO: avg review and preview image
+// TODO: !!AVG REVIEW!!
 // Get all spots
 router.get('/',handleValidationErrors, async(req,res) => {
 
@@ -127,6 +127,7 @@ router.get('/',handleValidationErrors, async(req,res) => {
     for(let i = 0; i < Spots.length; i++){
 
         let spot = Spots[i];
+
         if(spot.SpotImages.length > 0){
             for(let j = 0; j < spot.SpotImages.length; j++){
                 const spotImage = spot.SpotImages[j];
@@ -135,6 +136,7 @@ router.get('/',handleValidationErrors, async(req,res) => {
                 }
             }
         }
+
     }
 
     // console.log(Spots);
