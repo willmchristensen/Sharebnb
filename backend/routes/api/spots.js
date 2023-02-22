@@ -1,6 +1,7 @@
 const express = require('express');
 const {Op} = require('sequelize');
 const { Spot,Review,Booking,SpotImage, ReviewImage} = require('../../db/models');
+const { check } = require('express-validator');
 const {handleValidationErrors} = require('../../utils/validation');
 const {requireAuth} = require('../../utils/auth');
 const TokenExpiredError = require('jsonwebtoken/lib/TokenExpiredError');
@@ -8,8 +9,48 @@ const TokenExpiredError = require('jsonwebtoken/lib/TokenExpiredError');
 const router = express.Router();
 // -----------------TODO: (most routes need ERROR HANDLERS)---------------------
 
+const validateSpot = [
+    check('address')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Street address is required'),
+    check('city')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('City is required'),
+    check('state')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('State is required'),
+    check('country')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Country is required'),
+    check('lat')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Latitude is required'),
+    check('lng')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Longitude is required'),
+    check('name')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Name must be less than 50 characters'),
+    check('description')
+      .exists({ checkFalsy: true })
+      .notEmpty()
+      .withMessage('Description is required'),
+    check('price')
+        .exists({checkFalsy: true})
+        .notEmpty()
+        .withMessage('"Price per day is required"'),
+    handleValidationErrors
+];
+
 // Create a spot
-router.post('/',requireAuth,handleValidationErrors, async(req,res) => {
+router.post('/',requireAuth,validateSpot, async(req,res) => {
 
     const {address,city,state,country,lat,lng,name,description,price} = req.body;
 
@@ -96,7 +137,7 @@ router.get('/',handleValidationErrors, async(req,res) => {
         }
     }
 
-    console.log(Spots);
+    // console.log(Spots);
 
     if(Spots){
         res.status(200).json({Spots,page,size});

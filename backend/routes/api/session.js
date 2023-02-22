@@ -49,7 +49,7 @@ router.delete(
       res.clearCookie('token');
       return res.json({ message: 'success' });
     }
-  );
+);
 // Restore session user
 router.get(
   '/',
