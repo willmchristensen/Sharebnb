@@ -1,5 +1,5 @@
 const express = require('express');
-const {Op} = require('sequelize');
+const {Op, Sequelize, sequelize} = require('sequelize');
 const { Spot,Review,Booking,SpotImage, ReviewImage} = require('../../db/models');
 const {handleValidationErrors} = require('../../utils/validation');
 const {requireAuth} = require('../../utils/auth');
@@ -90,13 +90,27 @@ router.get('/',handleValidationErrors, async(req,res) => {
             for(let j = 0; j < spot.SpotImages.length; j++){
                 const spotImage = spot.SpotImages[j];
                 if(spotImage.preview){
-                    spot.previewImage
+                    spot.previewImage = spotImage.url;
                 }
             }
         }
-    }
+        delete spot.SpotImages;
 
-    console.log(Spots);
+
+        let reviewData = await Review.findOne({
+            where: {
+                spotId: spot.id
+            },
+            attributes: {
+                include: [
+                    [sequelize.fn('AVG',sequelize.col('stars')), 'avgRating']
+                ]
+            }
+        })
+
+        delete spot.Reviews;
+
+    }
 
     if(Spots){
         res.status(200).json({Spots,page,size});
