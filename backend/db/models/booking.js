@@ -5,8 +5,8 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Booking extends Model {
     static associate(models) {
-      Booking.belongsTo(models.User, {foreignKey: 'userId'});
-      Booking.belongsTo(models.Spot, {foreignKey: 'spotId'});
+      Booking.belongsTo(models.User, {foreignKey: 'userId', onDelete: 'CASCADE'});
+      Booking.belongsTo(models.Spot, {foreignKey: 'spotId', onDelete: 'CASCADE'});
     }
   }
   Booking.init({
