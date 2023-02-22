@@ -136,12 +136,6 @@ router.get('/',handleValidationErrors, async(req,res) => {
                 }
             }
         }
-<<<<<<< HEAD
-
-    }
-
-    // console.log(Spots);
-=======
         delete spot.SpotImages;
 
 
@@ -161,7 +155,6 @@ router.get('/',handleValidationErrors, async(req,res) => {
         delete spot.Reviews;
 
     }
->>>>>>> get-all-spots
 
     if(Spots){
         res.status(200).json({Spots,page,size});
