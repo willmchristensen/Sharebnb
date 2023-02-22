@@ -297,8 +297,7 @@ router.post('/:spotId/images',requireAuth,handleValidationErrors, async(req,res)
     });
     res.status(200).json(newSpotImage);
 });
-
-// TODO: include associated data and aggregate data before spotImages/Owner?
+// TODO: double check everything ----------         include associated data and aggregate data before spotImages/Owner?
 // Get details of a Spot from an id
 router.get('/:spotId', async(req,res) => {
     const {spotId} = req.params;
@@ -377,23 +376,25 @@ router.get('/:spotId', async(req,res) => {
 
 
 });
-// TODO: (error handlers) && (format userData)
+// TODO: double check everything
 // Get all Reviews by a Spot's id
 router.get('/:spotId/reviews', async(req,res) => {
     const {spotId} = req.params;
-    const Reviews = await Review.findAll({
-        where:{
-            spotId:spotId
-        },
-        include:{
-            model: ReviewImage,
-        }
-    });
-    let userData;
-    if(req.user){
-        userData = req.user;
+    const result = await Spot.findByPk(spotId);
+    if(!result){
+        return res.status(404).json({message: "Spot couldn't be found"})
+    }else{
+        const Reviews = await Review.findAll({
+            where:{
+                spotId:spotId
+            },
+            include:[
+                {model: User},
+                {model: ReviewImage},
+            ]
+        });
+        return res.status(200).json({Reviews});
     }
-    res.status(200).json({Reviews,userData});
 });
 // TODO: double check everything
 // Get bookings of a Spot from an id
