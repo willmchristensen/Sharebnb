@@ -1,6 +1,6 @@
 const express = require('express');
 const {Op, Sequelize} = require('sequelize');
-const { Spot,Review,Booking,SpotImage, ReviewImage} = require('../../db/models');
+const { Spot,Review,Booking,SpotImage, ReviewImage, User} = require('../../db/models');
 const validator = require('validator');
 const { check } = require('express-validator');
 const {handleValidationErrors} = require('../../utils/validation');
@@ -49,7 +49,7 @@ const validateSpot = [
         .withMessage('"Price per day is required"'),
     handleValidationErrors
 ];
-
+// TODO: DOUBLE CHECK EVERYTHING
 // Create a spot
 router.post('/',requireAuth,validateSpot, async(req,res) => {
 
@@ -71,9 +71,8 @@ router.post('/',requireAuth,validateSpot, async(req,res) => {
     res.status(201).json(newSpot)
 
 });
-// TODO: !!!!!!!!!!!check that current error message is incorrect!!!!!!!!!!!!!!!!
-// TODO: !!AVG REVIEW!!
 // FIXME: NEGATIVE OFFSET
+// TODO: check that current error message is incorrect
 // Get all spots
 router.get('/',handleValidationErrors, async(req,res) => {
 
@@ -177,8 +176,7 @@ router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
         res.status(400).json({message: "Spot couldn't be found"});
     }
 });
-
-// TODO: (previewImage & avgRating: keep in edit? still confused on what to do with these.)
+// TODO: DOUBLE CHECK EVERYTHING
 // Edit a spot by ID
 router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
     const {spotId} = req.params;
@@ -213,18 +211,18 @@ router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
         res.status(404).json({message: "Spot couldn't be found"})
     }
 });
-// FIXME: validate stars?
-const validateReview = [
-    check('review')
-      .exists({ checkFalsy: true })
-      .notEmpty()
-      .withMessage('Review text is required'),
-    // check('stars')
-    //   .exists({ checkFalsy: true })
-    //   .notEmpty()
-    //   .withMessage('City is required'),
-    handleValidationErrors
-];
+// FIXME: VALIDATOR stars?
+// const validateReview = [
+//     check('review')
+//       .exists({ checkFalsy: true })
+//       .notEmpty()
+//       .withMessage('Review text is required'),
+//     // check('stars')
+//     //   .exists({ checkFalsy: true })
+//     //   .notEmpty()
+//     //   .withMessage('City is required'),
+//     handleValidationErrors
+// ];
 // FIXME: errors
 // TODO: (ERRORS: 400,403 - Kanban) && (DOUBLE CHECK: were sending back a token right?)
 // Create a Review for a Spot based on the Spot's id
@@ -260,12 +258,16 @@ router.post('/:spotId/reviews',requireAuth,handleValidationErrors, async(req,res
     })
     return res.status(200).json({newReview, spot});
 });
+// FIXME: VALIDATOR
 // const validateBooking = [
 //     check('review')
 //       .exists(validator.isBefore(endDate,startDate))
 //       .notEmpty()
 //       .withMessage('endDate cannot be on or before startDate'),
-//     handleValidationErrors
+//     check('endDate')
+//         .isAfter('startDate')
+//         .withMessage('endDate cannot be on or before startDate'),
+//         handleValidationErrors
 // ];
 // FIXME: 400 error supposed to be middleware/use handleVal?
 // TODO: (error: 404, - Kanban)
@@ -283,6 +285,7 @@ router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,re
     });
     return res.status(200).json(newBooking);
 });
+// TODO: DOUBLE CHECK EVERYTHING
 // Create a SpotImage for a Spot based on the Spot's id
 router.post('/:spotId/images',requireAuth,handleValidationErrors, async(req,res) => {
     const {url,preview} = req.body;
@@ -295,26 +298,84 @@ router.post('/:spotId/images',requireAuth,handleValidationErrors, async(req,res)
     res.status(200).json(newSpotImage);
 });
 
-// FIXME: [include associated data and aggregate data]
-// TODO: include USER as owner
+// TODO: include associated data and aggregate data before spotImages/Owner?
 // Get details of a Spot from an id
 router.get('/:spotId', async(req,res) => {
     const {spotId} = req.params;
-    const Owner = req.user;
-    // ------HOW DO I INCLUDE PARTICULAR ITEMS------
     const spot = await Spot.findByPk(spotId, {
         include:[
             {model: SpotImage},
+            {model: User , as: 'Owner'},
         ]
     });
-    // ------HOW DO I INCLUDE NUMBER REVIEWS------
-    const numReviews = await Spot.findAndCountAll({
-        include: [
-            {model: Review, where: { spotId: spotId }}
-        ],
-    });
-    console.log(numReviews.count);
-    res.status(200).json(spot);
+
+    // ------HOW DO I INCLUDE NUMBER REVIEWS BEFORE SPOTIMAGES/OWNER------
+    let spotObj = spot.toJSON();
+
+    let reviewData = await Review.findOne({
+        where: {
+            spotId: spot.id
+        },
+        attributes: [
+            [Sequelize.fn('COUNT',Sequelize.col('id')), 'numReviews'],
+            [Sequelize.fn('AVG',Sequelize.col('stars')), 'avgStarRating']
+        ]
+    })
+
+    delete spotObj.avgRating;
+    spotObj.numReviews = reviewData.toJSON().numReviews;
+    spotObj.avgStarRating = reviewData.toJSON().avgStarRating;
+    // WHICH METHOD OF NUMREVIEWS IS PREFERRED?
+
+    // const numReviews = await Spot.findAndCountAll({
+    //     include: [
+    //         {model: Review, where: { spotId: spotId }}
+    //     ],
+    // });
+
+    // let num = numReviews.count;
+    // spotObj.numReviews = num;
+
+    res.status(200).json(spotObj);
+// -------------------------------------------------------
+    // const Spots = [];
+
+    // for(let i = 0; i < allSpots.length; i++){
+    //     let spot = allSpots[i];
+    //     Spots.push(spot.toJSON());
+    // }
+
+    // for(let i = 0; i < Spots.length; i++){
+
+    //     let spot = Spots[i];
+
+    //     if(spot.SpotImages.length > 0){
+    //         for(let j = 0; j < spot.SpotImages.length; j++){
+    //             const spotImage = spot.SpotImages[j];
+    //             if(spotImage.preview){
+    //                 spot.previewImage = spotImage.url;
+    //             }
+    //         }
+    //     }
+    //     delete spot.SpotImages;
+
+
+    //     let reviewData = await Review.findOne({
+    //         where: {
+    //             spotId: spot.id
+    //         },
+    //         attributes: [
+    //             [Sequelize.fn('AVG',Sequelize.col('stars')), 'avgRating']
+    //         ]
+    //     })
+
+    //     spot.avgRating = reviewData.toJSON().avgRating;
+
+    //     delete spot.Reviews;
+
+    // }
+
+
 });
 // TODO: (error handlers) && (format userData)
 // Get all Reviews by a Spot's id
@@ -334,7 +395,7 @@ router.get('/:spotId/reviews', async(req,res) => {
     }
     res.status(200).json({Reviews,userData});
 });
-// TODO: implement scope for logged in user (see Kanban)
+// TODO: double check everything
 // Get bookings of a Spot from an id
 router.get('/:spotId/bookings',requireAuth,handleValidationErrors,  async(req,res) => {
     const {spotId} = req.params;
@@ -349,6 +410,7 @@ router.get('/:spotId/bookings',requireAuth,handleValidationErrors,  async(req,re
         res.status(404).json({message: "Spot couldn't be found"});
     }
 });
+// TODO: double check everything
 // Delete a spot
 router.delete('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
     const {spotId} = req.params;

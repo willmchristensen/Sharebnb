@@ -3,7 +3,7 @@ const { Booking , Spot} = require('../../db/models');
 const {handleValidationErrors} = require('../../utils/validation');
 const {requireAuth} = require('../../utils/auth');
 const router = express.Router();
-
+// TODO: DOUBLE CHECK EVERYTHING
 // Get Bookings of Current User
 router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
     let User = req.user;
@@ -22,7 +22,7 @@ router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
     }
 });
 
-
+// TODO: DOUBLE CHECK EVERYTHING
 // Edit a booking by ID
 router.put('/:bookingId',requireAuth,handleValidationErrors, async(req,res) => {
     const {bookingId} = req.params;

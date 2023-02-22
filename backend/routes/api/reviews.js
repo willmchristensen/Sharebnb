@@ -22,6 +22,7 @@ const router = express.Router();
 // });
 // ---------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------
+//  FIXME: might need to include User model instead of grabbing from req
 // TODO: im assuming we want to include the user model but not sure if grabbing from req will suffice.
 // Get Reviews of Current User
 router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
@@ -45,8 +46,7 @@ router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
         res.status(404).json({message: "User couldn't be found"})
     }
 });
-// TODO:
-// 400 error for max images
+// TODO: 400 error for max images
 // Create a Image for a Review based on the Review's id
 router.post('/:reviewId/images', async(req,res) => {
     const {url} = req.body;
@@ -61,6 +61,7 @@ router.post('/:reviewId/images', async(req,res) => {
         res.status(404).json({message: "Review couldn't be found"})
     }
 });
+// TODO: DOUBLE CHECK EVERYTHING
 // Get details of a review from an id
 router.get('/:spotId', async(req,res) => {
     const {spotId} = req.params;
@@ -71,7 +72,7 @@ router.get('/:spotId', async(req,res) => {
     });
     res.status(200).json(Review);
 });
-
+// TODO: DOUBLE CHECK EVERYTHING
 // Edit a review by ID
 router.put('/:reviewId',requireAuth,handleValidationErrors, async(req,res) => {
     const {reviewId} = req.params;
@@ -90,6 +91,7 @@ router.put('/:reviewId',requireAuth,handleValidationErrors, async(req,res) => {
         res.status(404).json({message: "Spot couldn't be found"})
     }
 });
+// TODO: DOUBLE CHECK EVERYTHING
 // Delete a review
 router.delete('/:reviewId',requireAuth,handleValidationErrors, async(req,res) => {
     const {reviewId} = req.params;

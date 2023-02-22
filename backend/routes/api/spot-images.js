@@ -3,6 +3,7 @@ const { SpotImage } = require('../../db/models');
 const {handleValidationErrors} = require('../../utils/validation');
 const {requireAuth} = require('../../utils/auth');
 const router = express.Router();
+// TODO: double check everything
 // Delete a Spot Image
 router.delete('/:spotImageId',requireAuth,handleValidationErrors, async(req,res) => {
     const {spotImageId} = req.params;
