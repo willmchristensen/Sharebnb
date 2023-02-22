@@ -72,6 +72,7 @@ router.post('/',requireAuth,validateSpot, async(req,res) => {
 });
 // TODO: !!!!!!!!!!!check that current error message is incorrect!!!!!!!!!!!!!!!!
 // TODO: !!AVG REVIEW!!
+// FIXME: NEGATIVE OFFSET
 // Get all spots
 router.get('/',handleValidationErrors, async(req,res) => {
 
@@ -97,16 +98,16 @@ router.get('/',handleValidationErrors, async(req,res) => {
     if(maxPrice){
         where.price = { [Op.lte]: maxPrice }
     }
-
-    let pagination = {};
-    page = parseInt(page);
-    size = parseInt(size);
-    if(isNaN(page)) page = 0;
-    if(isNaN(size)) size = 20;
-    if (page > 10) page = 10
-    if (size > 20) size = 20
-    pagination.limit = size;
-    pagination.offset = size * (page - 1)
+    // FIXME: BUG INVOLVING NEGATIVE OFFSET
+    // let pagination = {};
+    // page = parseInt(page);
+    // size = parseInt(size);
+    // if(isNaN(page)) page = 0;
+    // if(isNaN(size)) size = 20;
+    // if (page > 10) page = 10
+    // if (size > 20) size = 20
+    // pagination.limit = size;
+    // pagination.offset = size * (page - 1)
 
     const allSpots = await Spot.findAll({
         where,
@@ -114,7 +115,7 @@ router.get('/',handleValidationErrors, async(req,res) => {
             {model: Review},
             {model: SpotImage},
         ],
-        ...pagination,
+        // ...pagination,
     });
 
     const Spots = [];
@@ -157,7 +158,8 @@ router.get('/',handleValidationErrors, async(req,res) => {
     }
 
     if(Spots){
-        res.status(200).json({Spots,page,size});
+        res.status(200).json({Spots});
+        // page,size
     }
 
 });
