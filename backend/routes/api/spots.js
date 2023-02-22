@@ -260,17 +260,28 @@ router.post('/:spotId/reviews',requireAuth,handleValidationErrors, async(req,res
     })
     return res.status(200).json({newReview, spot});
 });
-// TODO: (errors: 403,404, - Kanban)
+// const validateBooking = [
+//     check('review')
+//       .exists(validator.isBefore(endDate,startDate))
+//       .notEmpty()
+//       .withMessage('endDate cannot be on or before startDate'),
+//     handleValidationErrors
+// ];
+// FIXME: 400 error supposed to be middleware/use handleVal?
+// TODO: (error: 404, - Kanban)
 // Create a Booking for a Spot based on the Spot's id
 router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,res) => {
     const {startDate,endDate} = req.body;
+    if(validator.isBefore(endDate,startDate)){
+        return res.status(400).json({message: "endDate cannot be on or before startDate"})
+    }
     let newBooking= await Booking.create({
         userId: req.user.id,
         spotId: req.params.spotId,
         startDate,
         endDate
     });
-    res.status(200).json(newBooking);
+    return res.status(200).json(newBooking);
 });
 // Create a SpotImage for a Spot based on the Spot's id
 router.post('/:spotId/images',requireAuth,handleValidationErrors, async(req,res) => {
@@ -285,16 +296,16 @@ router.post('/:spotId/images',requireAuth,handleValidationErrors, async(req,res)
 });
 
 // FIXME: [include associated data and aggregate data]
+// TODO: include USER as owner
 // Get details of a Spot from an id
 router.get('/:spotId', async(req,res) => {
     const {spotId} = req.params;
+    const Owner = req.user;
     // ------HOW DO I INCLUDE PARTICULAR ITEMS------
-    const result = await Spot.findByPk(spotId, {
-        include:{
-            all:true
-            // model: SpotImage,
-            // model: Review,
-        }
+    const spot = await Spot.findByPk(spotId, {
+        include:[
+            {model: SpotImage},
+        ]
     });
     // ------HOW DO I INCLUDE NUMBER REVIEWS------
     const numReviews = await Spot.findAndCountAll({
@@ -303,7 +314,7 @@ router.get('/:spotId', async(req,res) => {
         ],
     });
     console.log(numReviews.count);
-    res.status(200).json({result});
+    res.status(200).json(spot);
 });
 // TODO: (error handlers) && (format userData)
 // Get all Reviews by a Spot's id
