@@ -1,5 +1,5 @@
 const express = require('express');
-const {Op, Sequelize, sequelize} = require('sequelize');
+const {Op, Sequelize} = require('sequelize');
 const { Spot,Review,Booking,SpotImage, ReviewImage} = require('../../db/models');
 const {handleValidationErrors} = require('../../utils/validation');
 const {requireAuth} = require('../../utils/auth');
@@ -103,10 +103,12 @@ router.get('/',handleValidationErrors, async(req,res) => {
             },
             attributes: {
                 include: [
-                    [sequelize.fn('AVG',sequelize.col('stars')), 'avgRating']
+                    [Sequelize.fn('AVG',Sequelize.col('stars')), 'avgRating']
                 ]
             }
         })
+
+        spot.avgRating = reviewData.toJSON().avgRating;
 
         delete spot.Reviews;
 
