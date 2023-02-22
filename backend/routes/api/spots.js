@@ -76,28 +76,28 @@ router.post('/',requireAuth,validateSpot, async(req,res) => {
 // Get all spots
 router.get('/',handleValidationErrors, async(req,res) => {
 
-    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+    // let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
 
-    let where = {};
+    // let where = {};
 
-    if(minLat){
-        where.lat = { [Op.gte]: minLat }
-    }
-    if(maxLat){
-        where.lat = { [Op.lte]: maxLat }
-    }
-    if(minLng){
-        where.lng = { [Op.gte]: minLng }
-    }
-    if(maxLng){
-        where.lng = { [Op.lte]: maxLng }
-    }
-    if(minPrice){
-        where.price = { [Op.gte]: minPrice }
-    }
-    if(maxPrice){
-        where.price = { [Op.lte]: maxPrice }
-    }
+    // if(minLat){
+    //     where.lat = { [Op.gte]: minLat }
+    // }
+    // if(maxLat){
+    //     where.lat = { [Op.lte]: maxLat }
+    // }
+    // if(minLng){
+    //     where.lng = { [Op.gte]: minLng }
+    // }
+    // if(maxLng){
+    //     where.lng = { [Op.lte]: maxLng }
+    // }
+    // if(minPrice){
+    //     where.price = { [Op.gte]: minPrice }
+    // }
+    // if(maxPrice){
+    //     where.price = { [Op.lte]: maxPrice }
+    // }
     // FIXME: BUG INVOLVING NEGATIVE OFFSET
     // let pagination = {};
     // page = parseInt(page);
@@ -110,7 +110,7 @@ router.get('/',handleValidationErrors, async(req,res) => {
     // pagination.offset = size * (page - 1)
 
     const allSpots = await Spot.findAll({
-        where,
+        // where,
         include:[
             {model: Review},
             {model: SpotImage},
