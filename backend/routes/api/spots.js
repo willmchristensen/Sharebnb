@@ -8,7 +8,7 @@ const {requireAuth} = require('../../utils/auth');
 const TokenExpiredError = require('jsonwebtoken/lib/TokenExpiredError');
 
 const router = express.Router();
-// -----------------TODO: (most routes need ERROR HANDLERS)---------------------
+
 
 const validateSpot = [
     check('address')
@@ -71,51 +71,50 @@ router.post('/',requireAuth,validateSpot, async(req,res) => {
     res.status(201).json(newSpot)
 
 });
-// FIXME: NEGATIVE OFFSET
-// TODO: check that current error message is incorrect
+// TODO:DOUBLE CHECK EVERYTHING
 // Get all spots
 router.get('/',handleValidationErrors, async(req,res) => {
 
-    // let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
 
-    // let where = {};
+    let where = {};
 
-    // if(minLat){
-    //     where.lat = { [Op.gte]: minLat }
-    // }
-    // if(maxLat){
-    //     where.lat = { [Op.lte]: maxLat }
-    // }
-    // if(minLng){
-    //     where.lng = { [Op.gte]: minLng }
-    // }
-    // if(maxLng){
-    //     where.lng = { [Op.lte]: maxLng }
-    // }
-    // if(minPrice){
-    //     where.price = { [Op.gte]: minPrice }
-    // }
-    // if(maxPrice){
-    //     where.price = { [Op.lte]: maxPrice }
-    // }
-    // FIXME: BUG INVOLVING NEGATIVE OFFSET
-    // let pagination = {};
-    // page = parseInt(page);
-    // size = parseInt(size);
-    // if(isNaN(page)) page = 0;
-    // if(isNaN(size)) size = 20;
-    // if (page > 10) page = 10
-    // if (size > 20) size = 20
-    // pagination.limit = size;
-    // pagination.offset = size * (page - 1)
+    if(minLat){
+        where.lat = { [Op.gte]: minLat }
+    }
+    if(maxLat){
+        where.lat = { [Op.lte]: maxLat }
+    }
+    if(minLng){
+        where.lng = { [Op.gte]: minLng }
+    }
+    if(maxLng){
+        where.lng = { [Op.lte]: maxLng }
+    }
+    if(minPrice){
+        where.price = { [Op.gte]: minPrice }
+    }
+    if(maxPrice){
+        where.price = { [Op.lte]: maxPrice }
+    }
+
+    let pagination = {};
+    page = parseInt(page);
+    size = parseInt(size);
+    if(isNaN(page)) page = 1;
+    if(isNaN(size)) size = 20;
+    if (page > 10) page = 10
+    if (size > 20) size = 20
+    pagination.limit = size;
+    pagination.offset = size * (page - 1)
 
     const allSpots = await Spot.findAll({
-        // where,
+        where,
         include:[
             {model: Review},
             {model: SpotImage},
         ],
-        // ...pagination,
+        ...pagination,
     });
 
     const Spots = [];
@@ -156,8 +155,7 @@ router.get('/',handleValidationErrors, async(req,res) => {
     }
 
     if(Spots){
-        res.status(200).json({Spots});
-        // page,size
+        return res.status(200).json({Spots,page,size});
     }
 
 });
