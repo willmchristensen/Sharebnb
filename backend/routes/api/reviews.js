@@ -45,19 +45,26 @@ router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
         res.status(404).json({message: "User couldn't be found"})
     }
 });
-// TODO: 400 error for max images
+// TODO: DOUBLE CHECK EVERYTHING
 // Create a Image for a Review based on the Review's id
 router.post('/:reviewId/images', async(req,res) => {
     const {url} = req.body;
-    let review = await Review.findByPk(req.params.reviewId);
+    let review = await Review.findByPk(req.params.reviewId, {
+        include: {
+            model: ReviewImage,
+        }
+    });
+    if(review.ReviewImages.length === 10){
+        return res.status(403).json({message: "Maximum number of images for this resource was reached"});
+    }
     if(review){
         let newImage = await ReviewImage.create({
             reviewId: review.id,
             url: url
         })
-        res.status(200).json(newImage);
+        return res.status(200).json(newImage);
     }else{
-        res.status(404).json({message: "Review couldn't be found"})
+        return res.status(404).json({message: "Review couldn't be found"})
     }
 });
 
