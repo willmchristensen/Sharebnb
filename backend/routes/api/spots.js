@@ -176,7 +176,7 @@ router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
         res.status(400).json({message: "Spot couldn't be found"});
     }
 });
-// TODO: DOUBLE CHECK EVERYTHING
+// TODO:DOUBLE CHECK EVERYTHING
 // Edit a spot by ID
 router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
     const {spotId} = req.params;
@@ -211,7 +211,7 @@ router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
         res.status(404).json({message: "Spot couldn't be found"})
     }
 });
-// TODO: DOUBLE CHECK EVERYTHING
+// TODO:DOUBLE CHECK EVERYTHING
 // Create a Review for a Spot based on the Spot's id
 router.post('/:spotId/reviews',requireAuth,handleValidationErrors, async(req,res) => {
     const {spotId} = req.params;
@@ -249,47 +249,59 @@ router.post('/:spotId/reviews',requireAuth,handleValidationErrors, async(req,res
 
     }
 });
-
-
-// FIXME: VALIDATOR
-// const validateBooking = [
-//     check('review')
-//       .exists(validator.isBefore(endDate,startDate))
-//       .notEmpty()
-//       .withMessage('endDate cannot be on or before startDate'),
-//     check('endDate')
-//         .isAfter('startDate')
-//         .withMessage('endDate cannot be on or before startDate'),
-//         handleValidationErrors
-// ];
-// FIXME: endDate validation done with date object?
-// TODO: (error: 404, - Kanban)
+// TODO:DOUBLE CHECK EVERYTHING
 // Create a Booking for a Spot based on the Spot's id
 router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,res) => {
-    const {startDate,endDate} = req.body;
-    if(validator.isBefore(endDate,startDate)){
-        return res.status(400).json({message: "endDate cannot be on or before startDate"})
+    const {spotId} = req.params;
+    let {startDate,endDate} = req.body;
+
+    startDate = new Date(startDate).getTime();
+    endDate = new Date(endDate).getTime();
+
+    if(endDate < startDate){
+        return res.status(400).json({message: "endDate cannot be on or before startDate"});
     }
-    let spot = Spot.findByPk(req.params.spotId,{
-        include:{
-            model: Booking,
+
+    const spot = await Spot.findByPk(spotId);
+    const bookings = await Booking.findAll({
+        where:{
+            spotId: spotId,
         }
     });
+
     if(!spot){
         return res.status(404).json({message: "Spot couldn't be found"})
+    }else{
+        let books = [];
+        bookings.forEach(booking => {
+            books.push(booking.toJSON())
+        })
+
+
+        for(let i = 0; i < books.length; i++){
+            let booking = books[i];
+            let start = booking.startDate;
+            let end = booking.endDate;
+            let startTime = new Date(start).getTime();
+            let endTime = new Date(end).getTime();
+            let booked = (startTime === startDate || startTime === endDate || endTime === startDate || endTime === endDate);
+            if(booked){
+                return res.status(403).json({message: "Sorry, this spot is already booked for the specified dates"});
+            }
+        }
+
+
+        let newBooking = await Booking.create({
+            userId: req.user.id,
+            spotId: spotId,
+            startDate,
+            endDate
+        });
+
+        return res.status(200).json(newBooking);
     }
-    let newBooking= await Booking.create({
-        userId: req.user.id,
-        spotId: req.params.spotId,
-        startDate,
-        endDate
-    });
-    // grab spot bookings
-    // for each booking
-    // if start or end date is within start or enddate of newBooking, error
-    return res.status(200).json({newBooking,spot});
 });
-// TODO: DOUBLE CHECK EVERYTHING
+// TODO:DOUBLE CHECK EVERYTHING
 // Create a SpotImage for a Spot based on the Spot's id
 router.post('/:spotId/images',requireAuth,handleValidationErrors, async(req,res) => {
     const {url,preview} = req.body;
@@ -299,9 +311,9 @@ router.post('/:spotId/images',requireAuth,handleValidationErrors, async(req,res)
         url,
         preview
     });
-    res.status(200).json(newSpotImage);
+    return res.status(200).json(newSpotImage);
 });
-// TODO: double check everything ----------
+// TODO:DOUBLE CHECK EVERYTHING
 //  include associated data and aggregate data before spotImages/Owner?
 // Get details of a Spot from an id
 router.get('/:spotId', async(req,res) => {
@@ -381,7 +393,7 @@ router.get('/:spotId', async(req,res) => {
 
 
 });
-// TODO: double check everything
+// TODO:DOUBLE CHECK EVERYTHING
 // Get all Reviews by a Spot's id
 router.get('/:spotId/reviews', async(req,res) => {
     const {spotId} = req.params;
@@ -401,7 +413,7 @@ router.get('/:spotId/reviews', async(req,res) => {
         return res.status(200).json({Reviews});
     }
 });
-// TODO: double check everything
+// TODO:DOUBLE CHECK EVERYTHING
 // Get bookings of a Spot from an id
 router.get('/:spotId/bookings',requireAuth,handleValidationErrors,  async(req,res) => {
 
@@ -432,48 +444,9 @@ router.get('/:spotId/bookings',requireAuth,handleValidationErrors,  async(req,re
             }
         }
         // return res.status(200).json({Bookings});
-    });
+});
 
-// -----------------------------------------------------------------------------
-    // const {spotId} = req.params;
-
-    // const ownerInfo = await Booking.findAll({
-    //     where:{
-    //         spotId:spotId
-    //     },
-    //     include:[
-    //       {model: User}
-    //     ]
-    // });
-    // // const notOwnerInfo = await Booking.findByPk(spotId,{
-    // //     include:[
-    // //         {attributes: ['spotId','startDate','endDate']}
-    // //     ],
-    // // });
-    // let spotOwnerId = ownerInfo.userId;
-    // let userId = req.user.id;
-    // return res.status(200).json({ownerInfo,spotOwnerId, userId});
-    // if(ownerInfo){
-    //     if(spotOwnerId === userId){
-    //         return res.status(200).json(ownerInfo);
-    //     }else{
-    //         return res.status(200).json(notOwnerInfo);
-    //     }
-    // }else{
-    //     return res.status(404).json({message: "Spot couldn't be found"});
-    // }
-    // const userInfo = await User.findByPk(ownerInfo.ownerId)
-
-    // const notOwnerInfo = await Spot.findByPk(spotId,{
-        //     include: {
-            //         model: Booking,
-            //         attributes: ['spotId','startDate','endDate']
-            //     }
-            // });
-            // });
-// ------------------------------------------------------------------------------------------------
-
-// TODO: double check everything
+// TODO:DOUBLE CHECK EVERYTHING
 // Delete a spot
 router.delete('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
     const {spotId} = req.params;
