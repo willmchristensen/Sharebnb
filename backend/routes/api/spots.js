@@ -211,18 +211,6 @@ router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
         res.status(404).json({message: "Spot couldn't be found"})
     }
 });
-// FIXME: VALIDATOR stars?
-// const validateReview = [
-//     check('review')
-//       .exists({ checkFalsy: true })
-//       .notEmpty()
-//       .withMessage('Review text is required'),
-//     // check('stars')
-//     //   .exists({ checkFalsy: true })
-//     //   .notEmpty()
-//     //   .withMessage('City is required'),
-//     handleValidationErrors
-// ];
 // TODO: DOUBLE CHECK EVERYTHING
 // Create a Review for a Spot based on the Spot's id
 router.post('/:spotId/reviews',requireAuth,handleValidationErrors, async(req,res) => {
@@ -282,13 +270,24 @@ router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,re
     if(validator.isBefore(endDate,startDate)){
         return res.status(400).json({message: "endDate cannot be on or before startDate"})
     }
+    let spot = Spot.findByPk(req.params.spotId,{
+        include:{
+            model: Booking,
+        }
+    });
+    if(!spot){
+        return res.status(404).json({message: "Spot couldn't be found"})
+    }
     let newBooking= await Booking.create({
         userId: req.user.id,
         spotId: req.params.spotId,
         startDate,
         endDate
     });
-    return res.status(200).json(newBooking);
+    // grab spot bookings
+    // for each booking
+    // if start or end date is within start or enddate of newBooking, error
+    return res.status(200).json({newBooking,spot});
 });
 // TODO: DOUBLE CHECK EVERYTHING
 // Create a SpotImage for a Spot based on the Spot's id
