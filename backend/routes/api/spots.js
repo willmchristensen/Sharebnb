@@ -256,7 +256,7 @@ router.post('/:spotId/reviews',requireAuth,handleValidationErrors, async(req,res
         review,
         stars
     })
-    return res.status(200).json({newReview, spot});
+    return res.status(200).json({newReview});
 });
 // FIXME: VALIDATOR
 // const validateBooking = [

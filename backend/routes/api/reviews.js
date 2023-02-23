@@ -1,5 +1,5 @@
 const express = require('express');
-const { Review, ReviewImage, Spot} = require('../../db/models');
+const { Review, ReviewImage, Spot, User} = require('../../db/models');
 const {handleValidationErrors} = require('../../utils/validation');
 const {requireAuth} = require('../../utils/auth');
 const router = express.Router();
@@ -22,8 +22,7 @@ const router = express.Router();
 // });
 // ---------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------
-//  FIXME: might need to include User model instead of grabbing from req
-// TODO: im assuming we want to include the user model but not sure if grabbing from req will suffice.
+// TODO: DOUBLE CHECK EVERYTHING
 // Get Reviews of Current User
 router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
     if(req.user){
@@ -32,13 +31,13 @@ router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
                 userId: req.user.id
             },
             include:[
+                {model: User},
                 {model: Spot},
                 {model: ReviewImage},
             ],
         });
-        let User = req.user;
         if(reviews){
-            res.status(200).json({reviews,User});
+            res.status(200).json({reviews});
         }else{
             res.status(404).json({message: "Reviews couldn't be found"})
         }
@@ -61,22 +60,33 @@ router.post('/:reviewId/images', async(req,res) => {
         res.status(404).json({message: "Review couldn't be found"})
     }
 });
+
+
+// --------------------------------------------------------------------
+// FIXME: what is this doing here? i dont think neccessary
 // TODO: DOUBLE CHECK EVERYTHING
 // Get details of a review from an id
-router.get('/:spotId', async(req,res) => {
-    const {spotId} = req.params;
-    const Review = await Review.findByPk(spotId, {
-        include:{
-            model: ReviewImage,
-        }
-    });
-    res.status(200).json(Review);
-});
+// router.get('/:spotId', async(req,res) => {
+//     const {spotId} = req.params;
+//     const Review = await Review.findByPk(spotId, {
+//         include:{
+//             model: ReviewImage,
+//         }
+//     });
+//     res.status(200).json(Review);
+// });
+// --------------------------------------------------------------------
 // TODO: DOUBLE CHECK EVERYTHING
+
+// TODO: VALIDATOR & ensure user check is working
 // Edit a review by ID
 router.put('/:reviewId',requireAuth,handleValidationErrors, async(req,res) => {
     const {reviewId} = req.params;
-    const result = await Review.findByPk(reviewId);
+    const result = await Review.findByPk(reviewId,{
+        where: {
+            userId: req.user.id
+        }
+    });
     if(result){
         const {review, stars} = req.body;
         // result.spotId = result.spotId;
@@ -84,9 +94,8 @@ router.put('/:reviewId',requireAuth,handleValidationErrors, async(req,res) => {
         result.review = review;
         result.stars = stars;
         await result.save();
+
         res.status(200).json(result);
-        // TODO:
-        // possibly change error response for body validations, specs say 400, my console said 500.
     }else{
         res.status(404).json({message: "Spot couldn't be found"})
     }
