@@ -178,10 +178,12 @@ router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
 });
 // TODO:DOUBLE CHECK EVERYTHING
 // Edit a spot by ID
-router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
+router.put('/:spotId',requireAuth,handleValidationErrors,validateSpot, async(req,res) => {
     const {spotId} = req.params;
-    const Spot = await Spot.findByPk(spotId);
-    if(Spot){
+    const spot = await Spot.findByPk(spotId);
+    if(!spot){
+        res.status(404).json({message: "Spot couldn't be found"})
+    }else{
         const {address,
             city,
             state,
@@ -193,22 +195,20 @@ router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
             price,
             ownerId} = req.body;
 
-            Spot.address =address ;
-            Spot.city =city ;
-            Spot.state =state ;
-            Spot.country =country ;
-            Spot.lat =lat ;
-            Spot.lng =lng ;
-            Spot.name =name ;
-            Spot.description =description ;
-            Spot.price =price ;
-            Spot.ownerId =ownerId;
+            spot.address =address ;
+            spot.city =city ;
+            spot.state =state ;
+            spot.country =country ;
+            spot.lat =lat ;
+            spot.lng =lng ;
+            spot.name =name ;
+            spot.description =description ;
+            spot.price =price ;
+            spot.ownerId =ownerId;
 
-            await Spot.save();
+            await spot.save();
 
-        res.status(200).json(Spot);
-    }else{
-        res.status(404).json({message: "Spot couldn't be found"})
+        return res.status(200).json(spot);
     }
 });
 // TODO:DOUBLE CHECK EVERYTHING
@@ -302,7 +302,6 @@ router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,re
     }
 });
 // TODO:DOUBLE CHECK EVERYTHING
-// TODO: REFACTOR TO NOT DELETE?
 // Create a SpotImage for a Spot based on the Spot's id
 router.post('/:spotId/images',requireAuth,handleValidationErrors, async(req,res) => {
     const {url,preview} = req.body;
@@ -377,11 +376,22 @@ router.get('/:spotId/reviews', async(req,res) => {
                 spotId:spotId
             },
             include:[
-                {model: User},
-                {model: ReviewImage},
+                {model: User, attributes: {
+                    exclude: [ "username",
+                    "email",
+                    "hashedPassword",
+                    "createdAt",
+                    "updatedAt"]
+                }},
+                {model: ReviewImage, attributes: {
+                    exclude: [ "createdAt",
+                    "updatedAt", "reviewId"]
+                }},
             ]
         });
+
         return res.status(200).json({Reviews});
+
     }
 });
 // TODO:DOUBLE CHECK EVERYTHING

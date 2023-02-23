@@ -25,47 +25,66 @@ const router = express.Router();
 // TODO: DOUBLE CHECK EVERYTHING
 // Get Reviews of Current User
 router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
-    if(req.user){
-        let reviews = await Review.findAll({
-            where:{
-                userId: req.user.id
+
+    const Reviews = await Review.findAll({
+        where:{
+            userId: req.user.id
+        },
+        include:[
+            {model: User, attributes: {
+                exclude: [ "username",
+                "email",
+                "hashedPassword",
+                "createdAt",
+                "updatedAt"]
+            }},
+            {model: Spot, attributes: {
+                exclude: [
+                "username",
+                "description",
+                "avgRating",
+                "createdAt",
+                "updatedAt",]
+            }},
+            {
+                model: ReviewImage,
+                attributes: {
+                    exclude: [
+                    "reviewId",
+                    "createdAt",
+                    "updatedAt",]
+                }
             },
-            include:[
-                {model: User},
-                {model: Spot},
-                {model: ReviewImage},
-            ],
-        });
-        if(reviews){
-            res.status(200).json({reviews});
-        }else{
-            res.status(404).json({message: "Reviews couldn't be found"})
-        }
+        ],
+    });
+    if(!Reviews){
+        return res.status(404).json({message: "Reviews couldn't be found"})
     }else{
-        res.status(404).json({message: "User couldn't be found"})
+        return res.status(200).json({Reviews});
     }
 });
 // TODO: DOUBLE CHECK EVERYTHING
 // Create a Image for a Review based on the Review's id
 router.post('/:reviewId/images', async(req,res) => {
     const {url} = req.body;
-    let review = await Review.findByPk(req.params.reviewId, {
+    const reviewId = req.params.reviewId;
+    let review = await Review.findByPk(reviewId, {
         include: {
             model: ReviewImage,
         }
     });
-    if(review.ReviewImages.length === 10){
-        return res.status(403).json({message: "Maximum number of images for this resource was reached"});
-    }
-    if(review){
-        let newImage = await ReviewImage.create({
-            reviewId: review.id,
-            url: url
-        })
-        return res.status(200).json(newImage);
-    }else{
+    // return res.json({review});
+    if(!review){
         return res.status(404).json({message: "Review couldn't be found"})
-    }
+    }else if(review.ReviewImages.length === 10){
+            return res.status(403).json({message: "Maximum number of images for this resource was reached"});
+        }else{
+            let newImage = await ReviewImage.create({
+                reviewId: review.id,
+                url: url
+            })
+            return res.status(200).json(newImage);
+        }
 });
 
 
