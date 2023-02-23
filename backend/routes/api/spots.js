@@ -161,7 +161,7 @@ router.get('/',handleValidationErrors, async(req,res) => {
     }
 
 });
-// TODO: owner scope?
+// TODO:DOUBLE CHECK EVERYTHING
 // Get Spots of Current User
 router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
     let User = req.user;
@@ -171,7 +171,7 @@ router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
         }
     })
     if(Spots){
-        res.status(200).json(Spots);
+        res.status(200).json({Spots});
     }else{
         res.status(400).json({message: "Spot couldn't be found"});
     }
