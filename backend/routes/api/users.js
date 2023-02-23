@@ -63,9 +63,7 @@ router.post(
         await setTokenCookie(res, user);
 
         // TODO: fix output of return to not say user user?
-        return res.json({
-          user: user
-        });
+        return res.json(user);
       }
 
     }

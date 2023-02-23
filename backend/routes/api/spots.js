@@ -311,8 +311,10 @@ router.post('/:spotId/images',requireAuth,handleValidationErrors, async(req,res)
     });
     return res.status(200).json(newSpotImage);
 });
+
+
 // TODO:DOUBLE CHECK EVERYTHING
-//  include associated data and aggregate data before spotImages/Owner?
+// FIXME: include associated data and aggregate data before spotImages/Owner?
 // Get details of a Spot from an id
 router.get('/:spotId', async(req,res) => {
     const {spotId} = req.params;
@@ -322,75 +324,30 @@ router.get('/:spotId', async(req,res) => {
             {model: User , as: 'Owner'},
         ]
     });
+    if(!spot){
+        return res.status(404).json({message: "Spot couldn't be found"})
+    }else{
+        let spotObj = spot.toJSON();
 
-    // ------HOW DO I INCLUDE NUMBER REVIEWS BEFORE SPOTIMAGES/OWNER------
-    let spotObj = spot.toJSON();
+        let reviewData = await Review.findOne({
+            where: {
+                spotId: spot.id
+            },
+            attributes: [
+                [Sequelize.fn('COUNT',Sequelize.col('id')), 'numReviews'],
+                [Sequelize.fn('AVG',Sequelize.col('stars')), 'avgStarRating']
+            ]
+        });
 
-    let reviewData = await Review.findOne({
-        where: {
-            spotId: spot.id
-        },
-        attributes: [
-            [Sequelize.fn('COUNT',Sequelize.col('id')), 'numReviews'],
-            [Sequelize.fn('AVG',Sequelize.col('stars')), 'avgStarRating']
-        ]
-    })
+        delete spotObj.avgRating;
+        spotObj.numReviews = reviewData.toJSON().numReviews;
+        spotObj.avgStarRating = reviewData.toJSON().avgStarRating;
 
-    delete spotObj.avgRating;
-    spotObj.numReviews = reviewData.toJSON().numReviews;
-    spotObj.avgStarRating = reviewData.toJSON().avgStarRating;
-    // WHICH METHOD OF NUMREVIEWS IS PREFERRED?
-
-    // const numReviews = await Spot.findAndCountAll({
-    //     include: [
-    //         {model: Review, where: { spotId: spotId }}
-    //     ],
-    // });
-
-    // let num = numReviews.count;
-    // spotObj.numReviews = num;
-
-    res.status(200).json(spotObj);
-// -------------------------------------------------------
-    // const Spots = [];
-
-    // for(let i = 0; i < allSpots.length; i++){
-    //     let spot = allSpots[i];
-    //     Spots.push(spot.toJSON());
-    // }
-
-    // for(let i = 0; i < Spots.length; i++){
-
-    //     let spot = Spots[i];
-
-    //     if(spot.SpotImages.length > 0){
-    //         for(let j = 0; j < spot.SpotImages.length; j++){
-    //             const spotImage = spot.SpotImages[j];
-    //             if(spotImage.preview){
-    //                 spot.previewImage = spotImage.url;
-    //             }
-    //         }
-    //     }
-    //     delete spot.SpotImages;
-
-
-    //     let reviewData = await Review.findOne({
-    //         where: {
-    //             spotId: spot.id
-    //         },
-    //         attributes: [
-    //             [Sequelize.fn('AVG',Sequelize.col('stars')), 'avgRating']
-    //         ]
-    //     })
-
-    //     spot.avgRating = reviewData.toJSON().avgRating;
-
-    //     delete spot.Reviews;
-
-    // }
-
-
+        return res.status(200).json(spotObj);
+    }
 });
+
+
 // TODO:DOUBLE CHECK EVERYTHING
 // Get all Reviews by a Spot's id
 router.get('/:spotId/reviews', async(req,res) => {

@@ -16,6 +16,8 @@ const validateLogin = [
     .withMessage('Please provide a password.'),
   handleValidationErrors
 ];
+// TODO: IS THIS OKAY?
+// TODO: 400 ERROR FORMAT?
 // Log in
 router.post(
   '/',
@@ -29,6 +31,7 @@ router.post(
       const err = new Error('Login failed');
       err.status = 401;
       err.title = 'Login failed';
+      err.message = 'Invalid credentials';
       err.errors = { credential: 'The provided credentials were invalid.' };
       return next(err);
     }
@@ -36,9 +39,7 @@ router.post(
     await setTokenCookie(res, user);
 
     return res.json({
-      user: {
-        user
-      }
+      user
     });
   }
 );
