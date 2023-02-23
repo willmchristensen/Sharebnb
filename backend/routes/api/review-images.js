@@ -4,7 +4,7 @@ const {handleValidationErrors} = require('../../utils/validation');
 const {requireAuth} = require('../../utils/auth');
 const router = express.Router();
 // TODO: DOUBLE CHECK EVERYTHING
-// TODO: (?implement owner scope?) && (refactor)
+// TODO: (?implement owner scope?) && (refactor for efficiency?? idk if even possible)
 // Delete a Review Image
 router.delete('/:reviewImageId',requireAuth,handleValidationErrors, async(req,res) => {
     const {reviewImageId} = req.params;

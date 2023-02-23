@@ -40,18 +40,27 @@ router.put('/:bookingId',requireAuth,handleValidationErrors, async(req,res) => {
     }
 });
 // ----------------------------------------------------------------------------------------
-// TODO: Error response with status 400 is given when it is past the booking's
-//       startDate (no deleting of current or past bookings)
+// TODO: DOUBLE CHECK EVERYTHING
 // -----------------------------------------------------------------------------------------
 // Delete a Booking
 router.delete('/:bookingId',requireAuth,handleValidationErrors, async(req,res) => {
     const {bookingId} = req.params;
     const result = await Booking.findByPk(bookingId);
-    if(result){
-        await result.destroy()
-        res.status(200).json({message: "Successfully deleted"});
-    }else{
-        res.status(404).json({message: "Booking couldn't be found"})
+
+    if(result.startDate){
+        let start = result.startDate;
+        let startInt = new Date(start).getTime();
+        let todayInt = new Date().getTime();
+        let inValidDelete = !(todayInt < startInt);
+        if(inValidDelete){
+            return res.status(403).json({message: "Bookings that have been started can't be deleted"});
+        }else if(result){
+            await result.destroy()
+            res.status(200).json({message: "Successfully deleted"});
+        }else{
+            res.status(404).json({message: "Booking couldn't be found"})
+        }
     }
+
 });
 module.exports = router;
