@@ -404,18 +404,75 @@ router.get('/:spotId/reviews', async(req,res) => {
 // TODO: double check everything
 // Get bookings of a Spot from an id
 router.get('/:spotId/bookings',requireAuth,handleValidationErrors,  async(req,res) => {
+
     const {spotId} = req.params;
-    const spot = await Spot.findByPk(spotId,{
-        include:{
-            model:Booking
-        }
-    });
-    if(spot){
-        res.status(200).json(spot.Bookings);
+    const ownerInfo = await Spot.findByPk(spotId);
+    if(!ownerInfo){
+        return res.status(404).json({message: "Spot couldn't be found"})
     }else{
-        res.status(404).json({message: "Spot couldn't be found"});
-    }
-});
+        let spotOwnerId = ownerInfo.ownerId;
+        let userId = req.user.id;
+        if(spotOwnerId === userId){
+            const Bookings = await Booking.findAll({
+                where:{
+                    spotId:spotId
+                },
+                include:[
+                    {model: User},
+                ]
+            });
+                return res.status(200).json({Bookings});
+            }else{
+                const Bookings = await Booking.findAll({
+                    where:{
+                        spotId:spotId
+                    }
+                });
+                return res.status(200).json({Bookings});
+            }
+        }
+        // return res.status(200).json({Bookings});
+    });
+
+// -----------------------------------------------------------------------------
+    // const {spotId} = req.params;
+
+    // const ownerInfo = await Booking.findAll({
+    //     where:{
+    //         spotId:spotId
+    //     },
+    //     include:[
+    //       {model: User}
+    //     ]
+    // });
+    // // const notOwnerInfo = await Booking.findByPk(spotId,{
+    // //     include:[
+    // //         {attributes: ['spotId','startDate','endDate']}
+    // //     ],
+    // // });
+    // let spotOwnerId = ownerInfo.userId;
+    // let userId = req.user.id;
+    // return res.status(200).json({ownerInfo,spotOwnerId, userId});
+    // if(ownerInfo){
+    //     if(spotOwnerId === userId){
+    //         return res.status(200).json(ownerInfo);
+    //     }else{
+    //         return res.status(200).json(notOwnerInfo);
+    //     }
+    // }else{
+    //     return res.status(404).json({message: "Spot couldn't be found"});
+    // }
+    // const userInfo = await User.findByPk(ownerInfo.ownerId)
+
+    // const notOwnerInfo = await Spot.findByPk(spotId,{
+        //     include: {
+            //         model: Booking,
+            //         attributes: ['spotId','startDate','endDate']
+            //     }
+            // });
+            // });
+// ------------------------------------------------------------------------------------------------
+
 // TODO: double check everything
 // Delete a spot
 router.delete('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
