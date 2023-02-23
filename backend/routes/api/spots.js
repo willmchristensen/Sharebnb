@@ -302,6 +302,7 @@ router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,re
     }
 });
 // TODO:DOUBLE CHECK EVERYTHING
+// TODO: REFACTOR TO NOT DELETE?
 // Create a SpotImage for a Spot based on the Spot's id
 router.post('/:spotId/images',requireAuth,handleValidationErrors, async(req,res) => {
     const {url,preview} = req.body;
@@ -318,6 +319,11 @@ router.post('/:spotId/images',requireAuth,handleValidationErrors, async(req,res)
             url,
             preview
         });
+        newSpotImage = newSpotImage.toJSON();
+        delete newSpotImage.updatedAt
+        delete newSpotImage.createdAt
+        delete newSpotImage.spotId
+
         return res.status(200).json(newSpotImage);
     }
 });
