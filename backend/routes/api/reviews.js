@@ -85,7 +85,7 @@ router.post('/:reviewId/images', async(req,res) => {
 // --------------------------------------------------------------------
 // TODO: DOUBLE CHECK EVERYTHING
 
-// TODO: VALIDATOR & ensure user check is working
+// TODO: VALIDATOR & **test editing a review that does not belong to current user**
 // Edit a review by ID
 router.put('/:reviewId',requireAuth,handleValidationErrors, async(req,res) => {
     const {reviewId} = req.params;
@@ -104,7 +104,7 @@ router.put('/:reviewId',requireAuth,handleValidationErrors, async(req,res) => {
 
         res.status(200).json(result);
     }else{
-        res.status(404).json({message: "Spot couldn't be found"})
+        res.status(404).json({message: "Review couldn't be found"});
     }
 });
 // TODO: DOUBLE CHECK EVERYTHING
