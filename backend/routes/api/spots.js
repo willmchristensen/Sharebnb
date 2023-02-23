@@ -68,7 +68,9 @@ router.post('/',requireAuth,validateSpot, async(req,res) => {
         ownerId: req.user.id
     });
 
-    res.status(201).json(newSpot)
+
+
+    return res.status(201).json(newSpot)
 
 });
 // TODO:DOUBLE CHECK EVERYTHING
@@ -303,13 +305,21 @@ router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,re
 // Create a SpotImage for a Spot based on the Spot's id
 router.post('/:spotId/images',requireAuth,handleValidationErrors, async(req,res) => {
     const {url,preview} = req.body;
-    let newSpotImage = await SpotImage.create({
-        userId: req.user.id,
-        spotId: req.params.spotId,
-        url,
-        preview
-    });
-    return res.status(200).json(newSpotImage);
+    const {spotId} = req.params;
+
+    const spot = await Spot.findByPk(spotId);
+
+    if(!spot){
+        return res.status(404).json({message: "Spot couldn't be found"})
+    }else{
+        let newSpotImage = await SpotImage.create({
+            userId: req.user.id,
+            spotId: req.params.spotId,
+            url,
+            preview
+        });
+        return res.status(200).json(newSpotImage);
+    }
 });
 
 
