@@ -223,41 +223,46 @@ router.put('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
 //     //   .withMessage('City is required'),
 //     handleValidationErrors
 // ];
-// FIXME: errors
-// TODO: (ERRORS: 400,403 - Kanban) && (DOUBLE CHECK: were sending back a token right?)
+// TODO: DOUBLE CHECK EVERYTHING
 // Create a Review for a Spot based on the Spot's id
 router.post('/:spotId/reviews',requireAuth,handleValidationErrors, async(req,res) => {
-    const {review,stars} = req.body;
+    const {spotId} = req.params;
+    let currentUser = req.user.id;
 
-    // let spot = Spot.findByPk(req.params.spotId);
-    // let reviews = spot.Reviews;
-    // // spot cant be found
-    // if(!spot){
-    //     return res.status(404).json({message: "Spot couldn't be found"})
-    // }
-    // review from current user already exists
-    // let revi = Review.findByPk(req.user.id,{
-    //     where: {
-    //         spotId: req.params.spotId
-    //     }
-    // });
-    // spot.Reviews.forEach(review => {
-    //     if(review.userId === req.user.id){
-    //         return res.status(403).json({message: "User already has a review for this spot", revi})
-    //     }
-    // })
-    // if(revi){
-    //     return res.status(403).json({message: "User already has a review for this spot", revi})
-    // };
+    const spot = await Spot.findByPk(spotId);
+    const reviewed = await Review.findOne({
+        where:{
+            spotId: spotId,
+            userId: currentUser,
+        }
+    });
 
-    let newReview = await Review.create({
-        userId: req.user.id,
-        spotId: req.params.spotId,
-        review,
-        stars
-    })
-    return res.status(200).json({newReview});
+    if(reviewed){
+        return res.status(403).json({message: "User already has a review for this spot"});
+    }else if(!spot){
+        return res.status(404).json({message: "Spot couldn't be found"});
+    }else{
+        const {review,stars} = req.body;
+        let validReview = review.length > 0;
+        let validStars = (!isNaN(stars));
+        if(validReview && validStars){
+            let newReview = await Review.create({
+                userId: req.user.id,
+                spotId: spotId,
+                review,
+                stars
+            });
+            return res.status(200).json({newReview});
+        }else if(!validReview){
+            return res.status(400).json({message: "Review text is required"});
+        }else{
+            return res.status(400).json({message: "Stars must be an integer from 1 to 5"});
+        }
+
+    }
 });
+
+
 // FIXME: VALIDATOR
 // const validateBooking = [
 //     check('review')
@@ -269,7 +274,7 @@ router.post('/:spotId/reviews',requireAuth,handleValidationErrors, async(req,res
 //         .withMessage('endDate cannot be on or before startDate'),
 //         handleValidationErrors
 // ];
-// FIXME: 400 error supposed to be middleware/use handleVal?
+// FIXME: endDate validation done with date object?
 // TODO: (error: 404, - Kanban)
 // Create a Booking for a Spot based on the Spot's id
 router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,res) => {
@@ -297,7 +302,8 @@ router.post('/:spotId/images',requireAuth,handleValidationErrors, async(req,res)
     });
     res.status(200).json(newSpotImage);
 });
-// TODO: double check everything ----------         include associated data and aggregate data before spotImages/Owner?
+// TODO: double check everything ----------
+//  include associated data and aggregate data before spotImages/Owner?
 // Get details of a Spot from an id
 router.get('/:spotId', async(req,res) => {
     const {spotId} = req.params;
