@@ -74,70 +74,81 @@ router.post('/',requireAuth,validateSpot, async(req,res) => {
     return res.status(201).json(newSpot)
 
 });
-const validateParameters = [
-    check('page')
-        .isFloat({min:0})
-        .optional()
-        .withMessage("Page must be greater than or equal to 0"),
-    check('size')
-        .isFloat({min:0})
-        .optional()
-        .withMessage("Page must be greater than or equal to 0"),
-    check("minLat")
-        .isDecimal()
-        .optional()
-        // .isInt({min:1, max:10})
-        .withMessage("Minimum latitude is invalid"),
-    check("maxLat")
-        .isDecimal()
-        .optional()
-        // .isInt({min:1, max:10})
-        .withMessage("Maximum latitude is invalid"),
-    check("minLng")
-        .isDecimal()
-        .optional()
-        // .isInt({min:1, max:10})
-        .withMessage("Minimum longitude is invalid"),
-    check("maxLng")
-        .isDecimal()
-        .optional()
-        // .isInt({min:1, max:10})
-        .withMessage("Page must be greater than or equal to 0"),
-    check("minPrice")
-        .isFloat({min:0})
-        .optional()
-        .withMessage("Page must be greater than or equal to 0"),
-    check("maxPrice")
-        .isFloat({min:0})
-        .optional()
-        .withMessage("Maximum price must be greater than or equal to 0"),
-        handleValidationErrors
-];
+// const validateParameters = [
+//     check('page')
+//         .isFloat({min:0})
+//         .optional()
+//         .withMessage("Page must be greater than or equal to 0"),
+//     check('size')
+//         .isFloat()
+//         .optional()
+//         .withMessage("Page must be greater than or equal to 0"),
+//     check("minLat")
+//         .isDecimal()
+//         .optional()
+//         // .isInt({min:1, max:10})
+//         .withMessage("Minimum latitude is invalid"),
+//     check("maxLat")
+//         .isDecimal()
+//         .optional()
+//         // .isInt({min:1, max:10})
+//         .withMessage("Maximum latitude is invalid"),
+//     check("minLng")
+//         .isDecimal()
+//         .optional()
+//         // .isInt({min:1, max:10})
+//         .withMessage("Minimum longitude is invalid"),
+//     check("maxLng")
+//         .isDecimal()
+//         .optional()
+//         // .isInt({min:1, max:10})
+//         .withMessage("Page must be greater than or equal to 0"),
+//     check("minPrice")
+//         .isDecimal({min:0})
+//         .optional()
+//         .withMessage("Page must be greater than or equal to 0"),
+//     check("maxPrice")
+//         .isDecimal({min:0})
+//         .optional()
+//         .withMessage("Maximum price must be greater than or equal to 0"),
+//         handleValidationErrors
+// ];
 // TODO:DOUBLE CHECK EVERYTHING
 // Get all spots
-router.get('/',validateParameters, async(req,res) => {
+router.get('/', async(req,res) => {
 
     let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
 
     let where = {};
+    let errors = {};
 
-    if(minLat){
-        where.lat = { [Op.gte]: minLat }
-    }
-    if(maxLat){
-        where.lat = { [Op.lte]: maxLat }
-    }
-    if(minLng){
-        where.lng = { [Op.gte]: minLng }
-    }
-    if(maxLng){
-        where.lng = { [Op.lte]: maxLng }
-    }
-    if(minPrice){
-        where.price = { [Op.gte]: minPrice }
-    }
-    if(maxPrice){
-        where.price = { [Op.lte]: maxPrice }
+    if(page < 1) errors.page = "Page must be greater than or equal to 1"
+    if(size < 1) errors.size = "Size must be greater than or equal to 1"
+
+    if(minLat && (minLat > 90 || minLat < -90)) errors.minLat = "Minimum latitude is invalid"
+    else if(minLat) where.lat = { [Op.gte]: minLat }
+
+    if(maxLat && (maxLat > 90 || maxLat < -90)) errors.maxLat = "Maximum latitude is invalid"
+    else if(maxLat) where.lat = { [Op.lte]: maxLat }
+
+    if(minLng && (minLng > 180 || minLng < -180) ) errors.minLng = "Minimum longitude is invalid"
+    else if(minLng) where.lng = { [Op.gte]: minLng }
+
+    if(maxLng && (minLng > 180 || minLng < -180) ) errors.maxLng = "Minimum longitude is invalid"
+    else if(maxLng) where.lng = { [Op.lte]: maxLng }
+
+    if(minPrice && minPrice < 0) errors.minPrice = "Minimum price must be greater than or equal to 0"
+    else if(minPrice) where.price = { [Op.gte]: minPrice }
+
+    if(maxPrice && maxPrice < 0) errors.maxPrice = "Maximum price must be greater than or equal to 0"
+    else if(maxPrice) where.price = { [Op.lte]: maxPrice }
+
+    if(Object.keys(errors).length){
+        return res.status(400).json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors
+        })
     }
 
     let pagination = {};
