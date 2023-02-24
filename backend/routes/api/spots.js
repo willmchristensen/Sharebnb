@@ -4,7 +4,7 @@ const { Spot,Review,Booking,SpotImage, ReviewImage, User} = require('../../db/mo
 const validator = require('validator');
 const moment = require('moment');
 const { check } = require('express-validator');
-const {handleValidationErrors} = require('../../utils/validation');
+const {} = require('../../utils/validation');
 const {requireAuth} = require('../../utils/auth');
 const TokenExpiredError = require('jsonwebtoken/lib/TokenExpiredError');
 
@@ -48,7 +48,7 @@ const validateSpot = [
         .exists({checkFalsy: true})
         .notEmpty()
         .withMessage('"Price per day is required"'),
-    handleValidationErrors
+
 ];
 // TODO: DOUBLE CHECK EVERYTHING
 // Create a spot
@@ -74,45 +74,7 @@ router.post('/',requireAuth,validateSpot, async(req,res) => {
     return res.status(201).json(newSpot)
 
 });
-// const validateParameters = [
-//     check('page')
-//         .isFloat({min:0})
-//         .optional()
-//         .withMessage("Page must be greater than or equal to 0"),
-//     check('size')
-//         .isFloat()
-//         .optional()
-//         .withMessage("Page must be greater than or equal to 0"),
-//     check("minLat")
-//         .isDecimal()
-//         .optional()
-//         // .isInt({min:1, max:10})
-//         .withMessage("Minimum latitude is invalid"),
-//     check("maxLat")
-//         .isDecimal()
-//         .optional()
-//         // .isInt({min:1, max:10})
-//         .withMessage("Maximum latitude is invalid"),
-//     check("minLng")
-//         .isDecimal()
-//         .optional()
-//         // .isInt({min:1, max:10})
-//         .withMessage("Minimum longitude is invalid"),
-//     check("maxLng")
-//         .isDecimal()
-//         .optional()
-//         // .isInt({min:1, max:10})
-//         .withMessage("Page must be greater than or equal to 0"),
-//     check("minPrice")
-//         .isDecimal({min:0})
-//         .optional()
-//         .withMessage("Page must be greater than or equal to 0"),
-//     check("maxPrice")
-//         .isDecimal({min:0})
-//         .optional()
-//         .withMessage("Maximum price must be greater than or equal to 0"),
-//         handleValidationErrors
-// ];
+
 // TODO:DOUBLE CHECK EVERYTHING
 // Get all spots
 router.get('/', async(req,res) => {
@@ -214,7 +176,7 @@ router.get('/', async(req,res) => {
 });
 // TODO:DOUBLE CHECK EVERYTHING
 // Get Spots of Current User
-router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
+router.get('/current',requireAuth,, async(req,res) => {
     let Spots = await Spot.findAll({
         where: {
             ownerId: req.user.id
@@ -228,7 +190,7 @@ router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
 });
 // TODO:DOUBLE CHECK EVERYTHING
 // Edit a spot by ID
-router.put('/:spotId',requireAuth,handleValidationErrors,validateSpot, async(req,res) => {
+router.put('/:spotId',requireAuth,,validateSpot, async(req,res) => {
     let spot = await Spot.findOne({
         where: {
             id: req.params.spotId,
@@ -270,7 +232,7 @@ router.put('/:spotId',requireAuth,handleValidationErrors,validateSpot, async(req
 });
 // TODO:DOUBLE CHECK EVERYTHING
 // Create a Review for a Spot based on the Spot's id
-router.post('/:spotId/reviews',requireAuth,handleValidationErrors, async(req,res) => {
+router.post('/:spotId/reviews',requireAuth,, async(req,res) => {
     const {spotId} = req.params;
     let currentUser = req.user.id;
 
@@ -311,7 +273,7 @@ router.post('/:spotId/reviews',requireAuth,handleValidationErrors, async(req,res
 // TODO:DOUBLE CHECK EVERYTHING
 // TODO: handle invalid dates?
 // Create a Booking for a Spot based on the Spot's id
-router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,res) => {
+router.post('/:spotId/bookings',requireAuth,, async(req,res) => {
     const {spotId} = req.params;
     let {startDate,endDate} = req.body;
 
@@ -369,7 +331,7 @@ router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,re
 });
 // TODO:DOUBLE CHECK EVERYTHING
 // Create a SpotImage for a Spot based on the Spot's id
-router.post('/:spotId/images',requireAuth,handleValidationErrors, async(req,res) => {
+router.post('/:spotId/images',requireAuth,, async(req,res) => {
     const {url,preview} = req.body;
 
     const spot = await Spot.findOne({
@@ -474,7 +436,7 @@ router.get('/:spotId/reviews', async(req,res) => {
 });
 // TODO:DOUBLE CHECK EVERYTHING
 // Get all bookings of a Spot from an id
-router.get('/:spotId/bookings',requireAuth,handleValidationErrors,  async(req,res) => {
+router.get('/:spotId/bookings',requireAuth,,  async(req,res) => {
 
     const {spotId} = req.params;
     const ownerInfo = await Spot.findByPk(spotId);
@@ -520,7 +482,7 @@ router.get('/:spotId/bookings',requireAuth,handleValidationErrors,  async(req,re
 
 // TODO:DOUBLE CHECK EVERYTHING
 // Delete a spot
-router.delete('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
+router.delete('/:spotId',requireAuth,, async(req,res) => {
     let spot = await Spot.findOne({
         where: {
             id: req.params.spotId,
