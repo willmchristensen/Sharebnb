@@ -313,6 +313,7 @@ router.post('/:spotId/bookings',requireAuth, async(req,res) => {
                 spotId: spotId,
             }
         });
+        let errors = {};
         for(let i = 0; i < bookings.length; i++){
             let booking = bookings[i];
             let start = booking.startDate;
@@ -323,7 +324,6 @@ router.post('/:spotId/bookings',requireAuth, async(req,res) => {
             let startConflict = startTime >= scheduledStart && startTime <= scheduledEnd;
             let endConflict = endTime >= scheduledStart && endTime <= scheduledEnd;
 
-            let errors = {};
 
             if(startConflict){
                 errors.startDate = "Start date conflicts with an existing booking"
