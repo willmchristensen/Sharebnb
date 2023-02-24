@@ -337,7 +337,7 @@ router.post('/:spotId/bookings',requireAuth, async(req,res) => {
                 message: 'Sorry, this spot is already booked for the specified dates',
                 statusCode: 403,
                 errors
-            })
+            });
         }
 
         let newBooking = await Booking.create({
@@ -518,9 +518,15 @@ router.delete('/:spotId',requireAuth, async(req,res) => {
     });
     if(spot){
         await result.destroy()
-        res.status(200).json({message: "Successfully deleted"});
+        res.status(200).json({
+            message: "Successfully deleted",
+            statusCode: 200
+        });
     }else{
-        res.status(404).json({message: "Spot couldn't be found"})
+        res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        });
     }
 });
 module.exports = router;
