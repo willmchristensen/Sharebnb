@@ -75,11 +75,47 @@ router.post('/',requireAuth,validateSpot, async(req,res) => {
 
 });
 const validateParameters = [
-
+    check('page')
+        .isFloat({min:0})
+        .optional()
+        .withMessage("Page must be greater than or equal to 0"),
+    check('size')
+        .isFloat({min:0})
+        .optional()
+        .withMessage("Page must be greater than or equal to 0"),
+    check("minLat")
+        .isDecimal()
+        .optional()
+        // .isInt({min:1, max:10})
+        .withMessage("Minimum latitude is invalid"),
+    check("maxLat")
+        .isDecimal()
+        .optional()
+        // .isInt({min:1, max:10})
+        .withMessage("Maximum latitude is invalid"),
+    check("minLng")
+        .isDecimal()
+        .optional()
+        // .isInt({min:1, max:10})
+        .withMessage("Minimum longitude is invalid"),
+    check("maxLng")
+        .isDecimal()
+        .optional()
+        // .isInt({min:1, max:10})
+        .withMessage("Page must be greater than or equal to 0"),
+    check("minPrice")
+        .isFloat({min:0})
+        .optional()
+        .withMessage("Page must be greater than or equal to 0"),
+    check("maxPrice")
+        .isFloat({min:0})
+        .optional()
+        .withMessage("Maximum price must be greater than or equal to 0"),
+        handleValidationErrors
 ];
 // TODO:DOUBLE CHECK EVERYTHING
 // Get all spots
-router.get('/',handleValidationErrors, async(req,res) => {
+router.get('/',validateParameters, async(req,res) => {
 
     let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
 
