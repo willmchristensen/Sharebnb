@@ -31,7 +31,7 @@ router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
     if(Bookings){
         res.status(200).json({Bookings});
     }else{
-        res.status(400).json({message: "Booking couldn't be found"});
+        res.status(404).json({message: "Booking couldn't be found"});
     }
 });
 // ----------------------------------------------------------------------------------------
@@ -46,13 +46,19 @@ router.put('/:bookingId',requireAuth,handleValidationErrors, async(req,res) => {
         }
     });
     if(!booking){
-        return res.status(404).json({message: "Booking couldn't be found"})
+        return res.status(404).json({
+            message: "Booking couldn't be found",
+            statusCode: 404
+        })
     }else {
         let today = new Date().getTime();
         let end = booking.endDate;
         let endTime = new Date(end).getTime();
         if(today > endTime){
-            return res.status(403).json({message: "Past bookings can't be modified"});
+            return res.status(403).json({
+                message: "Past bookings can't be modified",
+                statusCode: 403
+            });
         }else {
             let {startDate,endDate} = req.body;
 
@@ -60,7 +66,13 @@ router.put('/:bookingId',requireAuth,handleValidationErrors, async(req,res) => {
             let endTime = new Date(endDate).getTime();
 
             if(endTime < startTime){
-                return res.status(400).json({message: "endDate cannot be on or before startDate"});
+                return res.status(400).json({
+                    message: "Validation error",
+                    statusCode: 400,
+                    errors: [
+                      "endDate cannot be on or before startDate"
+                    ]
+                  });
             }else{
                 const bookings = await Booking.findAll({where:{spotId: booking.spotId,}});
                 for(let i = 0; i < bookings.length; i++){
