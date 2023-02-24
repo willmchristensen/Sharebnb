@@ -165,10 +165,9 @@ router.get('/',handleValidationErrors, async(req,res) => {
 // TODO:DOUBLE CHECK EVERYTHING
 // Get Spots of Current User
 router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
-    let User = req.user;
     let Spots = await Spot.findAll({
         where: {
-            ownerId: User.id
+            ownerId: req.user.id
         }
     })
     if(Spots){
@@ -180,8 +179,13 @@ router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
 // TODO:DOUBLE CHECK EVERYTHING
 // Edit a spot by ID
 router.put('/:spotId',requireAuth,handleValidationErrors,validateSpot, async(req,res) => {
-    const {spotId} = req.params;
-    let spot = await Spot.findByPk(spotId);
+    let spot = await Spot.findOne({
+        where: {
+            id: req.params.spotId,
+            ownerId: req.user.id
+        }
+    });
+    // return res.json(spot);
     if(!spot){
         res.status(404).json({message: "Spot couldn't be found"})
     }else{
@@ -286,6 +290,7 @@ router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,re
             let end = booking.endDate;
             let scheduledStart = new Date(start).getTime();
             let scheduledEnd = new Date(end).getTime();
+
             // let event = moment(startDate).isBetween(scheduledStart,scheduledEnd);
             // return res.json({scheduledStart,scheduledEnd,startTime,endTime,event})
             let booked = (moment(startDate).isBetween(scheduledStart,scheduledEnd) || (moment(endDate).isBetween(scheduledStart,scheduledEnd)));
@@ -454,9 +459,13 @@ router.get('/:spotId/bookings',requireAuth,handleValidationErrors,  async(req,re
 // TODO:DOUBLE CHECK EVERYTHING
 // Delete a spot
 router.delete('/:spotId',requireAuth,handleValidationErrors, async(req,res) => {
-    const {spotId} = req.params;
-    const result = await Spot.findByPk(spotId);
-    if(result){
+    let spot = await Spot.findOne({
+        where: {
+            id: req.params.spotId,
+            ownerId: req.user.id
+        }
+    });
+    if(spot){
         await result.destroy()
         res.status(200).json({message: "Successfully deleted"});
     }else{
