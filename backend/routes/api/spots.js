@@ -313,9 +313,13 @@ router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,re
 // Create a SpotImage for a Spot based on the Spot's id
 router.post('/:spotId/images',requireAuth,handleValidationErrors, async(req,res) => {
     const {url,preview} = req.body;
-    const {spotId} = req.params;
 
-    const spot = await Spot.findByPk(spotId);
+    const spot = await Spot.findOne({
+        where: {
+            id: req.params.spotId,
+            ownerId: req.user.id
+        }
+    });
 
     if(!spot){
         return res.status(404).json({message: "Spot couldn't be found"})
