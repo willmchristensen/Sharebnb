@@ -291,11 +291,19 @@ router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,re
             let scheduledStart = new Date(start).getTime();
             let scheduledEnd = new Date(end).getTime();
 
-            // let event = moment(startDate).isBetween(scheduledStart,scheduledEnd);
-            // return res.json({scheduledStart,scheduledEnd,startTime,endTime,event})
-            let booked = (moment(startDate).isBetween(scheduledStart,scheduledEnd) || (moment(endDate).isBetween(scheduledStart,scheduledEnd)));
-            if(booked){
-                return res.status(403).json({message: "Sorry, this spot is already booked for the specified dates"});
+            let startConflict = moment(startDate).isBetween(scheduledStart,scheduledEnd);
+            let endConflict = moment(endDate).isBetween(scheduledStart,scheduledEnd);
+
+            if(startConflict){
+                return res.status(403).json({
+                    message: "Sorry, this spot is already booked for the specified dates",
+                    errors:"Start date conflicts with an existing booking"
+                });
+            }else if(endConflict){
+                return res.status(403).json({
+                    message: "Sorry, this spot is already booked for the specified dates",
+                    errors:"End date conflicts with an existing booking"
+                });
             }
         }
 
