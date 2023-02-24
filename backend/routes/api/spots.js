@@ -308,12 +308,6 @@ router.post('/:spotId/bookings',requireAuth, async(req,res) => {
             statusCode: 404
         });
     }else{
-<<<<<<< HEAD
-
-        let errors = {};
-
-=======
->>>>>>> dev
         const bookings = await Booking.findAll({
             where:{
                 spotId: spotId,
