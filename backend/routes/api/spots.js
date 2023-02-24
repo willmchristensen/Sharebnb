@@ -341,7 +341,7 @@ router.post('/:spotId/images',requireAuth, async(req,res) => {
         return res.status(404).json({
             message: "Spot couldn't be found",
             statusCode: 404
-        })
+        });
     }else{
         let newSpotImage = await SpotImage.create({
             userId: req.user.id,
