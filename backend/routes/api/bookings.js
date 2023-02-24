@@ -11,12 +11,17 @@ router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
         where: {
             userId: User.id
         },
-        include: {
-            model: Spot,
-        }
+        include: [
+            {model: Spot, attributes: {
+                exclude: [ "description",
+                "avgRating",
+                "createdAt",
+                "updatedAt"]
+            }},
+        ]
     })
     if(Bookings){
-        res.status(200).json(Bookings);
+        res.status(200).json({Bookings});
     }else{
         res.status(400).json({message: "Booking couldn't be found"});
     }

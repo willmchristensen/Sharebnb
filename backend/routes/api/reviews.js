@@ -1,5 +1,6 @@
 const express = require('express');
 const { Review, ReviewImage, Spot, User} = require('../../db/models');
+const validator = require('validator');
 const {handleValidationErrors} = require('../../utils/validation');
 const {requireAuth} = require('../../utils/auth');
 const router = express.Router();
@@ -115,15 +116,22 @@ router.put('/:reviewId',requireAuth,handleValidationErrors, async(req,res) => {
     });
     if(result){
         const {review, stars} = req.body;
-        // result.spotId = result.spotId;
-        result.userId = req.user.id;
-        result.review = review;
-        result.stars = stars;
-        await result.save();
+        let validReview = (typeof review === 'string' && review.length > 0);
+        let validStars = (typeof stars === 'number');
+        if(validReview && validStars){
+            result.userId = req.user.id;
+            result.review = review;
+            result.stars = stars;
+            await result.save();
 
-        res.status(200).json(result);
+            return res.status(200).json(result);
+        }else if(!validReview){
+            return res.status(400).json({message: "Review text is required"});
+        }else{
+            return res.status(400).json({message: "Stars must be an integer from 1 to 5"});
+        }
     }else{
-        res.status(404).json({message: "Review couldn't be found"});
+        return res.status(404).json({message: "Review couldn't be found"});
     }
 });
 // TODO: DOUBLE CHECK EVERYTHING
@@ -135,7 +143,7 @@ router.delete('/:reviewId',requireAuth,handleValidationErrors, async(req,res) =>
         await result.destroy()
         res.status(200).json({message: "Successfully deleted"});
     }else{
-        res.status(404).json({message: "Spot couldn't be found"})
+        res.status(404).json({message: "Review couldn't be found"})
     }
 });
 module.exports = router;

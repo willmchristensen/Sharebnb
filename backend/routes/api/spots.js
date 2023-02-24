@@ -180,7 +180,7 @@ router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
 // Edit a spot by ID
 router.put('/:spotId',requireAuth,handleValidationErrors,validateSpot, async(req,res) => {
     const {spotId} = req.params;
-    const spot = await Spot.findByPk(spotId);
+    let spot = await Spot.findByPk(spotId);
     if(!spot){
         res.status(404).json({message: "Spot couldn't be found"})
     }else{
@@ -192,8 +192,7 @@ router.put('/:spotId',requireAuth,handleValidationErrors,validateSpot, async(req
             lng,
             name,
             description,
-            price,
-            ownerId} = req.body;
+            price} = req.body;
 
             spot.address =address ;
             spot.city =city ;
@@ -204,9 +203,12 @@ router.put('/:spotId',requireAuth,handleValidationErrors,validateSpot, async(req
             spot.name =name ;
             spot.description =description ;
             spot.price =price ;
-            spot.ownerId =ownerId;
 
             await spot.save();
+
+            spot = spot.toJSON();
+            delete spot.avgRating;
+            delete spot.previewImage;
 
         return res.status(200).json(spot);
     }
@@ -231,16 +233,18 @@ router.post('/:spotId/reviews',requireAuth,handleValidationErrors, async(req,res
         return res.status(404).json({message: "Spot couldn't be found"});
     }else{
         const {review,stars} = req.body;
-        let validReview = review.length > 0;
-        let validStars = (!isNaN(stars));
+
+        let validReview = (typeof review === 'string' && review.length > 0);
+        let validStars = (typeof stars === 'number');
+
         if(validReview && validStars){
             let newReview = await Review.create({
                 userId: req.user.id,
-                spotId: spotId,
+                spotId: parseInt(spotId),
                 review,
                 stars
             });
-            return res.status(200).json({newReview});
+            return res.status(200).json(newReview);
         }else if(!validReview){
             return res.status(400).json({message: "Review text is required"});
         }else{
@@ -293,7 +297,7 @@ router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,re
 
         let newBooking = await Booking.create({
             userId: req.user.id,
-            spotId: spotId,
+            spotId: parseInt(spotId),
             startDate,
             endDate
         });
@@ -314,7 +318,7 @@ router.post('/:spotId/images',requireAuth,handleValidationErrors, async(req,res)
     }else{
         let newSpotImage = await SpotImage.create({
             userId: req.user.id,
-            spotId: req.params.spotId,
+            spotId: parseInt(req.params.spotId),
             url,
             preview
         });
@@ -395,7 +399,7 @@ router.get('/:spotId/reviews', async(req,res) => {
     }
 });
 // TODO:DOUBLE CHECK EVERYTHING
-// Get bookings of a Spot from an id
+// Get all bookings of a Spot from an id
 router.get('/:spotId/bookings',requireAuth,handleValidationErrors,  async(req,res) => {
 
     const {spotId} = req.params;
@@ -411,7 +415,13 @@ router.get('/:spotId/bookings',requireAuth,handleValidationErrors,  async(req,re
                     spotId:spotId
                 },
                 include:[
-                    {model: User},
+                    {model: User, attributes: {
+                        exclude: [ "username",
+                    "email",
+                    "hashedPassword",
+                    "createdAt",
+                    "updatedAt"]
+                    }},
                 ]
             });
                 return res.status(200).json({Bookings});
@@ -419,6 +429,13 @@ router.get('/:spotId/bookings',requireAuth,handleValidationErrors,  async(req,re
                 const Bookings = await Booking.findAll({
                     where:{
                         spotId:spotId
+                    },
+                    attributes: {
+                        exclude: [
+                            "id",
+                            "userId",
+                        "createdAt",
+                        "updatedAt"]
                     }
                 });
                 return res.status(200).json({Bookings});
