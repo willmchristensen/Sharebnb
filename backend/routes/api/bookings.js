@@ -1,6 +1,7 @@
 const express = require('express');
 const { Booking , Spot} = require('../../db/models');
 const {handleValidationErrors} = require('../../utils/validation');
+const moment = require('moment');
 const {requireAuth} = require('../../utils/auth');
 const router = express.Router();
 // TODO: DOUBLE CHECK EVERYTHING
@@ -30,18 +31,67 @@ router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
 // TODO: DOUBLE CHECK EVERYTHING
 // Edit a booking by ID
 router.put('/:bookingId',requireAuth,handleValidationErrors, async(req,res) => {
+    // if(result){
+    //     const {startDate,endDate} = req.body;
+
+    // }else{
+    //     res.status(404).json({message: "Spot couldn't be found"})
+    // }
     const {bookingId} = req.params;
-    const result = await Booking.findByPk(bookingId);
-    if(result){
-        const {startDate,endDate} = req.body;
-        // result.spotId = result.spotId;
-        result.userId = req.user.id;
-        result.startDate = startDate;
-        result.endDate = endDate;
-        await result.save();
-        res.status(200).json(result);
-    }else{
-        res.status(404).json({message: "Spot couldn't be found"})
+    const booking = await Booking.findByPk(bookingId);
+
+    let today = new Date().getTime();
+
+    let end = booking.endDate;
+    let endTime = new Date(end).getTime();
+    // return res.json({end,today, endTime})
+
+    if(!booking){
+        return res.status(404).json({message: "Booking couldn't be found"})
+    }else if(today > endTime){
+        return res.status(403).json({message: "Past bookings can't be modified"});
+    }else {
+        let {startDate,endDate} = req.body;
+
+        let startTime = new Date(startDate).getTime();
+        let endTime = new Date(endDate).getTime();
+
+        if(endTime < startTime){
+            return res.status(400).json({message: "endDate cannot be on or before startDate"});
+        }else{
+
+            const bookings = await Booking.findAll({
+                where:{
+                    spotId: booking.spotId,
+                }
+            });
+
+            let books = [];
+            bookings.forEach(booking => {
+                books.push(booking.toJSON())
+            })
+
+            for(let i = 0; i < books.length; i++){
+                let booking = books[i];
+                let start = booking.startDate;
+                let end = booking.endDate;
+                let scheduledStart = new Date(start).getTime();
+                let scheduledEnd = new Date(end).getTime();
+                let booked = (moment(startDate).isBetween(scheduledStart,scheduledEnd) || (moment(endDate).isBetween(scheduledStart,scheduledEnd)));
+                if(booked){
+                    return res.status(403).json({message: "Sorry, this spot is already booked for the specified dates"});
+                }
+            }
+
+            booking.spotId = booking.spotId;
+            booking.userId = req.user.id;
+            booking.startDate = startDate;
+            booking.endDate = endDate;
+            await booking.save();
+
+            return res.status(200).json(booking);
+        }
+
     }
 });
 // ----------------------------------------------------------------------------------------

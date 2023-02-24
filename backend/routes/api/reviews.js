@@ -41,7 +41,6 @@ router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
             }},
             {model: Spot, attributes: {
                 exclude: [
-                "username",
                 "description",
                 "avgRating",
                 "createdAt",

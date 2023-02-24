@@ -2,6 +2,7 @@ const express = require('express');
 const {Op, Sequelize} = require('sequelize');
 const { Spot,Review,Booking,SpotImage, ReviewImage, User} = require('../../db/models');
 const validator = require('validator');
+const moment = require('moment');
 const { check } = require('express-validator');
 const {handleValidationErrors} = require('../../utils/validation');
 const {requireAuth} = require('../../utils/auth');
@@ -267,33 +268,33 @@ router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,re
     }
 
     const spot = await Spot.findByPk(spotId);
-    const bookings = await Booking.findAll({
-        where:{
-            spotId: spotId,
-        }
-    });
 
     if(!spot){
         return res.status(404).json({message: "Spot couldn't be found"})
     }else{
+
+        const bookings = await Booking.findAll({
+            where:{
+                spotId: spotId,
+            }
+        });
+
         let books = [];
         bookings.forEach(booking => {
             books.push(booking.toJSON())
         })
 
-
         for(let i = 0; i < books.length; i++){
             let booking = books[i];
             let start = booking.startDate;
             let end = booking.endDate;
-            let startTime = new Date(start).getTime();
-            let endTime = new Date(end).getTime();
-            let booked = (startTime === startDate || startTime === endDate || endTime === startDate || endTime === endDate);
+            let scheduledStart = new Date(start).getTime();
+            let scheduledEnd = new Date(end).getTime();
+            let booked = (moment(startDate).isBetween(scheduledStart,scheduledEnd) || (moment(endDate).isBetween(scheduledStart,scheduledEnd)));
             if(booked){
                 return res.status(403).json({message: "Sorry, this spot is already booked for the specified dates"});
             }
         }
-
 
         let newBooking = await Booking.create({
             userId: req.user.id,
@@ -339,7 +340,15 @@ router.get('/:spotId', async(req,res) => {
     const {spotId} = req.params;
     const spot = await Spot.findByPk(spotId, {
         include:[
-            {model: SpotImage},
+            {
+                model: SpotImage,
+                attributes: {
+                    exclude: [
+                    "spotId",
+                    "createdAt",
+                    "updatedAt",]
+                }
+            },
             {model: User , as: 'Owner'},
         ]
     });
