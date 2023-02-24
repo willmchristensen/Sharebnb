@@ -74,6 +74,9 @@ router.post('/',requireAuth,validateSpot, async(req,res) => {
     return res.status(201).json(newSpot)
 
 });
+const validateParameters = [
+
+];
 // TODO:DOUBLE CHECK EVERYTHING
 // Get all spots
 router.get('/',handleValidationErrors, async(req,res) => {

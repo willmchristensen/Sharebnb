@@ -4,7 +4,9 @@ const {handleValidationErrors} = require('../../utils/validation');
 const moment = require('moment');
 const {requireAuth} = require('../../utils/auth');
 const router = express.Router();
+// ----------------------------------------------------------------------------------------
 // TODO: DOUBLE CHECK EVERYTHING
+// -----------------------------------------------------------------------------------------
 // Get Bookings of Current User
 router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
     let User = req.user;
@@ -13,30 +15,30 @@ router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
             userId: User.id
         },
         include: [
-            {model: Spot, attributes: {
-                exclude: [ "description",
-                "avgRating",
-                "createdAt",
-                "updatedAt"]
-            }},
+            {
+                model: Spot, attributes: {
+                    exclude:
+                    [
+                        "description",
+                        "avgRating",
+                        "createdAt",
+                        "updatedAt"
+                    ]
+                }
+            },
         ]
-    })
+    });
     if(Bookings){
         res.status(200).json({Bookings});
     }else{
         res.status(400).json({message: "Booking couldn't be found"});
     }
 });
-
+// ----------------------------------------------------------------------------------------
 // TODO: DOUBLE CHECK EVERYTHING
+// -----------------------------------------------------------------------------------------
 // Edit a booking by ID
 router.put('/:bookingId',requireAuth,handleValidationErrors, async(req,res) => {
-    // if(result){
-    //     const {startDate,endDate} = req.body;
-
-    // }else{
-    //     res.status(404).json({message: "Spot couldn't be found"})
-    // }
     const booking = await Booking.findOne({
         where: {
             id: req.params.bookingId,
@@ -113,9 +115,9 @@ router.delete('/:bookingId',requireAuth,handleValidationErrors, async(req,res) =
             return res.status(403).json({message: "Bookings that have been started can't be deleted"});
         }else if(result){
             await result.destroy()
-            res.status(200).json({message: "Successfully deleted"});
+            return res.status(200).json({message: "Successfully deleted"});
         }else{
-            res.status(404).json({message: "Booking couldn't be found"})
+            return res.status(404).json({message: "Booking couldn't be found"});
         }
     }
 
