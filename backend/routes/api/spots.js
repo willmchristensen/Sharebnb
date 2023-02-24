@@ -323,6 +323,8 @@ router.post('/:spotId/bookings',requireAuth, async(req,res) => {
             let startConflict = startTime >= scheduledStart && startTime <= scheduledEnd;
             let endConflict = endTime >= scheduledStart && endTime <= scheduledEnd;
 
+            let errors = {};
+
             if(startConflict){
                 errors.startDate = "Start date conflicts with an existing booking"
             }else if(endConflict){
