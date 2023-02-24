@@ -71,8 +71,8 @@ router.put('/:bookingId',requireAuth,handleValidationErrors, async(req,res) => {
                     let scheduledStart = new Date(start).getTime();
                     let scheduledEnd = new Date(end).getTime();
 
-                    let startConflict = moment(startDate).isBetween(scheduledStart,scheduledEnd);
-                    let endConflict = moment(endDate).isBetween(scheduledStart,scheduledEnd);
+                    let startConflict = startTime >= scheduledStart && startTime <= scheduledEnd;
+                    let endConflict = endTime >= scheduledStart && endTime <= scheduledEnd;
 
                     if(startConflict){
                         return res.status(403).json({

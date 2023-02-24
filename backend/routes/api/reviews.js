@@ -68,7 +68,11 @@ router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
 router.post('/:reviewId/images', async(req,res) => {
     const {url} = req.body;
     const reviewId = req.params.reviewId;
-    let review = await Review.findByPk(reviewId, {
+    let review = await Review.findOne({
+        where:{
+            id: reviewId,
+            userId: req.user.id
+        },
         include: {
             model: ReviewImage,
         }

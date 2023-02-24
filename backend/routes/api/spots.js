@@ -271,7 +271,6 @@ router.post('/:spotId/reviews',requireAuth, async(req,res) => {
     }
 });
 // TODO:DOUBLE CHECK EVERYTHING
-// TODO: handle invalid dates?
 // Create a Booking for a Spot based on the Spot's id
 router.post('/:spotId/bookings',requireAuth, async(req,res) => {
     const {spotId} = req.params;
@@ -285,17 +284,14 @@ router.post('/:spotId/bookings',requireAuth, async(req,res) => {
     }
 
     const spot = await Spot.findByPk(spotId);
-
     if(!spot){
         return res.status(404).json({message: "Spot couldn't be found"})
     }else{
-
         const bookings = await Booking.findAll({
             where:{
                 spotId: spotId,
             }
         });
-
         for(let i = 0; i < bookings.length; i++){
             let booking = bookings[i];
             let start = booking.startDate;
@@ -303,8 +299,8 @@ router.post('/:spotId/bookings',requireAuth, async(req,res) => {
             let scheduledStart = new Date(start).getTime();
             let scheduledEnd = new Date(end).getTime();
 
-            let startConflict = moment(startDate).isBetween(scheduledStart,scheduledEnd);
-            let endConflict = moment(endDate).isBetween(scheduledStart,scheduledEnd);
+            let startConflict = startTime >= scheduledStart && startTime <= scheduledEnd;
+            let endConflict = endTime >= scheduledStart && endTime <= scheduledEnd;
 
             if(startConflict){
                 return res.status(403).json({
@@ -342,7 +338,10 @@ router.post('/:spotId/images',requireAuth, async(req,res) => {
     });
 
     if(!spot){
-        return res.status(404).json({message: "Spot couldn't be found"})
+        return res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
     }else{
         let newSpotImage = await SpotImage.create({
             userId: req.user.id,
@@ -380,7 +379,10 @@ router.get('/:spotId', async(req,res) => {
         ]
     });
     if(!spot){
-        return res.status(404).json({message: "Spot couldn't be found"})
+        return res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
     }else{
         let spotObj = spot.toJSON();
 
