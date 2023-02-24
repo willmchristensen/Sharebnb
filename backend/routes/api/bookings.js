@@ -43,6 +43,7 @@ router.put('/:bookingId',requireAuth,handleValidationErrors, async(req,res) => {
     let today = new Date().getTime();
 
     let end = booking.endDate;
+    // return res.json(end);
     let endTime = new Date(end).getTime();
     // return res.json({end,today, endTime})
 
