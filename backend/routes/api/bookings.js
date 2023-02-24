@@ -31,7 +31,7 @@ router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
     if(Bookings){
         res.status(200).json({Bookings});
     }else{
-        res.status(400).json({message: "Booking couldn't be found"});
+        res.status(404).json({message: "Booking couldn't be found"});
     }
 });
 // ----------------------------------------------------------------------------------------
@@ -46,13 +46,19 @@ router.put('/:bookingId',requireAuth,handleValidationErrors, async(req,res) => {
         }
     });
     if(!booking){
-        return res.status(404).json({message: "Booking couldn't be found"})
+        return res.status(404).json({
+            message: "Booking couldn't be found",
+            statusCode: 404
+        })
     }else {
         let today = new Date().getTime();
         let end = booking.endDate;
         let endTime = new Date(end).getTime();
         if(today > endTime){
-            return res.status(403).json({message: "Past bookings can't be modified"});
+            return res.status(403).json({
+                message: "Past bookings can't be modified",
+                statusCode: 403
+            });
         }else {
             let {startDate,endDate} = req.body;
 
@@ -60,7 +66,13 @@ router.put('/:bookingId',requireAuth,handleValidationErrors, async(req,res) => {
             let endTime = new Date(endDate).getTime();
 
             if(endTime < startTime){
-                return res.status(400).json({message: "endDate cannot be on or before startDate"});
+                return res.status(400).json({
+                    message: "Validation error",
+                    statusCode: 400,
+                    errors: [
+                      "endDate cannot be on or before startDate"
+                    ]
+                  });
             }else{
                 const bookings = await Booking.findAll({where:{spotId: booking.spotId,}});
                 for(let i = 0; i < bookings.length; i++){
@@ -71,8 +83,8 @@ router.put('/:bookingId',requireAuth,handleValidationErrors, async(req,res) => {
                     let scheduledStart = new Date(start).getTime();
                     let scheduledEnd = new Date(end).getTime();
 
-                    let startConflict = moment(startDate).isBetween(scheduledStart,scheduledEnd);
-                    let endConflict = moment(endDate).isBetween(scheduledStart,scheduledEnd);
+                    let startConflict = startTime >= scheduledStart && startTime <= scheduledEnd;
+                    let endConflict = endTime >= scheduledStart && endTime <= scheduledEnd;
 
                     if(startConflict){
                         return res.status(403).json({
@@ -106,19 +118,33 @@ router.delete('/:bookingId',requireAuth,handleValidationErrors, async(req,res) =
     const {bookingId} = req.params;
     const result = await Booking.findByPk(bookingId);
 
-    if(result.startDate){
+    if(result){
         let start = result.startDate;
         let startInt = new Date(start).getTime();
         let todayInt = new Date().getTime();
         let inValidDelete = !(todayInt < startInt);
         if(inValidDelete){
-            return res.status(403).json({message: "Bookings that have been started can't be deleted"});
+            return res.status(403).json({
+                message: "Bookings that have been started can't be deleted",
+                statusCode: 403
+            });
         }else if(result){
             await result.destroy()
-            return res.status(200).json({message: "Successfully deleted"});
+            return res.status(200).json({
+                message: "Successfully deleted",
+                statusCode: 200
+            });
         }else{
-            return res.status(404).json({message: "Booking couldn't be found"});
+            return res.status(404).json({
+                message: "Booking couldn't be found",
+                statusCode: 404
+            });
         }
+    }else{
+        return res.status(404).json({
+            message: "Booking couldn't be found",
+            statusCode: 404
+        });
     }
 
 });

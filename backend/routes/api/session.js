@@ -16,8 +16,6 @@ const validateLogin = [
     .withMessage('Please provide a password.'),
   handleValidationErrors
 ];
-// TODO: IS THIS OKAY?
-// TODO: 400 ERROR FORMAT?
 // Log in
 router.post(
   '/',

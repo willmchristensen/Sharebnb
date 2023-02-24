@@ -69,8 +69,6 @@ router.post('/',requireAuth,validateSpot, async(req,res) => {
         ownerId: req.user.id
     });
 
-
-
     return res.status(201).json(newSpot)
 
 });
@@ -185,7 +183,10 @@ router.get('/current',requireAuth, async(req,res) => {
     if(Spots){
         res.status(200).json({Spots});
     }else{
-        res.status(400).json({message: "Spot couldn't be found"});
+        res.status(400).json({
+            message: "Spot couldn't be found",
+            statusCode: 400
+        });
     }
 });
 // TODO:DOUBLE CHECK EVERYTHING
@@ -197,9 +198,11 @@ router.put('/:spotId',requireAuth,validateSpot, async(req,res) => {
             ownerId: req.user.id
         }
     });
-    // return res.json(spot);
     if(!spot){
-        res.status(404).json({message: "Spot couldn't be found"})
+        res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        });
     }else{
         const {address,
             city,
@@ -245,9 +248,15 @@ router.post('/:spotId/reviews',requireAuth, async(req,res) => {
     });
 
     if(reviewed){
-        return res.status(403).json({message: "User already has a review for this spot"});
+        return res.status(403).json({
+            message: "User already has a review for this spot",
+            statusCode: 403
+        });
     }else if(!spot){
-        return res.status(404).json({message: "Spot couldn't be found"});
+        return res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        });
     }else{
         const {review,stars} = req.body;
 
@@ -263,15 +272,20 @@ router.post('/:spotId/reviews',requireAuth, async(req,res) => {
             });
             return res.status(200).json(newReview);
         }else if(!validReview){
-            return res.status(400).json({message: "Review text is required"});
+            return res.status(400).json({
+                message: "Review text is required",
+                statusCode: 400
+            });
         }else{
-            return res.status(400).json({message: "Stars must be an integer from 1 to 5"});
+            return res.status(400).json({
+                message: "Stars must be an integer from 1 to 5",
+                statusCode: 400
+            });
         }
 
     }
 });
 // TODO:DOUBLE CHECK EVERYTHING
-// TODO: handle invalid dates?
 // Create a Booking for a Spot based on the Spot's id
 router.post('/:spotId/bookings',requireAuth, async(req,res) => {
     const {spotId} = req.params;
@@ -281,23 +295,30 @@ router.post('/:spotId/bookings',requireAuth, async(req,res) => {
     let endTime = new Date(endDate).getTime();
 
     if(endTime < startTime){
-        return res.status(400).json({message: "endDate cannot be on or before startDate"});
+        return res.status(400).json({
+            message: "endDate cannot be on or before startDate",
+            statusCode: 400
+        });
     }
 
     const spot = await Spot.findByPk(spotId);
-
     if(!spot){
-        return res.status(404).json({message: "Spot couldn't be found"})
+        return res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        });
     }else{
+<<<<<<< HEAD
 
         let errors = {};
 
+=======
+>>>>>>> dev
         const bookings = await Booking.findAll({
             where:{
                 spotId: spotId,
             }
         });
-
         for(let i = 0; i < bookings.length; i++){
             let booking = bookings[i];
             let start = booking.startDate;
@@ -305,8 +326,8 @@ router.post('/:spotId/bookings',requireAuth, async(req,res) => {
             let scheduledStart = new Date(start).getTime();
             let scheduledEnd = new Date(end).getTime();
 
-            let startConflict = moment(startDate).isBetween(scheduledStart,scheduledEnd);
-            let endConflict = moment(endDate).isBetween(scheduledStart,scheduledEnd);
+            let startConflict = startTime >= scheduledStart && startTime <= scheduledEnd;
+            let endConflict = endTime >= scheduledStart && endTime <= scheduledEnd;
 
             if(startConflict){
                 errors.startDate = "Start date conflicts with an existing booking"
@@ -346,7 +367,10 @@ router.post('/:spotId/images',requireAuth, async(req,res) => {
     });
 
     if(!spot){
-        return res.status(404).json({message: "Spot couldn't be found"})
+        return res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        });
     }else{
         let newSpotImage = await SpotImage.create({
             userId: req.user.id,
@@ -384,7 +408,10 @@ router.get('/:spotId', async(req,res) => {
         ]
     });
     if(!spot){
-        return res.status(404).json({message: "Spot couldn't be found"})
+        return res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
     }else{
         let spotObj = spot.toJSON();
 
