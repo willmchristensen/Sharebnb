@@ -9,19 +9,28 @@ router.delete('/:spotImageId',requireAuth,handleValidationErrors, async(req,res)
     const {spotImageId} = req.params;
     const userId = req.user.id;
 
-    const result = await SpotImage.findByPk(spotImageId);
-    const spot = await Spot.findByPk(result.spotId);
-
-    let spotOwner = spot.ownerId;
-    // return res.json({spotOwner,userId,spot,result})
-    if(spotOwner !== userId){
-        return res.status(404).json({message: "Spot Image couldn't be found"})
-    }
-    if(result){
-        await result.destroy()
-        return res.status(200).json({message: "Successfully deleted"});
+    const spotImage = await SpotImage.findByPk(spotImageId);
+    if(!spotImage){
+        return res.status(404).json({
+            message: "Spot Image couldn't be found",
+            statusCode: 404
+        })
     }else{
-        return res.status(404).json({message: "Spot Image couldn't be found"})
+        const spot = await Spot.findByPk(spotImage.spotId);
+        let spotOwner = spot.ownerId;
+        if(spotOwner !== userId){
+            return res.status(404).json({
+                message: "Spot Image couldn't be found",
+                statusCode: 404
+            })
+        }
+        if(spotImage){
+            await spotImage.destroy()
+            return res.status(200).json({
+                message: "Successfully deleted",
+                statusCode: 200
+            });
+        }
     }
 });
 module.exports = router;
