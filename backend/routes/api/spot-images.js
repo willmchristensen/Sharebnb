@@ -15,13 +15,13 @@ router.delete('/:spotImageId',requireAuth,handleValidationErrors, async(req,res)
     let spotOwner = spot.ownerId;
     // return res.json({spotOwner,userId,spot,result})
     if(spotOwner !== userId){
-        return res.status(404).json({message: "Spot couldn't be found"})
+        return res.status(404).json({message: "Spot Image couldn't be found"})
     }
     if(result){
         await result.destroy()
         return res.status(200).json({message: "Successfully deleted"});
     }else{
-        return res.status(404).json({message: "Spot couldn't be found"})
+        return res.status(404).json({message: "Spot Image couldn't be found"})
     }
 });
 module.exports = router;
