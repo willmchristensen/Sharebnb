@@ -66,18 +66,15 @@ router.put('/:bookingId',requireAuth,handleValidationErrors, async(req,res) => {
                 }
             });
 
-            let books = [];
-            bookings.forEach(booking => {
-                books.push(booking.toJSON())
-            })
-
-            for(let i = 0; i < books.length; i++){
-                let booking = books[i];
+            for(let i = 0; i < bookings.length; i++){
+                let booking = bookings[i];
                 let start = booking.startDate;
                 let end = booking.endDate;
                 let scheduledStart = new Date(start).getTime();
                 let scheduledEnd = new Date(end).getTime();
-                let booked = (moment(startDate).isBetween(scheduledStart,scheduledEnd) || (moment(endDate).isBetween(scheduledStart,scheduledEnd)));
+
+
+                let booked = ((startTime >= scheduledStart || startTime <= scheduledEnd) || (endTime >= scheduledStart || endTime <= scheduledEnd))
                 if(booked){
                     return res.status(403).json({message: "Sorry, this spot is already booked for the specified dates"});
                 }

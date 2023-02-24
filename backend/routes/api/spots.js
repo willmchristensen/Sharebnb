@@ -255,15 +255,16 @@ router.post('/:spotId/reviews',requireAuth,handleValidationErrors, async(req,res
     }
 });
 // TODO:DOUBLE CHECK EVERYTHING
+// TODO: handle invalid dates?
 // Create a Booking for a Spot based on the Spot's id
 router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,res) => {
     const {spotId} = req.params;
     let {startDate,endDate} = req.body;
 
-    startDate = new Date(startDate).getTime();
-    endDate = new Date(endDate).getTime();
+    let startTime = new Date(startDate).getTime();
+    let endTime = new Date(endDate).getTime();
 
-    if(endDate < startDate){
+    if(endTime < startTime){
         return res.status(400).json({message: "endDate cannot be on or before startDate"});
     }
 
@@ -279,17 +280,14 @@ router.post('/:spotId/bookings',requireAuth,handleValidationErrors, async(req,re
             }
         });
 
-        let books = [];
-        bookings.forEach(booking => {
-            books.push(booking.toJSON())
-        })
-
-        for(let i = 0; i < books.length; i++){
-            let booking = books[i];
+        for(let i = 0; i < bookings.length; i++){
+            let booking = bookings[i];
             let start = booking.startDate;
             let end = booking.endDate;
             let scheduledStart = new Date(start).getTime();
             let scheduledEnd = new Date(end).getTime();
+            // let event = moment(startDate).isBetween(scheduledStart,scheduledEnd);
+            // return res.json({scheduledStart,scheduledEnd,startTime,endTime,event})
             let booked = (moment(startDate).isBetween(scheduledStart,scheduledEnd) || (moment(endDate).isBetween(scheduledStart,scheduledEnd)));
             if(booked){
                 return res.status(403).json({message: "Sorry, this spot is already booked for the specified dates"});
