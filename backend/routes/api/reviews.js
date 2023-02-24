@@ -5,54 +5,41 @@ const {handleValidationErrors} = require('../../utils/validation');
 const {requireAuth} = require('../../utils/auth');
 const router = express.Router();
 
-// TODO: *
-// remove this entirely cuz moved into spots?
-// ---------------------------------------------------------------------------------
-//                              ~~~~~~       BUG        ~~~~~~
-// ---------------------------------------------------------------------------------
-// Create a Review for a Spot based on the Spot's id
-// router.post('/:spotId', async(req,res) => {
-//     const {review,stars} = req.body;
-//     let newReview = await Review.create({
-//         userId: req.user.id,
-//         spotId: req.params.spotId,
-//         review,
-//         stars
-//     })
-//     res.status(200).json(newReview);
-// });
-// ---------------------------------------------------------------------------------
-// ---------------------------------------------------------------------------------
 // TODO: DOUBLE CHECK EVERYTHING
 // Get Reviews of Current User
 router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
-
     const Reviews = await Review.findAll({
         where:{
             userId: req.user.id
         },
         include:[
-            {model: User, attributes: {
-                exclude: [ "username",
-                "email",
-                "hashedPassword",
-                "createdAt",
-                "updatedAt"]
-            }},
-            {model: Spot, attributes: {
-                exclude: [
-                "description",
-                "avgRating",
-                "createdAt",
-                "updatedAt",]
-            }},
+            {
+                model: User,
+                attributes: {
+                    exclude: [ "username",
+                    "email",
+                    "hashedPassword",
+                    "createdAt",
+                    "updatedAt"]
+                }
+            },
+            {
+                model: Spot,
+                attributes: {
+                    exclude: [
+                    "description",
+                    "avgRating",
+                    "createdAt",
+                    "updatedAt"]
+                }
+            },
             {
                 model: ReviewImage,
                 attributes: {
                     exclude: [
                     "reviewId",
                     "createdAt",
-                    "updatedAt",]
+                    "updatedAt"]
                 }
             },
         ],
@@ -80,7 +67,6 @@ router.post('/:reviewId/images', async(req,res) => {
             model: ReviewImage,
         }
     });
-    // return res.json({review});
     if(!review){
         return res.status(404).json({
             message: "Review couldn't be found",

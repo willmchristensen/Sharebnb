@@ -14,7 +14,7 @@ router.delete('/:spotImageId',requireAuth,handleValidationErrors, async(req,res)
         return res.status(404).json({
             message: "Spot Image couldn't be found",
             statusCode: 404
-        })
+        });
     }else{
         const spot = await Spot.findByPk(spotImage.spotId);
         let spotOwner = spot.ownerId;
@@ -22,7 +22,7 @@ router.delete('/:spotImageId',requireAuth,handleValidationErrors, async(req,res)
             return res.status(404).json({
                 message: "Spot Image couldn't be found",
                 statusCode: 404
-            })
+            });
         }
         if(spotImage){
             await spotImage.destroy()
