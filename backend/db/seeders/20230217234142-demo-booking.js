@@ -9,29 +9,32 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    options.tableName = 'SpotImages';
+    options.tableName = 'Bookings';
     return queryInterface.bulkInsert(options, [
       {
         spotId:1,
-        url:'a',
-        preview:true,
+        userId:1,
+        startDate:"2021-11-19 20:39:36",
+        endDate:"2021-12-19 20:39:36",
       },
       {
         spotId:2,
-        url:'b',
-        preview:true,
+        userId:2,
+        startDate:"2021-1-19 20:39:36",
+        endDate:"2021-11-19 20:39:36",
       },
       {
         spotId:3,
-        url:'c',
-        preview:true,
+        userId:3,
+        startDate:"2021-10-19 20:39:36",
+        endDate:"2021-11-19 20:39:36",
       }
 
     ], {});
   },
 
   down: async (queryInterface, Sequelize) => {
-    options.tableName = 'SpotImages';
+    options.tableName = 'Bookings';
     return queryInterface.bulkDelete(options, {
       id: {
         [Op.in]: [1,2,3]

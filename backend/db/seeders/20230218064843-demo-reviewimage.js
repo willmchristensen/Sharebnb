@@ -8,28 +8,28 @@ if (process.env.NODE_ENV === 'production') {
 }
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    options.tableName = 'ReviewImages',
-    await queryInterface.bulkInsert(options, [
+  up: async (queryInterface, Sequelize) => {
+    options.tableName = 'ReviewImages';
+    return queryInterface.bulkInsert(options, [
       {
-        "reviewId":1,
-        "url":'a',
+        reviewId :1,
+        url :'a',
       },
       {
-        "reviewId":2,
-        "url":'b',
+        reviewId:2,
+        url:'b',
       },
       {
-        "reviewId":3,
-        "url":'c',
+        reviewId:3,
+        url:'c',
       }
 
     ], {});
   },
 
-  async down (queryInterface, Sequelize) {
-    options.tableName = 'ReviewImages',
-    await queryInterface.bulkDelete(options, {
+  down: async (queryInterface, Sequelize) => {
+    options.tableName = 'ReviewImages';
+    return queryInterface.bulkDelete(options, {
       id: {
         [Op.in]: [1,2,3]
       }

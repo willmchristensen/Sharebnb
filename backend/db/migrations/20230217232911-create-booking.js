@@ -5,11 +5,9 @@ if (process.env.NODE_ENV === 'production') {
  options.schema = process.env.SCHEMA; // define your schema in options object
 }
 
-
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Reviews', {
+   up: async(queryInterface, Sequelize) => {
+    return queryInterface.createTable('Bookings', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -26,11 +24,11 @@ module.exports = {
         references: {model: 'Users'},
         onDelete: 'CASCADE',
       },
-      review: {
-        type: Sequelize.STRING
+      startDate: {
+        type: Sequelize.DATEONLY
       },
-      stars: {
-        type: Sequelize.INTEGER
+      endDate: {
+        type: Sequelize.DATEONLY
       },
       createdAt: {
         allowNull: false,
@@ -44,8 +42,8 @@ module.exports = {
       }
     }, options);
   },
-  async down(queryInterface, Sequelize) {
-    options.tableName = "Reviews";
-    await queryInterface.dropTable(options);
+  down: async(queryInterface, Sequelize) => {
+    options.tableName = "Bookings";
+    return queryInterface.dropTable(options);
   }
 };
