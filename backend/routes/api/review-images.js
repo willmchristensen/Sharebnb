@@ -5,17 +5,20 @@ const {requireAuth} = require('../../utils/auth');
 const router = express.Router();
 // TODO: DOUBLE CHECK EVERYTHING
 // Delete a Review Image
-router.delete('/:reviewImageId',requireAuth,handleValidationErrors, async(req,res) => {
+router.delete('/:reviewImageId',requireAuth, async(req,res) => {
     const {reviewImageId} = req.params;
     const reviewImage = await ReviewImage.findByPk(reviewImageId);
     if(!reviewImage){
         res.status(404).json({
-            message: "ReviewImage couldn't be found",
+            message: "Review Image couldn't be found",
             statusCode: 404
         });
     }else {
-        const review = await Review.findByPk(reviewImage.reviewId);
-        if(req.user.id !== review.userId){
+        const review = await Review.findOne({where: {
+            id: reviewImage.reviewId,
+            userId: req.user.id
+        }});
+        if(!review){
             res.status(400).json({
                 message: "Review must belong to the current user",
                 statusCode: 400
