@@ -92,10 +92,19 @@ router.put('/:reviewId',requireAuth,handleValidationErrors, async(req,res) => {
     const editedReview = await Review.findOne({
         where: {
             id: reviewId,
-            userId: req.user.id
         }
     });
-    if(editedReview){
+    if(!editedReview){
+        return res.status(404).json({
+            message: "Review couldn't be found",
+            statusCode:404
+        });
+    }else if(editedReview.userId !== req.user.id){
+        return res.status(403).json({
+            message: "Review must belong to the current user",
+            statusCode: 403
+        });
+    }else{
         const {review, stars} = req.body;
         let validReview = (typeof review === 'string' && review.length > 0);
         let validStars = (typeof stars === 'number');
@@ -117,11 +126,6 @@ router.put('/:reviewId',requireAuth,handleValidationErrors, async(req,res) => {
                 statusCode:400
             });
         }
-    }else{
-        return res.status(404).json({
-            message: "Review couldn't be found",
-            statusCode:404
-        });
     }
 });
 // TODO: DOUBLE CHECK EVERYTHING
