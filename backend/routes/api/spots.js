@@ -108,7 +108,7 @@ router.get('/', async(req,res) => {
             message: 'Validation Error',
             statusCode: 400,
             errors
-        })
+        });
     }
 
     let pagination = {};
@@ -307,47 +307,52 @@ router.post('/:spotId/bookings',requireAuth, async(req,res) => {
             message: "Spot couldn't be found",
             statusCode: 404
         });
-    }else{
-        const bookings = await Booking.findAll({
-            where:{
-                spotId: spotId,
-            }
-        });
-        let errors = {};
-        for(let i = 0; i < bookings.length; i++){
-            let booking = bookings[i];
-            let start = booking.startDate;
-            let end = booking.endDate;
-            let scheduledStart = new Date(start).getTime();
-            let scheduledEnd = new Date(end).getTime();
-
-            let startConflict = startTime >= scheduledStart && startTime <= scheduledEnd;
-            let endConflict = endTime >= scheduledStart && endTime <= scheduledEnd;
-
-
-            if(startConflict){
-                errors.startDate = "Start date conflicts with an existing booking"
-            }else if(endConflict){
-                errors.endDate = "End date conflicts with an existing booking"
-            }
-        }
-
-        if(Object.keys(errors).length){
+    }else if(spot.ownerId === req.user.id){
             return res.status(403).json({
-                message: 'Sorry, this spot is already booked for the specified dates',
-                statusCode: 403,
-                errors
+                message: "Spot must not belong to the current user",
+                statusCode: 403
             });
+    }else{
+    const bookings = await Booking.findAll({
+        where:{
+            spotId: spotId,
         }
+    });
+    let errors = {};
+    for(let i = 0; i < bookings.length; i++){
+        let booking = bookings[i];
+        let start = booking.startDate;
+        let end = booking.endDate;
+        let scheduledStart = new Date(start).getTime();
+        let scheduledEnd = new Date(end).getTime();
 
-        let newBooking = await Booking.create({
-            userId: req.user.id,
-            spotId: parseInt(spotId),
-            startDate,
-            endDate
+        let startConflict = startTime >= scheduledStart && startTime <= scheduledEnd;
+        let endConflict = endTime >= scheduledStart && endTime <= scheduledEnd;
+
+
+        if(startConflict){
+            errors.startDate = "Start date conflicts with an existing booking"
+        }else if(endConflict){
+            errors.endDate = "End date conflicts with an existing booking"
+        }
+    }
+
+    if(Object.keys(errors).length){
+        return res.status(403).json({
+            message: 'Sorry, this spot is already booked for the specified dates',
+            statusCode: 403,
+            errors
         });
+    }
 
-        return res.status(200).json(newBooking);
+    let newBooking = await Booking.create({
+        userId: req.user.id,
+        spotId: parseInt(spotId),
+        startDate,
+        endDate
+    });
+
+    return res.status(200).json(newBooking);
     }
 });
 // TODO:DOUBLE CHECK EVERYTHING

@@ -4,11 +4,9 @@ const {handleValidationErrors} = require('../../utils/validation');
 const moment = require('moment');
 const {requireAuth} = require('../../utils/auth');
 const router = express.Router();
-// ----------------------------------------------------------------------------------------
 // TODO: DOUBLE CHECK EVERYTHING
-// -----------------------------------------------------------------------------------------
 // Get Bookings of Current User
-router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
+router.get('/current',requireAuth, async(req,res) => {
     let User = req.user;
     let Bookings = await Booking.findAll({
         where: {
@@ -29,16 +27,14 @@ router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
         ]
     });
     if(Bookings){
-        res.status(200).json({Bookings});
+        return res.status(200).json({Bookings});
     }else{
-        res.status(404).json({message: "Booking couldn't be found"});
+        return res.status(404).json({message: "Booking couldn't be found"});
     }
 });
-// ----------------------------------------------------------------------------------------
 // TODO: DOUBLE CHECK EVERYTHING
-// -----------------------------------------------------------------------------------------
 // Edit a booking by ID
-router.put('/:bookingId',requireAuth,handleValidationErrors, async(req,res) => {
+router.put('/:bookingId',requireAuth, async(req,res) => {
     const booking = await Booking.findOne({
         where: {
             id: req.params.bookingId,
@@ -65,16 +61,19 @@ router.put('/:bookingId',requireAuth,handleValidationErrors, async(req,res) => {
             let startTime = new Date(startDate).getTime();
             let endTime = new Date(endDate).getTime();
 
+            let errors = {};
+
             if(endTime < startTime){
                 return res.status(400).json({
                     message: "Validation error",
                     statusCode: 400,
                     errors: {
-                      "endDate cannot be on or before startDate"
+                      endDate: "endDate cannot be on or before startDate"
                     }
                   });
             }else{
                 const bookings = await Booking.findAll({where:{spotId: booking.spotId,}});
+
                 for(let i = 0; i < bookings.length; i++){
 
                     let booking = bookings[i];
@@ -86,40 +85,39 @@ router.put('/:bookingId',requireAuth,handleValidationErrors, async(req,res) => {
                     let startConflict = startTime >= scheduledStart && startTime <= scheduledEnd;
                     let endConflict = endTime >= scheduledStart && endTime <= scheduledEnd;
 
-                    if(startConflict){
-                        return res.status(403).json({
-                            message: "Sorry, this spot is already booked for the specified dates",
-                            errors:"Start date conflicts with an existing booking"
-                        });
-                    }else if(endConflict){
-                        return res.status(403).json({
-                            message: "Sorry, this spot is already booked for the specified dates",
-                            errors:"End date conflicts with an existing booking"
-                        });
-                    }
+                    if(startConflict) errors.startDate = "Start date conflicts with an existing booking"
+                    if(endConflict) errors.endDate = "End date conflicts with an existing booking"
+
                 }
 
-                booking.spotId = booking.spotId;
-                booking.userId = req.user.id;
-                booking.startDate = startDate;
-                booking.endDate = endDate;
-                await booking.save();
+                if(Object.keys(errors).length){
+                    return res.status(403).json({
+                        message: "Sorry, this spot is already booked for the specified dates",
+                        statusCode: 403,
+                        errors
+                    });
+                }else{
+                    booking.spotId = booking.spotId;
+                    booking.userId = req.user.id;
+                    booking.startDate = startDate;
+                    booking.endDate = endDate;
+                    await booking.save();
 
-                return res.status(200).json(booking);
+                    return res.status(200).json(booking);
+                }
+
             }
         }
     }
 });
-// ----------------------------------------------------------------------------------------
 // TODO: DOUBLE CHECK EVERYTHING
-// -----------------------------------------------------------------------------------------
 // Delete a Booking
-router.delete('/:bookingId',requireAuth,handleValidationErrors, async(req,res) => {
+router.delete('/:bookingId',requireAuth, async(req,res) => {
     const {bookingId} = req.params;
-    const result = await Booking.findByPk(bookingId);
+    const booking = await Booking.findByPk(bookingId);
 
-    if(result){
-        let start = result.startDate;
+    if(booking){
+        let start = booking.startDate;
         let startInt = new Date(start).getTime();
         let todayInt = new Date().getTime();
         let inValidDelete = !(todayInt < startInt);
@@ -128,8 +126,8 @@ router.delete('/:bookingId',requireAuth,handleValidationErrors, async(req,res) =
                 message: "Bookings that have been started can't be deleted",
                 statusCode: 403
             });
-        }else if(result){
-            await result.destroy()
+        }else if(booking){
+            await booking.destroy()
             return res.status(200).json({
                 message: "Successfully deleted",
                 statusCode: 200
