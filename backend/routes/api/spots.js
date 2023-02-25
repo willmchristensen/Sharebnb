@@ -517,13 +517,13 @@ router.delete('/:spotId',requireAuth, async(req,res) => {
         }
     });
     if(spot){
-        await result.destroy()
-        res.status(200).json({
+        await spot.destroy()
+        return res.status(200).json({
             message: "Successfully deleted",
             statusCode: 200
         });
     }else{
-        res.status(404).json({
+        return res.status(404).json({
             message: "Spot couldn't be found",
             statusCode: 404
         });
