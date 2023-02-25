@@ -69,9 +69,9 @@ router.put('/:bookingId',requireAuth,handleValidationErrors, async(req,res) => {
                 return res.status(400).json({
                     message: "Validation error",
                     statusCode: 400,
-                    errors: [
+                    errors: {
                       "endDate cannot be on or before startDate"
-                    ]
+                    }
                   });
             }else{
                 const bookings = await Booking.findAll({where:{spotId: booking.spotId,}});
