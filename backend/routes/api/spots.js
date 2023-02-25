@@ -308,10 +308,10 @@ router.post('/:spotId/bookings',requireAuth, async(req,res) => {
             statusCode: 404
         });
     }else if(spot.ownerId === req.user.id){
-            return res.status(403).json({
-                message: "Spot must not belong to the current user",
-                statusCode: 403
-            });
+        return res.status(403).json({
+            message: "Spot must not belong to the current user",
+            statusCode: 403
+        });
     }else{
     const bookings = await Booking.findAll({
         where:{

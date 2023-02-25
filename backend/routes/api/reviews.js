@@ -131,13 +131,17 @@ router.delete('/:reviewId',requireAuth,handleValidationErrors, async(req,res) =>
     const review = await Review.findOne({
         where:{
             id:reviewId,
-            userId: req.user.id
         }
     });
     if(!review){
         res.status(404).json({
             message: "Review couldn't be found",
             statusCode: 404
+        });
+    }else if(review.userId !== req.user.id){
+        return res.status(403).json({
+            message: "Review must belong to the current user",
+            statusCode: 403
         });
     }else{
         await review.destroy()
