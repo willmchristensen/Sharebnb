@@ -420,17 +420,31 @@ router.post('/:spotId/images',requireAuth, async(req,res) => {
 router.get('/:spotId', async(req,res) => {
     const {spotId} = req.params;
     const spot = await Spot.findByPk(spotId, {
+        attributes:{
+            exclude: ["avgRating", "previewImage"]
+        },
         include:[
             {
                 model: SpotImage,
                 attributes: {
-                    exclude: [
-                    "spotId",
-                    "createdAt",
-                    "updatedAt",]
+                    exclude:
+                    [
+                        "spotId",
+                        "createdAt",
+                        "updatedAt",
+                    ]
                 }
             },
-            {model: User , as: 'Owner'},
+            {
+                model: User ,
+                as: "Owner",
+                attributes:
+                [
+                    "id",
+                    "firstName",
+                    "lastName"
+                ]
+            },
         ]
     });
     if(!spot){
@@ -451,7 +465,6 @@ router.get('/:spotId', async(req,res) => {
             ]
         });
 
-        delete spotObj.avgRating;
         spotObj.numReviews = reviewData.toJSON().numReviews;
         spotObj.avgStarRating = reviewData.toJSON().avgStarRating;
 
