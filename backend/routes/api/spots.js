@@ -47,7 +47,7 @@ const validateSpot = [
         .exists({checkFalsy: true})
         .notEmpty()
         .withMessage('"Price per day is required"'),
-
+    handleValidationErrors
 ];
 // TODO: DOUBLE CHECK EVERYTHING
 // Create a spot
