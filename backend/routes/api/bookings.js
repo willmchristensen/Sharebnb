@@ -1,5 +1,7 @@
 const express = require('express');
 const { Booking , Spot} = require('../../db/models');
+const {handleValidationErrors} = require('../../utils/validation');
+const { check } = require('express-validator');
 const {requireAuth} = require('../../utils/auth');
 const router = express.Router();
 // TODO: DOUBLE CHECK EVERYTHING
@@ -35,7 +37,16 @@ router.get('/current',requireAuth, async(req,res) => {
 });
 // TODO: DOUBLE CHECK EVERYTHING
 // Edit a booking by ID
-router.put('/:bookingId',requireAuth, async(req,res) => {
+const validateBooking = [
+    check('startDate')
+        .exists({checkFalsy: true})
+        .withMessage("StartDate is required"),
+    check('endDate')
+        .exists({checkFalsy: true})
+        .withMessage("EndDate is required"),
+    handleValidationErrors
+];
+router.put('/:bookingId',requireAuth,validateBooking, async(req,res) => {
     const booking = await Booking.findOne({
         where: {
             id: req.params.bookingId,
