@@ -7,6 +7,8 @@ const router = express.Router();
 // Delete a Review Image
 router.delete('/:reviewImageId',requireAuth, async(req,res) => {
     const {reviewImageId} = req.params;
+    const userId = req.user.id;
+
     const reviewImage = await ReviewImage.findByPk(reviewImageId);
     if(!reviewImage){
         return res.status(404).json({
@@ -14,15 +16,18 @@ router.delete('/:reviewImageId',requireAuth, async(req,res) => {
             statusCode: 404
         });
     }else {
-        const review = await Review.findOne({where: {
-            id: reviewImage.reviewId,
-            userId: req.user.id
-        }});
+        // return res.json(reviewImage)
+        const review = await Review.findByPk(reviewImage.reviewId);
         if(!review){
-            return res.status(400).json({
-                message: "Forbidden",
+            return res.status(404).json({
+                message: "Review couldn't be found",
+                statusCode: 404
+            });
+        }else if(review.userId !== userId){
+            return res.status(403).json({
+                message: "Review must belong to the current user",
                 statusCode: 403
-              });
+            });
         }else{
             await reviewImage.destroy()
             return res.status(200).json({
@@ -30,6 +35,7 @@ router.delete('/:reviewImageId',requireAuth, async(req,res) => {
                 statusCode: 200
             });
         }
+        // return res.json(review);
     }
 });
 module.exports = router;

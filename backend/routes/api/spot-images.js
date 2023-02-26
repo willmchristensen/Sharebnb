@@ -17,14 +17,12 @@ router.delete('/:spotImageId',requireAuth,handleValidationErrors, async(req,res)
         });
     }else{
         const spot = await Spot.findByPk(spotImage.spotId);
-        let spotOwner = spot.ownerId;
-        if(spotOwner !== userId){
-            return res.status(404).json({
-                message: "Spot Image couldn't be found",
-                statusCode: 404
+        if(spot.ownerId !== userId){
+            return res.status(403).json({
+                message: "Spot must belong to the current user",
+                statusCode: 403
             });
-        }
-        if(spotImage){
+        }else{
             await spotImage.destroy()
             return res.status(200).json({
                 message: "Successfully deleted",
