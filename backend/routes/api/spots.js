@@ -315,7 +315,16 @@ router.post('/:spotId/reviews',requireAuth,validateReview, async(req,res) => {
 });
 // TODO:DOUBLE CHECK EVERYTHING
 // Create a Booking for a Spot based on the Spot's id
-router.post('/:spotId/bookings',requireAuth, async(req,res) => {
+const validateBooking = [
+    check('startDate')
+        .exists({checkFalsy: true})
+        .withMessage("StartDate is required"),
+    check('endDate')
+        .exists({checkFalsy: true})
+        .withMessage("EndDate is required"),
+    handleValidationErrors
+];
+router.post('/:spotId/bookings',requireAuth,validateBooking, async(req,res) => {
     const {spotId} = req.params;
     const {startDate,endDate} = req.body;
     const spot = await Spot.findByPk(spotId);
@@ -382,7 +391,16 @@ router.post('/:spotId/bookings',requireAuth, async(req,res) => {
 });
 // TODO: DOUBLE CHECK EVERYTHING -- implement max images
 // Create a SpotImage for a Spot based on the Spot's id
-router.post('/:spotId/images',requireAuth, async(req,res) => {
+const validateImage = [
+    check('url')
+        .exists({checkFalsy: true})
+        .withMessage("Url is required"),
+    check('preview')
+        .exists({checkFalsy: true})
+        .withMessage("Preview is required"),
+    handleValidationErrors
+];
+router.post('/:spotId/images',requireAuth,validateImage, async(req,res) => {
     const {url,preview} = req.body;
 
     const spot = await Spot.findOne({

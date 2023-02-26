@@ -56,7 +56,13 @@ router.get('/current',requireAuth, async(req,res) => {
 });
 // TODO: DOUBLE CHECK EVERYTHING
 // Create a Image for a Review based on the Review's id
-router.post('/:reviewId/images', async(req,res) => {
+const validateImage = [
+    check('url')
+        .exists({checkFalsy: true})
+        .withMessage("Url is required"),
+    handleValidationErrors
+];
+router.post('/:reviewId/images',requireAuth,validateImage, async(req,res) => {
     const {url} = req.body;
     const reviewId = req.params.reviewId;
     let review = await Review.findOne({
