@@ -15,7 +15,6 @@ router.delete('/:reviewImageId',requireAuth, async(req,res) => {
             statusCode: 404
         });
     }else {
-        // return res.json(reviewImage)
         const review = await Review.findByPk(reviewImage.reviewId);
         if(!review){
             return res.status(404).json({
