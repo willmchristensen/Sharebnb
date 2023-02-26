@@ -19,9 +19,9 @@ router.delete('/:spotImageId',requireAuth,handleValidationErrors, async(req,res)
         const spot = await Spot.findByPk(spotImage.spotId);
         let spotOwner = spot.ownerId;
         if(spotOwner !== userId){
-            return res.status(404).json({
-                message: "Spot Image couldn't be found",
-                statusCode: 404
+            return res.status(403).json({
+                message: "Spot must belong to the current user",
+                statusCode: 403
             });
         }
         if(spotImage){
