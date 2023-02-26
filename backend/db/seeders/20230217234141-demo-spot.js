@@ -23,8 +23,6 @@ module.exports = {
         name: "Cabby by the Beachy",
         description: "Where the wild things are",
         price: 123,
-        avgRating: 4.3,
-        previewImage: 'www.image.com',
       },
       {
         id: 2,
@@ -38,8 +36,6 @@ module.exports = {
         name: "Sandy",
         description: "Sally sells seashells here",
         price: 200,
-        avgRating: 4.1,
-        previewImage: 'www.imagine.com',
       },
       {
         id: 3,
@@ -53,8 +49,6 @@ module.exports = {
         name: "Rainy",
         description: "It rains here",
         price: 999,
-        avgRating: 4.4,
-        previewImage: 'www.images.com',
       }
     ], {});
   },
