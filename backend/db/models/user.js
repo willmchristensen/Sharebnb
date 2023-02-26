@@ -11,13 +11,13 @@ module.exports = (sequelize, DataTypes) => {
         lastName,
         username,
         email,
-        userName } = this; // context will be the User instance
+       } = this; // context will be the User instance
       return {  id,
         firstName,
         lastName,
         username,
         email,
-        userName };
+       };
     }
     validatePassword(password) {
       return bcrypt.compareSync(password, this.hashedPassword.toString());
