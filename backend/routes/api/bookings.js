@@ -1,7 +1,5 @@
 const express = require('express');
 const { Booking , Spot} = require('../../db/models');
-const {handleValidationErrors} = require('../../utils/validation');
-const moment = require('moment');
 const {requireAuth} = require('../../utils/auth');
 const router = express.Router();
 // TODO: DOUBLE CHECK EVERYTHING
@@ -29,7 +27,10 @@ router.get('/current',requireAuth, async(req,res) => {
     if(Bookings){
         return res.status(200).json({Bookings});
     }else{
-        return res.status(404).json({message: "Booking couldn't be found"});
+        return res.status(404).json({
+            message: "Booking couldn't be found",
+            statusCode: 404
+    });
     }
 });
 // TODO: DOUBLE CHECK EVERYTHING

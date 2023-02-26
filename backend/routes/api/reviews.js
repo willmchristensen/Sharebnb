@@ -1,6 +1,5 @@
 const express = require('express');
 const { Review, ReviewImage, Spot, User} = require('../../db/models');
-const validator = require('validator');
 const { check } = require('express-validator');
 const {handleValidationErrors} = require('../../utils/validation');
 const {requireAuth} = require('../../utils/auth');

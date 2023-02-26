@@ -477,7 +477,10 @@ router.get('/:spotId/reviews', async(req,res) => {
     const {spotId} = req.params;
     const result = await Spot.findByPk(spotId);
     if(!result){
-        return res.status(404).json({message: "Spot couldn't be found"})
+        return res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
     }else{
         const Reviews = await Review.findAll({
             where:{
@@ -509,7 +512,10 @@ router.get('/:spotId/bookings',requireAuth,  async(req,res) => {
     const {spotId} = req.params;
     const ownerInfo = await Spot.findByPk(spotId);
     if(!ownerInfo){
-        return res.status(404).json({message: "Spot couldn't be found"})
+        return res.status(404).json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
     }else{
         let spotOwnerId = ownerInfo.ownerId;
         let userId = req.user.id;

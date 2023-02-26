@@ -1,6 +1,5 @@
 const express = require('express');
 const { ReviewImage, Review} = require('../../db/models');
-const {handleValidationErrors} = require('../../utils/validation');
 const {requireAuth} = require('../../utils/auth');
 const router = express.Router();
 // TODO: DOUBLE CHECK EVERYTHING
@@ -35,7 +34,6 @@ router.delete('/:reviewImageId',requireAuth, async(req,res) => {
                 statusCode: 200
             });
         }
-        // return res.json(review);
     }
 });
 module.exports = router;
