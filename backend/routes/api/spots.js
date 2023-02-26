@@ -87,7 +87,6 @@ router.post('/',requireAuth,validateSpot, async(req,res) => {
     return res.status(201).json(newSpot)
 
 });
-
 // TODO:DOUBLE CHECK EVERYTHING
 // Get all spots
 router.get('/', async(req,res) => {
@@ -196,11 +195,11 @@ router.get('/current',requireAuth, async(req,res) => {
         }
     })
     if(Spots){
-        res.status(200).json({Spots});
+        return res.status(200).json({Spots});
     }else{
-        res.status(400).json({
+        return res.status(404).json({
             message: "Spot couldn't be found",
-            statusCode: 400
+            statusCode: 404
         });
     }
 });
@@ -313,7 +312,8 @@ router.post('/:spotId/reviews',requireAuth,validateReview, async(req,res) => {
 // Create a Booking for a Spot based on the Spot's id
 router.post('/:spotId/bookings',requireAuth, async(req,res) => {
     const {spotId} = req.params;
-    let {startDate,endDate} = req.body;
+    const {startDate,endDate} = req.body;
+    const spot = await Spot.findByPk(spotId);
 
     let startTime = new Date(startDate).getTime();
     let endTime = new Date(endDate).getTime();
@@ -323,10 +323,7 @@ router.post('/:spotId/bookings',requireAuth, async(req,res) => {
             message: "endDate cannot be on or before startDate",
             statusCode: 400
         });
-    }
-
-    const spot = await Spot.findByPk(spotId);
-    if(!spot){
+    }else if(!spot){
         return res.status(404).json({
             message: "Spot couldn't be found",
             statusCode: 404
@@ -360,26 +357,25 @@ router.post('/:spotId/bookings',requireAuth, async(req,res) => {
                 errors.endDate = "End date conflicts with an existing booking"
             }
         }
-
         if(Object.keys(errors).length){
             return res.status(403).json({
                 message: 'Sorry, this spot is already booked for the specified dates',
                 statusCode: 403,
                 errors
             });
+        }else{
+            let newBooking = await Booking.create({
+                userId: req.user.id,
+                spotId: parseInt(spotId),
+                startDate,
+                endDate
+            });
+
+            return res.status(200).json(newBooking);
         }
-
-        let newBooking = await Booking.create({
-            userId: req.user.id,
-            spotId: parseInt(spotId),
-            startDate,
-            endDate
-        });
-
-        return res.status(200).json(newBooking);
     }
 });
-// TODO:DOUBLE CHECK EVERYTHING
+// TODO: DOUBLE CHECK EVERYTHING -- implement max images
 // Create a SpotImage for a Spot based on the Spot's id
 router.post('/:spotId/images',requireAuth, async(req,res) => {
     const {url,preview} = req.body;
@@ -419,10 +415,7 @@ router.post('/:spotId/images',requireAuth, async(req,res) => {
         return res.status(200).json(newSpotImage);
     }
 });
-
-
 // TODO:DOUBLE CHECK EVERYTHING
-// FIXME: include associated data and aggregate data before spotImages/Owner?
 // Get details of a Spot from an id
 router.get('/:spotId', async(req,res) => {
     const {spotId} = req.params;
@@ -465,8 +458,6 @@ router.get('/:spotId', async(req,res) => {
         return res.status(200).json(spotObj);
     }
 });
-
-
 // TODO:DOUBLE CHECK EVERYTHING
 // Get all Reviews by a Spot's id
 router.get('/:spotId/reviews', async(req,res) => {
@@ -543,7 +534,6 @@ router.get('/:spotId/bookings',requireAuth,  async(req,res) => {
         }
         // return res.status(200).json({Bookings});
 });
-
 // TODO:DOUBLE CHECK EVERYTHING
 // Delete a spot
 router.delete('/:spotId',requireAuth, async(req,res) => {
