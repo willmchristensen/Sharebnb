@@ -293,6 +293,11 @@ router.post('/:spotId/reviews',requireAuth,validateReview, async(req,res) => {
             message: "User already has a review for this spot",
             statusCode: 403
         });
+    }else if(spot.ownerId === req.user.id){
+        return res.status(403).json({
+            message: "Spot must not belong to the current user",
+            statusCode: 403
+        });
     }else if(!spot){
         return res.status(404).json({
             message: "Spot couldn't be found",
