@@ -9,11 +9,13 @@ module.exports = (sequelize, DataTypes) => {
       const {  id,
         firstName,
         lastName,
+        username,
         email,
         userName } = this; // context will be the User instance
       return {  id,
         firstName,
         lastName,
+        username,
         email,
         userName };
     }

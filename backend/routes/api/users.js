@@ -29,8 +29,6 @@ const validateSignup = [
       .withMessage('Last Name is required'),
     handleValidationErrors
 ];
-// FIXME: exclude stack?
-// TODO: fix output of return to not say user user?
 // Sign up
 router.post(
     '/',
@@ -62,7 +60,6 @@ router.post(
 
         await setTokenCookie(res, user);
 
-        // TODO: fix output of return to not say user user?
         return res.json(user);
       }
 
