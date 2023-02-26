@@ -38,7 +38,6 @@ router.put('/:bookingId',requireAuth, async(req,res) => {
     const booking = await Booking.findOne({
         where: {
             id: req.params.bookingId,
-            userId: req.user.id,
         }
     });
     if(!booking){
@@ -46,6 +45,11 @@ router.put('/:bookingId',requireAuth, async(req,res) => {
             message: "Booking couldn't be found",
             statusCode: 404
         })
+    }else if(booking.userId !== req.user.id){
+        return res.status(403).json({
+            message: "Booking must belong to the current user",
+            statusCode: 403
+        });
     }else {
         let today = new Date().getTime();
         let end = booking.endDate;
@@ -116,7 +120,17 @@ router.delete('/:bookingId',requireAuth, async(req,res) => {
     const {bookingId} = req.params;
     const booking = await Booking.findByPk(bookingId);
 
-    if(booking){
+    if(!booking){
+        return res.status(404).json({
+            message: "Booking couldn't be found",
+            statusCode: 404
+        });
+    }else if(booking.userId !== req.user.id){
+        return res.status(403).json({
+            message: "Booking must belong to the current user",
+            statusCode: 403
+        });
+    }else{
         let start = booking.startDate;
         let startInt = new Date(start).getTime();
         let todayInt = new Date().getTime();
@@ -132,18 +146,7 @@ router.delete('/:bookingId',requireAuth, async(req,res) => {
                 message: "Successfully deleted",
                 statusCode: 200
             });
-        }else{
-            return res.status(404).json({
-                message: "Booking couldn't be found",
-                statusCode: 404
-            });
         }
-    }else{
-        return res.status(404).json({
-            message: "Booking couldn't be found",
-            statusCode: 404
-        });
     }
-
 });
 module.exports = router;

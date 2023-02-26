@@ -1,13 +1,14 @@
 const express = require('express');
 const { Review, ReviewImage, Spot, User} = require('../../db/models');
 const validator = require('validator');
+const { check } = require('express-validator');
 const {handleValidationErrors} = require('../../utils/validation');
 const {requireAuth} = require('../../utils/auth');
 const router = express.Router();
 
 // TODO: DOUBLE CHECK EVERYTHING
 // Get Reviews of Current User
-router.get('/current',requireAuth,handleValidationErrors, async(req,res) => {
+router.get('/current',requireAuth, async(req,res) => {
     const Reviews = await Review.findAll({
         where:{
             userId: req.user.id
@@ -61,7 +62,6 @@ router.post('/:reviewId/images', async(req,res) => {
     let review = await Review.findOne({
         where:{
             id: reviewId,
-            userId: req.user.id
         },
         include: {
             model: ReviewImage,
@@ -72,6 +72,11 @@ router.post('/:reviewId/images', async(req,res) => {
             message: "Review couldn't be found",
             statusCode: 404
         });
+    }else if(review.userId !== req.user.id){
+            return res.status(403).json({
+                message: "Review must belong to the current user",
+                statusCode: 403
+            });
     }else if(review.ReviewImages.length === 10){
             return res.status(403).json({
                 message: "Maximum number of images for this resource was reached",
@@ -86,9 +91,20 @@ router.post('/:reviewId/images', async(req,res) => {
         }
 });
 // TODO: DOUBLE CHECK EVERYTHING
+const validateReview = [
+    check('review')
+        .exists({checkFalsy: true})
+        .withMessage("Review text is required"),
+    check('stars')
+        .exists({checkFalsy: true})
+        .isInt({min: 1, max: 5})
+        .withMessage("Stars must be an integer from 1 to 5"),
+    handleValidationErrors
+];
 // Edit a review by ID
-router.put('/:reviewId',requireAuth,handleValidationErrors, async(req,res) => {
+router.put('/:reviewId',requireAuth, validateReview, async(req,res) => {
     const {reviewId} = req.params;
+    const {review, stars} = req.body;
     const editedReview = await Review.findOne({
         where: {
             id: reviewId,
@@ -105,32 +121,17 @@ router.put('/:reviewId',requireAuth,handleValidationErrors, async(req,res) => {
             statusCode: 403
         });
     }else{
-        const {review, stars} = req.body;
-        let validReview = (typeof review === 'string' && review.length > 0);
-        let validStars = (typeof stars === 'number');
-        if(validReview && validStars){
-            editedReview.userId = req.user.id;
-            editedReview.review = review;
-            editedReview.stars = stars;
-            await editedReview.save();
+        editedReview.userId = req.user.id;
+        editedReview.review = review;
+        editedReview.stars = stars;
+        await editedReview.save();
 
-            return res.status(200).json(editedReview);
-        }else if(!validReview){
-            return res.status(400).json({
-                message: "Review text is required",
-                statusCode:400
-            });
-        }else{
-            return res.status(400).json({
-                message: "Stars must be an integer from 1 to 5",
-                statusCode:400
-            });
-        }
+        return res.status(200).json(editedReview);
     }
 });
 // TODO: DOUBLE CHECK EVERYTHING
 // Delete a review
-router.delete('/:reviewId',requireAuth,handleValidationErrors, async(req,res) => {
+router.delete('/:reviewId',requireAuth, async(req,res) => {
     const {reviewId} = req.params;
     const review = await Review.findOne({
         where:{
