@@ -55,7 +55,7 @@ router.post('/',requireAuth,validateSpot, async(req,res) => {
 
     const {address,city,state,country,lat,lng,name,description,price} = req.body;
 
-    const newSpot = await Spot.create({
+    await Spot.create({
         address,
         city,
         state,
@@ -66,6 +66,22 @@ router.post('/',requireAuth,validateSpot, async(req,res) => {
         description,
         price,
         ownerId: req.user.id
+    });
+
+    const newSpot =  await Spot.findOne({
+        where: {
+            address:address,
+            city:city,
+            state:state,
+            country:country,
+            lat:lat,
+            lng:lng,
+            name:name,
+            description:description,
+            price:price,
+            ownerId: req.user.id
+        },
+        attributes :{ exclude: ["previewImage", "avgRating"] }
     });
 
     return res.status(201).json(newSpot)
@@ -229,11 +245,23 @@ router.put('/:spotId',requireAuth,validateSpot, async(req,res) => {
 
             await spot.save();
 
-            spot = spot.toJSON();
-            delete spot.avgRating;
-            delete spot.previewImage;
+            const revisedSpot =  await Spot.findOne({
+                where: {
+                    address:address,
+                    city:city,
+                    state:state,
+                    country:country,
+                    lat:lat,
+                    lng:lng,
+                    name:name,
+                    description:description,
+                    price:price,
+                    ownerId: req.user.id
+                },
+                attributes :{ exclude: ["previewImage", "avgRating"] }
+            });
 
-        return res.status(200).json(spot);
+        return res.status(200).json(revisedSpot);
     }
 });
 // TODO:DOUBLE CHECK EVERYTHING
@@ -373,16 +401,20 @@ router.post('/:spotId/images',requireAuth, async(req,res) => {
             statusCode: 403
         });
     }else{
-        let newSpotImage = await SpotImage.create({
-            userId: req.user.id,
+        await SpotImage.create({
             spotId: parseInt(req.params.spotId),
             url,
             preview
         });
-        newSpotImage = newSpotImage.toJSON();
-        delete newSpotImage.updatedAt
-        delete newSpotImage.createdAt
-        delete newSpotImage.spotId
+
+        let newSpotImage = await SpotImage.findOne({
+            where: {
+                spotId: parseInt(req.params.spotId),
+                url: url,
+                preview: preview
+            },
+            attributes : ["id","url", "preview"]
+        });
 
         return res.status(200).json(newSpotImage);
     }

@@ -83,11 +83,18 @@ router.post('/:reviewId/images', async(req,res) => {
                 statusCode: 403
             });
         }else{
-            let newImage = await ReviewImage.create({
+            await ReviewImage.create({
                 reviewId: review.id,
                 url: url
-            })
-            return res.status(200).json(newImage);
+            });
+            let newReviewImage = await ReviewImage.findOne({
+                where: {
+                    reviewId: review.id,
+                    url: url,
+                },
+                attributes : ["id","url"]
+            });
+            return res.status(200).json(newReviewImage);
         }
 });
 // TODO: DOUBLE CHECK EVERYTHING
