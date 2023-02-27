@@ -83,9 +83,9 @@ router.post('/:reviewId/images',requireAuth,validateImage, async(req,res) => {
                 statusCode: 403
             });
     }else if(review.ReviewImages.length === 10){
-            return res.status(403).json({
+            return res.status(400).json({
                 message: "Maximum number of images for this resource was reached",
-                statusCode: 403
+                statusCode: 400
             });
         }else{
             await ReviewImage.create({
