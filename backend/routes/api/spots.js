@@ -293,15 +293,15 @@ router.post('/:spotId/reviews',requireAuth,validateReview, async(req,res) => {
             message: "User already has a review for this spot",
             statusCode: 403
         });
-    }else if(spot.ownerId === req.user.id){
-        return res.status(403).json({
-            message: "Spot must not belong to the current user",
-            statusCode: 403
-        });
     }else if(!spot){
         return res.status(404).json({
             message: "Spot couldn't be found",
             statusCode: 404
+        });
+    }else if(spot.ownerId === req.user.id){
+        return res.status(403).json({
+            message: "Spot must not belong to the current user",
+            statusCode: 403
         });
     }else{
         let newReview = await Review.create({
@@ -510,14 +510,18 @@ router.get('/:spotId/reviews', async(req,res) => {
                 spotId:spotId
             },
             include:[
-                {model: User, attributes: {
+                {
+                    model: User,
+                     attributes: {
                     exclude: [ "username",
                     "email",
                     "hashedPassword",
                     "createdAt",
                     "updatedAt"]
                 }},
-                {model: ReviewImage, attributes: {
+                {
+                    model: ReviewImage,
+                     attributes: {
                     exclude: [ "createdAt",
                     "updatedAt", "reviewId"]
                 }},
@@ -530,7 +534,7 @@ router.get('/:spotId/reviews', async(req,res) => {
 });
 // TODO:DOUBLE CHECK EVERYTHING
 // Get all bookings of a Spot from an id
-router.get('/:spotId/bookings',requireAuth,  async(req,res) => {
+router.get('/:spotId/bookings',requireAuth, async(req,res) => {
 
     const {spotId} = req.params;
     const ownerInfo = await Spot.findByPk(spotId);
@@ -548,12 +552,17 @@ router.get('/:spotId/bookings',requireAuth,  async(req,res) => {
                     spotId:spotId
                 },
                 include:[
-                    {model: User, attributes: {
-                        exclude: [ "username",
-                    "email",
-                    "hashedPassword",
-                    "createdAt",
-                    "updatedAt"]
+                    {
+                        model: User,
+                        attributes: {
+                            exclude:
+                            [
+                                "username",
+                                "email",
+                                "hashedPassword",
+                                "createdAt",
+                                "updatedAt"
+                            ]
                     }},
                 ]
             });
@@ -564,17 +573,18 @@ router.get('/:spotId/bookings',requireAuth,  async(req,res) => {
                         spotId:spotId
                     },
                     attributes: {
-                        exclude: [
+                        exclude:
+                        [
                             "id",
                             "userId",
-                        "createdAt",
-                        "updatedAt"]
+                            "createdAt",
+                            "updatedAt"
+                        ]
                     }
                 });
                 return res.status(200).json({Bookings});
             }
         }
-        // return res.status(200).json({Bookings});
 });
 // TODO:DOUBLE CHECK EVERYTHING
 // Delete a spot
