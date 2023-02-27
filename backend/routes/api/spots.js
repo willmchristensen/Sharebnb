@@ -181,9 +181,7 @@ router.get('/', async(req,res) => {
 
     }
 
-    if(Spots){
-        return res.status(200).json({Spots,page,size});
-    }
+    return res.status(200).json({Spots,page,size});
 
 });
 // TODO:DOUBLE CHECK EVERYTHING
@@ -193,7 +191,7 @@ router.get('/current',requireAuth, async(req,res) => {
         where: {
             ownerId: req.user.id
         }
-    })
+    });
     if(Spots){
         return res.status(200).json({Spots});
     }else{
