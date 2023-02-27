@@ -371,7 +371,9 @@ router.post('/:spotId/bookings',requireAuth,validateBooking, async(req,res) => {
 
             if(startConflict){
                 errors.startDate = "Start date conflicts with an existing booking"
-            }else if(endConflict){
+            }
+
+            if(endConflict){
                 errors.endDate = "End date conflicts with an existing booking"
             }
         }
