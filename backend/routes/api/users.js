@@ -52,9 +52,9 @@ router.post(
       let userNameExists = userNameStorage.length > 0;
 
       if(emailExists){
-        return res.status(403).json({message: "User already exists", errors: ["User with that email already exists"]})
+        return res.status(403).json({message: "User already exists", statusCode:403 ,errors: ["User with that email already exists"]})
       }else if(userNameExists){
-        return res.status(403).json({message: "User already exists", errors: ["User with that username already exists"]})
+        return res.status(403).json({message: "User already exists", statusCode:403 ,errors: ["User with that username already exists"]})
       }else{
         let user = await User.signup({ email, password, username,firstName, lastName });
 
