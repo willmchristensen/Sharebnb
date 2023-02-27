@@ -5,7 +5,7 @@ const {requireAuth} = require('../../utils/auth');
 const router = express.Router();
 // TODO: double check everything
 // Delete a Spot Image
-router.delete('/:spotImageId',requireAuth,handleValidationErrors, async(req,res) => {
+router.delete('/:spotImageId',requireAuth, async(req,res) => {
     const {spotImageId} = req.params;
     const userId = req.user.id;
 
