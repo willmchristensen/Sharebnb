@@ -30,9 +30,12 @@ router.use('/spot-images', spotImagesRouter);
 router.use('/review-images', reviewImagesRouter);
 
 
-
-router.get('/test',requireAuth, (req, res) => {
-  res.json('hello world' );
-});
+// test
+// router.post('/test', (req, res) => {
+//   res.json({ requestBody: req.body });
+// });
+// router.get('/test',requireAuth, (req, res) => {
+//   res.json('hello world' );
+// });
 
 module.exports = router;
