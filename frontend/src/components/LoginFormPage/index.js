@@ -30,12 +30,8 @@ function LoginFormPage() {
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
+      {/* <div id='square'></div>     */}
       <label>
-      <div id='square'></div>
-      <div id='square2'></div>
-      <div id='square3'></div>
-      <div id='square4'></div>
-      <div id='square5'></div>      
         Username or Email
         <input
           type="text"
