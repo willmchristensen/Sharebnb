@@ -10,10 +10,10 @@ export const getAllSpots = () => async (dispatch) => {
 
     if (response.ok) {
         const allSpots = await response.json();
-        // console.log(allSpots)
         dispatch(load(allSpots));
     }
 };
+
 
 const initialState = {
     spots: []

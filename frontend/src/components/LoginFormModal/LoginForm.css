@@ -1,21 +1,20 @@
-#root{
+/* #root{ */
     /* border: 10px solid salmon; */
-    display: flex;
+    /* display: flex;
     justify-content: center;
     align-items: center;
-    height: 300px;
     background-color: rgb(169, 169, 169);
     font-family: 'Roboto', sans-serif;
-    margin: 10px;
-}
+    margin: 10px; */
+/* } */
 form{
     font-weight: 10;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    height: 300px;
-    width: 150px;
+    /* height: 300px;
+    width: 150px; */
     color: rgba(0, 0, 0, 0.733);
 }
 #login{
@@ -24,79 +23,12 @@ form{
     background-color: rgba(167, 185, 187, 0.623);
     color: rgba(0, 0, 0, 0.89);
     font-size: 15px;
-    width: 100px;
     height: fit-content;
+}
+button{
+    width: 50px;
 }
 #login:hover{
     box-shadow: 1px 1px 1px rgb(202, 231, 202);
     filter: brightness(150%)
 }
-/* #square{
-    position: absolute;
-    border: 1px solid red;
-    top: 20px;
-    height: 1px;
-    width: 11px;
-    transform: rotate(110deg);
-}
-
-#square2{
-    position:absolute;
-    top: 10px;
-    border: 1px solid red;
-    height: 1px;
-    width: 11px;
-    transform: rotate(120deg);
-} */
-
-/* #square3{
-    position:absolute;
-    border: 1px solid red;
-    top: 20px;
-    height: 100px;
-    width: 100px;
-    transform: rotate(130deg);
-}
-#square4{
-    position:absolute;
-    border: 1px solid red;
-    height: 100px;
-    top: 10px;
-    width: 100px;
-    transform: rotate(140deg);
-} */
-/* *[id^='square']{
-    background-color: rgba(91, 255, 255, 0.151);
-} */
-/* *[id^='square']{
-    animation-name: example;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-}
-@keyframes example {
-    from {
-    background-color: white;
-    transform: rotate(10deg) scale(0.5);
-    border-radius: 0px;
-    }
-    25% {
-    background-color: wheat;
-    transform: rotate(30deg) scale(1.2);
-    border-radius: 5px;
-    }
-    50% {
-    background-color: goldenrod;
-    transform: rotate(60deg) scale(11);
-    border-radius: 10px;
-    }
-    75% {
-    background-color: darkblue;
-    transform: rotate(75deg) scale(0.5);
-    border-radius: 25px;
-    }
-    to {
-    background-color: aqua;
-    transform: rotate(90deg) scale(1);
-    border-radius: 50px;
-    }
-} */

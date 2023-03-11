@@ -5,6 +5,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 
 import SpotBrowser from "./components/SpotBrowser"
+import SpotCard from "./components/SpotCard";
 
 function App() {
   const dispatch = useDispatch();
@@ -16,16 +17,17 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
-        <Switch>
-          <Route
-            path={[ "/api/spots"]}
-            exact
-          >
-            <SpotBrowser />
-          </Route>
-        </Switch>
-      )}
+        {isLoaded && (
+          <Switch>
+            <Route
+              path={[ "/api/spots"]}
+              exact
+            >
+              <SpotBrowser />
+            </Route>
+          </Switch>
+        )} 
+      {/* <SpotCard></SpotCard> */}
     </>
   );
 }

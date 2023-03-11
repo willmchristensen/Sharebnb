@@ -1,23 +1,9 @@
-#root{
-    height: 700px;
-}
-form{
-    font-weight: 10;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: 500px;
-    width: 150px;
-    color: rgba(0, 0, 0, 0.733);
-}
 button{
     border-radius: 7%;
     border: 1px solid rgba(202, 231, 202, 0.205);
     background-color: rgba(167, 185, 187, 0.623);
     color: rgba(0, 0, 0, 0.89);
     font-size: 15px;
-    width: 100px;
     height: fit-content;
 }
 button:hover{

@@ -2,16 +2,16 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Route } from 'react-router-dom';
 import { getAllSpots } from '../../store/spots';
-
+import SpotCard from '../SpotCard';
 const SpotBrowser = () => {
-  const allSpots = useSelector(state => state.spots);
-  // console.log(allSpots.spots.Spots);
-  let spots = allSpots.spots.Spots;
+  // FIXME: spots persist?
   const dispatch = useDispatch(); 
   useEffect(() => {
     dispatch(getAllSpots())
   }, [dispatch]) 
-
+  let spots = useSelector(state => state.spots);
+  let allSpots = Object.values(spots)[0].Spots;
+  // console.log(allSpots[0].address);
   // if (!allSpots) {
   //   return null;
   // }
@@ -19,26 +19,16 @@ const SpotBrowser = () => {
   return (
     <main>
       <nav>
-         {spots.map((spot) => {
+        <SpotCard></SpotCard>
+        {/* {allSpots.forEach(element => {
           return (
-            <NavLink key={spot.name} to={`/spots/${spot.id}`}>
-              <div
-                className='nav-link'
-              >
-                <div
-                  className="nav-link-image"
-                  style={{ backgroundImage: `url('${spot.previewImage}')` }}
-                ></div>
-                <div>
-                  <div className="primary-text">{spot.name}</div>
-                  <div className="secondary-text">
-                    ${spot.price}
-                  </div>
-                </div>
-              </div>
-            </NavLink>
-          );
-        })}
+            <h1>{element.address}</h1>
+          )
+        })} */}
+        {/* <h1>{allSpots[0].address}</h1>
+        {/* {allSpots.map(spot => (
+          <SpotCard spot={spot}></SpotCard>
+        ))} */}
       </nav>
     </main>
   );
