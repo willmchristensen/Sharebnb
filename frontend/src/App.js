@@ -4,6 +4,8 @@ import { Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 
+import SpotBrowser from "./components/SpotBrowser"
+
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -16,6 +18,12 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route
+            path={["/", "/spots", "/spots/:spotId"]}
+            exact
+          >
+            <SpotBrowser />
+          </Route>
         </Switch>
       )}
     </>
