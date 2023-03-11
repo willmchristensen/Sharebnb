@@ -1,32 +1,31 @@
-const LOAD = "spots/LOAD";
+const LOAD = "api/spots";
 
-const load = (list) => ({
+const load = (spots) => ({
     type: LOAD,
-    list,
+    payload: spots,
 });
 
 export const getAllSpots = () => async (dispatch) => {
     const response = await fetch(`/api/spots`);
 
     if (response.ok) {
-        const list = await response.json();
-        dispatch(load(list));
+        const allSpots = await response.json();
+        // console.log(allSpots)
+        dispatch(load(allSpots));
     }
 };
 
 const initialState = {
-    allSpots: []
+    spots: []
 };
 
 const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case LOAD:{
-            const newState = {...state};
-            action.list.forEach((spot) => {
-                newState[spot.id] = spot;
-            });
-            return newState
-        };
+        case LOAD:  
+            return {
+                ...state,
+                spots: action.payload
+            }
         default:
             return state;
     }
