@@ -21,11 +21,15 @@ const initialState = {
 
 const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case LOAD:  
-            return {
+        case LOAD:{ 
+            const newState = {
                 ...state,
-                spots: action.payload
+                spots: action.payload 
             }
+            return {
+                ...newState
+            }
+        }
         default:
             return state;
     }
