@@ -4,8 +4,9 @@ import { NavLink, Route } from 'react-router-dom';
 import { getAllSpots } from '../../store/spots';
 
 const SpotBrowser = () => {
-  const allSpots = useSelector(state => state.spots.spots);
-  console.log(allSpots)
+  const allSpots = useSelector(state => state.spots);
+  // console.log(allSpots.spots.Spots);
+  let spots = allSpots.spots.Spots;
   const dispatch = useDispatch(); 
   useEffect(() => {
     dispatch(getAllSpots())
@@ -18,7 +19,7 @@ const SpotBrowser = () => {
   return (
     <main>
       <nav>
-         {/* {spots.map((spot) => {
+         {spots.map((spot) => {
           return (
             <NavLink key={spot.name} to={`/spots/${spot.id}`}>
               <div
@@ -37,7 +38,7 @@ const SpotBrowser = () => {
               </div>
             </NavLink>
           );
-        })} */}
+        })}
       </nav>
     </main>
   );
