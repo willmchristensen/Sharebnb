@@ -1,29 +1,32 @@
 import {useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, Route } from 'react-router-dom';
-import {getPokemon} from '../store/pokemon'
+// import { NavLink, Route } from 'react-router-dom';
+// import {getPokemon} from '../store/pokemon'
 
 const SpotBrowser = () => {
-  const pokemon = useSelector(state => {
-    return state.pokemon.list.map(pokemonId => state.pokemon[pokemonId]);
-  });
- 
-  const dispatch = useDispatch(); 
-  useEffect(() => {
-    dispatch(getPokemon())
-  }, [dispatch]) 
+//   const spots = useSelector(state => {
+//     return state.allSpots.map(spotId => state.spots[spotId]);
+//   });
+//   console.log(spots)
+    // useSelector(state => {
+    //     console.log(state);
+    // });
+//   const dispatch = useDispatch(); 
+//   useEffect(() => {
+//     dispatch(getPokemon())
+//   }, [dispatch]) 
 
-  if (!pokemon) {
-    return null;
-  }
+//   if (!pokemon) {
+//     return null;
+//   }
 
   return (
     <h1>hi from all spots</h1>
     // <main>
     //   <nav>
-    //     {/* {pokemon.map((pokemon) => {
+    //     {/* {spots.map((spot) => {
     //       return (
-    //         <NavLink key={pokemon.name} to={`/pokemon/${pokemon.id}`}>
+    //         <NavLink key={spot.name} to={`/pokemon/${pokemon.id}`}>
     //           <div
     //             className={
     //               Number.parseInt(pokemonId) === pokemon.id
