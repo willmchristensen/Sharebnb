@@ -9,12 +9,12 @@ function Navigation({ isLoaded }){
 
   return (
     <ul className="nav-bar">
-      <li className="logo-item">
+      <li>
         <i class="fas fa-yin-yang"></i>
         <NavLink exact to="/">ShareBnb</NavLink>
       </li>
         {isLoaded && (
-          <li className="profile-item">
+          <li>
             <ProfileButton user={sessionUser} />
           </li>
         )}
