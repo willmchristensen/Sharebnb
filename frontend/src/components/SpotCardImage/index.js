@@ -20,7 +20,7 @@ const SpotCardImage = (spot) => {
   // console.log(toolTipStyling);
   return (
     <>
-        <div className="spot-card-image" onMouseEnter={handleMouseEnter} onMouseExit={handleMouseExit}>
+        <div className="spot-card-image">
             <img src={cabin} alt="" />
             {/* <p style={{visibility: {toolTipStyling}}}>tooltip</p> */}
         </div>

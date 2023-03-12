@@ -7,6 +7,12 @@
         "c c c"
         "d d d";
 }
+@media screen and (max-width: 1250px){
+    .spot-details-section{
+        display: flex;
+        flex-direction: column;
+    }   
+}
 .spot-details-hero-image{
     grid-area: b;
 }
@@ -60,5 +66,5 @@
 .spot-details-reviews-stars{
     border: 1px solid blue;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
