@@ -1,8 +1,8 @@
 const LOAD = "api/spots";
 
-const load = (spots) => ({
+const load = (allSpots) => ({
     type: LOAD,
-    payload: spots,
+    payload: allSpots,
 });
 
 export const getAllSpots = () => async (dispatch) => {
@@ -16,20 +16,26 @@ export const getAllSpots = () => async (dispatch) => {
 
 
 const initialState = {
-    spots: []
+    allSpots: []
 };
 
 const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case LOAD:{ 
-            const newState = {
-                ...state,
-                spots: action.payload 
-            }
-            return {
-                ...newState
-            }
+        case LOAD: {
+            const newState = {...state,};
+            newState.allSpots = {...action.payload.Spots};
+            return newState
         }
+        // case LOAD:{ 
+        //     const newState = {
+        //         ...state,
+        //         spots: action.payload 
+        //     }
+        //     console.log('--------------- ALLSPOTS IN REDUCER --------------',{newState})
+        //     return {
+        //         ...newState
+        //     }
+        // }
         default:
             return state;
     }

@@ -1,6 +1,12 @@
+.spot-card-image{
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+/* TODO: MEDIA QUERIES? */
 .spot-card-image > img{
     /* TODO: IMAGES*/
-    width: 200px;
-    height: 200px;
+    max-width: 200px;
+    max-height: 200px;
     padding: 5px;
 }
