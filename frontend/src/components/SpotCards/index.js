@@ -37,38 +37,26 @@ const SpotCards = (spot) => {
     // </main>
     <div className="spot-cards-section">
         <NavLink 
-                className="spot-card"
-                key={spot.name}
-                to={`/spots/${spot.id}`}
-        >
-                <div className="nav-link">
-                    <div className="nav-link-image">
-                       <SpotCardImage></SpotCardImage>
-                    </div>
-                    <div className="primary-text">
-                        <h4>name</h4>
-                    </div>
-                    <div className="secondary-text">
-                        <h4>price</h4>
-                    </div>
-                </div>
-        </NavLink>
-        <NavLink 
             className="spot-card"
             key={spot.name}
             to={`/spots/${spot.id}`}
         >
             <div className="nav-link">
                 <div className="nav-link-image">
-                    <p>
-                        <h1></h1>
-                    </p>
+                    <SpotCardImage></SpotCardImage>
                 </div>
-                <div className="primary-text">
-                    <h4>name</h4>
+                <div className="nav-link-info-primary">
+                    <h4>City, State</h4>
+                    <h4>#.#</h4>
+                    {/* <div className="nav-link-primary-city-state">
+                        <h4>City, State</h4>
+                    </div>
+                    <div className="nav-link-primary-avg-rating">
+                        <h4>#.#</h4>
+                    </div> */}
                 </div>
-                <div className="secondary-text">
-                    <h4>price</h4>
+                <div className="nav-link-info-secondary">
+                    <h4>$123.45 night</h4> 
                 </div>
             </div>
         </NavLink>
@@ -79,15 +67,20 @@ const SpotCards = (spot) => {
         >
             <div className="nav-link">
                 <div className="nav-link-image">
-                    <p>
-                        <h1></h1>
-                    </p>
+                    <SpotCardImage></SpotCardImage>
                 </div>
-                <div className="primary-text">
-                    <h4>name</h4>
+                <div className="nav-link-info-primary">
+                    <h4>City, State</h4>
+                    <h4>#.#</h4>
+                    {/* <div className="nav-link-primary-city-state">
+                        <h4>City, State</h4>
+                    </div>
+                    <div className="nav-link-primary-avg-rating">
+                        <h4>#.#</h4>
+                    </div> */}
                 </div>
-                <div className="secondary-text">
-                    <h4>price</h4>
+                <div className="nav-link-info-secondary">
+                    <h4>$123.45 night</h4> 
                 </div>
             </div>
         </NavLink>
@@ -98,15 +91,44 @@ const SpotCards = (spot) => {
         >
             <div className="nav-link">
                 <div className="nav-link-image">
-                    <p>
-                        <h1></h1>
-                    </p>
+                    <SpotCardImage></SpotCardImage>
                 </div>
-                <div className="primary-text">
-                    <h4>name</h4>
+                <div className="nav-link-info-primary">
+                    <h4>City, State</h4>
+                    <h4>#.#</h4>
+                    {/* <div className="nav-link-primary-city-state">
+                        <h4>City, State</h4>
+                    </div>
+                    <div className="nav-link-primary-avg-rating">
+                        <h4>#.#</h4>
+                    </div> */}
                 </div>
-                <div className="secondary-text">
-                    <h4>price</h4>
+                <div className="nav-link-info-secondary">
+                    <h4>$123.45 night</h4> 
+                </div>
+            </div>
+        </NavLink>
+        <NavLink 
+            className="spot-card"
+            key={spot.name}
+            to={`/spots/${spot.id}`}
+        >
+            <div className="nav-link">
+                <div className="nav-link-image">
+                    <SpotCardImage></SpotCardImage>
+                </div>
+                <div className="nav-link-info-primary">
+                    <h4>City, State</h4>
+                    <h4>#.#</h4>
+                    {/* <div className="nav-link-primary-city-state">
+                        <h4>City, State</h4>
+                    </div>
+                    <div className="nav-link-primary-avg-rating">
+                        <h4>#.#</h4>
+                    </div> */}
+                </div>
+                <div className="nav-link-info-secondary">
+                    <h4>$123.45 night</h4> 
                 </div>
             </div>
         </NavLink>

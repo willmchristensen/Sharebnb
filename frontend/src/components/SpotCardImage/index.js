@@ -12,7 +12,6 @@ const SpotCardImage = (spot) => {
   return (
     <div className="spot-card-image">
         <img src={cabin} alt="" />
-        <p>img</p>
     </div>
   );
 };

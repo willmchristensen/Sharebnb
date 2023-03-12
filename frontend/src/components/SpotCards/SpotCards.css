@@ -15,4 +15,19 @@
     width: 100%;
     border:1px solid #CEEDC7;
 }
+.nav-link-info-primary{
+    border: 1px dotted rgb(234, 0, 255);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    font-size: 10px;
+    height: 20px;
+}
+.nav-link-info-secondary{
+    border: 1px dotted rgb(234, 0, 255);
+    display: flex;
+    justify-content: flex-start;
+    font-size: 10px;
+}
 /* ------------SPOT CARDS------------ */
