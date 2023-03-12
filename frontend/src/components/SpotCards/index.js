@@ -6,14 +6,15 @@ import SpotCardImage from '../SpotCardImage';
 import './SpotCards.css';
 
 const SpotCards = (spot) => {
+
   return (
     <NavLink 
         className="spot-card"
         key={spot.spot.name}
         to={`/spots/${spot.spot.id}`}
     >
-        <div className="nav-link">
-            <div className="nav-link-image">
+        <div className="nav-link" >
+            <div className="nav-link-image" >
                 <SpotCardImage></SpotCardImage>
             </div>
             <div className="nav-link-info-primary">

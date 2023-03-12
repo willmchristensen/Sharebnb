@@ -1,6 +1,18 @@
+/* .tooltip-wrapper{
+    visibility: hidden;
+    border: 10px solid plum;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+.tooltip-wrapper:hover{
+    visibility: visible;
+} */
 .spot-card-image{
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 5px;
 }
 /* TODO: MEDIA QUERIES? */
@@ -10,3 +22,19 @@
     max-height: 200px;
     padding: 5px;
 }
+/* TODO: TOOLTIP! */
+/* .tooltip{
+    visibility:hidden;
+    position: absolute;
+    display: inline-block;
+    border: #CEEDC7 1px solid;
+    width: 100px;
+    max-height: 20px;
+    font-size: 10px;
+    background-color: black;
+    z-index: inherit;
+}
+
+.tooltip:hover{
+    visibility: visible;
+} */

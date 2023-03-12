@@ -21,7 +21,7 @@ function App() {
         {isLoaded && (
           <Switch>
             <Route
-              path={[ "/api/spots"]}
+              path={[ "/", "/api/spots"]}
               exact
             >
               <SpotBrowser />

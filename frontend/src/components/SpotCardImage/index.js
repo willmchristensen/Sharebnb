@@ -10,9 +10,12 @@ const SpotCardImage = (spot) => {
   // }
 
   return (
-    <div className="spot-card-image">
-        <img src={cabin} alt="" />
-    </div>
+    <>
+        <div className="spot-card-image">
+            <img src={cabin} alt="" />
+            <p className="tooltip">tooltip</p>
+        </div>
+    </>
   );
 };
 
