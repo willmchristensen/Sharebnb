@@ -142,16 +142,33 @@ const SpotCards = (spot) => {
         </div>
         <div className="spot-details-info">
             <hr />
-            <div className="spot-details-info">
-                
+            <div className="spot-details-info-title">
+                <h2>Description/Address/Name</h2>
             </div>
-            <div className="spot-details-info">
-                
+            <div className="spot-details-info-description">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos voluptates quod reiciendis deleniti aperiam tempora, dignissimos modi in adipisci, ullam tempore, ea consectetur? Reprehenderit, ipsa?
+                </p>
             </div>
-            <div className="spot-details-info">
-                
+            <div className="spot-details-info-reserve">
+                <div className="spot-details-info-reserve-reviews-stars">
+                    <h3>#.#</h3>
+                    <h3># reviews</h3>
+                </div>
+                <div className="spot-details-info-reserve-button">
+                    <button className="reserve-spot">
+                        Reserve
+                    </button>
+                </div>
             </div>
         </div>
+        <div className="spot-details-reviews">
+            <div className="spot-details-reviews-stars">
+                <h3>#.#</h3>
+                <h3># reviews</h3>
+            </div>
+        </div>
+        {/* <SpotReview></SpotReview> */}
     </div>
   );
 };

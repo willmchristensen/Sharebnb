@@ -3,7 +3,9 @@
     grid-template-areas:             
         "b b a"            
         "b b a"            
-        "b b a";
+        "b b a"
+        "c c c"
+        "d d d";
 }
 .spot-details-hero-image{
     grid-area: b;
@@ -15,4 +17,48 @@
         "b a"            
         "b a"            
         "b a";
+}
+.spot-details-info{
+    grid-area: c;
+    display: grid;
+    grid-template-areas: 
+        "a b"
+        "c b";
+    margin: 20px;
+}
+.spot-details-info-title{
+    grid-area: a;
+}
+.spot-details-info-description{
+    grid-area: c;
+}
+.spot-details-info-reserve{
+    grid-area: b;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid burlywood;
+    border-radius: 4%;
+    font-weight: 10;
+    color: rgba(0, 0, 0, 0.733);
+    padding: 20px;
+}
+.spot-details-info-reserve-reviews-stars{
+    width: 100%;
+    border: 1px solid rgb(255, 82, 82);
+    display: flex;
+    justify-content: space-between;
+}
+.spot-details-info-reserve-button{
+    margin: 10px;
+}
+.spot-details-reviews{
+    grid-area: d;
+    border: 1px solid yellow;
+}
+.spot-details-reviews-stars{
+    border: 1px solid blue;
+    display: flex;
+    justify-content: space-between;
 }
