@@ -5,7 +5,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 
 import SpotBrowser from "./components/SpotBrowser"
-import SpotCard from "./components/SpotCard";
+import SpotCards from "./components/SpotCards";
 
 function App() {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      {/* <Navigation isLoaded={isLoaded} />
         {isLoaded && (
           <Switch>
             <Route
@@ -26,8 +26,8 @@ function App() {
               <SpotBrowser />
             </Route>
           </Switch>
-        )} 
-      {/* <SpotCard></SpotCard> */}
+        )}  */}
+      <SpotCards></SpotCards>
     </>
   );
 }

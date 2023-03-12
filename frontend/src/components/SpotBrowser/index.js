@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Route } from 'react-router-dom';
 import { getAllSpots } from '../../store/spots';
-import SpotCard from '../SpotCard';
+import SpotCards from '../SpotCards';
 const SpotBrowser = () => {
   // FIXME: spots persist?
   const dispatch = useDispatch(); 
@@ -19,7 +19,7 @@ const SpotBrowser = () => {
   return (
     <main>
       <nav>
-        <SpotCard></SpotCard>
+        <SpotCards></SpotCards>
         {/* {allSpots.forEach(element => {
           return (
             <h1>{element.address}</h1>
@@ -27,7 +27,7 @@ const SpotBrowser = () => {
         })} */}
         {/* <h1>{allSpots[0].address}</h1>
         {/* {allSpots.map(spot => (
-          <SpotCard spot={spot}></SpotCard>
+          <SpotCards spot={spot}></SpotCards>
         ))} */}
       </nav>
     </main>

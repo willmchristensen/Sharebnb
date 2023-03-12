@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllSpots } from '../../store/spots';
-
+import './SpotCardImage.css';
+import cabin from '../../images/daniel-j-schwarz-BNX4W2GDjxI-unsplash.jpg'
 const SpotCardImage = (spot) => {
 
   // if (!allSpots) {
@@ -10,7 +11,7 @@ const SpotCardImage = (spot) => {
 
   return (
     <div className="spot-card-image">
-        <img src={`placeholder`} alt="" />
+        <img src={cabin} alt="" />
         <p>img</p>
     </div>
   );
