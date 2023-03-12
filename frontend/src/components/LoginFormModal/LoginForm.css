@@ -1,30 +1,3 @@
-/* #root{ */
-    /* border: 10px solid salmon; */
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(169, 169, 169);
-    font-family: 'Roboto', sans-serif;
-    margin: 10px; */
-    /* } */
-#modal-content{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    border-radius: 23%;
-    font-weight: 10;
-    height: 230px;
-    width: 230px;
-    color: rgba(0, 0, 0, 0.733);
-}
-form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-}
 .user-information{
     display: flex;
     flex-direction: column;

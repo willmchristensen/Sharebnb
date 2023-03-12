@@ -32,7 +32,7 @@ function LoginFormModal() {
             <li key={idx}>{error}</li>
             ))}
         </ul>
-        <div    className="user-information">
+        <div className="user-information">
           <h1>Log In</h1>
           <label>
             <input
