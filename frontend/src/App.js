@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation";
 
 import SpotBrowser from "./components/SpotBrowser"
 import SpotCards from "./components/SpotCards";
+import SpotDetails from "./components/SpotDetails"
 
 function App() {
   const dispatch = useDispatch();
@@ -27,7 +28,8 @@ function App() {
             </Route>
           </Switch>
         )}  */}
-      <SpotCards></SpotCards>
+      {/* <SpotCards></SpotCards> */}
+      <SpotDetails></SpotDetails>
     </>
   );
 }

@@ -1,0 +1,18 @@
+.spot-details-section{
+    display: grid;
+    grid-template-areas:             
+        "b b a"            
+        "b b a"            
+        "b b a";
+}
+.spot-details-hero-image{
+    grid-area: b;
+}
+.spot-details-images-cards{
+    border: 1px solid blue;
+    display: grid;
+    grid-template-areas:             
+        "b a"            
+        "b a"            
+        "b a";
+}
