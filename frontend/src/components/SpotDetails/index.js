@@ -6,6 +6,7 @@ import SpotCardImage from '../SpotCardImage';
 import LargeCardImage from '../SpotCardImage/LargeCardImage';
 import SpotReview from '../SpotReview';
 import { loadSpotDetails } from '../../store/spots';
+import {loadSpotReviews} from '../../store/reviews'
 
 import './SpotDetails.css';
 
@@ -15,15 +16,20 @@ const SpotCards = () => {
     // console.log(spotId)
     const spotId = 3;
     const dispatch = useDispatch();
-    const spot = useSelector(state => state.spots.singleSpot)
+    const spot = useSelector(state => state.spots.singleSpot);
+    const reviews = useSelector(state => state.reviews.spot);
+    const allReviews = Object.values(reviews);
+    // console.log('------------------------------allReviews',allReviews);
     // console.log('--------------------------------------------------spotINDEX', spot);
     const handleReservation = () => window.alert('Feature in progress');
   // if (!allSpots) {
   //   return null;
   // }
     useEffect(() => {
-        dispatch(loadSpotDetails(spotId))
+        dispatch(loadSpotDetails(spotId));
+        dispatch(loadSpotReviews(spotId));
     }, [spotId])
+    
   return (
     <>
         <div className="spot-details-images">
@@ -126,8 +132,14 @@ const SpotCards = () => {
             </div>
         </div>
         </div>
+            {
+                allReviews.map(review => {
+                    return (
+                        <SpotReview review={review}></SpotReview>
+                    );
+                })
+            }
         </div>
-        <SpotReview spot={spot}></SpotReview>
     </>
   );
 };

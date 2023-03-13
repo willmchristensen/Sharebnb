@@ -1,5 +1,6 @@
 const LOAD = "api/spots";
 const LOADONE = "api/spots/:spotId"
+const LOADREVIEWS = "/api/spots/:spotId/reviews"
 
 const load = (data) => ({
     type: LOAD,
@@ -10,6 +11,7 @@ const loadOne = (data) => ({
     type: LOADONE,
     payload: data,
 });
+
 
 const normalize = (data) => data.reduce((obj,ele) => ({
     ...obj,
@@ -30,18 +32,18 @@ export const loadSpotDetails = (id) => async (dispatch) => {
     const response = await fetch(`/api/spots/${id}`);
     if(response.ok){
         const data = await response.json();
-        console.log('------------------------------data',data.Owner);
+        // console.log('------------------------------data',data.Owner);
         dispatch(loadOne(data));
     }
 }
-
 
 const initialState = {
     allSpots: {},
     singleSpot:{
         SpotImages: [],
         Owner: {}
-    }
+    },
+    reviews: {}
 };
 
 const spotsReducer = (state = initialState, action) => {
@@ -56,6 +58,11 @@ const spotsReducer = (state = initialState, action) => {
             newState.singleSpot = {...action.payload};
             newState.SpotImages = [...action.payload.SpotImages];
             newState.Owner = {...action.payload.Owner};
+            return newState
+        }
+        case LOADREVIEWS: {
+            const newState = {...state};
+            newState.reviews = {...action.payload.Reviews};
             return newState
         }
         default:

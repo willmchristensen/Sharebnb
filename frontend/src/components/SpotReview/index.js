@@ -6,23 +6,30 @@ import SpotCardImage from '../SpotCardImage';
 import LargeCardImage from '../SpotCardImage/LargeCardImage';
 import './SpotReview.css';
 
-const SpotReview = ({spot}) => {
+const SpotReview = ({review}) => {
 
     const handleReservation = () => window.alert('Feature in progress');
-
     // const reviews = spot.reviews;
     // console.log('------------------------------reviews',reviews);
     // console.log('------------------------------spot',spot);
+
+    let date = new Date(review.createdAt);
+    let months = ["January","February","March","April","May","June","July",
+    "August","September","October","November","December"];
+    let monthNum = date.getMonth();
+    let month = months[monthNum - 1];
+    let year = date.getFullYear();
+
   return (
     <div className="spot-review">
-        <h2 className="spot-review-name">
-            name
-        </h2>
+        <h3 className="spot-review-name">
+            {review.User.firstName} {review.User.lastName}
+        </h3>
         <h3 className="spot-review-date">
-            date
+            {month} {year}
         </h3>
         <p className="spot-review-description">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum, quibusdam.
+            {review.review}
         </p>
     </div>
   );
