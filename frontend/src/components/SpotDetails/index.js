@@ -1,19 +1,29 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, Route } from 'react-router-dom';
+import { NavLink, Route, useParams} from 'react-router-dom';
 import { getAllSpots } from '../../store/spots';
 import SpotCardImage from '../SpotCardImage';
 import LargeCardImage from '../SpotCardImage/LargeCardImage';
 import SpotReview from '../SpotReview';
+import { loadSpotDetails } from '../../store/spots';
+
 import './SpotDetails.css';
 
-const SpotCards = (spot) => {
-
+const SpotCards = () => {
+    // TODO: ROUTEPARAMS
+    // const {spotId} = useParams();
+    // console.log(spotId)
+    const spotId = 3;
+    const dispatch = useDispatch();
+    const spot = useSelector(state => state.spots.singleSpot)
+    console.log('--------------------------------------------------spotINDEX', spot);
     const handleReservation = () => window.alert('Feature in progress');
   // if (!allSpots) {
   //   return null;
   // }
-
+    useEffect(() => {
+        dispatch(loadSpotDetails(spotId))
+    }, [spotId])
   return (
     <>
         <div className="spot-details-images">
@@ -25,7 +35,7 @@ const SpotCards = (spot) => {
                 >
                     <div className="nav-link">
                         <div className="nav-link-image">
-                            <LargeCardImage></LargeCardImage>
+                            <LargeCardImage spot={spot}></LargeCardImage>
                         </div>
                     </div>
                 </NavLink>
@@ -83,17 +93,17 @@ const SpotCards = (spot) => {
             <div className="spot-details-info">
                 <hr />
                 <div className="spot-details-info-title">
-                    <h2>Description/Address/Name</h2>
+                    <h2>{spot.address}</h2>
                 </div>
                 <div className="spot-details-info-description">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos voluptates quod reiciendis deleniti aperiam tempora, dignissimos modi in adipisci, ullam tempore, ea consectetur? Reprehenderit, ipsa?
+                        {spot.description}
                     </p>
                 </div>
                 <div className="spot-details-info-reserve">
                     <div className="spot-details-info-reserve-reviews-stars">
-                        <h3>#.#</h3>
-                        <h3># reviews</h3>
+                        <h3>{spot.avgStarRating}</h3>
+                        <h3>{spot.numReviews}  review(s)</h3>
                     </div>
                     <div className="spot-details-info-reserve-button">
                         <button 
@@ -106,10 +116,15 @@ const SpotCards = (spot) => {
                 </div>
         </div>
         <div className="spot-details-reviews">
-            <div className="spot-details-reviews-stars">
-                <h3>#.#</h3>
-                <h3># reviews</h3>
+        <div className="spot-details-reviews-content">
+            <div className="spot-details-reviews-content-stars">
+                <i class="fas fa-star"></i>
+                <h3>{spot.avgStarRating}</h3>
             </div>
+            <div className="spot-details-reviews-content-reviews">
+                <h3>{spot.numReviews}  review(s)</h3>
+            </div>
+        </div>
         </div>
         </div>
         <SpotReview></SpotReview>

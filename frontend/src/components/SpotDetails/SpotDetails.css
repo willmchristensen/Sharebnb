@@ -1,4 +1,5 @@
 .spot-details-section{
+    width: 100%;
     border: 10px solid black;
 }
 @media screen and (max-width: 1250px){
@@ -65,6 +66,7 @@
 .spot-details-info-reserve-reviews-stars{
     width: 100%;
     border: 1px solid rgb(255, 82, 82);
+    padding: 10px;
     display: flex;
     justify-content: space-between;
 }
@@ -73,10 +75,31 @@
 }
 .spot-details-reviews{
     grid-area: d;
-    border: 1px solid yellow;
+    border: 1px solid rgb(255, 183, 0);
+    display: flex;
+    justify-content: left;
 }
-.spot-details-reviews-stars{
+.spot-details-reviews-content{
+    width: 10%;
+    border: 1px solid rgb(68, 0, 255);
+    display: flex;
+    justify-content: space-between;
+}
+.spot-details-reviews-content-stars{
     border: 1px solid blue;
     display: flex;
-    justify-content: flex-start;
+    justify-content: left;
+    align-content: center;
+}
+.spot-details-reviews-content-stars > *{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.spot-details-reviews-content-reviews{
+    display: flex;
+    border:1px solid sienna;
+    display: flex;
+    justify-content: right;
+    align-content: center;
 }

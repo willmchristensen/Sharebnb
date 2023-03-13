@@ -27,7 +27,7 @@ function App() {
   return (
     <>
       
-      <Navigation isLoaded={isLoaded} />
+      {/* <Navigation isLoaded={isLoaded} />
         {isLoaded && (
           <Switch>
             <Route
@@ -38,10 +38,10 @@ function App() {
               
             </Route>
           </Switch>
-        )}
+        )} */}
 
-      {/*<SpotDetails></SpotDetails>
-      <CreateNewSpot></CreateNewSpot>
+      <SpotDetails></SpotDetails>
+      {/*<CreateNewSpot></CreateNewSpot>
       <SignupFormModal></SignupFormModal>
       <LoginFormModal></LoginFormModal>
       <PostAReviewModal></PostAReviewModal>
