@@ -26,7 +26,6 @@
  display: flex;
  flex-direction: column;
  align-items: left;
- justify-content: center;
 }
 .user-information-create-spot > label > input{
  width: 90%;
