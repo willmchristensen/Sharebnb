@@ -1,0 +1,14 @@
+.filled{
+ color: red;
+}
+.empty{
+ color: yellow;
+}
+.filled-star{
+ border: 10px solid purple;
+}
+.filled-star > i{
+ color: aqua;
+ height: 10px;
+ width: 20px;
+}

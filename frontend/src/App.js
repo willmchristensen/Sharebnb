@@ -8,6 +8,7 @@ import SpotBrowser from "./components/SpotBrowser"
 import SpotCards from "./components/SpotCards";
 import SpotDetails from "./components/SpotDetails"
 import CreateNewSpot from "./components/CreateNewSpotForm";
+import PostAReviewModal from './components/PostAReviewModal'
 
 function App() {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      {/* <Navigation isLoaded={isLoaded} />
         {isLoaded && (
           <Switch>
             <Route
@@ -28,10 +29,11 @@ function App() {
               <SpotBrowser />
             </Route>
           </Switch>
-        )} 
+        )}  */}
       {/* <SpotCards></SpotCards> */}
       {/* <SpotDetails></SpotDetails> */}
       {/* <CreateNewSpot></CreateNewSpot> */}
+      <PostAReviewModal></PostAReviewModal>
     </>
   );
 }
