@@ -1,6 +1,7 @@
 const LOAD = "api/spots";
 const LOADONE = "api/spots/:spotId"
 const LOADREVIEWS = "/api/spots/:spotId/reviews"
+const LOADCURRENT = "/api/spots/current"
 
 const load = (data) => ({
     type: LOAD,
@@ -11,6 +12,11 @@ const loadOne = (data) => ({
     type: LOADONE,
     payload: data,
 });
+
+const loadCurrent = (data) => ({
+    type:   LOADCURRENT,
+    payload: data,
+})
 
 
 const normalize = (data) => data.reduce((obj,ele) => ({
@@ -34,6 +40,16 @@ export const loadSpotDetails = (id) => async (dispatch) => {
         const data = await response.json();
         // console.log('------------------------------data',data.Owner);
         dispatch(loadOne(data));
+    }
+}
+
+
+export const loadUserSpots = () => async (dispatch) => {
+    const response = await fetch(`/api/spots/current`);
+    if(response.ok){
+        const data = await response.json();
+        console.log('------------------------------data',data);
+        dispatch(loadCurrent(data));
     }
 }
 
@@ -64,6 +80,11 @@ const spotsReducer = (state = initialState, action) => {
             const newState = {...state};
             newState.reviews = {...action.payload.Reviews};
             return newState
+        }
+        case LOADCURRENT: {
+            const newState = {...state};
+            newState.allSpots = {...action.payload};
+            return newState;
         }
         default:
             return state;

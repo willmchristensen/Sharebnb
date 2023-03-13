@@ -27,25 +27,24 @@ function App() {
   return (
     <>
       
-      {/* <Navigation isLoaded={isLoaded} />
+      <Navigation isLoaded={isLoaded} />
         {isLoaded && (
           <Switch>
             <Route
               path={[ "/", "/api/spots"]}
               exact
             >
-              <Spots />
+              {/* <Spots /> */}
               
             </Route>
           </Switch>
-        )} */}
-
-      <SpotDetails></SpotDetails>
-      {/*<CreateNewSpot></CreateNewSpot>
-      <SignupFormModal></SignupFormModal>
+        )}
+      <ManageSpots></ManageSpots>
+      {/* <SpotDetails></SpotDetails> */}
+      {/* <CreateNewSpot></CreateNewSpot> */}
+      {/*<SignupFormModal></SignupFormModal>
       <LoginFormModal></LoginFormModal>
       <PostAReviewModal></PostAReviewModal>
-      <ManageSpots></ManageSpots>
       <DeleteASpot></DeleteASpot>
       <DeleteReview></DeleteReview>
       <ManageReviews></ManageReviews> */}
