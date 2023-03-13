@@ -9,6 +9,7 @@ import SpotCards from "./components/SpotCards";
 import SpotDetails from "./components/SpotDetails"
 import CreateNewSpot from "./components/CreateNewSpotForm";
 import PostAReviewModal from './components/PostAReviewModal'
+import ManageSpots from './components/ManageSpots'
 
 function App() {
   const dispatch = useDispatch();
@@ -33,7 +34,8 @@ function App() {
       {/* <SpotCards></SpotCards> */}
       {/* <SpotDetails></SpotDetails> */}
       {/* <CreateNewSpot></CreateNewSpot> */}
-      <PostAReviewModal></PostAReviewModal>
+      {/* <PostAReviewModal></PostAReviewModal> */}
+      <ManageSpots></ManageSpots>
     </>
   );
 }
