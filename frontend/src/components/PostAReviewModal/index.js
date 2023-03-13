@@ -38,7 +38,7 @@ function PostAReviewModal() {
   return (
     <>
     {/* onSubmit={handleSubmit} */}
-      <form >
+      <form className="review-modal">
         <div className="user-information-post-review">
           <h2>Post a Review</h2>
           <div className="form-row-post-review">
@@ -47,12 +47,21 @@ function PostAReviewModal() {
                 className="form-row-data-post-review-label"
               >
                 How was your stay?
-                <input
+                {/* <input
                   type="text"
                   name="description"
                   value={description}
                   onChange={e=>setDescription(e.target.value)}
-                />
+                /> */}
+                <textarea 
+                  name="description" 
+                  value={description} 
+                  onChange={e=>setDescription(e.target.value)}  
+                  cols="30" 
+                  rows="10"
+                >
+
+                </textarea>
               </label>
               {/* <p className="errors">{errors.description}</p>       */}
             </div>
