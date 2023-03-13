@@ -6,12 +6,12 @@ import './PostReview.css'
 import StarsRatingInput from './stars.js'
 
 function PostAReviewModal() {
-  const dispatch = useDispatch();
-  const [credential, setCredential] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
-  const [validationErrors, setValidationErrors] = useState({});
-  const { closeModal } = useModal();
+  // const dispatch = useDispatch();
+  const [description, setDescription] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [errors, setErrors] = useState([]);
+  // const [validationErrors, setValidationErrors] = useState({});
+  // const { closeModal } = useModal();
 
   // TODO: REFACTOR TO AUTHENTICATE REVIEW
   // useEffect(() => {
@@ -22,27 +22,30 @@ function PostAReviewModal() {
   // }, [password,credential])
 
   // TODO: REFACTOR TO POST A REVIEW
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setErrors([]);
-    return dispatch(sessionActions.login({ credential, password }))
-      .then(closeModal)
-      .catch(
-        async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
-        }
-      );
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   setErrors([]);
+  //   return dispatch(sessionActions.login({ credential, password }))
+  //     .then(closeModal)
+  //     .catch(
+  //       async (res) => {
+  //         const data = await res.json();
+  //         if (data && data.errors) setErrors(data.errors);
+  //       }
+  //     );
+  // };
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+    {/* onSubmit={handleSubmit} */}
+      <form >
         <div className="user-information-post-review">
           <h2>Post a Review</h2>
-          {/* <div className="form-row">
-            <div className="form-row-data">
-              <label>
+          <div className="form-row-post-review">
+            <div className="form-row-data-post-review">
+              <label
+                className="form-row-data-post-review-label"
+              >
                 How was your stay?
                 <input
                   type="text"
@@ -51,9 +54,9 @@ function PostAReviewModal() {
                   onChange={e=>setDescription(e.target.value)}
                 />
               </label>
-              <p className="errors">{errors.description}</p>      
+              {/* <p className="errors">{errors.description}</p>       */}
             </div>
-          </div> */}
+          </div>
           {/* <div className="form-row">
             <div className="form-row-data">
             <label>
@@ -71,12 +74,12 @@ function PostAReviewModal() {
             </div>
           </div> */}
           <StarsRatingInput></StarsRatingInput>
-          <button
+          {/* <button
             type="submit"
             disabled={Boolean(Object.keys(errors).length)}
           >
             Revi the spizzle
-          </button>
+          </button> */}
         </div>
      </form>
     </>

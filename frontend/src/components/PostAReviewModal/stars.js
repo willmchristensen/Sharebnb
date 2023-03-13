@@ -6,7 +6,7 @@ function StarsRatingInput() {
  // const handleClick = (newRating) => {
  //    onChange(newRating);
  //  }
-  // TODO: ACTIVERATING
+  // TODO: ACTIVERATING => rating in backen
   // const [activeRating,setActiveRating] = useState({rating});
   const [activeRating,setActiveRating] = useState(0);
   let rating = 5;
