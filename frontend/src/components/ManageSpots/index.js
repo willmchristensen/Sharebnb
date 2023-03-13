@@ -5,8 +5,9 @@ import { getAllSpots } from '../../store/spots';
 import SpotCards from '../SpotCards';
 import SpotCardImage from '../SpotCardImage'
 import './ManageSpots.css'
+import ManageButtons from '../ManageButtons'
+// TODO: THUNKS
 const ManageSpots = () => {
-  // TODO: THUNK
   // const dispatch = useDispatch(); 
   // useEffect(() => {
   //   dispatch(getAllSpots())
@@ -53,10 +54,7 @@ const ManageSpots = () => {
     //   </nav>
     // </main>
     // TODO: add these buttons to the cards? 
-    <div className="buttons">
-     <button id="button">Update</button>
-     <button id="button">Delete</button>
-    </div>
+    <ManageButtons></ManageButtons>
   );
 };
 

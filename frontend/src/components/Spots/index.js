@@ -3,16 +3,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Route } from 'react-router-dom';
 import { getAllSpots } from '../../store/spots';
 import SpotCards from '../SpotCards';
-const SpotBrowser = () => {
-  // FIXME: spots persist?
+const Spots = () => {
   const dispatch = useDispatch(); 
   useEffect(() => {
     dispatch(getAllSpots())
   }, [dispatch]) 
   let spots = useSelector(state => state.spots.allSpots);
-  console.log('----------------',spots);
+  console.log('-------spots---------',spots);
   let allSpots = Object.values(spots)
-  console.log('----------------',allSpots);
+  console.log('-------allSpots---------',allSpots);
 
   return (
     <main >
@@ -21,7 +20,7 @@ const SpotBrowser = () => {
           allSpots.map(spot => {
             return (
               <SpotCards spot={spot}></SpotCards>
-            )
+            );
           })
         }
       </nav>
@@ -29,4 +28,4 @@ const SpotBrowser = () => {
   );
 };
 
-export default SpotBrowser;
+export default Spots;

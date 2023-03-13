@@ -4,7 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 
-import SpotBrowser from "./components/SpotBrowser"
+import Spots from "./components/Spots"
 import SpotCards from "./components/SpotCards";
 import SpotDetails from "./components/SpotDetails"
 import CreateNewSpot from "./components/CreateNewSpotForm";
@@ -14,6 +14,8 @@ import DeleteASpot from './components/DeleteSpotModal'
 import DeleteReview from "./components/DeleteReviewModal";
 import LoginFormModal from "./components/LoginFormModal"
 import SignupFormModal from "./components/SignupFormModal"
+import ManageReviews from "./components/ManageReviews";
+import UpdateReviewModal from "./components/UpdateReviewModal";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +26,7 @@ function App() {
 
   return (
     <>
+      
       <Navigation isLoaded={isLoaded} />
         {isLoaded && (
           <Switch>
@@ -31,11 +34,13 @@ function App() {
               path={[ "/", "/api/spots"]}
               exact
             >
-              <SpotBrowser />
+              <Spots />
+              
             </Route>
           </Switch>
-        )} 
-      <SpotDetails></SpotDetails>
+        )}
+
+      {/*<SpotDetails></SpotDetails>
       <CreateNewSpot></CreateNewSpot>
       <SignupFormModal></SignupFormModal>
       <LoginFormModal></LoginFormModal>
@@ -43,6 +48,8 @@ function App() {
       <ManageSpots></ManageSpots>
       <DeleteASpot></DeleteASpot>
       <DeleteReview></DeleteReview>
+      <ManageReviews></ManageReviews> */}
+      {/* <UpdateReviewModal></UpdateReviewModal> */}
     </>
   );
 }
