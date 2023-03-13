@@ -1,14 +1,7 @@
-.filled{
- color: red;
+.stars{
+ display: flex;
+ margin: 10px;
 }
-.empty{
- color: yellow;
-}
-.filled-star{
- border: 10px solid purple;
-}
-.filled-star > i{
- color: aqua;
- height: 10px;
- width: 20px;
+.star{
+ padding: 5px;
 }
