@@ -16,7 +16,7 @@ const SpotCards = () => {
     const spotId = 3;
     const dispatch = useDispatch();
     const spot = useSelector(state => state.spots.singleSpot)
-    console.log('--------------------------------------------------spotINDEX', spot);
+    // console.log('--------------------------------------------------spotINDEX', spot);
     const handleReservation = () => window.alert('Feature in progress');
   // if (!allSpots) {
   //   return null;
