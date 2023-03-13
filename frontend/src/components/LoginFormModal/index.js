@@ -62,7 +62,7 @@ function LoginFormModal() {
             />
           </label>
           <p style={{color: 'red'}}>{validationErrors.password}</p>
-          <button type="submit">Log In</button>
+          <button type="submit" disabled={Boolean(Object.values(validationErrors).length)}>Log In</button>
           <button type="submit">Demo User</button>
         </div>
       </form>
