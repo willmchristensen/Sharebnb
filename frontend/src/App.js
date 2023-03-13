@@ -18,7 +18,7 @@ function App() {
 
   return (
     <>
-      {/* <Navigation isLoaded={isLoaded} />
+      <Navigation isLoaded={isLoaded} />
         {isLoaded && (
           <Switch>
             <Route
@@ -28,10 +28,10 @@ function App() {
               <SpotBrowser />
             </Route>
           </Switch>
-        )}  */}
+        )} 
       {/* <SpotCards></SpotCards> */}
-      <SpotDetails></SpotDetails>
-      {/* <CreateNewSpot></CreateNewSpot> */}
+      {/* <SpotDetails></SpotDetails> */}
+      <CreateNewSpot></CreateNewSpot>
     </>
   );
 }

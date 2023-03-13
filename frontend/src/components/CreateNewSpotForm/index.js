@@ -43,10 +43,10 @@ function CreateNewSpot() {
       className="create-spot-form"
       onSubmit={onSubmit}
     >
-     <div className="user-information">
+     <div className="user-information-create-spot">
       <h2>Create a Spot</h2>
       <div className="form-row">
-       
+       <div className="form-row-data">
        <label>
          Set a base price for your spot
          <input
@@ -57,161 +57,183 @@ function CreateNewSpot() {
          />
        </label>
        <p className="errors">{errors.basePrice}</p>      
-      
+       </div>
       </div>
       <div className="form-row">
-       <label>
-         Country
-         <input
-           type="text"
-           name="country"
-           value={country}
-           onChange={e=>setCountry(e.target.value)}
-         />
-       </label>
-       <p className="errors">
-        {errors.country}
-        </p>
+        <div className="form-row-data">
+        <label>
+          Country
+          <input
+            type="text"
+            name="country"
+            value={country}
+            onChange={e=>setCountry(e.target.value)}
+          />
+        </label>
+        <p className="errors">
+          {errors.country}
+          </p>
+        </div>
       </div>
       <div className="form-row">
-       <label>
-         Country
-         <input
-           type="text"
-           name="country"
-           value={country}
-           onChange={e=>setCountry(e.target.value)}
-         />
-       </label>
-       <p className="errors">
-        {errors.country}
-        </p>
+        <div className="form-row-data">
+        <label>
+          Country
+          <input
+            type="text"
+            name="country"
+            value={country}
+            onChange={e=>setCountry(e.target.value)}
+          />
+        </label>
+        <p className="errors">
+          {errors.country}
+          </p>
+        </div>
       </div>
       <div className="form-row">
-       <label>
-         Country
-         <input
-           type="text"
-           name="country"
-           value={country}
-           onChange={e=>setCountry(e.target.value)}
-         />
-       </label>
-       <p className="errors">
-        {errors.country}
-        </p>
+        <div className="form-row-data">
+        <label>
+          Country
+          <input
+            type="text"
+            name="country"
+            value={country}
+            onChange={e=>setCountry(e.target.value)}
+          />
+        </label>
+        <p className="errors">
+          {errors.country}
+          </p>
+        </div>
       </div>
       <div className="form-row">
-       <label>
-         Country
-         <input
-           type="text"
-           name="country"
-           value={country}
-           onChange={e=>setCountry(e.target.value)}
-         />
-       </label>
-       <p className="errors">
-        {errors.country}
-        </p>
+        <div className="form-row-data">
+        <label>
+          Country
+          <input
+            type="text"
+            name="country"
+            value={country}
+            onChange={e=>setCountry(e.target.value)}
+          />
+        </label>
+        <p className="errors">
+          {errors.country}
+          </p>
+        </div>
       </div>
       <div className="form-row">
-       <label>
-         Country
-         <input
-           type="text"
-           name="country"
-           value={country}
-           onChange={e=>setCountry(e.target.value)}
-         />
-       </label>
-       <p className="errors">
-        {errors.country}
-        </p>
+        <div className="form-row-data">
+        <label>
+          Country
+          <input
+            type="text"
+            name="country"
+            value={country}
+            onChange={e=>setCountry(e.target.value)}
+          />
+        </label>
+        <p className="errors">
+          {errors.country}
+          </p>
+        </div>
       </div>
       <div className="form-row">
-       <label>
-         Country
-         <input
-           type="text"
-           name="country"
-           value={country}
-           onChange={e=>setCountry(e.target.value)}
-         />
-       </label>
-       <p className="errors">
-        {errors.country}
-        </p>
+        <div className="form-row-data">
+        <label>
+          Country
+          <input
+            type="text"
+            name="country"
+            value={country}
+            onChange={e=>setCountry(e.target.value)}
+          />
+        </label>
+        <p className="errors">
+          {errors.country}
+          </p>
+        </div>
       </div>
       <div className="form-row">
-       <label>
-         Country
-         <input
-           type="text"
-           name="country"
-           value={country}
-           onChange={e=>setCountry(e.target.value)}
-         />
-       </label>
-       <p className="errors">
-        {errors.country}
-        </p>
+        <div className="form-row-data">
+        <label>
+          Country
+          <input
+            type="text"
+            name="country"
+            value={country}
+            onChange={e=>setCountry(e.target.value)}
+          />
+        </label>
+        <p className="errors">
+          {errors.country}
+          </p>
+        </div>
+      </div>
+     <div className="form-row">
+        <div className="form-row-data">
+        <label>
+          Country
+          <input
+            type="text"
+            name="country"
+            value={country}
+            onChange={e=>setCountry(e.target.value)}
+          />
+        </label>
+        <p className="errors">
+          {errors.country}
+          </p>
+        </div>
       </div>
       <div className="form-row">
-       <label>
-         Country
-         <input
-           type="text"
-           name="country"
-           value={country}
-           onChange={e=>setCountry(e.target.value)}
-         />
-       </label>
-       <p className="errors">
-        {errors.country}
-        </p>
+        <div className="form-row-data">
+        <label>
+          Country
+          <input
+            type="text"
+            name="country"
+            value={country}
+            onChange={e=>setCountry(e.target.value)}
+          />
+        </label>
+        <p className="errors">
+          {errors.country}
+          </p>
+        </div>
       </div>
       <div className="form-row">
-       <label>
-         Country
-         <input
-           type="text"
-           name="country"
-           value={country}
-           onChange={e=>setCountry(e.target.value)}
-         />
-       </label>
-       <p className="errors">
-        {errors.country}
-        </p>
+        <div className="form-row-data">
+        <label>
+          Country
+          <input
+            type="text"
+            name="country"
+            value={country}
+            onChange={e=>setCountry(e.target.value)}
+          />
+        </label>
+        <p className="errors">
+          {errors.country}
+          </p>
+        </div>
       </div>
       <div className="form-row">
-       <label>
-         Country
-         <input
-           type="text"
-           name="country"
-           value={country}
-           onChange={e=>setCountry(e.target.value)}
-         />
-       </label>
-       <p className="errors">
-        {errors.country}
-        </p>
-      </div>
-      <div className="form-row">
-       <label>
-         Country
-         <input
-           type="text"
-           name="country"
-           value={country}
-           onChange={e=>setCountry(e.target.value)}
-         />
-       </label>
-       <p className="errors">
-        {errors.country}
-        </p>
+        <div className="form-row-data">
+        <label>
+          Country
+          <input
+            type="text"
+            name="country"
+            value={country}
+            onChange={e=>setCountry(e.target.value)}
+          />
+        </label>
+        <p className="errors">
+          {errors.country}
+          </p>
+        </div>
       </div>
       <button
         type="submit"
