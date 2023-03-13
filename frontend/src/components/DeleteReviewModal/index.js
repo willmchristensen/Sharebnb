@@ -25,7 +25,7 @@ function DeleteReview() {
     <>
     <div className="delete-a-spot">
       <h2>Confirm Delete</h2>
-      <h3>Are you sure you want to remove this spot from the listings?</h3>
+      <h3>Are you sure you want to remove this review from the listings?</h3>
       <div className="delete-buttons">
         <button 
           id="delete-button"
