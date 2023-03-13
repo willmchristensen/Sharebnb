@@ -11,6 +11,7 @@ const loadOne = (data) => ({
     payload: data,
 });
 
+// const loadReviews = 
 
 const normalize = (data) => data.reduce((obj,ele) => ({
     ...obj,
@@ -40,9 +41,21 @@ export const loadSpotDetails = (id) => async (dispatch) => {
     }
 }
 
+// export const loadSpotReviews = (id) => async(dispatch) => {
+//     const response = await fetch(`/${id}/reviews`);
+//     if(response.ok){
+//         const data = await response.json();
+//         console.log('------------------------------data', data);
+//         dispatch(loadReviews(data))
+//     }
+// }
+
+
 const initialState = {
     allSpots: {},
-    singleSpot:{}
+    singleSpot:{},
+    reviews: {},
+    bookings: {},
 };
 
 const spotsReducer = (state = initialState, action) => {

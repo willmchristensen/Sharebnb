@@ -127,7 +127,7 @@ const SpotCards = () => {
         </div>
         </div>
         </div>
-        <SpotReview></SpotReview>
+        <SpotReview spot={spot}></SpotReview>
     </>
   );
 };

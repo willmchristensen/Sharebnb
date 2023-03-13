@@ -12,7 +12,7 @@ function SignupFormModal() {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
   const handleSubmit = (e) => {
@@ -24,6 +24,7 @@ function SignupFormModal() {
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
+          console.log('-----------',errors,data && data.errors)
         });
     }
     return setErrors(['Confirm Password field must be the same as the Password field']);
@@ -32,9 +33,9 @@ function SignupFormModal() {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <ul>
+        {/* <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-        </ul>
+        </ul> */}
         <div className="user-information">
           <h1>Sign Up</h1>
           <label>
@@ -46,6 +47,7 @@ function SignupFormModal() {
               required
             />
           </label>
+          {<p className="errors">{errors.credentials}</p>}
           <label>
             <input
               placeHolder="Username"
@@ -55,6 +57,7 @@ function SignupFormModal() {
               required
             />
           </label>
+          {<p className="errors">{errors.username}</p>}
           <label>
             <input
               placeHolder="First Name"
@@ -64,6 +67,7 @@ function SignupFormModal() {
               required
             />
           </label>
+          {<p className="errors">{errors.firstName}</p>}
           <label>
             <input
               placeHolder="Last Name"
@@ -73,6 +77,7 @@ function SignupFormModal() {
               required
             />
           </label>
+          {<p className="errors">{errors.lastName}</p>}
           <label>
             <input
               placeHolder="Password"
@@ -82,6 +87,7 @@ function SignupFormModal() {
               required
             />
           </label>
+          {<p className="errors">{errors.password}</p>}
           <label>
             <input
               placeHolder="Confirm Password"
