@@ -1,28 +1,40 @@
 .spot-details-section{
-    display: grid;
-    grid-template-areas:             
-        "b b a"            
-        "b b a"            
-        "b b a"
-        "c c c"
-        "d d d";
+    border: 10px solid black;
 }
 @media screen and (max-width: 1250px){
-    .spot-details-section{
+    .spot-details-images{
         display: flex;
         flex-direction: column;
     }   
 }
-.spot-details-hero-image{
-    grid-area: b;
+.spot-details-images{
+    border: 10px solid purple;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
 }
-.spot-details-images-cards{
+.spot-details-images-hero{
+    border: 10px solid yellow;
+    display: flex;
+    align-items: center;justify-content: center;
+    width: 70%;
+}
+.spot-details-images-support{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border:10px solid pink;
+    width: 100%;
+}
+.spot-details-images-support-cards{
     border: 1px solid blue;
     display: grid;
     grid-template-areas:             
         "b a"            
         "b a"            
         "b a";
+    width: 100%;
 }
 .spot-details-info{
     grid-area: c;

@@ -30,8 +30,8 @@ function App() {
           </Switch>
         )}  */}
       {/* <SpotCards></SpotCards> */}
-      {/* <SpotDetails></SpotDetails> */}
-      <CreateNewSpot></CreateNewSpot>
+      <SpotDetails></SpotDetails>
+      {/* <CreateNewSpot></CreateNewSpot> */}
     </>
   );
 }

@@ -16,8 +16,8 @@ const SpotCards = (spot) => {
 
   return (
     <>
-        <div className="spot-details-section">
-            <div className="spot-details-hero-image">
+        <div className="spot-details-images">
+            <div className="spot-details-images-hero">
                 <NavLink 
                     className="spot-card"
                     key={spot.name}
@@ -27,45 +27,19 @@ const SpotCards = (spot) => {
                         <div className="nav-link-image">
                             <LargeCardImage></LargeCardImage>
                         </div>
-                        <div className="nav-link-info-primary">
-                            <h4>City, State</h4>
-                            <h4>#.#</h4>
-                            {/* <div className="nav-link-primary-city-state">
-                                <h4>City, State</h4>
-                            </div>
-                            <div className="nav-link-primary-avg-rating">
-                                <h4>#.#</h4>
-                            </div> */}
-                        </div>
-                        <div className="nav-link-info-secondary">
-                            <h4>$123.45 night</h4> 
-                        </div>
                     </div>
                 </NavLink>
             </div>
-            <div className="spot-details-images">
-                <div className="spot-details-images-cards">
+            <div className="spot-details-images-support">
+                <div className="spot-details-images-support-cards">
                     <NavLink 
                         className="spot-card"
                         key={spot.name}
                         to={`/spots/${spot.id}`}
                     >
                         <div className="nav-link">
-                            <div className="nav-link-image">
+                            <div className="nav-link-image" id="bruh">
                                 <SpotCardImage></SpotCardImage>
-                            </div>
-                            <div className="nav-link-info-primary">
-                                <h4>City, State</h4>
-                                <h4>#.#</h4>
-                                {/* <div className="nav-link-primary-city-state">
-                                    <h4>City, State</h4>
-                                </div>
-                                <div className="nav-link-primary-avg-rating">
-                                    <h4>#.#</h4>
-                                </div> */}
-                            </div>
-                            <div className="nav-link-info-secondary">
-                                <h4>$123.45 night</h4> 
                             </div>
                         </div>
                     </NavLink>
@@ -78,19 +52,6 @@ const SpotCards = (spot) => {
                             <div className="nav-link-image">
                                 <SpotCardImage></SpotCardImage>
                             </div>
-                            <div className="nav-link-info-primary">
-                                <h4>City, State</h4>
-                                <h4>#.#</h4>
-                                {/* <div className="nav-link-primary-city-state">
-                                    <h4>City, State</h4>
-                                </div>
-                                <div className="nav-link-primary-avg-rating">
-                                    <h4>#.#</h4>
-                                </div> */}
-                            </div>
-                            <div className="nav-link-info-secondary">
-                                <h4>$123.45 night</h4> 
-                            </div>
                         </div>
                     </NavLink>
                     <NavLink 
@@ -102,19 +63,6 @@ const SpotCards = (spot) => {
                             <div className="nav-link-image">
                                 <SpotCardImage></SpotCardImage>
                             </div>
-                            <div className="nav-link-info-primary">
-                                <h4>City, State</h4>
-                                <h4>#.#</h4>
-                                {/* <div className="nav-link-primary-city-state">
-                                    <h4>City, State</h4>
-                                </div>
-                                <div className="nav-link-primary-avg-rating">
-                                    <h4>#.#</h4>
-                                </div> */}
-                            </div>
-                            <div className="nav-link-info-secondary">
-                                <h4>$123.45 night</h4> 
-                            </div>
                         </div>
                     </NavLink>
                     <NavLink 
@@ -125,24 +73,13 @@ const SpotCards = (spot) => {
                         <div className="nav-link">
                             <div className="nav-link-image">
                                 <SpotCardImage></SpotCardImage>
-                            </div>
-                            <div className="nav-link-info-primary">
-                                <h4>City, State</h4>
-                                <h4>#.#</h4>
-                                {/* <div className="nav-link-primary-city-state">
-                                    <h4>City, State</h4>
-                                </div>
-                                <div className="nav-link-primary-avg-rating">
-                                    <h4>#.#</h4>
-                                </div> */}
-                            </div>
-                            <div className="nav-link-info-secondary">
-                                <h4>$123.45 night</h4> 
                             </div>
                         </div>
                     </NavLink>
                 </div>
             </div>
+        </div>
+        <div className="spot-details-section">
             <div className="spot-details-info">
                 <hr />
                 <div className="spot-details-info-title">
@@ -167,13 +104,13 @@ const SpotCards = (spot) => {
                         </button>
                     </div>
                 </div>
+        </div>
+        <div className="spot-details-reviews">
+            <div className="spot-details-reviews-stars">
+                <h3>#.#</h3>
+                <h3># reviews</h3>
             </div>
-            <div className="spot-details-reviews">
-                <div className="spot-details-reviews-stars">
-                    <h3>#.#</h3>
-                    <h3># reviews</h3>
-                </div>
-            </div>
+        </div>
         </div>
         <SpotReview></SpotReview>
     </>

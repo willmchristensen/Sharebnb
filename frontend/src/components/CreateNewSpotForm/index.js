@@ -74,146 +74,144 @@ function CreateNewSpot() {
         </p>
       </div>
       <div className="form-row">
-       
        <label>
-         Set a base price for your spot
+         Country
          <input
-           type="number"
-           name="basePrice"
-           value={basePrice}
-           onChange={e=>setBasePrice(e.target.value)}
+           type="text"
+           name="country"
+           value={country}
+           onChange={e=>setCountry(e.target.value)}
          />
        </label>
        <p className="errors">
-        {errors.basePrice}
-        </p>      
-      
-      </div>
-      <div className="form-row">
-       
-       <label>
-         Set a base price for your spot
-         <input
-           type="number"
-           name="basePrice"
-           value={basePrice}
-           onChange={e=>setBasePrice(e.target.value)}
-         />
-       </label>
-       <p className="errors">{errors.basePrice}</p>      
-      
-      </div>
-      <div className="form-row">
-       
-       <label>
-         Set a base price for your spot
-         <input
-           type="number"
-           name="basePrice"
-           value={basePrice}
-           onChange={e=>setBasePrice(e.target.value)}
-         />
-       </label>
-       <p className="errors">{errors.basePrice}</p>      
-      
-      </div>
-      <div className="form-row">
-       
-       <label>
-         Set a base price for your spot
-         <input
-           type="number"
-           name="basePrice"
-           value={basePrice}
-           onChange={e=>setBasePrice(e.target.value)}
-         />
-       </label>
-       <p className="errors">{errors.basePrice}</p>      
-      
-      </div>
-      <div className="form-row">
-       
-       <label>
-         Set a base price for your spot
-         <input
-           type="number"
-           name="basePrice"
-           value={basePrice}
-           onChange={e=>setBasePrice(e.target.value)}
-         />
-       </label>
-       <p className="errors">{errors.basePrice}</p>      
-      
-      </div>
-      <div className="form-row">
-       
-       <label>
-         Set a base price for your spot
-         <input
-           type="number"
-           name="basePrice"
-           value={basePrice}
-           onChange={e=>setBasePrice(e.target.value)}
-         />
-       </label>
-       <p className="errors">{errors.basePrice}</p>      
-      
-      </div>
-      <div className="form-row">
-       
-      <label>
-        Set a base price for your spot
-        <input
-          type="number"
-          name="basePrice"
-          value={basePrice}
-          onChange={e=>setBasePrice(e.target.value)}
-        />
-      </label>
-      <p className="errors">{errors.basePrice}</p>      
-      
-      </div>
-      <div className="form-row">
-       
-       <label>
-         Set a base price for your spot
-         <input
-           type="number"
-           name="basePrice"
-           value={basePrice}
-           onChange={e=>setBasePrice(e.target.value)}
-         />
-       </label>
-       <p className="errors">{errors.basePrice}</p>      
-      
-      </div>
-      <div className="form-row">
-       
-       <label>
-         Set a base price for your spot
-         <input
-           type="number"
-           name="basePrice"
-           value={basePrice}
-           onChange={e=>setBasePrice(e.target.value)}
-         />
-       </label>
-       <p className="errors">{errors.basePrice}</p>      
-      
+        {errors.country}
+        </p>
       </div>
       <div className="form-row">
        <label>
-         Set a base price for your spot
+         Country
          <input
-           type="number"
-           name="basePrice"
-           value={basePrice}
-           onChange={e=>setBasePrice(e.target.value)}
+           type="text"
+           name="country"
+           value={country}
+           onChange={e=>setCountry(e.target.value)}
          />
        </label>
        <p className="errors">
-        {errors.basePrice}
-       </p>      
+        {errors.country}
+        </p>
+      </div>
+      <div className="form-row">
+       <label>
+         Country
+         <input
+           type="text"
+           name="country"
+           value={country}
+           onChange={e=>setCountry(e.target.value)}
+         />
+       </label>
+       <p className="errors">
+        {errors.country}
+        </p>
+      </div>
+      <div className="form-row">
+       <label>
+         Country
+         <input
+           type="text"
+           name="country"
+           value={country}
+           onChange={e=>setCountry(e.target.value)}
+         />
+       </label>
+       <p className="errors">
+        {errors.country}
+        </p>
+      </div>
+      <div className="form-row">
+       <label>
+         Country
+         <input
+           type="text"
+           name="country"
+           value={country}
+           onChange={e=>setCountry(e.target.value)}
+         />
+       </label>
+       <p className="errors">
+        {errors.country}
+        </p>
+      </div>
+      <div className="form-row">
+       <label>
+         Country
+         <input
+           type="text"
+           name="country"
+           value={country}
+           onChange={e=>setCountry(e.target.value)}
+         />
+       </label>
+       <p className="errors">
+        {errors.country}
+        </p>
+      </div>
+      <div className="form-row">
+       <label>
+         Country
+         <input
+           type="text"
+           name="country"
+           value={country}
+           onChange={e=>setCountry(e.target.value)}
+         />
+       </label>
+       <p className="errors">
+        {errors.country}
+        </p>
+      </div>
+      <div className="form-row">
+       <label>
+         Country
+         <input
+           type="text"
+           name="country"
+           value={country}
+           onChange={e=>setCountry(e.target.value)}
+         />
+       </label>
+       <p className="errors">
+        {errors.country}
+        </p>
+      </div>
+      <div className="form-row">
+       <label>
+         Country
+         <input
+           type="text"
+           name="country"
+           value={country}
+           onChange={e=>setCountry(e.target.value)}
+         />
+       </label>
+       <p className="errors">
+        {errors.country}
+        </p>
+      </div>
+      <div className="form-row">
+       <label>
+         Country
+         <input
+           type="text"
+           name="country"
+           value={country}
+           onChange={e=>setCountry(e.target.value)}
+         />
+       </label>
+       <p className="errors">
+        {errors.country}
+        </p>
       </div>
       <button
         type="submit"
