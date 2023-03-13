@@ -3,8 +3,10 @@
     flex-direction: column;
     justify-content:space-evenly;
     align-items: center;
-    width: 100%;
+    width: 300px;
     height: 100%;
+    border: 10px solid rgb(255, 187, 97);
+    border-radius: 11%;
 }
 .user-information > label{
     display: flex;

@@ -1,6 +1,7 @@
 .review-modal{
     border: 10px solid rgb(255, 187, 97);
     border-radius: 11%;
+    width: 300px;
 }
 .user-information-post-review{
     display: flex;

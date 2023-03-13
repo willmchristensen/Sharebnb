@@ -10,6 +10,10 @@ import SpotDetails from "./components/SpotDetails"
 import CreateNewSpot from "./components/CreateNewSpotForm";
 import PostAReviewModal from './components/PostAReviewModal'
 import ManageSpots from './components/ManageSpots'
+import DeleteASpot from './components/DeleteSpotModal'
+import DeleteReview from "./components/DeleteReviewModal";
+import LoginFormModal from "./components/LoginFormModal"
+import SignupFormModal from "./components/SignupFormModal"
 
 function App() {
   const dispatch = useDispatch();
@@ -31,11 +35,14 @@ function App() {
             </Route>
           </Switch>
         )}  */}
-      {/* <SpotCards></SpotCards> */}
       {/* <SpotDetails></SpotDetails> */}
       {/* <CreateNewSpot></CreateNewSpot> */}
-      {/* <PostAReviewModal></PostAReviewModal> */}
-      <ManageSpots></ManageSpots>
+      <SignupFormModal></SignupFormModal>
+      <LoginFormModal></LoginFormModal>
+      <PostAReviewModal></PostAReviewModal>
+      {/* <ManageSpots></ManageSpots> */}
+      <DeleteASpot></DeleteASpot>
+      <DeleteReview></DeleteReview>
     </>
   );
 }
