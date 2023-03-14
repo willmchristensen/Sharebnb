@@ -6,6 +6,10 @@
     border: 10px solid black;
 }
 @media screen and (max-width: 1250px){
+    .spot-details > *{
+        display: flex;
+        flex-direction: column;
+    }
     .spot-details-images{
         display: flex;
         flex-direction: column;
@@ -78,8 +82,14 @@
     color: rgba(0, 0, 0, 0.733);
     padding: 20px;
 }
-.spot-details-info-reserve-reviews-stars{
+.spot-details-info-reserve-info{
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.spot-details-info-reserve-reviews-stars{
+    width: 10rem;
     border: 1px solid rgb(255, 82, 82);
     padding: 10px;
     display: flex;
