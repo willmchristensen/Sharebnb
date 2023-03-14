@@ -54,110 +54,124 @@ function CreateNewSpot() {
       <div className="form-row">
        <div className="form-row-data">
        <label>
-         Set a base price for your spot
+        <div className="form-row-data-label">
+          <span>Set a base price for your spot</span>
+          <span className="errors">{errors.basePrice}</span>
+        </div>
          <input
            type="number"
            name="basePrice"
            value={basePrice}
            onChange={e=>setBasePrice(e.target.value)}
+           placeHolder="Price per night (USD)"
          />
        </label>
-       <p className="errors">{errors.basePrice}</p>      
+             
        </div>
       </div>
       <div className="form-row">
         <div className="form-row-data">
         <label>
-          Country
+          <div className="form-row-data-label">
+            <span>Country</span>
+            <span className="errors">{errors.country}</span>
+          </div>
           <input
             type="text"
             name="country"
             value={country}
             onChange={e=>setCountry(e.target.value)}
+            placeHolder="Country"
           />
         </label>
-        <p className="errors">
-          {errors.country}
-          </p>
         </div>
       </div>
       <div className="form-row">
         <div className="form-row-data">
         <label>
-          Country
+          <div className="form-row-data-label">
+            <span>Address</span>
+            <span className="errors">{errors.country}</span>
+          </div>
           <input
             type="text"
             name="country"
-            value={country}
-            onChange={e=>setCountry(e.target.value)}
+            value={address}
+            onChange={e=>setAddress(e.target.value)}
+            placeHolder="Address"
           />
         </label>
         <p className="errors">
-          {errors.country}
+          {errors.Address}
           </p>
+        </div>
+      </div>
+      <div className="form-row">
+        <div className="form-row-data-city-state">
+        <label>
+          <div className="form-row-data-label">
+            <span>City</span>
+            <span className="errors">{errors.country}</span>
+          </div>
+          <input
+            type="text"
+            name="country"
+            value={city}
+            onChange={e=>setCity(e.target.value)}
+            placeHolder="city"
+          />
+        </label>
+          <label>
+            <div className="form-row-data-label">
+              <span>State</span>
+              <span className="errors">{errors.state}</span>
+            </div>
+          <input
+            type="text"
+            name="country"
+            value={state}
+            onChange={e=>setState(e.target.value)}
+            placeHolder="state"
+          />
+        </label>
+        </div>
+      </div>
+      <div className="form-row">
+        <div className="form-row-data">
+        
         </div>
       </div>
       <div className="form-row">
         <div className="form-row-data">
         <label>
-          Country
+        Description
           <input
             type="text"
             name="country"
-            value={country}
-            onChange={e=>setCountry(e.target.value)}
+            value={description}
+            onChange={e=>setDescription(e.target.value)}
+            placeHolder="description"
           />
         </label>
         <p className="errors">
-          {errors.country}
-          </p>
-        </div>
-      </div>
-      <div className="form-row">
-        <div className="form-row-data">
-        <label>
-          Country
-          <input
-            type="text"
-            name="country"
-            value={country}
-            onChange={e=>setCountry(e.target.value)}
-          />
-        </label>
-        <p className="errors">
-          {errors.country}
-          </p>
-        </div>
-      </div>
-      <div className="form-row">
-        <div className="form-row-data">
-        <label>
-          Country
-          <input
-            type="text"
-            name="country"
-            value={country}
-            onChange={e=>setCountry(e.target.value)}
-          />
-        </label>
-        <p className="errors">
-          {errors.country}
+          {errors.description}
         </p>
         </div>
       </div>
       <div className="form-row">
         <div className="form-row-data">
         <label>
-          Country
+        Title
           <input
             type="text"
-            name="country"
-            value={country}
-            onChange={e=>setCountry(e.target.value)}
+            name="title"
+            value={title}
+            onChange={e=>setTitle(e.target.value)}
+            placeHolder="title"
           />
         </label>
         <p className="errors">
-          {errors.country}
+          {errors.title}
           </p>
         </div>
       </div>
@@ -171,6 +185,7 @@ function CreateNewSpot() {
             name="country"
             value={photos}
             onChange={e=>setPhotos(e.target.value)}
+            placeHolder=""
             placeholder="Preview Image URL"
           />
         </label>

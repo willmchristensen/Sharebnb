@@ -26,14 +26,6 @@ const SpotCards = () => {
 
     const handleReservation = () => window.alert('Feature in progress');
     
-    // window.alert('Feature in progress');
-    // Notice the "Post Your Review" button which is only visible for 
-    // logged-in users on a Spot's Detail Page 
-    // if the user didn't post a review for that Spot yet and 
-    const reviewed = Boolean(allReviews.find(rev => rev.userId === sessionUser.id));
-    console.log(reviewed);
-    // the user isn't the creator of the spot
-    
     // TODO: double check dependencies
     // TODO: WIDTH 1000PX??
     useEffect(() => {
@@ -148,11 +140,7 @@ const SpotCards = () => {
             </div>
         </div>
     </div>
-    {/* FIXME: */}
-    {/* TODO: CONDITIONALLY RENDER */}
-    {/* canReview?  */}
-    {console.log('------------------------------sessionUser',sessionUser)}
-    {console.log('------------------------------')}
+    {/* TODO: DOUBLE CHECK */}
     { sessionUser && !Boolean(allReviews.find(rev => rev.userId === sessionUser.id)) && spot.ownerId !== sessionUser.id &&
         (
             <div className="spot-details-info-reserve-button">

@@ -1,5 +1,6 @@
 *{
     font-family: 'Roboto', sans-serif;
+    font-size: 10px;
 }
 #root{
     border: 1px solid royalblue;
@@ -36,4 +37,7 @@ form{
 #button:hover{
     box-shadow: 1px 1px 1px rgb(202, 231, 202);
     filter: brightness(150%);
+}
+.errors{
+    color: red;
 }
