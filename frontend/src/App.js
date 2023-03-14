@@ -40,7 +40,7 @@ function App() {
           </Switch>
         )} */}
       {/* <ManageSpots></ManageSpots> */}
-      {/* <SpotDetails></SpotDetails> */}
+      <SpotDetails></SpotDetails>
       {/* <CreateNewSpot></CreateNewSpot> */}
       {/*<SignupFormModal></SignupFormModal>
       <LoginFormModal></LoginFormModal>
@@ -48,7 +48,7 @@ function App() {
       <DeleteASpot></DeleteASpot>
       <DeleteReview></DeleteReview>
       <ManageReviews></ManageReviews> */}
-      {/* <UpdateReviewModal></UpdateReviewModal> */}
+     <UpdateReviewModal></UpdateReviewModal>
     </>
   );
 }

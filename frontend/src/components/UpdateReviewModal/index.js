@@ -36,27 +36,20 @@ function UpdateReviewModal(review) {
     {/* onSubmit={handleSubmit} */}
       <form className="review-modal">
         <div className="user-information-post-review">
-          <h2>Post a Review</h2>
+          <h2>How was your stay at {review.address}?</h2>
           <div className="form-row-post-review">
             <div className="form-row-data-post-review">
               <label
                 className="form-row-data-post-review-label"
               >
-                How was your stay at review.spot.address?
-                {/* <input
-                  type="text"
-                  name="description"
-                  value={description}
-                  onChange={e=>setDescription(e.target.value)}
-                /> */}
                 <textarea 
                   name="description" 
                   value={description} 
                   onChange={e=>setDescription(e.target.value)}  
                   cols="30" 
                   rows="10"
+                  placeholder="Just a quick review"
                 >
-
                 </textarea>
               </label>
               {/* <p className="errors">{errors.description}</p>       */}
@@ -83,7 +76,7 @@ function UpdateReviewModal(review) {
             type="submit"
             // disabled={Boolean(Object.keys(errors).length)}
           >
-            Update the rizzle
+            Update Your Review
           </button>
         </div>
      </form>
