@@ -13,42 +13,41 @@ function CreateNewSpot() {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('0');
   const [photos, setPhotos] = useState('');
-  const [lat, setLat] = useState(0);
-  const [lng, setLng] = useState(0);
-
-
+  const [lat, setLat] = useState(0.1);
+  const [lng, setLng] = useState(0.2);
   const history = useHistory();
   const dispatch = useDispatch();
 
   const [errors,setValidationErrors] = useState({});
   
-  useEffect(() => {
-    const errors = {};
+  // useEffect(() => {
+  //   const errors = {};
     
-    if(!country) errors.country = "Country is required"
-    if(!address) errors.address = "Address is required"
-    if(!city) errors.city = "City is required"
-    if(!state) errors.state = "State is required"
-    if(!description) errors.description = "Description is required"
-    if(description.length < 30) errors.description = "Description needs 30 or more characters";
-    if(!name) errors.name = "Title is required"
-    if(!price) errors.price = "BasePrice is required"
-    // FIXME: PHOTOS ERRORS 
-    if(!Boolean(Object.keys(photos).length)) errors.photos = "Photos is required"
-    let acceptedFiles = ['png','jpg','peg'];
-    if(!acceptedFiles.includes(photos.slice(photos.length - 3))){
-      errors.photos = "Image URL must end in .png, .jpg, or .jpeg";
-    }
+  //   if(!country) errors.country = "Country is required"
+  //   if(!address) errors.address = "Address is required"
+  //   if(!city) errors.city = "City is required"
+  //   if(!state) errors.state = "State is required"
+  //   if(!description) errors.description = "Description is required"
+  //   if(description.length < 30) errors.description = "Description needs 30 or more characters";
+  //   if(!name) errors.name = "Title is required"
+  //   if(!price) errors.price = "BasePrice is required"
+  //   // FIXME: PHOTOS ERRORS 
+  //   // if(!Boolean(Object.keys(photos).length)) errors.photos = "Photos is required"
+  //   // let acceptedFiles = ['png','jpg','peg'];
+  //   // if(!acceptedFiles.includes(photos.slice(photos.length - 3))){
+  //   //   errors.photos = "Image URL must end in .png, .jpg, or .jpeg";
+  //   // }
 
-    setValidationErrors(errors) 
-  }, [country,address,city,state,description,name,price,photos])
+  //   setValidationErrors(errors) 
+  // }, [country,address,city,state,description,name,price,photos])
 
   // name
   const onSubmit = async (e) => {
     e.preventDefault()
     const vals = {country,address,city,state,description,price, lat, lng};
-    // console.table(vals);
+    // console.log('valsvalsvalsvalsvals',vals);
     let createdSpot = await dispatch(addOneSpot(vals));
+    // console.log('createdSpotcreatedSpotcreatedSpot:',createdSpot);
     if(createdSpot){
       history.push(`/spots/${createdSpot.id}`)
     }
@@ -198,7 +197,6 @@ function CreateNewSpot() {
         </p>}
         </div>
       </div>
-     
       <button
         type="submit"
         disabled={Boolean(Object.keys(errors).length)}

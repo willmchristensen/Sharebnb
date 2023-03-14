@@ -29,7 +29,7 @@ function App() {
   return (
     <>
       
-      {/* <Navigation isLoaded={isLoaded} />
+      <Navigation isLoaded={isLoaded} />
         {isLoaded && (
           <Switch>
             <Route
@@ -51,9 +51,9 @@ function App() {
               <SpotDetails></SpotDetails>
             </Route>
           </Switch>
-        )} */}
+        )}
         {/* <ManageReviews></ManageReviews>  */}
-      <ManageSpots></ManageSpots>
+      {/* <ManageSpots></ManageSpots> */}
       
       {/* <CreateNewSpot></CreateNewSpot> */}
       {/*<SignupFormModal></SignupFormModal>
