@@ -6,6 +6,11 @@ import './Navigation.css';
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
+  console.log('--------------------------ses', Boolean(sessionUser));
+
+  const handleCreateSpot = (e) => {
+
+  }
 
   return (
     <ul className="nav-bar">
@@ -13,11 +18,32 @@ function Navigation({ isLoaded }){
         <i class="fas fa-yin-yang"></i>
         <NavLink exact to="/">ShareBnb</NavLink>
       </li>
-        {isLoaded && (
-          <li>
-            <ProfileButton user={sessionUser} />
-          </li>
-        )}
+      <div className="nav-bar-conditional-content">
+        {
+          sessionUser && (
+            <>
+              <li>
+                <NavLink
+                  className="spot-card"
+                  // key={}
+                  to={`/spots/new`}
+                >
+                  create spot
+                </NavLink>
+              </li>
+            </>
+          )
+        }
+        {
+          isLoaded && (
+          <>
+            <li>
+              <ProfileButton user={sessionUser} />
+            </li>
+          </>
+          )
+        }
+      </div>
     </ul>
   );
 }

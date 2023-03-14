@@ -12,9 +12,9 @@ import './SpotDetails.css';
 
 const SpotCards = () => {
     // TODO: ROUTEPARAMS
-    // const {spotId} = useParams();
-    // console.log(spotId)
-    const spotId = 3;
+    const {spotId} = useParams();
+    console.log(spotId)
+    // const spotId = 3;
     const dispatch = useDispatch();
     const spot = useSelector(state => state.spots.singleSpot);
     const reviews = useSelector(state => state.reviews.spot);

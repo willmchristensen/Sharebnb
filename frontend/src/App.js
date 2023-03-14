@@ -16,7 +16,7 @@ import LoginFormModal from "./components/LoginFormModal"
 import SignupFormModal from "./components/SignupFormModal"
 import ManageReviews from "./components/ManageReviews";
 import UpdateReviewModal from "./components/UpdateReviewModal";
-
+// TODO: UPDATE ROUTES
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -35,13 +35,24 @@ function App() {
               exact
             >
               <Spots />
-              
+            </Route>
+            <Route
+              path={[ "/spots/new"]}
+              exact
+            >
+              <CreateNewSpot></CreateNewSpot> 
+            </Route>
+            <Route
+              path={[ "/spots/:spotId"]}
+              exact
+            >
+              <SpotDetails></SpotDetails>
             </Route>
           </Switch>
         )}
         {/* <ManageReviews></ManageReviews>  */}
       {/* <ManageSpots></ManageSpots> */}
-      {/* <SpotDetails></SpotDetails> */}
+      
       {/* <CreateNewSpot></CreateNewSpot> */}
       {/*<SignupFormModal></SignupFormModal>
       <LoginFormModal></LoginFormModal>
