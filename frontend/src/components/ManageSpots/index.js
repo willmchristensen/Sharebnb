@@ -41,7 +41,7 @@ const ManageSpots = () => {
               return (
                 <>
                   <SpotCards spot={spot}></SpotCards>
-                  <ManageButtons></ManageButtons>
+                  <ManageButtons spot={spot}></ManageButtons>
                 </>
               )
             })

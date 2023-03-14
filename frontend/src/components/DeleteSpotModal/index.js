@@ -3,23 +3,20 @@ import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import './DeleteASpot.css'
+import { deleteOneSpot } from "../../store/spots";
+import { loadUserSpots } from '../../store/spots';
 
 function DeleteSpotModal({spot}) {
   const { closeModal } = useModal();
-
-  // TODO: REFACTOR TO DELETE A SPOT
+  const dispatch = useDispatch();
+  // TODO: NOT UPDATING STATE, 400 CUZ TRYING TO DELETE A SPOT THAT HAS BEEN DELETED
   const handleDelete = (e) => {
     e.preventDefault();
     // setErrors([]);
     console.log('this will dispatch delete');
-    // return dispatch(deleteASpot(spot))
-    //   .then(closeModal)
-    //   .catch(
-    //     async (res) => {
-    //       const data = await res.json();
-    //       if (data && data.errors) setErrors(data.errors);
-    //     }
-    //   );
+    dispatch(loadUserSpots())
+    return dispatch(deleteOneSpot(spot.id))
+      .then(closeModal)
   };
 
   return (

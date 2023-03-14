@@ -4,7 +4,7 @@ const LOAD = "spots";
 const LOAD_ONE = "spots/LOAD_ONE"
 const LOAD_CURRENT = "/spots/LOAD_CURRENT"
 const ADD_ONE = "spots/ADD_ONE"
-
+const DELETE_ONE ="spots/DELETE_ONE"
 
 const load = (data) => ({
     type: LOAD,
@@ -24,6 +24,11 @@ const loadCurrent = (data) => ({
 const addOne = (data) => ({
     type: ADD_ONE,
     payload: data,
+})
+
+const deleteOne = (data) => ({
+    type: DELETE_ONE,
+    payload: data
 })
 
 const normalize = (data) => data.reduce((obj,ele) => ({
@@ -74,9 +79,30 @@ export const addOneSpot = (data) => async (dispatch) => {
           body: JSON.stringify(data),
         });
         const spot = await response.json();
-        if(spot){
+        if(spot.ok){
             dispatch(addOne(spot));
             return spot;
+        }
+      } catch (error) {
+        throw error;
+      }
+}
+
+export const deleteOneSpot = (id) => async (dispatch) => {
+    try {
+        const response = await csrfFetch(`/api/spots/${id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          }
+        //   body: JSON.stringify(id),
+        });
+        const result = await response.json();
+        if(result.ok){
+            dispatch(deleteOne(result));
+            console.log('------------------------------res',result);
+            console.log('------------------------------',response);
+            // return spot;
         }
       } catch (error) {
         throw error;
@@ -120,6 +146,13 @@ const spotsReducer = (state = initialState, action) => {
             const newState = {...state};
             newState[action.payload.id] = {...action.payload};
             return newState;  
+        }
+        case DELETE_ONE: {
+            const newState = {...state};
+            delete newState[action.payload.id];
+            return {
+                ...newState
+            }
         }
         default:
             return state;
