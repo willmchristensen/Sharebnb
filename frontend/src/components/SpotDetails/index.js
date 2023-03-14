@@ -188,7 +188,7 @@ const SpotDetails = () => {
         )
     }
     </div>
-        {
+        { 
             allReviews.map(review => {
                 return (
                     <SpotReview review={review}></SpotReview>
