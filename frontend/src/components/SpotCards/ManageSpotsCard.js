@@ -12,9 +12,9 @@ const ManageSpotsCard = ({spot}) => {
   return (
     <div className="manage-card">
       <NavLink 
-      className="spot-card"
-      key={spot.name}
-      to={`/spots/${spot.id}`}
+        className="spot-card"
+        key={spot.name}
+        to={`/spots/${spot.id}`}
       >
       <div className="nav-link" >
         <div className="nav-link-image" >

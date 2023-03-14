@@ -11,7 +11,7 @@ function CreateNewSpot() {
   const [state,setState] = useState('');
   const [description, setDescription] = useState('');
   const [name, setName] = useState('');
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState('0');
   const [photos, setPhotos] = useState('');
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
