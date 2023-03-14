@@ -4,22 +4,23 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import './DeleteASpot.css'
 
-function DeleteASpot() {
+function DeleteASpot({spot}) {
   const { closeModal } = useModal();
 
   // TODO: REFACTOR TO DELETE A SPOT
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   setErrors([]);
-  //   return dispatch(sessionActions.login({ credential, password }))
-  //     .then(closeModal)
-  //     .catch(
-  //       async (res) => {
-  //         const data = await res.json();
-  //         if (data && data.errors) setErrors(data.errors);
-  //       }
-  //     );
-  // };
+  const handleDelete = (e) => {
+    e.preventDefault();
+    // setErrors([]);
+    console.log('this will dispatch delete');
+    // return dispatch(deleteASpot(spot))
+    //   .then(closeModal)
+    //   .catch(
+    //     async (res) => {
+    //       const data = await res.json();
+    //       if (data && data.errors) setErrors(data.errors);
+    //     }
+    //   );
+  };
 
   return (
     <>
@@ -29,13 +30,13 @@ function DeleteASpot() {
       <div className="delete-buttons">
         <button 
           id="delete-button"
-          // onClick={handleDelete}
+          onClick={handleDelete}
         >
           Yes (Delete Spot)
         </button>
         <button 
           id="keep-button"
-          // onClick={closeModal}
+          onClick={closeModal}
         >
           No (Keep Spot)
         </button>
