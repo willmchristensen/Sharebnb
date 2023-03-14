@@ -32,19 +32,9 @@ function LoginFormModal() {
       );
   };
 
-  const handleDemoUser = (e) => {
-    e.preventDefault();
-    setCredential('Demo-lition');
-    setPassword('Password');
-    setErrors({});
-    return dispatch(sessionActions.login({ credential, password }))
-      .then(closeModal)
-      .catch(
-        async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
-        }
-      );
+  const handleDemoUser = () => {
+    return dispatch(sessionActions.login({ credential:'Demo-lition', password:'password'}))
+      .then(closeModal);
   }
 
   return (
@@ -78,9 +68,11 @@ function LoginFormModal() {
           </label>
           <p className="errors">{errors.password}</p>
           <button type="submit" disabled={Boolean(Object.values(errors).length)}>Log In</button>
-          <button type="submit" onClick={handleDemoUser}>Demo User</button>
         </div>
       </form>
+      <button type="submit" onClick={handleDemoUser}>
+        Demo User
+      </button>
     </>
   );
 }

@@ -9,6 +9,7 @@ import { getAllSpots } from '../../store/spots';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
+  const [manageSpots,showManageSpots] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
@@ -16,6 +17,20 @@ function ProfileButton({ user }) {
     if (showMenu) return;
     setShowMenu(true);
   };
+  
+  let spots = useSelector(state => state.spots.allSpots);
+  let allSpots = Object.values(spots);
+  console.log('------------------------------allSpots',allSpots);
+  useEffect(() => {
+    if(user){
+      let isOwner = allSpots.find(spot => spot.ownerId === user.id);
+      if(isOwner){
+        showManageSpots(true);
+      }
+    }else{
+      showManageSpots(false);
+    }
+  },[user])
 
   useEffect(() => {
     if (!showMenu) return;
@@ -45,11 +60,6 @@ function ProfileButton({ user }) {
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
-  let spots = useSelector(state => state.spots.allSpots);
-  let allSpots = Object.values(spots);
-  // console.log('------------------------------allSpots',allSpots);
-  let isOwner = allSpots.find(spot => spot.ownerId === user.id);
-
   return (
     <>
       <button onClick={openMenu}>
@@ -58,7 +68,7 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {/* user and owner of spots? */}
         {/* if so, show manage spots */}
-        {user && isOwner ? (
+        {user && manageSpots ? (
           <>
             <li>
               <NavLink

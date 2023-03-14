@@ -58,7 +58,7 @@ function App() {
             </Route>
           </Switch>
         )}
-        <DeleteASpot></DeleteASpot>
+        {/* <DeleteASpot></DeleteASpot> */}
         {/* <ManageReviews></ManageReviews>  */}
       
       

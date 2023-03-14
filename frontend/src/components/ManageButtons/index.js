@@ -3,6 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import './ManageButtons.css'
 const ManageButtons = (spot) => {
 
+  // const handleUpdate = () => {
+  //   console.log('update')
+  // }
+  // const handle = () => {
+    
+  // }
+
   return (
     <>
         <div className="manage-buttons">
