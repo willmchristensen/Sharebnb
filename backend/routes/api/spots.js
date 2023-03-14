@@ -57,8 +57,10 @@ const validateSpot = [
 // TODO: DOUBLE CHECK EVERYTHING
 // Create a spot
 router.post('/',requireAuth,validateSpot, async(req,res) => {
-
+    
     const {address,city,state,country,lat,lng,name,description,price} = req.body;
+    // TESTING
+        console.log('-------------------BACKEND-------------------',req.body, address,city,price);
 
     await Spot.create({
         address,
@@ -88,6 +90,7 @@ router.post('/',requireAuth,validateSpot, async(req,res) => {
         },
         attributes :{ exclude: ["previewImage", "avgRating"] }
     });
+
 
     return res.status(201).json(newSpot)
 
