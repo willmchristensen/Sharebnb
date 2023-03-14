@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import './DeleteASpot.css'
 
-function DeleteASpot({spot}) {
+function DeleteSpotModal({spot}) {
   const { closeModal } = useModal();
 
   // TODO: REFACTOR TO DELETE A SPOT
@@ -46,4 +46,4 @@ function DeleteASpot({spot}) {
   );
 }
 
-export default DeleteASpot;
+export default DeleteSpotModal;

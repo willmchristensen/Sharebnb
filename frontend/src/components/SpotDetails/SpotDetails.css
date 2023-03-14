@@ -95,7 +95,7 @@
     display: flex;
     justify-content: space-between;
 }
-.spot-details-info-review-button > *{
+.modal-material > *{
     border: 10px solid red;
     width: 10rem;
     height: 10rem;

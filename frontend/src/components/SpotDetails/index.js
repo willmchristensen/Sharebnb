@@ -1,3 +1,5 @@
+// TODO: double check dependencies
+// TODO: WIDTH 1000PX??
 import { useEffect,useState,useRef } from 'react';
 import { useSelector, useDispatch,  } from 'react-redux';
 import { NavLink, Route, useParams} from 'react-router-dom';
@@ -12,6 +14,7 @@ import OpenModalMenuItem from '../OpenModalButton';
 import './SpotDetails.css';
 
 const SpotDetails = () => {
+    // ---------------modal------------------
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
     const openMenu = () => {
@@ -21,34 +24,27 @@ const SpotDetails = () => {
     const closeMenu = () => setShowMenu(false);
     useEffect(() => {
       if (!showMenu) return;
-  
       const closeMenu = (e) => {
         if (!ulRef.current.contains(e.target)) {
           setShowMenu(false);
         }
       };
-  
       document.addEventListener('click', closeMenu);
-  
       return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
-  
+    // ---------------modal------------------
+    // ---------------data------------------
     const {spotId} = useParams();
-
     const dispatch = useDispatch();
-
     const spot = useSelector(state => state.spots.singleSpot);
-
     const reviews = useSelector(state => state.reviews.spot);
     const allReviews = Object.values(reviews);
-
     const sessionUser = useSelector(state => state.session.user);
     // console.log('------------------------------sessionUser',sessionUser);
+    // ---------------data------------------
 
     const handleReservation = () => window.alert('Feature in progress');
     
-    // TODO: double check dependencies
-    // TODO: WIDTH 1000PX??
     useEffect(() => {
         dispatch(loadSpotDetails(spotId));
         dispatch(loadSpotReviews(spotId));
@@ -169,7 +165,7 @@ const SpotDetails = () => {
     {/* TODO: DOUBLE CHECK */}
     { sessionUser && !Boolean(allReviews.find(rev => rev.userId === sessionUser.id)) && spot.ownerId !== sessionUser.id &&
         (
-            <div className="spot-details-info-review-button">
+            <div className="modal-material">
                 {/* <button 
                     className="review-spot"
                     id="button"

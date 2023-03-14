@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import './DeleteReview.css'
 
-function DeleteReview() {
+function DeleteReviewModal() {
   const { closeModal } = useModal();
 
   // TODO: REFACTOR TO DELETE A SPOT
@@ -23,26 +23,26 @@ function DeleteReview() {
 
   return (
     <>
-    <div className="delete-a-spot">
-      <h2>Confirm Delete</h2>
-      <h3>Are you sure you want to remove this review from the listings?</h3>
-      <div className="delete-buttons">
-        <button 
-          id="delete-button"
-          // onClick={handleDelete}
-        >
-          Yes (Delete Review)
-        </button>
-        <button 
-          id="keep-button"
-          // onClick={closeModal}
-        >
-          No (Keep Review)
-        </button>
+      <div className="delete-a-spot">
+        <h2>Confirm Delete</h2>
+        <h3>Are you sure you want to remove this review from the listings?</h3>
+        <div className="delete-buttons">
+          <button 
+            id="delete-button"
+            // onClick={handleDelete}
+          >
+            Yes (Delete Review)
+          </button>
+          <button 
+            id="keep-button"
+            // onClick={closeModal}
+          >
+            No (Keep Review)
+          </button>
+        </div>
       </div>
-    </div>
     </>
   );
 }
 
-export default DeleteReview;
+export default DeleteReviewModal;
