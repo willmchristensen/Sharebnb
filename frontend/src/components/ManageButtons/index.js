@@ -6,8 +6,8 @@ const ManageButtons = (spot) => {
   return (
     <>
         <div className="manage-buttons">
-            <button id="button">Update</button>
-            <button id="button">Delete</button>
+            <button id="manage-button">Update</button>
+            <button id="manage-button">Delete</button>
         </div>
     </>
   );

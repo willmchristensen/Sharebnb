@@ -7,16 +7,16 @@ import './SpotCards.css';
 
 const SpotCards = (spot) => {
 
-let rating = spot.spot.avgRating;
-let city = spot.spot.city;
-let price = spot.spot.price;
+let rating = spot.avgRating;
+let city = spot.city;
+let price = spot.price;
 const avgRating = Boolean(rating) ?  rating : '#.#';
 
   return (
     <NavLink 
         className="spot-card"
-        key={spot.spot.name}
-        to={`/spots/${spot.spot.id}`}
+        key={spot.name}
+        to={`/spots/${spot.id}`}
     >
         <div className="nav-link" >
             <div className="nav-link-image" >

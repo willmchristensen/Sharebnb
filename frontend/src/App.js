@@ -27,19 +27,19 @@ function App() {
   return (
     <>
       
-      <Navigation isLoaded={isLoaded} />
+      {/* <Navigation isLoaded={isLoaded} />
         {isLoaded && (
           <Switch>
             <Route
               path={[ "/", "/api/spots"]}
               exact
             >
-              {/* <Spots /> */}
+              <Spots />
               
             </Route>
           </Switch>
-        )}
-      <ManageSpots></ManageSpots>
+        )} */}
+      {/* <ManageSpots></ManageSpots> */}
       {/* <SpotDetails></SpotDetails> */}
       {/* <CreateNewSpot></CreateNewSpot> */}
       {/*<SignupFormModal></SignupFormModal>
