@@ -29,7 +29,12 @@ const ManageSpots = () => {
         <nav className="spot-cards-section">
           <div className="spot-cards-section-header">
             <h3>Manage Your Spots</h3>
-            <button id="manage-button">create a new spot</button>
+            <NavLink
+              className="spot-card"
+              to={`/spots/new`}
+            >
+              <button id="manage-button">create a new spot</button>
+            </NavLink>
           </div>
           {
             allSpots.map(spot => {

@@ -1,10 +1,9 @@
-import { restoreCSRF, csrfFetch } from "./csrf";
+import { csrfFetch } from "./csrf";
 
-const LOAD = "api/spots";
-const LOADONE = "api/spots/:spotId"
-const LOADREVIEWS = "/api/spots/:spotId/reviews"
-const LOADCURRENT = "/api/spots/current"
-const ADDONE = "api/spots"
+const LOAD = "spots";
+const LOAD_ONE = "spots/LOAD_ONE"
+const LOAD_CURRENT = "/spots/LOAD_CURRENT"
+const ADD_ONE = "spots/ADD_ONE"
 
 
 const load = (data) => ({
@@ -13,17 +12,17 @@ const load = (data) => ({
 });
 
 const loadOne = (data) => ({
-    type: LOADONE,
+    type: LOAD_ONE,
     payload: data,
 });
 
 const loadCurrent = (data) => ({
-    type:   LOADCURRENT,
+    type:   LOAD_CURRENT,
     payload: data,
 })
 
 const addOne = (data) => ({
-    type: ADDONE,
+    type: ADD_ONE,
     payload: data,
 })
 
@@ -65,17 +64,23 @@ export const loadUserSpots = () => async (dispatch) => {
     }
 }
 
-export const addOneSpot = (payload) => async (dispatch) => {
-    const response = await csrfFetch(`/api/spots`, {
-        method: "POST",
-        headers: {"Content-type": "application/json"},
-        body: JSON.stringify(payload)
-    });
-    console.log('------------------------------RESPONSE', response);
-    const data = await response.json();
-    console.log('------------------------------data', data);
-    dispatch(addOne(data));
-    return data
+export const addOneSpot = (data) => async (dispatch) => {
+    try {
+        const response = await csrfFetch(`/api/spots`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+        const spot = await response.json();
+        if(spot){
+            dispatch(addOne(spot));
+            return spot;
+        }
+      } catch (error) {
+        throw error;
+      }
 }
 
 const initialState = {
@@ -94,7 +99,7 @@ const spotsReducer = (state = initialState, action) => {
             newState.allSpots = {...action.payload};
             return newState;
         }
-        case LOADONE: {
+        case LOAD_ONE: {
             const newState = {...state};
             newState.singleSpot = {...action.payload};
             newState.SpotImages = [...action.payload.SpotImages];
@@ -106,18 +111,15 @@ const spotsReducer = (state = initialState, action) => {
         //     newState.reviews = {...action.payload.Reviews};
         //     return newState
         // }
-        case LOADCURRENT: {
+        case LOAD_CURRENT: {
             const newState = {...state};
             newState.allSpots = {...action.payload};
             return newState;
         }
-        case ADDONE:{
-            const newState = {
-                ...state,
-                ...action.payload
-            };
-            // newState.allSpots[action.payload.id] = {...action.payload}
-            return newState;
+        case ADD_ONE: {
+            const newState = {...state};
+            newState[action.payload.id] = {...action.payload};
+            return newState;  
         }
         default:
             return state;

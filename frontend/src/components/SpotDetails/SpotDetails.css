@@ -95,8 +95,10 @@
     display: flex;
     justify-content: space-between;
 }
-.spot-details-info-reserve-button{
-    margin: 10px;
+.spot-details-info-review-button > *{
+    border: 10px solid red;
+    width: 10rem;
+    height: 10rem;
 }
 .spot-details-reviews{
     grid-area: d;

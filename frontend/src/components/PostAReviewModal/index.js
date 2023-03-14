@@ -4,14 +4,13 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import './PostReview.css'
 import StarsRatingInput from './stars.js'
-
-function PostAReviewModal() {
+function PostAReviewModal({spot}) {
   // const dispatch = useDispatch();
   const [description, setDescription] = useState("");
   // const [password, setPassword] = useState("");
   // const [errors, setErrors] = useState([]);
   // const [validationErrors, setValidationErrors] = useState({});
-  // const { closeModal } = useModal();
+  const { closeModal } = useModal();
 
   // TODO: REFACTOR TO AUTHENTICATE REVIEW
   // useEffect(() => {
@@ -60,7 +59,6 @@ function PostAReviewModal() {
                   cols="30" 
                   rows="10"
                 >
-
                 </textarea>
               </label>
               {/* <p className="errors">{errors.description}</p>       */}

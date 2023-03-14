@@ -5,14 +5,14 @@ import './CreateNewSpot.css'
 import { addOneSpot } from '../../store/spots';
 
 function CreateNewSpot() {
-  const [country,setCountry] = useState('');
-  const [address,setAddress] = useState('');
-  const [city,setCity] = useState('');
-  const [state,setState] = useState('');
-  const [description, setDescription] = useState('');
-  const [name, setName] = useState('');
+  const [country,setCountry] = useState('testing11');
+  const [address,setAddress] = useState('testing11');
+  const [city,setCity] = useState('testing11');
+  const [state,setState] = useState('testing11');
+  const [description, setDescription] = useState('testing11');
+  const [name, setName] = useState('nametesting11');
   const [price, setPrice] = useState(100.0);
-  const [photos, setPhotos] = useState('');
+  const [photos, setPhotos] = useState('testin11');
   const [lat, setLat] = useState(0.1);
   const [lng, setLng] = useState(0.2);
   const history = useHistory();
@@ -45,7 +45,7 @@ function CreateNewSpot() {
   const onSubmit = async (e) => {
     e.preventDefault()
     // price = Number(price)
-    const vals = {country,address,city,state,description,price, lat, lng};
+    const vals = {country,address,city,state,description,price,lat,lng, name};
     console.log('valsvalsvalsvalsvals',vals);
     let createdSpot = await dispatch(addOneSpot(vals));
     // console.log('createdSpotcreatedSpotcreatedSpot:',createdSpot);

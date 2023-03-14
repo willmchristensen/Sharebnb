@@ -20,7 +20,7 @@ function ProfileButton({ user }) {
   
   let spots = useSelector(state => state.spots.allSpots);
   let allSpots = Object.values(spots);
-  console.log('------------------------------allSpots',allSpots);
+  // console.log('------------------------------allSpots',allSpots);
   useEffect(() => {
     if(user){
       let isOwner = allSpots.find(spot => spot.ownerId === user.id);
@@ -30,7 +30,7 @@ function ProfileButton({ user }) {
     }else{
       showManageSpots(false);
     }
-  },[user])
+  },[user]);
 
   useEffect(() => {
     if (!showMenu) return;
@@ -48,7 +48,7 @@ function ProfileButton({ user }) {
 
   useEffect(() => {
     dispatch(getAllSpots())
-  }, [dispatch])
+  }, [dispatch]);
 
   const closeMenu = () => setShowMenu(false);
 

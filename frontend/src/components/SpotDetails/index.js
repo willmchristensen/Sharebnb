@@ -1,17 +1,38 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect,useState,useRef } from 'react';
+import { useSelector, useDispatch,  } from 'react-redux';
 import { NavLink, Route, useParams} from 'react-router-dom';
 import { getAllSpots } from '../../store/spots';
 import SpotCardImage from '../SpotCardImage';
 import LargeCardImage from '../SpotCardImage/LargeCardImage';
 import SpotReview from '../SpotReview';
 import { loadSpotDetails } from '../../store/spots';
-import {loadSpotReviews} from '../../store/reviews'
-
+import {loadSpotReviews} from '../../store/reviews';
+import PostAReviewModal from '../PostAReviewModal/index';
+import OpenModalMenuItem from '../OpenModalButton';
 import './SpotDetails.css';
 
 const SpotDetails = () => {
-
+    const [showMenu, setShowMenu] = useState(false);
+    const ulRef = useRef();
+    const openMenu = () => {
+      if (showMenu) return;
+      setShowMenu(true);
+    }
+    const closeMenu = () => setShowMenu(false);
+    useEffect(() => {
+      if (!showMenu) return;
+  
+      const closeMenu = (e) => {
+        if (!ulRef.current.contains(e.target)) {
+          setShowMenu(false);
+        }
+      };
+  
+      document.addEventListener('click', closeMenu);
+  
+      return () => document.removeEventListener("click", closeMenu);
+    }, [showMenu]);
+  
     const {spotId} = useParams();
 
     const dispatch = useDispatch();
@@ -148,15 +169,22 @@ const SpotDetails = () => {
     {/* TODO: DOUBLE CHECK */}
     { sessionUser && !Boolean(allReviews.find(rev => rev.userId === sessionUser.id)) && spot.ownerId !== sessionUser.id &&
         (
-            <div className="spot-details-info-reserve-button">
-                <button 
+            <div className="spot-details-info-review-button">
+                {/* <button 
                     className="review-spot"
                     id="button"
                     // onClick={handleReview}
                 >
                     Post Your Review
-                </button>
+                </button> */}
+               <h1>need text inside modal menu item below</h1>
+               <OpenModalMenuItem
+                    itemText="BREH"
+                    onItemClick={closeMenu}
+                    modalComponent={<PostAReviewModal spot={spot}/>}
+                />
             </div>
+            
         )
     }
     </div>

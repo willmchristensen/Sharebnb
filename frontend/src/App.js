@@ -28,7 +28,7 @@ function App() {
 
   return (
     <>
-      
+      {/* <PostAReviewModal></PostAReviewModal> */}
       <Navigation isLoaded={isLoaded} />
         {isLoaded && (
           <Switch>
@@ -65,7 +65,7 @@ function App() {
       {/* <CreateNewSpot></CreateNewSpot> */}
       {/*<SignupFormModal></SignupFormModal>
       <LoginFormModal></LoginFormModal>
-      <PostAReviewModal></PostAReviewModal>
+      
       
       <DeleteReview></DeleteReview>
       
