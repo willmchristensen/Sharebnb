@@ -27,7 +27,7 @@ function App() {
   return (
     <>
       
-      {/* <Navigation isLoaded={isLoaded} />
+      <Navigation isLoaded={isLoaded} />
         {isLoaded && (
           <Switch>
             <Route
@@ -38,8 +38,8 @@ function App() {
               
             </Route>
           </Switch>
-        )} */}
-        <ManageReviews></ManageReviews> 
+        )}
+        {/* <ManageReviews></ManageReviews>  */}
       {/* <ManageSpots></ManageSpots> */}
       {/* <SpotDetails></SpotDetails> */}
       {/* <CreateNewSpot></CreateNewSpot> */}

@@ -5,11 +5,9 @@ import { getAllSpots } from '../../store/spots';
 import SpotCardImage from '../SpotCardImage';
 import './SpotCards.css';
 
-const SpotCards = (spot) => {
+const SpotCards = ({spot}) => {
 
 let rating = spot.avgRating;
-let city = spot.city;
-let price = spot.price;
 const avgRating = Boolean(rating) ?  rating : '#.#';
 
   return (
@@ -23,7 +21,7 @@ const avgRating = Boolean(rating) ?  rating : '#.#';
                 <SpotCardImage></SpotCardImage>
             </div>
             <div className="nav-link-info-primary">
-                <h4>{city}</h4>
+                <h4>{spot.city}</h4>
                 {/* {console.log(Boolean(spot.spot.avgRating))} */}
                 <div>
                     <i class="fas fa-star"></i>
@@ -31,7 +29,7 @@ const avgRating = Boolean(rating) ?  rating : '#.#';
                 </div>
             </div>
             <div className="nav-link-info-secondary">
-                <h4>{price}</h4> 
+                <h4>{spot.price}</h4> 
             </div>
         </div>
     </NavLink>
