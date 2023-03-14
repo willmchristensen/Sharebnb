@@ -10,9 +10,12 @@ function CreateNewSpot() {
   const [city,setCity] = useState('');
   const [state,setState] = useState('');
   const [description, setDescription] = useState('');
-  const [title, setTitle] = useState('');
-  const [basePrice, setBasePrice] = useState(0);
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState(0);
   const [photos, setPhotos] = useState('');
+  const [lat, setLat] = useState(0);
+  const [lng, setLng] = useState(0);
+
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -28,8 +31,8 @@ function CreateNewSpot() {
     if(!state) errors.state = "State is required"
     if(!description) errors.description = "Description is required"
     if(description.length < 30) errors.description = "Description needs 30 or more characters";
-    if(!title) errors.title = "Title is required"
-    if(!basePrice) errors.basePrice = "BasePrice is required"
+    if(!name) errors.name = "Title is required"
+    if(!price) errors.price = "BasePrice is required"
     // FIXME: PHOTOS ERRORS 
     if(!Boolean(Object.keys(photos).length)) errors.photos = "Photos is required"
     let acceptedFiles = ['png','jpg','peg'];
@@ -38,12 +41,12 @@ function CreateNewSpot() {
     }
 
     setValidationErrors(errors) 
-  }, [country,address,city,state,description,title,basePrice,photos])
+  }, [country,address,city,state,description,name,price,photos])
 
-
+  // name
   const onSubmit = async (e) => {
     e.preventDefault()
-    const vals = {country,address,city,state,description,title,basePrice};
+    const vals = {country,address,city,state,description,price, lat, lng};
     // console.table(vals);
     let createdSpot = await dispatch(addOneSpot(vals));
     if(createdSpot){
@@ -63,13 +66,13 @@ function CreateNewSpot() {
        <label>
         <div className="form-row-data-label">
           <span>Set a base price for your spot</span>
-          <span className="errors">{errors.basePrice}</span>
+          <span className="errors">{errors.price}</span>
         </div>
          <input
            type="number"
-           name="basePrice"
-           value={basePrice}
-           onChange={e=>setBasePrice(e.target.value)}
+           name="price"
+           value={price}
+           onChange={e=>setPrice(e.target.value)}
            placeholder="Price per night (USD)"
          />
        </label>
@@ -163,17 +166,17 @@ function CreateNewSpot() {
       <div className="form-row">
         <div className="form-row-data">
         <label>
-        Title
+        Name
           <input
             type="text"
-            name="title"
-            value={title}
-            onChange={e=>setTitle(e.target.value)}
-            placeholder="title"
+            name="name"
+            value={name}
+            onChange={e=>setName(e.target.value)}
+            placeholder="name"
           />
         </label>
         <p className="errors">
-          {errors.title}
+          {errors.name}
           </p>
         </div>
       </div>
