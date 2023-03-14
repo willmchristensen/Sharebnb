@@ -21,19 +21,17 @@ const SpotCards = () => {
     const reviews = useSelector(state => state.reviews.spot);
     const allReviews = Object.values(reviews);
 
-    const sessionUser = useSelector(state => state.session.User);
-    if(sessionUser){
-        const hasReviewed = allReviews.find(rev => rev.userId === sessionUser.id);
-        const isOwner = spot.ownerId === sessionUser.id;
-        const canReview = sessionUser && !hasReviewed && isOwner; 
-    }
+    const sessionUser = useSelector(state => state.session.user);
+    // console.log('------------------------------sessionUser',sessionUser);
 
     const handleReservation = () => window.alert('Feature in progress');
-    const handleReview = () => 
-    window.alert('Feature in progress');
+    
+    // window.alert('Feature in progress');
     // Notice the "Post Your Review" button which is only visible for 
     // logged-in users on a Spot's Detail Page 
     // if the user didn't post a review for that Spot yet and 
+    const reviewed = allReviews.find(rev => rev.userId === sessionUser.id);
+    console.log(reviewed);
     // the user isn't the creator of the spot
     
     // TODO: double check dependencies
@@ -150,13 +148,21 @@ const SpotCards = () => {
             </div>
         </div>
     </div>
+    {/* FIXME: */}
     {/* TODO: CONDITIONALLY RENDER */}
     {/* canReview?  */}
+    {/* { sessionUser && allReviews.find(rev => rev.userId === sessionUser.id) && spot.ownerId !== sessionUser.id &&
+        (
+            <h1>
+                yeet
+            </h1>
+        )
+    } */}
     <div className="spot-details-info-reserve-button">
         <button 
             className="review-spot"
             id="button"
-            onClick={handleReview}
+            // onClick={handleReview}
         >
             Post Your Review
         </button>
