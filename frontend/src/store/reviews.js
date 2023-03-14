@@ -1,3 +1,4 @@
+import { restoreCSRF, csrfFetch } from "./csrf";
 const SPOTREVIEWS = "/api/spots/:spotId/reviews"
 
 const loadReviews = (data) => ({
@@ -11,7 +12,7 @@ const normalize = (data) => data.reduce((obj,ele) => ({
 }), {});
 
 export const loadSpotReviews = (id) => async (dispatch) => {
- const response = await fetch(`/api/spots/${id}/reviews`);
+ const response = await csrfFetch(`/api/spots/${id}/reviews`);
  if(response.ok){
      const data = await response.json();
      const reviews = normalize(data.Reviews);

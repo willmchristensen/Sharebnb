@@ -43,13 +43,13 @@ function CreateNewSpot() {
 
   const onSubmit = async (e) => {
     e.preventDefault()
-    const vals = {country,address,city,state,description,title,basePrice,photos};
-    console.table(vals);
-    window.alert(vals);
+    const vals = {country,address,city,state,description,title,basePrice};
+    // console.table(vals);
     let createdSpot = await dispatch(addOneSpot(vals));
     if(createdSpot){
-      // history.push(`/spots/${createdSpot.id}`)
+      history.push(`/spots/${createdSpot.id}`)
     }
+    console.log(createdSpot);
   }
   return (
     <form

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Switch, Route } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import { restoreCSRF, csrfFetch } from "./store/csrf";
 
 import Spots from "./components/Spots"
 import SpotCards from "./components/SpotCards";
@@ -16,6 +17,7 @@ import LoginFormModal from "./components/LoginFormModal"
 import SignupFormModal from "./components/SignupFormModal"
 import ManageReviews from "./components/ManageReviews";
 import UpdateReviewModal from "./components/UpdateReviewModal";
+
 // TODO: UPDATE ROUTES
 function App() {
   const dispatch = useDispatch();

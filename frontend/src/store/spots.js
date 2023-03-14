@@ -1,8 +1,11 @@
+import { restoreCSRF, csrfFetch } from "./csrf";
+
 const LOAD = "api/spots";
 const LOADONE = "api/spots/:spotId"
 const LOADREVIEWS = "/api/spots/:spotId/reviews"
 const LOADCURRENT = "/api/spots/current"
 const ADDONE = "api/spots"
+
 
 const load = (data) => ({
     type: LOAD,
@@ -20,7 +23,7 @@ const loadCurrent = (data) => ({
 })
 
 const addOne = (data) => ({
-    type:   ADDONE,
+    type: ADDONE,
     payload: data,
 })
 
@@ -30,7 +33,7 @@ const normalize = (data) => data.reduce((obj,ele) => ({
 }), {});
 
 export const getAllSpots = () => async (dispatch) => {
-    const response = await fetch(`/api/spots`);
+    const response = await csrfFetch(`/api/spots`);
 
     if (response.ok) {
         const data = await response.json();
@@ -40,7 +43,7 @@ export const getAllSpots = () => async (dispatch) => {
 };
 
 export const loadSpotDetails = (id) => async (dispatch) => {
-    const response = await fetch(`/api/spots/${id}`);
+    const response = await csrfFetch(`/api/spots/${id}`);
     if(response.ok){
         const data = await response.json();
         // console.log('------------------------------data',data.Owner);
@@ -49,7 +52,7 @@ export const loadSpotDetails = (id) => async (dispatch) => {
 }
 
 export const loadUserSpots = () => async (dispatch) => {
-    const response = await fetch(`/api/spots/current`);
+    const response = await csrfFetch(`/api/spots/current`);
     // console.log('------------------------------response',response);
     if(response.ok){
         const data = await response.json();
@@ -63,7 +66,7 @@ export const loadUserSpots = () => async (dispatch) => {
 }
 
 export const addOneSpot = (payload) => async (dispatch) => {
-    const response = await fetch(`/api/spots`, {
+    const response = await csrfFetch(`/api/spots`, {
         method: "POST",
         headers: {"Content-type": "application/json"},
         body: JSON.stringify(payload)
@@ -111,7 +114,7 @@ const spotsReducer = (state = initialState, action) => {
         case ADDONE:{
             const newState = {...state};
             console.log(action.payload);
-            newState.allSpots.action.payload.id = {...action.payload}
+            newState.allSpots[action.payload.id] = {...action.payload}
             return newState;
         }
         default:
