@@ -52,6 +52,7 @@ function App() {
             </Route>
           </Switch>
         )}
+        <DeleteASpot></DeleteASpot>
         {/* <ManageReviews></ManageReviews>  */}
       {/* <ManageSpots></ManageSpots> */}
       
@@ -59,7 +60,7 @@ function App() {
       {/*<SignupFormModal></SignupFormModal>
       <LoginFormModal></LoginFormModal>
       <PostAReviewModal></PostAReviewModal>
-      <DeleteASpot></DeleteASpot>
+      
       <DeleteReview></DeleteReview>
       
      {/* <UpdateReviewModal></UpdateReviewModal> */}

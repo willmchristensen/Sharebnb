@@ -9,20 +9,19 @@ function LoginFormModal() {
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
-  const [validationErrors, setValidationErrors] = useState({} );
+  const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
   useEffect(() => {
     const errors = {};
-    if(password.length < 6)errors.password = 'length';
-    if(credential.length < 4)errors.credential = 'length';
-    setValidationErrors(errors)
+    if(password.length < 6) errors.password = 'length';
+    if(credential.length < 4) errors.credential = 'length';
+    setErrors(errors)
   }, [password,credential])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors([]);
+    setErrors({});
     return dispatch(sessionActions.login({ credential, password }))
       .then(closeModal)
       .catch(
@@ -37,7 +36,7 @@ function LoginFormModal() {
     e.preventDefault();
     setCredential('Demo-lition');
     setPassword('Password');
-    setErrors([]);
+    setErrors({});
     return dispatch(sessionActions.login({ credential, password }))
       .then(closeModal)
       .catch(
@@ -67,7 +66,7 @@ function LoginFormModal() {
               placeholder="Username or Email"
             />
           </label>
-          <p className="errors">{validationErrors.credential}</p>
+          <p className="errors">{errors.credential}</p>
           <label>
             <input
               type="password"
@@ -77,8 +76,8 @@ function LoginFormModal() {
               placeholder="Password"
             />
           </label>
-          <p className="errors">{validationErrors.password}</p>
-          <button type="submit" disabled={Boolean(Object.values(validationErrors).length)}>Log In</button>
+          <p className="errors">{errors.password}</p>
+          <button type="submit" disabled={Boolean(Object.values(errors).length)}>Log In</button>
           <button type="submit" onClick={handleDemoUser}>Demo User</button>
         </div>
       </form>
