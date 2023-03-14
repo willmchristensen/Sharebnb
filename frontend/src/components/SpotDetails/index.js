@@ -10,7 +10,7 @@ import {loadSpotReviews} from '../../store/reviews'
 
 import './SpotDetails.css';
 
-const SpotCards = () => {
+const SpotDetails = () => {
 
     const {spotId} = useParams();
 
@@ -171,4 +171,4 @@ const SpotCards = () => {
   );
 };
 
-export default SpotCards;
+export default SpotDetails;

@@ -45,6 +45,12 @@ function App() {
               <CreateNewSpot></CreateNewSpot> 
             </Route>
             <Route
+              path={[ "/spots/current"]}
+              exact
+            >
+              <ManageSpots></ManageSpots>
+            </Route>
+            <Route
               path={[ "/spots/:spotId"]}
               exact
             >
@@ -54,7 +60,7 @@ function App() {
         )}
         <DeleteASpot></DeleteASpot>
         {/* <ManageReviews></ManageReviews>  */}
-      {/* <ManageSpots></ManageSpots> */}
+      
       
       {/* <CreateNewSpot></CreateNewSpot> */}
       {/*<SignupFormModal></SignupFormModal>

@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import { getAllSpots } from '../../store/spots';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -29,6 +31,10 @@ function ProfileButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
+  useEffect(() => {
+    dispatch(getAllSpots())
+  }, [dispatch])
+
   const closeMenu = () => setShowMenu(false);
 
   const logout = (e) => {
@@ -39,14 +45,39 @@ function ProfileButton({ user }) {
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
+  let spots = useSelector(state => state.spots.allSpots);
+  let allSpots = Object.values(spots);
+  // console.log('------------------------------allSpots',allSpots);
+  let isOwner = allSpots.find(spot => spot.ownerId === user.id);
+
   return (
     <>
       <button onClick={openMenu}>
         <i className="fas fa-user-circle" />
       </button>
       <ul className={ulClassName} ref={ulRef}>
-        {user ? (
+        {/* user and owner of spots? */}
+        {/* if so, show manage spots */}
+        {user && isOwner ? (
           <>
+            <li>
+              <NavLink
+                // key={}
+                to={`/spots/current`}
+              >
+                Manage Spots
+              </NavLink>
+            </li>
+            <li>{user.username}</li>
+            <li>{user.firstName} {user.lastName}</li>
+            <li>{user.email}</li>
+            <li>
+              <button onClick={logout}>Log Out</button>
+            </li>
+          </>
+        ) : user ? (
+          <>
+            <li>JUST USER BRUH</li>
             <li>{user.username}</li>
             <li>{user.firstName} {user.lastName}</li>
             <li>{user.email}</li>

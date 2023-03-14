@@ -11,7 +11,7 @@ function CreateNewSpot() {
   const [state,setState] = useState('');
   const [description, setDescription] = useState('');
   const [name, setName] = useState('');
-  const [price, setPrice] = useState('0');
+  const [price, setPrice] = useState(100.0);
   const [photos, setPhotos] = useState('');
   const [lat, setLat] = useState(0.1);
   const [lng, setLng] = useState(0.2);
@@ -44,8 +44,9 @@ function CreateNewSpot() {
   // name
   const onSubmit = async (e) => {
     e.preventDefault()
+    // price = Number(price)
     const vals = {country,address,city,state,description,price, lat, lng};
-    // console.log('valsvalsvalsvalsvals',vals);
+    console.log('valsvalsvalsvalsvals',vals);
     let createdSpot = await dispatch(addOneSpot(vals));
     // console.log('createdSpotcreatedSpotcreatedSpot:',createdSpot);
     if(createdSpot){
@@ -60,7 +61,7 @@ function CreateNewSpot() {
     >
      <div className="user-information-create-spot">
       <h2>Create a Spot</h2>
-      <div className="form-row">
+      {/* <div className="form-row">
        <div className="form-row-data">
        <label>
         <div className="form-row-data-label">
@@ -77,7 +78,7 @@ function CreateNewSpot() {
        </label>
              
        </div>
-      </div>
+      </div> */}
       <div className="form-row">
         <div className="form-row-data">
         <label>
