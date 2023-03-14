@@ -30,7 +30,7 @@ const SpotCards = () => {
     // Notice the "Post Your Review" button which is only visible for 
     // logged-in users on a Spot's Detail Page 
     // if the user didn't post a review for that Spot yet and 
-    const reviewed = allReviews.find(rev => rev.userId === sessionUser.id);
+    const reviewed = Boolean(allReviews.find(rev => rev.userId === sessionUser.id));
     console.log(reviewed);
     // the user isn't the creator of the spot
     
@@ -151,22 +151,21 @@ const SpotCards = () => {
     {/* FIXME: */}
     {/* TODO: CONDITIONALLY RENDER */}
     {/* canReview?  */}
-    {/* { sessionUser && allReviews.find(rev => rev.userId === sessionUser.id) && spot.ownerId !== sessionUser.id &&
+    {console.log('------------------------------sessionUser',sessionUser)}
+    {console.log('------------------------------')}
+    { sessionUser && !Boolean(allReviews.find(rev => rev.userId === sessionUser.id)) && spot.ownerId !== sessionUser.id &&
         (
-            <h1>
-                yeet
-            </h1>
+            <div className="spot-details-info-reserve-button">
+                <button 
+                    className="review-spot"
+                    id="button"
+                    // onClick={handleReview}
+                >
+                    Post Your Review
+                </button>
+            </div>
         )
-    } */}
-    <div className="spot-details-info-reserve-button">
-        <button 
-            className="review-spot"
-            id="button"
-            // onClick={handleReview}
-        >
-            Post Your Review
-        </button>
-    </div>
+    }
     </div>
         {
             allReviews.map(review => {
