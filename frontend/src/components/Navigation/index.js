@@ -6,11 +6,6 @@ import './Navigation.css';
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
-  console.log('--------------------------ses', Boolean(sessionUser));
-
-  const handleCreateSpot = (e) => {
-
-  }
 
   return (
     <ul className="nav-bar">

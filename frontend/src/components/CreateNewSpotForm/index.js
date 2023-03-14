@@ -1,6 +1,8 @@
 import {useState,useEffect} from 'react';
+import {useDispatch} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import './CreateNewSpot.css'
+import { addOneSpot } from '../../store/spots';
 
 function CreateNewSpot() {
   const [country,setCountry] = useState('');
@@ -13,7 +15,8 @@ function CreateNewSpot() {
   const [photos, setPhotos] = useState('');
 
   const history = useHistory();
-  
+  const dispatch = useDispatch();
+
   const [errors,setValidationErrors] = useState({});
   
   useEffect(() => {
@@ -28,7 +31,7 @@ function CreateNewSpot() {
     if(!title) errors.title = "Title is required"
     if(!basePrice) errors.basePrice = "BasePrice is required"
     // FIXME: PHOTOS ERRORS 
-    if(Boolean(Object.keys(photos).length)) errors.photos = "Photos is required"
+    if(!Boolean(Object.keys(photos).length)) errors.photos = "Photos is required"
     let acceptedFiles = ['png','jpg','peg'];
     if(!acceptedFiles.includes(photos.slice(photos.length - 3))){
       errors.photos = "Image URL must end in .png, .jpg, or .jpeg";
@@ -36,13 +39,17 @@ function CreateNewSpot() {
 
     setValidationErrors(errors) 
   }, [country,address,city,state,description,title,basePrice,photos])
-  
-  function onSubmit(e){
+
+
+  const onSubmit = async (e) => {
     e.preventDefault()
     const vals = {country,address,city,state,description,title,basePrice,photos};
     console.table(vals);
     window.alert(vals);
-    // history.push('/')
+    let createdSpot = await dispatch(addOneSpot(vals));
+    if(createdSpot){
+      // history.push(`/spots/${createdSpot.id}`)
+    }
   }
   return (
     <form
@@ -63,7 +70,7 @@ function CreateNewSpot() {
            name="basePrice"
            value={basePrice}
            onChange={e=>setBasePrice(e.target.value)}
-           placeHolder="Price per night (USD)"
+           placeholder="Price per night (USD)"
          />
        </label>
              
@@ -81,7 +88,7 @@ function CreateNewSpot() {
             name="country"
             value={country}
             onChange={e=>setCountry(e.target.value)}
-            placeHolder="Country"
+            placeholder="Country"
           />
         </label>
         </div>
@@ -98,7 +105,7 @@ function CreateNewSpot() {
             name="country"
             value={address}
             onChange={e=>setAddress(e.target.value)}
-            placeHolder="Address"
+            placeholder="Address"
           />
         </label>
         <p className="errors">
@@ -118,7 +125,7 @@ function CreateNewSpot() {
             name="country"
             value={city}
             onChange={e=>setCity(e.target.value)}
-            placeHolder="city"
+            placeholder="city"
           />
         </label>
           <label>
@@ -131,14 +138,9 @@ function CreateNewSpot() {
             name="country"
             value={state}
             onChange={e=>setState(e.target.value)}
-            placeHolder="state"
+            placeholder="state"
           />
         </label>
-        </div>
-      </div>
-      <div className="form-row">
-        <div className="form-row-data">
-        
         </div>
       </div>
       <div className="form-row">
@@ -150,7 +152,7 @@ function CreateNewSpot() {
             name="country"
             value={description}
             onChange={e=>setDescription(e.target.value)}
-            placeHolder="description"
+            placeholder="description"
           />
         </label>
         <p className="errors">
@@ -167,7 +169,7 @@ function CreateNewSpot() {
             name="title"
             value={title}
             onChange={e=>setTitle(e.target.value)}
-            placeHolder="title"
+            placeholder="title"
           />
         </label>
         <p className="errors">
@@ -185,7 +187,6 @@ function CreateNewSpot() {
             name="country"
             value={photos}
             onChange={e=>setPhotos(e.target.value)}
-            placeHolder=""
             placeholder="Preview Image URL"
           />
         </label>
