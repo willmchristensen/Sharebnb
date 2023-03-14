@@ -21,15 +21,30 @@ const SpotCards = () => {
     const reviews = useSelector(state => state.reviews.spot);
     const allReviews = Object.values(reviews);
 
-    const handleReservation = () => window.alert('Feature in progress');
+    const sessionUser = useSelector(state => state.session.User);
+    if(sessionUser){
+        const hasReviewed = allReviews.find(rev => rev.userId === sessionUser.id);
+        const isOwner = spot.ownerId === sessionUser.id;
+        const canReview = sessionUser && !hasReviewed && isOwner; 
+    }
 
+    const handleReservation = () => window.alert('Feature in progress');
+    const handleReview = () => 
+    window.alert('Feature in progress');
+    // Notice the "Post Your Review" button which is only visible for 
+    // logged-in users on a Spot's Detail Page 
+    // if the user didn't post a review for that Spot yet and 
+    // the user isn't the creator of the spot
+    
+    // TODO: double check dependencies
+    // TODO: WIDTH 1000PX??
     useEffect(() => {
         dispatch(loadSpotDetails(spotId));
         dispatch(loadSpotReviews(spotId));
     }, [spotId])
     
   return (
-    <>
+    <div className="spot-details">
         <div className="spot-details-header">
             <h1>{spot.name}</h1>
             <h3>{spot.city}, {spot.state}, {spot.country}</h3>
@@ -134,16 +149,27 @@ const SpotCards = () => {
                 <h3>review(s)</h3>
             </div>
         </div>
-        </div>
-            {
-                allReviews.map(review => {
-                    return (
-                        <SpotReview review={review}></SpotReview>
-                    );
-                })
-            }
-        </div>
-    </>
+    </div>
+    {/* TODO: CONDITIONALLY RENDER */}
+    {/* canReview?  */}
+    <div className="spot-details-info-reserve-button">
+        <button 
+            className="review-spot"
+            id="button"
+            onClick={handleReview}
+        >
+            Post Your Review
+        </button>
+    </div>
+    </div>
+        {
+            allReviews.map(review => {
+                return (
+                    <SpotReview review={review}></SpotReview>
+                );
+            })
+        }
+    </div>
   );
 };
 

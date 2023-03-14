@@ -24,7 +24,7 @@ form{
     width: 100%;
     width: fit-content;
 }
-button{
+#button{
     margin: 10px;
     border-radius: 7%;
     border: 1px solid rgb(230, 231, 202);
@@ -33,7 +33,7 @@ button{
     font-size: 15px;
     height: fit-content;
 }
-button:hover{
+#button:hover{
     box-shadow: 1px 1px 1px rgb(202, 231, 202);
     filter: brightness(150%);
 }
