@@ -11,20 +11,18 @@ import {loadSpotReviews} from '../../store/reviews'
 import './SpotDetails.css';
 
 const SpotCards = () => {
-    // TODO: ROUTEPARAMS
+
     const {spotId} = useParams();
-    console.log(spotId)
-    // const spotId = 3;
+
     const dispatch = useDispatch();
+
     const spot = useSelector(state => state.spots.singleSpot);
+
     const reviews = useSelector(state => state.reviews.spot);
     const allReviews = Object.values(reviews);
-    // console.log('------------------------------allReviews',allReviews);
-    // console.log('--------------------------------------------------spotINDEX', spot);
+
     const handleReservation = () => window.alert('Feature in progress');
-  // if (!allSpots) {
-  //   return null;
-  // }
+
     useEffect(() => {
         dispatch(loadSpotDetails(spotId));
         dispatch(loadSpotReviews(spotId));
@@ -32,6 +30,10 @@ const SpotCards = () => {
     
   return (
     <>
+        <div className="spot-details-header">
+            <h1>{spot.name}</h1>
+            <h3>{spot.city}, {spot.state}, {spot.country}</h3>
+        </div>
         <div className="spot-details-images">
             <div className="spot-details-images-hero">
                 <NavLink 
@@ -99,7 +101,7 @@ const SpotCards = () => {
             <div className="spot-details-info">
                 <hr />
                 <div className="spot-details-info-title">
-                    <h2>{spot.address}</h2>
+                    <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
                 </div>
                 <div className="spot-details-info-description">
                     <p>
@@ -128,7 +130,8 @@ const SpotCards = () => {
                 <h3>{spot.avgStarRating}</h3>
             </div>
             <div className="spot-details-reviews-content-reviews">
-                <h3>{spot.numReviews}  review(s)</h3>
+                <h3>{spot.numReviews}</h3>
+                <h3>review(s)</h3>
             </div>
         </div>
         </div>

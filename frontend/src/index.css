@@ -1,3 +1,6 @@
+*{
+    font-family: 'Roboto', sans-serif;
+}
 #root{
     border: 1px solid royalblue;
     display: flex;
