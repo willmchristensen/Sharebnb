@@ -18,9 +18,9 @@ const ManageSpots = () => {
     dispatch(loadUserSpots())
   }, [dispatch]) 
   let spots = useSelector(state => state.spots.allSpots);
-  console.log('----------------spotsspotsspotsspotsspotsspotsspotsspots',spots);
+  // // console.log('----------------spotsspotsspotsspotsspotsspotsspotsspots',spots);
   let allSpots = Object.values(spots);
-  console.log('------------------------------allspots', allSpots);
+  // console.log('------------------------------allspots', allSpots);
 
   return (
     <main >

@@ -1,5 +1,25 @@
 /* ------------SPOT CARDS------------ */
+/* TODO: MOVE TOOLTIP INSIDE IMAGE */
+/* .tooltip{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.tooltip:hover .tooltip-text{
+    color: red;
+}
+
+/* .tool{
+    position: absolute;
+} */
+.tooltip-text{
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+}
 .spot-cards-section{
+    width: 1000px;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -12,10 +32,18 @@
     margin: 15px;
     border:1px solid #CEEDC7;
 }
+.spot-card:hover .tooltip-text{
+    color: red;
+    font-weight: bolder;
+    visibility: visible;
+}
 .spot-card > *{
     width: 70%;
 }
 .nav-link{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     /* width: 100%; */
     border:1px solid #CEEDC7;
 }

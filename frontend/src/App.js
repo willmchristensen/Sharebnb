@@ -53,7 +53,7 @@ function App() {
           </Switch>
         )}
         {/* <ManageReviews></ManageReviews>  */}
-      {/* <ManageSpots></ManageSpots> */}
+      <ManageSpots></ManageSpots>
       
       {/* <CreateNewSpot></CreateNewSpot> */}
       {/*<SignupFormModal></SignupFormModal>

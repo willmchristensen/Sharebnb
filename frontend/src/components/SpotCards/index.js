@@ -4,7 +4,7 @@ import { NavLink, Route } from 'react-router-dom';
 import { getAllSpots } from '../../store/spots';
 import SpotCardImage from '../SpotCardImage';
 import './SpotCards.css';
-
+// TODO: TOOLTIP!!!!!!!!!!!!!!!!
 const SpotCards = ({spot}) => {
 
 let rating = spot.avgRating;
@@ -17,6 +17,10 @@ const avgRating = Boolean(rating) ?  rating : '#.#';
         to={`/spots/${spot.id}`}
     >
         <div className="nav-link" >
+            <div className="tooltip-text">
+                TOOLTIP
+                {/* <span className="tool">TOOLTIP</span> */}
+            </div>
             <div className="nav-link-image" >
                 <SpotCardImage></SpotCardImage>
             </div>

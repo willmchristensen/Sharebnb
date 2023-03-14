@@ -1,14 +1,4 @@
-/* .tooltip-wrapper{
-    visibility: hidden;
-    border: 10px solid plum;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
-}
-.tooltip-wrapper:hover{
-    visibility: visible;
-} */
+
 .spot-card-image{
     display: flex;
     justify-content: center;
