@@ -5,18 +5,13 @@ import SpotReview from '../SpotReview';
 import ManageButtons from '../ManageButtons'
 // import './SpotDetails.css';
 
-const ManageReviews = (spot) => {
-
-    const handleReservation = () => window.alert('Feature in progress');
-  // if (!allSpots) {
-  //   return null;
-  // }
-
+const ManageReviews = () => {
+  
   return (
     <>
     <div className="manage-reviews-section">
         <h2>Manage Reviews</h2>
-        <SpotReview></SpotReview>
+         <SpotReview></SpotReview>
         <ManageButtons></ManageButtons>
     </div>
     </>

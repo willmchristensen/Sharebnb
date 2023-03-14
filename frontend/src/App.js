@@ -39,16 +39,17 @@ function App() {
             </Route>
           </Switch>
         )} */}
+        <ManageReviews></ManageReviews> 
       {/* <ManageSpots></ManageSpots> */}
-      <SpotDetails></SpotDetails>
+      {/* <SpotDetails></SpotDetails> */}
       {/* <CreateNewSpot></CreateNewSpot> */}
       {/*<SignupFormModal></SignupFormModal>
       <LoginFormModal></LoginFormModal>
       <PostAReviewModal></PostAReviewModal>
       <DeleteASpot></DeleteASpot>
       <DeleteReview></DeleteReview>
-      <ManageReviews></ManageReviews> */}
-     <UpdateReviewModal></UpdateReviewModal>
+      
+     {/* <UpdateReviewModal></UpdateReviewModal> */}
     </>
   );
 }
