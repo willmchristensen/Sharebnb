@@ -32,12 +32,9 @@ const deleteOne = (data) => ({
     payload: data
 });
 
-const addImage = (id,data) => ({
+const addSpot = (data) => ({
     type: ADD_IMAGE,
-    payload: {
-        id,
-        data
-    },
+    payload: data
 });
 // /:spotId/images
 
@@ -119,25 +116,36 @@ export const deleteOneSpot = (id) => async (dispatch) => {
       }
 }
 
-export const addOneImage = (id, data) => async (dispatch) => {
-    try{
-        const response = await fetch(`/api/items/${id}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
+export const createOneSpot = (spot, images) => async (dispatch) => {
+    console.log(spot,images);
+    const response = await csrfFetch("/api/spots", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(spot)
+    });
+    if(response.ok){
+        const spot = await response.json();
+        spot.SpotImages = [];
+        
+        images.forEach(async (img) => {
+            console.log(img);
+            const imageRes = await csrfFetch(`/api/spots/${spot.id}/images`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(img)
+            });
+            const image = await imageRes.json();
+            spot.SpotImages.push(image);
         });
 
-        const image = await response.json();
-        if(image.ok){
-            dispatch(addImage(id,image));
-            // return spot;
-        }
-      } catch (error) {
-        throw error;
-      }
-}
+        dispatch(addSpot(spot))
+        return spot;
+    };
+};
 
 const initialState = {
     allSpots: {},
@@ -186,7 +194,7 @@ const spotsReducer = (state = initialState, action) => {
         }
         case ADD_IMAGE: {
             const newState = {...state};
-            newState.singleSpot[action.payload.id].SpotImages = {...action.payload};
+            newState.singleSpot[action.payload.id] = {...action.payload};
             return newState;  
         }
         default:

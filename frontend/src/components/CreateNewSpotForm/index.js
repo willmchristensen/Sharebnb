@@ -2,7 +2,7 @@ import {useState,useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import './CreateNewSpot.css'
-import { addOneSpot, addOneImage } from '../../store/spots';
+import { createOneSpot } from '../../store/spots';
 
 function CreateNewSpot() {
   const [country,setCountry] = useState('Actual Country');
@@ -13,9 +13,14 @@ function CreateNewSpot() {
   const [name, setName] = useState('Spot Name Here');
   const [price, setPrice] = useState(100.0);
   const [previewImage,setPreviewImage] = useState('');
-  const [photos, setPhotos] = useState([]);
+  const [photoOne,setPhotoOne] = useState('');
+  const [photoTwo,setPhotoTwo] = useState('');
+  const [photoThree,setPhotoThree] = useState('');
+  const [photoFour,setPhotoFour] = useState('');
   const [lat, setLat] = useState(0.1);
   const [lng, setLng] = useState(0.2);
+
+  // ------------------------------------------
   // const [country,setCountry] = useState('');
   // const [address,setAddress] = useState('');
   // const [city,setCity] = useState('');
@@ -51,7 +56,7 @@ function CreateNewSpot() {
 
 
     setValidationErrors(errors) 
-  }, [country,address,city,state,description,name,price])
+  }, [country,address,city,state,description,name,price]);
 
   useEffect(() => {
     let acceptedFiles = ['png','jpg','peg'];
@@ -67,27 +72,35 @@ function CreateNewSpot() {
   useEffect(() => {
     let acceptedFiles = ['png','jpg','peg'];
     const errors = {}
-    if(!acceptedFiles.includes(photos.slice(photos.length - 3))){
-      errors.photos = "Image URL must end in .png, .jpg, or .jpeg"
+    if(!acceptedFiles.includes(photoOne.slice(photoOne.length - 3))){
+      errors.photoOne = "Image URL must end in .png, .jpg, or .jpeg"
+    }
+    if(!acceptedFiles.includes(photoTwo.slice(photoTwo.length - 3))){
+      errors.photoTwo = "Image URL must end in .png, .jpg, or .jpeg"
+    }
+    if(!acceptedFiles.includes(photoThree.slice(photoThree.length - 3))){
+      errors.photoThree = "Image URL must end in .png, .jpg, or .jpeg"
+    }
+    if(!acceptedFiles.includes(photoFour.slice(photoFour.length - 3))){
+      errors.photoOne = "Image URL must end in .png, .jpg, or .jpeg"
     }
     setPhotoErrors(errors);
-  }, [photos]);
+  }, [photoOne,photoTwo,photoThree,photoFour]);
 
   const onSubmit = async (e) => {
-    e.preventDefault()
-
+    e.preventDefault();
     const vals = {
       country,address,city,state,description,price,lat,lng,name
     };
-    let createdSpot = await dispatch(addOneSpot(vals));
-    console.log(createdSpot)
-    if(createdSpot){
-      photos.push(previewImage);
-      console.log(photos)
-    }
+    const spotImages = [];
+    spotImages.push({url: previewImage, preview: true});
+    if(photoOne){spotImages.push({url: photoOne, preview: false});}
+    if(photoTwo){spotImages.push({url: photoTwo, preview: false});}
+    if(photoThree){spotImages.push({url: photoThree, preview: false});}
+    if(photoFour){spotImages.push({url: photoFour, preview: false});}
+    let createdSpot = await dispatch(createOneSpot(vals,spotImages));
+    console.log('createdSPOT',createdSpot)
   }
-
-
   return (
     <form
       className="create-spot-form"
@@ -217,13 +230,13 @@ function CreateNewSpot() {
           <input
             type="text"
             name="country"
-            value={photos}
-            onChange={e=>setPhotos(e.target.value)}
+            value={photoOne}
+            onChange={e=>setPhotoOne(e.target.value)}
             placeholder="Image URL"
           />
         </label>
         <p className="errors">
-          {photoErrors.photos}
+          {photoErrors.photoOne}
         </p>
         </div>
       </div>
@@ -233,13 +246,13 @@ function CreateNewSpot() {
           <input
             type="text"
             name="country"
-            value={photos}
-            onChange={e=>setPhotos(e.target.value)}
+            value={photoTwo}
+            onChange={e=>setPhotoTwo(e.target.value)}
             placeholder="Image URL"
           />
         </label>
         <p className="errors">
-          {photoErrors.photos}
+          {photoErrors.photoTwo}
         </p>
         </div>
       </div>
@@ -249,13 +262,13 @@ function CreateNewSpot() {
           <input
             type="text"
             name="country"
-            value={photos}
-            onChange={e=>setPhotos(e.target.value)}
+            value={photoThree}
+            onChange={e=>setPhotoThree(e.target.value)}
             placeholder="Image URL"
           />
         </label>
         <p className="errors">
-          {photoErrors.photos}
+          {photoErrors.photoThree}
         </p>
         </div>
       </div>
@@ -265,13 +278,13 @@ function CreateNewSpot() {
           <input
             type="text"
             name="country"
-            value={photos}
-            onChange={e=>setPhotos(e.target.value)}
+            value={photoFour}
+            onChange={e=>setPhotoFour(e.target.value)}
             placeholder="Image URL"
           />
         </label>
         <p className="errors">
-          {photoErrors.photos}
+          {photoErrors.photoFour}
         </p>
         </div>
       </div>
