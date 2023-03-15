@@ -38,15 +38,15 @@ const ManageButtons = ({spot, review}) => {
             <button id="manage-button">Update</button>
             <div className="modal-material">
               <OpenModalMenuItem
-                      buttonText="Update Review"
-                      onItemClick={closeMenu}
-                      modalComponent={<UpdateReviewModal spot={spot}/>}
+                  buttonText="Update Review"
+                  onItemClick={closeMenu}
+                  modalComponent={<UpdateReviewModal spot={spot}/>}
               />
               <OpenModalMenuItem
                   buttonText="Delete Review"
                   onItemClick={closeMenu}
                   modalComponent={<DeleteReviewModal spot={spot}/>}
-            />
+              />
             </div>
         </div>
     </>

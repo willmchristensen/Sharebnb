@@ -95,11 +95,7 @@
     display: flex;
     justify-content: space-between;
 }
-.modal-material > *{
-    border: 10px solid red;
-    width: 10rem;
-    height: 10rem;
-}
+
 .spot-details-reviews{
     grid-area: d;
     border: 1px solid rgb(255, 183, 0);
