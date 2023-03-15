@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import * as sessionActions from "../../store/session";
+import addOneReview from '../../store/spots';
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import './PostReview.css'
@@ -9,13 +9,14 @@ function PostAReviewModal({spot}) {
   const [stars, setStars] = useState(0);
   const { closeModal } = useModal();
   const [errors,setErrors] = useState({});
+  const dispatch = useDispatch();
   // TODO: REFACTOR TO AUTHENTICATE REVIEW
-  useEffect(() => {
-    const errors = {};
-    if(description.length < 10)errors.description = 'length';
-    if(stars < 1)errors.credential = 'length';
-    setErrors(errors)
-  }, [description,stars])
+  // useEffect(() => {
+  //   const errors = {};
+  //   if(description.length < 10)errors.description = 'length';
+  //   if(stars < 1)errors.credential = 'length';
+  //   setErrors(errors)
+  // }, [description,stars])
 
   // TODO: REFACTOR TO POST A REVIEW
   // const handleSubmit = (e) => {
@@ -30,7 +31,13 @@ function PostAReviewModal({spot}) {
   //       }
   //     );
   // };
-
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const vals = {
+      description,stars
+    };
+    let createdReview = await dispatch(addOneReview());
+  }
   return (
     <>
     {/* onSubmit={handleSubmit} */}
@@ -55,13 +62,14 @@ function PostAReviewModal({spot}) {
             </div>
           </div>
           <StarsRatingInput changeStars={setStars} rating={stars}></StarsRatingInput>
-          <button
+          {/* <button
             type="submit"
             id="button"
-            disabled={Boolean(Object.keys(errors).length)}
+            // disabled={Boolean(Object.keys(errors).length)}
+            onClick={() => {console.log('hi')}}
           >
-            Update Your Review
-          </button>
+            Post Your Review
+          </button> */}
         </div>
      </form>
     </>

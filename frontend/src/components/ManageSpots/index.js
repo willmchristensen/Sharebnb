@@ -15,41 +15,42 @@ import SpotCards from '../SpotCards';
 
 const ManageSpots = () => {
   const dispatch = useDispatch(); 
+  
+  const userId = useSelector(state=> state.session.user.id);
   useEffect(() => {
     dispatch(loadUserSpots())
-  }, [dispatch]) 
+  }, [userId]) 
+  const spots = useSelector(state=> state.spots.allSpots);
+  const allSpots = Object.values(spots);
+  console.log('------------------------------spots',spots.allSpots);
 
-  const userId = useSelector(state=> state.session.user.id);
-  const spots = useSelector(state=> state.spots);
-  console.log('------------------------------spots',spots);
-
-  // return (
-  //   <main >
-  //     <div className="manage-wrapper">
-  //       <nav className="spot-cards-section">
-  //         <div className="spot-cards-section-header">
-  //           <h3>Manage Your Spots</h3>
-  //           <NavLink
-  //             className="spot-card"
-  //             to={`/spots/new`}
-  //           >
-  //             <button id="manage-button">create a new spot</button>
-  //           </NavLink>
-  //         </div>
-  //         {
-  //           allSpotsArray.map(spot => {
-  //             return (
-  //               <>
-  //                 <SpotCards spot={spot}></SpotCards>
-  //                 <ManageButtons spot={spot}></ManageButtons>
-  //               </>
-  //             )
-  //           })
-  //         }
-  //       </nav>
-  //     </div>
-  //   </main>
-  // );
+  return (
+    <main >
+      <div className="manage-wrapper">
+        <nav className="spot-cards-section">
+          <div className="spot-cards-section-header">
+            <h3>Manage Your Spots</h3>
+            <NavLink
+              className="spot-card"
+              to={`/spots/new`}
+            >
+              <button id="manage-button">create a new spot</button>
+            </NavLink>
+          </div>
+          {
+            allSpots.map(spot => {
+              return (
+                <>
+                  <SpotCards spot={spot}></SpotCards>
+                  <ManageButtons spot={spot}></ManageButtons>
+                </>
+              )
+            })
+          }
+        </nav>
+      </div>
+    </main>
+  );
 };
 
 export default ManageSpots;

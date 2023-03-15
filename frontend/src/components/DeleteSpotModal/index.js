@@ -19,26 +19,36 @@ function DeleteSpotModal({spot}) {
       .then(closeModal)
   };
 
+  // let spots = useState(state => state.spots)
+
+  // useEffect(() => {
+  //     dispatch(loadUserSpots())
+  //   }, [spots])
+
+  //   useEffect(() => {
+  //     dispatch(loadUserSpots())
+  //   }, [spots])
+
   return (
     <>
-    <div className="delete-a-spot">
-      <h2>Confirm Delete</h2>
-      <h3>Are you sure you want to remove this spot from the listings?</h3>
-      <div className="delete-buttons">
-        <button 
-          id="delete-button"
-          onClick={handleDelete}
-        >
-          Yes (Delete Spot)
-        </button>
-        <button 
-          id="keep-button"
-          onClick={closeModal}
-        >
-          No (Keep Spot)
-        </button>
+      <div className="delete-a-spot">
+        <h2>Confirm Delete</h2>
+        <h3>Are you sure you want to remove this spot from the listings?</h3>
+        <div className="delete-buttons">
+          <button 
+            id="delete-button"
+            onClick={handleDelete}
+          >
+            Yes (Delete Spot)
+          </button>
+          <button 
+            id="keep-button"
+            onClick={closeModal}
+          >
+            No (Keep Spot)
+          </button>
+        </div>
       </div>
-    </div>
     </>
   );
 }

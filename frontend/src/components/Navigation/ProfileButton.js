@@ -29,17 +29,16 @@ function ProfileButton({ user }) {
     if(user){
       let isOwner = allSpots.find(spot => spot.ownerId === user.id);
       let opinionated = allReviews.find(review => review.userId === user.id);
-
-    if(isOwner){
-      showManageSpots(true);
-    }else if(!isOwner){
-      showManageSpots(false);
-    }else if(opinionated){
-      showManageReviews(true);
-    }else{
-      showManageReviews(false);
+      if(isOwner){
+        showManageSpots(true);
+      }else if(!isOwner){
+        showManageSpots(false);
+      }else if(opinionated){
+        showManageReviews(true);
+      }else{
+        showManageReviews(false);
+      }
     }
-   }
    }, [user]);
 
   useEffect(() => {

@@ -76,24 +76,24 @@ export const loadUserSpots = () => async (dispatch) => {
     }
 }
 
-export const addOneSpot = (data) => async (dispatch) => {
-    try {
-        const response = await csrfFetch(`/api/spots`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        });
-        const spot = await response.json();
-        if(spot.ok){
-            dispatch(addOne(spot));
-            return spot;
-        }
-      } catch (error) {
-        throw error;
-      }
-}
+// export const addOneSpot = (data) => async (dispatch) => {
+//     try {
+//         const response = await csrfFetch(`/api/spots`, {
+//           method: "POST",
+//           headers: {
+//             "Content-Type": "application/json",
+//           },
+//           body: JSON.stringify(data),
+//         });
+//         const spot = await response.json();
+//         if(spot.ok){
+//             dispatch(addOne(spot));
+//             return spot;
+//         }
+//       } catch (error) {
+//         throw error;
+//       }
+// }
 
 export const deleteOneSpot = (id) => async (dispatch) => {
     try {
@@ -181,7 +181,6 @@ const spotsReducer = (state = initialState, action) => {
         }
         case ADD_IMAGE: {
             const newState = {...state};
-            console.log('------------------------------action.payload.id',action.payload.id);
             newState.singleSpot[action.payload.id] = {...action.payload};
             return newState;  
         }
