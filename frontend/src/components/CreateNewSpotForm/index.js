@@ -35,7 +35,6 @@ function CreateNewSpot() {
 
   const history = useHistory();
   const dispatch = useDispatch();
-
   const [errors,setValidationErrors] = useState({});
   const [imageErrors, setImageErrors] = useState({});
   const [photoErrors, setPhotoErrors] = useState({});
@@ -99,7 +98,8 @@ function CreateNewSpot() {
     if(photoThree){spotImages.push({url: photoThree, preview: false});}
     if(photoFour){spotImages.push({url: photoFour, preview: false});}
     let createdSpot = await dispatch(createOneSpot(vals,spotImages));
-    console.log('createdSPOT',createdSpot)
+    console.log('createdSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOT',createdSpot)
+    history.push(`/spots/${createdSpot.id}`)
   }
   return (
     <form
