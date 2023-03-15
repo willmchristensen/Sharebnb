@@ -12,16 +12,20 @@ function LoginFormModal() {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
-  useEffect(() => {
-    const errors = {};
-    if(password.length < 6) errors.password = 'length';
-    if(credential.length < 4) errors.credential = 'length';
-    setErrors(errors)
-  }, [password,credential])
+  // useEffect(() => {
+  //   const errors = {};
+  //   if(password.length < 6) errors.password = 'length';
+  //   if(credential.length < 4) errors.credential = 'length';
+  //   setErrors(errors)
+  // }, [password,credential])
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors({});
+    const errors = {};
+    if(password.length < 6) errors.password = 'length';
+    if(credential.length < 4) errors.credential = 'length';
+    setErrors(errors)
     return dispatch(sessionActions.login({ credential, password }))
       .then(closeModal)
       .catch(

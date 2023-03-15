@@ -44,7 +44,7 @@ const ManageButtons = ({spot}) => {
                 </button> */}
                <h1>ADD TEXT BELOW</h1>
                <OpenModalMenuItem
-                    itemText="BREH"
+                    buttonText="BREH"
                     onItemClick={closeMenu}
                     modalComponent={<DeleteSpotModal spot={spot}/>}
                 />

@@ -10,8 +10,10 @@ function Navigation({ isLoaded }){
   return (
     <ul className="nav-bar">
       <li>
-        <i class="fas fa-yin-yang"></i>
-        <NavLink exact to="/">ShareBnb</NavLink>
+        <NavLink exact to="/">
+          <i class="fas fa-yin-yang"></i>
+          ShareBnb
+        </NavLink>
       </li>
       <div className="nav-bar-conditional-content">
         {
