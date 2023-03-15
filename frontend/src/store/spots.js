@@ -99,16 +99,12 @@ export const deleteOneSpot = (id) => async (dispatch) => {
     try {
         const response = await csrfFetch(`/api/spots/${id}`, {
           method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          }
-        //   body: JSON.stringify(id),
         });
-        const result = await response.json();
-        if(result.ok){
+        if(response.ok){
+            const result = await response.json();
             dispatch(deleteOne(result));
             console.log('------------------------------res',result);
-            console.log('------------------------------',response);
+            // console.log('------------------------------',response);
             // return spot;
         }
       } catch (error) {
@@ -188,12 +184,11 @@ const spotsReducer = (state = initialState, action) => {
         case DELETE_ONE: {
             const newState = {...state};
             delete newState[action.payload.id];
-            return {
-                ...newState
-            }
+            return newState;
         }
         case ADD_IMAGE: {
             const newState = {...state};
+            console.log('------------------------------action.payload.id',action.payload.id);
             newState.singleSpot[action.payload.id] = {...action.payload};
             return newState;  
         }

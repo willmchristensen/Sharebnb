@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import './stars.css'
 
-function StarsRatingInput() {
+function StarsRatingInput({changeStars}) {
 
  // const handleClick = (newRating) => {
  //    onChange(newRating);
@@ -21,6 +21,7 @@ function StarsRatingInput() {
         className="star"   
         onMouseEnter={() => setActiveRating(1)}
         onMouseLeave={() => setActiveRating(rating)}
+        onClick={() => changeStars(1)}
       >
         {activeRating >= 1 ? filled : empty}
       </div>
@@ -28,6 +29,7 @@ function StarsRatingInput() {
         className="star"   
         onMouseEnter={() => setActiveRating(2)}
         onMouseLeave={() => setActiveRating(rating)}
+        onClick={() => changeStars(2)}
       >
         {activeRating >= 2 ? filled : empty}
       </div>
@@ -35,6 +37,7 @@ function StarsRatingInput() {
         className="star"   
         onMouseEnter={() => setActiveRating(3)}
         onMouseLeave={() => setActiveRating(rating)}
+        onClick={() => changeStars(3)}
       >
         {activeRating >= 3 ? filled : empty}
       </div>
@@ -42,6 +45,7 @@ function StarsRatingInput() {
         className="star"   
         onMouseEnter={() => setActiveRating(4)}
         onMouseLeave={() => setActiveRating(rating)}
+        onClick={() => changeStars(4)}
       >
         {activeRating >= 4 ? filled : empty}
       </div>
@@ -49,6 +53,7 @@ function StarsRatingInput() {
         className="star"   
         onMouseEnter={() => setActiveRating(5)}
         onMouseLeave={() => setActiveRating(rating)}
+        onClick={() => changeStars(5)}
       >
         {activeRating >= 5 ? filled : empty}
       </div>

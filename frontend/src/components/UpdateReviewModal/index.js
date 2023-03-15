@@ -8,7 +8,7 @@ import StarsRatingInput from './stars.js'
 function UpdateReviewModal(review) {
   // const dispatch = useDispatch();
   const [description, setDescription] = useState("");
-
+  const [stars, setStars] = useState(review.stars);
   // TODO: REFACTOR TO AUTHENTICATE REVIEW
   // useEffect(() => {
   //   const errors = {};
@@ -33,7 +33,6 @@ function UpdateReviewModal(review) {
 
   return (
     <>
-    {/* onSubmit={handleSubmit} */}
       <form className="review-modal">
         <div className="user-information-post-review">
           <h2>How was your stay at {review.address}?</h2>
@@ -55,25 +54,10 @@ function UpdateReviewModal(review) {
               {/* <p className="errors">{errors.description}</p>       */}
             </div>
           </div>
-          {/* <div className="form-row">
-            <div className="form-row-data">
-            <label>
-              Stars
-              <input
-                type="text"
-                name="country"
-                value={country}
-                onChange={e=>setCountry(e.target.value)}
-              />
-            </label>
-            <p className="errors">
-              {errors.country}
-              </p>
-            </div>
-          </div> */}
-          <StarsRatingInput></StarsRatingInput>
+          <StarsRatingInput changeStars={setStars}></StarsRatingInput>
           <button
             type="submit"
+            id="button"
             // disabled={Boolean(Object.keys(errors).length)}
           >
             Update Your Review

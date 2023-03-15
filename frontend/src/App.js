@@ -67,9 +67,9 @@ function App() {
       <LoginFormModal></LoginFormModal>
       
       
-      <DeleteReview></DeleteReview>
+      <DeleteReview></DeleteReview>*/}
       
-     {/* <UpdateReviewModal></UpdateReviewModal> */}
+     <UpdateReviewModal></UpdateReviewModal> 
     </>
   );
 }
