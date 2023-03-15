@@ -18,14 +18,10 @@ const ManageSpots = () => {
   useEffect(() => {
     dispatch(loadUserSpots())
   }, [dispatch]) 
-  let spots = Object.values(useSelector(state => state.spots.allSpots));
-  console.log('----------------spotsspotsspotsspotsspotsspotsspotsspots',spots);
-  let user = useSelector(state => state.session.user);
-  console.log('------------------------------user', user);
-  let allSpots = spots.find(spot => spot.ownerId === user.id);
-  console.log('------------------------------allSpots', allSpots);
-  let allSpotsArray = Object.values(allSpots)
-  console.log('------------------------------ARRAY', typeof allSpots);
+
+  const userId = useSelector(state=> state.session.user.id);
+  const spots = useSelector(state=> state.spots);
+  console.log('------------------------------spots',spots);
 
   // return (
   //   <main >

@@ -162,9 +162,7 @@ const spotsReducer = (state = initialState, action) => {
         case LOAD_ONE: {
             const newState = {...state};
             newState.singleSpot = {...action.payload};
-            newState.SpotImages = [...action.payload.SpotImages];
-            newState.Owner = {...action.payload.Owner};
-            return newState
+            return newState;
         }
         case LOAD_CURRENT: {
             const newState = {...state};
