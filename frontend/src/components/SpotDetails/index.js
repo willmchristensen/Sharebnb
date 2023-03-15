@@ -170,6 +170,7 @@ const SpotDetails = () => {
         </div>
     </div>
     {/* TODO: DOUBLE CHECK */}
+    {console.log('-sessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.id',spot.ownerId,sessionUser.id)}
     { sessionUser && !Boolean(allReviews.find(rev => rev.userId === sessionUser.id)) && spot.ownerId !== sessionUser.id &&
         (
             <div className="modal-material">
@@ -181,7 +182,7 @@ const SpotDetails = () => {
                     Post Your Review
                 </button> */}
                <OpenModalMenuItem
-                    buttonText="DOES THIS WORK?"
+                    buttonText="POST A REVIEW"
                     onItemClick={closeMenu}
                     modalComponent={<PostAReviewModal spot={spot}/>}
                 />

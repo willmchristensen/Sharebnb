@@ -4,7 +4,7 @@ import OpenModalMenuItem from '../OpenModalButton'
 import DeleteReviewModal from '../DeleteReviewModal'
 import UpdateReviewModal from '../UpdateReviewModal'
 import DeleteSpotModal from '../DeleteSpotModal'
-import CreateNewSpot from '../CreateNewSpotForm'
+import UpdateSpot from '../UpdateSpotForm';
 import './ManageButtons.css'
 
 const ManageButtons = ({spot, review}) => {
@@ -56,7 +56,7 @@ const ManageButtons = ({spot, review}) => {
               <OpenModalMenuItem
                 buttonText="Update Spot"
                 onItemClick={closeMenu}
-                modalComponent={<CreateNewSpot spot={spot}/>}
+                modalComponent={<UpdateSpot spot={spot}/>}
               />
               <OpenModalMenuItem
                   buttonText="Delete Spot"

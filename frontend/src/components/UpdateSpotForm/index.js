@@ -1,21 +1,20 @@
 import {useState,useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {useHistory} from 'react-router-dom';
-import './CreateNewSpot.css'
-import { createOneSpot } from '../../store/spots';
-
+// import './CreateNewSpot.css'
+// import { createOneSpot } from '../../store/spots';
 import { useModal } from "../../context/Modal";
 
+function UpdateSpot({spot}) {
 
-function CreateNewSpot() {
-
-  const [country,setCountry] = useState('Actual Country');
-  const [address,setAddress] = useState('123 Address');
-  const [city,setCity] = useState('SomeCity');
-  const [state,setState] = useState('AState');
-  const [description, setDescription] = useState('This is me describing this spotThis is me describing this spotThis is me describing this spot');
-  const [name, setName] = useState('Spot Name Here');
-  const [price, setPrice] = useState(100.0);
+    // TODO: UPDATE WITH CURRENT VALS FROM SPOT
+  const [country,setCountry] = useState('');
+  const [address,setAddress] = useState('');
+  const [city,setCity] = useState('');
+  const [state,setState] = useState('');
+  const [description, setDescription] = useState('');
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState();
   const [previewImage,setPreviewImage] = useState('');
   const [photoOne,setPhotoOne] = useState('');
   const [photoTwo,setPhotoTwo] = useState('');
@@ -23,23 +22,7 @@ function CreateNewSpot() {
   const [photoFour,setPhotoFour] = useState('');
   const [lat, setLat] = useState(0.1);
   const [lng, setLng] = useState(0.2);
-
-  // ------------------------------------------
-  // const [country,setCountry] = useState('');
-  // const [address,setAddress] = useState('');
-  // const [city,setCity] = useState('');
-  // const [state,setState] = useState('');
-  // const [description, setDescription] = useState('');
-  // const [name, setName] = useState('');
-  // const [price, setPrice] = useState();
-  // const [previewImage,setPreviewImage] = useState('');
-  // const [photos, setPhotos] = useState([]);
-  // const [lat, setLat] = useState(0.1);
-  // const [lng, setLng] = useState(0.2);
-
-    const { closeModal } = useModal();
-
-
+  const { closeModal } = useModal();
   const history = useHistory();
   const dispatch = useDispatch();
   const [errors,setValidationErrors] = useState({});
@@ -104,9 +87,10 @@ function CreateNewSpot() {
     if(photoTwo){spotImages.push({url: photoTwo, preview: false});}
     if(photoThree){spotImages.push({url: photoThree, preview: false});}
     if(photoFour){spotImages.push({url: photoFour, preview: false});}
-    let createdSpot = await dispatch(createOneSpot(vals,spotImages));
-    console.log('createdSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOT',createdSpot)
-    history.push(`/spots/${createdSpot.id}`)
+    // FIXME: UPDATED SPOT
+    // let updatedSpot = await dispatch(updateSpot(vals,spotImages));
+    // console.log('UPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOT',createdSpot)
+    // history.push(`/spots/${createdSpot.id}`)
     closeModal()
   }
   return (
@@ -307,4 +291,4 @@ function CreateNewSpot() {
   );
 }
 
-export default CreateNewSpot;
+export default UpdateSpot;
