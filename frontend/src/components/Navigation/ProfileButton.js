@@ -80,6 +80,14 @@ function ProfileButton({ user }) {
                 Manage Spots
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                // key={}
+                to={`/reviews/current`}
+              >
+                Manage Reviews
+              </NavLink>
+            </li>
             <li>{user.username}</li>
             <li>{user.firstName} {user.lastName}</li>
             <li>{user.email}</li>

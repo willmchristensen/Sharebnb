@@ -166,11 +166,6 @@ const spotsReducer = (state = initialState, action) => {
             newState.Owner = {...action.payload.Owner};
             return newState
         }
-        // case LOADREVIEWS: {
-        //     const newState = {...state};
-        //     newState.reviews = {...action.payload.Reviews};
-        //     return newState
-        // }
         case LOAD_CURRENT: {
             const newState = {...state};
             newState.allSpots = {...action.payload};

@@ -5,17 +5,17 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import { restoreCSRF, csrfFetch } from "./store/csrf";
 
+import LoginFormModal from "./components/LoginFormModal"
+import SignupFormModal from "./components/SignupFormModal"
 import Spots from "./components/Spots"
 import SpotCards from "./components/SpotCards";
 import SpotDetails from "./components/SpotDetails"
 import CreateNewSpot from "./components/CreateNewSpotForm";
 import PostAReviewModal from './components/PostAReviewModal'
 import ManageSpots from './components/ManageSpots'
+import ManageReviews from "./components/ManageReviews";
 import DeleteASpot from './components/DeleteSpotModal'
 import DeleteReview from "./components/DeleteReviewModal";
-import LoginFormModal from "./components/LoginFormModal"
-import SignupFormModal from "./components/SignupFormModal"
-import ManageReviews from "./components/ManageReviews";
 import UpdateReviewModal from "./components/UpdateReviewModal";
 
 // TODO: UPDATE ROUTES
@@ -43,6 +43,12 @@ function App() {
               exact
             >
               <CreateNewSpot></CreateNewSpot> 
+            </Route>
+            <Route
+              path={[ "/reviews/current"]}
+              exact
+            >
+              <ManageReviews></ManageReviews>
             </Route>
             <Route
               path={[ "/spots/current"]}
