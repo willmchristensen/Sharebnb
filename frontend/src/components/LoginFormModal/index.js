@@ -12,12 +12,12 @@ function LoginFormModal() {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
-  // useEffect(() => {
-  //   const errors = {};
-  //   if(password.length < 6) errors.password = 'length';
-  //   if(credential.length < 4) errors.credential = 'length';
-  //   setErrors(errors)
-  // }, [password,credential])
+  useEffect(() => {
+    const errors = {};
+    if(password.length < 6) errors.password = 'length';
+    if(credential.length < 4) errors.credential = 'length';
+    setErrors(errors)
+  }, [password,credential])
 // TODO: DOUBLE CHECK THIS IS OKAY OR CHANGE TO CONDITIONAL RENDERING
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -60,7 +60,6 @@ function LoginFormModal() {
               placeholder="Username or Email"
             />
           </label>
-          <p className="errors">{errors.credential}</p>
           <label>
             <input
               type="password"
@@ -70,7 +69,6 @@ function LoginFormModal() {
               placeholder="Password"
             />
           </label>
-          <p className="errors">{errors.password}</p>
           <button type="submit" disabled={Boolean(Object.values(errors).length)}>Log In</button>
         </div>
       </form>

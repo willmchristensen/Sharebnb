@@ -40,7 +40,7 @@ const SpotDetails = () => {
     const reviews = useSelector(state => state.reviews.spot);
     const allReviews = Object.values(reviews);
     const sessionUser = useSelector(state => state.session.user);
-    // console.log('------------------------------sessionUser',sessionUser);
+    console.log('------------------------------sessionUser',sessionUser);
     // ---------------data------------------
 
     const handleReservation = () => window.alert('Feature in progress');
@@ -137,7 +137,11 @@ const SpotDetails = () => {
                         </div>
                         <div className="spot-details-info-reserve-reviews-stars">
                             <h3>{spot.avgStarRating}</h3>
-                            <h3>{spot.numReviews}  review(s)</h3>
+                            {spot.numReviews > 0 ? (
+                    <h3>
+                        {spot.numReviews} review(s)
+                    </h3> 
+                ) : <h3>"New"</h3>}
                         </div>
                     </div>
                     <div className="spot-details-info-reserve-button">
@@ -157,8 +161,11 @@ const SpotDetails = () => {
                 <h3>{spot.avgStarRating}</h3>
             </div>
             <div className="spot-details-reviews-content-reviews">
-                <h3>{spot.numReviews}</h3>
-                <h3>review(s)</h3>
+                {spot.numReviews > 0 ? (
+                    <h3>
+                        {spot.numReviews} review(s)
+                    </h3> 
+                ) : <h3>"New"</h3>}
             </div>
         </div>
     </div>
