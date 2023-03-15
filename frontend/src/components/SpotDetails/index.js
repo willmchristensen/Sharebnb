@@ -173,9 +173,8 @@ const SpotDetails = () => {
                 >
                     Post Your Review
                 </button> */}
-               <h1>need text inside modal menu item below</h1>
                <OpenModalMenuItem
-                    itemText="BREH"
+                    buttonText="DOES THIS WORK?"
                     onItemClick={closeMenu}
                     modalComponent={<PostAReviewModal spot={spot}/>}
                 />

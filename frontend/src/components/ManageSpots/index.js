@@ -23,7 +23,7 @@ const ManageSpots = () => {
   let user = useSelector(state => state.session.user);
   console.log('------------------------------user', user);
   let allSpots = spots.find(spot => spot.ownerId === user.id);
-  console.log('------------------------------allSpots', typeof allSpots);
+  console.log('------------------------------allSpots', allSpots);
   let allSpotsArray = Object.values(allSpots)
   console.log('------------------------------ARRAY', typeof allSpots);
 

@@ -6,6 +6,7 @@ import SpotCardImage from '../SpotCardImage';
 import LargeCardImage from '../SpotCardImage/LargeCardImage';
 import OpenModalMenuItem from '../OpenModalButton';
 import DeleteReviewModal from '../DeleteReviewModal';
+import ManageButtons from '../ManageButtons'
 import './SpotReview.css';
 
 const SpotReview = ({review}) => {
@@ -60,21 +61,21 @@ const SpotReview = ({review}) => {
         } */}
           { sessionUser && !Boolean(review.userId === sessionUser.id) &&
         (
-            <div className="modal-material">
-                {/* <button 
-                    className="review-spot"
-                    id="button"
-                    // onClick={handleReview}
-                >
-                    Post Your Review
-                </button> */}
-               <h1>CHANGE CONDITIONAL ABOVE AND ADD TEXT BELOW</h1>
-               <OpenModalMenuItem
-                    itemText="BREH"
-                    onItemClick={closeMenu}
-                    modalComponent={<DeleteReviewModal review={review}/>}
-                />
-            </div>
+          <ManageButtons review={review}></ManageButtons>
+            // <div className="modal-material">
+            //     {/* <button 
+            //         className="review-spot"
+            //         id="button"
+            //         // onClick={handleReview}
+            //     >
+            //         Post Your Review
+            //     </button> */}
+            //    <OpenModalMenuItem
+            //         itemText="BREH"
+            //         onItemClick={closeMenu}
+            //         modalComponent={<DeleteReviewModal review={review}/>}
+            //     />
+            // </div>
             
         )
     }
