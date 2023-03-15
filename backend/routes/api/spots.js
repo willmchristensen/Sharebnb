@@ -411,7 +411,7 @@ const validateImage = [
 ];
 router.post('/:spotId/images',requireAuth,validateImage, async(req,res) => {
     const {url,preview} = req.body;
-
+    console.log('---------TESTING-----------', req.body, url, preview);
     const spot = await Spot.findOne({
         where: {
             id: req.params.spotId,

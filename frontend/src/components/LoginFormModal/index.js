@@ -18,7 +18,7 @@ function LoginFormModal() {
   //   if(credential.length < 4) errors.credential = 'length';
   //   setErrors(errors)
   // }, [password,credential])
-
+// TODO: DOUBLE CHECK THIS IS OKAY OR CHANGE TO CONDITIONAL RENDERING
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors({});

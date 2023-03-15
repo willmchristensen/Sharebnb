@@ -5,6 +5,7 @@ const LOAD_ONE = "spots/LOAD_ONE"
 const LOAD_CURRENT = "/spots/LOAD_CURRENT"
 const ADD_ONE = "spots/ADD_ONE"
 const DELETE_ONE ="spots/DELETE_ONE"
+const ADD_IMAGE = "spots/ADD_IMAGE"
 
 const load = (data) => ({
     type: LOAD,
@@ -19,17 +20,26 @@ const loadOne = (data) => ({
 const loadCurrent = (data) => ({
     type:   LOAD_CURRENT,
     payload: data,
-})
+});
 
 const addOne = (data) => ({
     type: ADD_ONE,
     payload: data,
-})
+});
 
 const deleteOne = (data) => ({
     type: DELETE_ONE,
     payload: data
-})
+});
+
+const addImage = (id,data) => ({
+    type: ADD_IMAGE,
+    payload: {
+        id,
+        data
+    },
+});
+// /:spotId/images
 
 const normalize = (data) => data.reduce((obj,ele) => ({
     ...obj,
@@ -109,6 +119,26 @@ export const deleteOneSpot = (id) => async (dispatch) => {
       }
 }
 
+export const addOneImage = (id, data) => async (dispatch) => {
+    try{
+        const response = await fetch(`/api/items/${id}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+
+        const image = await response.json();
+        if(image.ok){
+            dispatch(addImage(id,image));
+            // return spot;
+        }
+      } catch (error) {
+        throw error;
+      }
+}
+
 const initialState = {
     allSpots: {},
     singleSpot:{
@@ -153,6 +183,11 @@ const spotsReducer = (state = initialState, action) => {
             return {
                 ...newState
             }
+        }
+        case ADD_IMAGE: {
+            const newState = {...state};
+            newState.singleSpot[action.payload.id].SpotImages = {...action.payload};
+            return newState;  
         }
         default:
             return state;
