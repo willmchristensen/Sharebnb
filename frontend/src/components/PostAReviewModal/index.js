@@ -5,20 +5,17 @@ import { useModal } from "../../context/Modal";
 import './PostReview.css'
 import StarsRatingInput from './stars.js'
 function PostAReviewModal({spot}) {
-  // const dispatch = useDispatch();
   const [description, setDescription] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [errors, setErrors] = useState([]);
-  // const [validationErrors, setValidationErrors] = useState({});
+  const [stars, setStars] = useState(0);
   const { closeModal } = useModal();
-
+  const [errors,setErrors] = useState({});
   // TODO: REFACTOR TO AUTHENTICATE REVIEW
-  // useEffect(() => {
-  //   const errors = {};
-  //   if(password.length < 6)errors.password = 'length';
-  //   if(credential.length < 4)errors.credential = 'length';
-  //   setValidationErrors(errors)
-  // }, [password,credential])
+  useEffect(() => {
+    const errors = {};
+    if(description.length < 10)errors.description = 'length';
+    if(stars < 1)errors.credential = 'length';
+    setErrors(errors)
+  }, [description,stars])
 
   // TODO: REFACTOR TO POST A REVIEW
   // const handleSubmit = (e) => {
@@ -46,12 +43,6 @@ function PostAReviewModal({spot}) {
                 className="form-row-data-post-review-label"
               >
                 How was your stay?
-                {/* <input
-                  type="text"
-                  name="description"
-                  value={description}
-                  onChange={e=>setDescription(e.target.value)}
-                /> */}
                 <textarea 
                   name="description" 
                   value={description} 
@@ -61,32 +52,16 @@ function PostAReviewModal({spot}) {
                 >
                 </textarea>
               </label>
-              {/* <p className="errors">{errors.description}</p>       */}
             </div>
           </div>
-          {/* <div className="form-row">
-            <div className="form-row-data">
-            <label>
-              Stars
-              <input
-                type="text"
-                name="country"
-                value={country}
-                onChange={e=>setCountry(e.target.value)}
-              />
-            </label>
-            <p className="errors">
-              {errors.country}
-              </p>
-            </div>
-          </div> */}
-          <StarsRatingInput></StarsRatingInput>
-          {/* <button
+          <StarsRatingInput changeStars={setStars} rating={stars}></StarsRatingInput>
+          <button
             type="submit"
+            id="button"
             disabled={Boolean(Object.keys(errors).length)}
           >
-            Revi the spizzle
-          </button> */}
+            Update Your Review
+          </button>
         </div>
      </form>
     </>

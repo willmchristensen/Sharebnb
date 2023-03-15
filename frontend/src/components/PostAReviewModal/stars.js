@@ -1,15 +1,14 @@
 import {useEffect, useState} from 'react';
 import './stars.css'
 
-function StarsRatingInput() {
+function StarsRatingInput({changeStars,rating}) {
 
  // const handleClick = (newRating) => {
  //    onChange(newRating);
  //  }
   // TODO: ACTIVERATING => rating in backen
   // const [activeRating,setActiveRating] = useState({rating});
-  const [activeRating,setActiveRating] = useState(0);
-  let rating = 5;
+  const [activeRating,setActiveRating] = useState(rating);
   let empty = <i className="far fa-star"></i>;
   let filled = <i className="fas fa-star"></i>;
  //  // useEffect(() => {
@@ -21,6 +20,7 @@ function StarsRatingInput() {
         className="star"   
         onMouseEnter={() => setActiveRating(1)}
         onMouseLeave={() => setActiveRating(rating)}
+        onClick={() => changeStars(1)}
       >
         {activeRating >= 1 ? filled : empty}
       </div>
@@ -28,6 +28,7 @@ function StarsRatingInput() {
         className="star"   
         onMouseEnter={() => setActiveRating(2)}
         onMouseLeave={() => setActiveRating(rating)}
+        onClick={() => changeStars(2)}
       >
         {activeRating >= 2 ? filled : empty}
       </div>
@@ -35,6 +36,7 @@ function StarsRatingInput() {
         className="star"   
         onMouseEnter={() => setActiveRating(3)}
         onMouseLeave={() => setActiveRating(rating)}
+        onClick={() => changeStars(3)}
       >
         {activeRating >= 3 ? filled : empty}
       </div>
@@ -42,6 +44,7 @@ function StarsRatingInput() {
         className="star"   
         onMouseEnter={() => setActiveRating(4)}
         onMouseLeave={() => setActiveRating(rating)}
+        onClick={() => changeStars(4)}
       >
         {activeRating >= 4 ? filled : empty}
       </div>
@@ -49,6 +52,7 @@ function StarsRatingInput() {
         className="star"   
         onMouseEnter={() => setActiveRating(5)}
         onMouseLeave={() => setActiveRating(rating)}
+        onClick={() => changeStars(5)}
       >
         {activeRating >= 5 ? filled : empty}
       </div>

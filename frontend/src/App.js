@@ -28,8 +28,8 @@ function App() {
 
   return (
     <>
-      {/* <PostAReviewModal></PostAReviewModal> */}
-      <Navigation isLoaded={isLoaded} />
+      <PostAReviewModal></PostAReviewModal>
+      {/* <Navigation isLoaded={isLoaded} />
         {isLoaded && (
           <Switch>
             <Route
@@ -63,7 +63,7 @@ function App() {
               <SpotDetails></SpotDetails>
             </Route>
           </Switch>
-        )}
+        )} */}
         {/* <DeleteASpot></DeleteASpot> */}
         {/* <ManageReviews></ManageReviews>  */}
       

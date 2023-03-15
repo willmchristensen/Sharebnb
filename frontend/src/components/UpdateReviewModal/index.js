@@ -55,7 +55,11 @@ function UpdateReviewModal(review) {
               {/* <p className="errors">{errors.description}</p>       */}
             </div>
           </div>
-          <StarsRatingInput changeStars={setStars}></StarsRatingInput>
+          <StarsRatingInput 
+            changeStars={setStars}
+            rating={stars}
+          >
+          </StarsRatingInput>
           <button
             type="submit"
             id="button"
