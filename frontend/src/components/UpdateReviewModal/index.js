@@ -35,7 +35,8 @@ function UpdateReviewModal(review) {
     <>
       <form className="review-modal">
         <div className="user-information-post-review">
-          <h2>How was your stay at {review.address}?</h2>
+          {console.log('------------------------------REVIEW', review)}
+          <h2>How was your stay at {review.id}?</h2>
           <div className="form-row-post-review">
             <div className="form-row-data-post-review">
               <label

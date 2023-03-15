@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import OpenModalMenuItem from '../OpenModalButton'
 import DeleteReviewModal from '../DeleteReviewModal'
 import UpdateReviewModal from '../UpdateReviewModal'
+import DeleteSpotModal from '../DeleteSpotModal'
+import CreateNewSpot from '../CreateNewSpotForm'
 import './ManageButtons.css'
 
 const ManageButtons = ({spot, review}) => {
@@ -34,21 +36,36 @@ const ManageButtons = ({spot, review}) => {
 
   return (
     <>
-        <div className="manage-buttons">
-            <button id="manage-button">Update</button>
-            <div className="modal-material">
+      { 
+        review ? (
+          <div className="modal-material">
               <OpenModalMenuItem
-                  buttonText="Update Review"
-                  onItemClick={closeMenu}
-                  modalComponent={<UpdateReviewModal spot={spot}/>}
+                buttonText="Update Review"
+                onItemClick={closeMenu}
+                modalComponent={<UpdateReviewModal spot={spot}/>}
               />
               <OpenModalMenuItem
                   buttonText="Delete Review"
                   onItemClick={closeMenu}
                   modalComponent={<DeleteReviewModal spot={spot}/>}
               />
-            </div>
-        </div>
+          </div>
+            
+          ) : (
+            <div className="modal-material">
+              <OpenModalMenuItem
+                buttonText="Update Spot"
+                onItemClick={closeMenu}
+                modalComponent={<CreateNewSpot spot={spot}/>}
+              />
+              <OpenModalMenuItem
+                  buttonText="Delete Spot"
+                  onItemClick={closeMenu}
+                  modalComponent={<DeleteSpotModal spot={spot}/>}
+              />
+          </div>
+          )
+      }
     </>
   );
 };
