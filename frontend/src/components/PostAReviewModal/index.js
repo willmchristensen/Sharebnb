@@ -15,21 +15,11 @@ function PostAReviewModal({spot}) {
   const history = useHistory();
   const user = useSelector(state => state.session.user);
 
-  // TODO: REFACTOR TO AUTHENTICATE REVIEW
-  // useEffect(() => {
-  //   const errors = {};
-  //   if(description.length < 10)errors.description = 'length';
-  //   if(stars < 1)errors.credential = 'length';
-  //   setErrors(errors)
-  // }, [description,stars])
-
-  // TODO: REFACTOR TO POST A REVIEW
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log('description,starsdescription,starsdescription,starsdescription,starsdescription,starsdescription,starsdescription,starsdescription,starsdescription,starsdescription,starsdescription,starsdescription,starsdescription,starsdescription,stars',review,stars)
+    console.log('description,starsdescription,starsdescription,starsdescription,starsdescription,starsdescription,,stars',review,stars)
     const rev = {review,stars};
-// FIXME: THIS NEEDS DYNAMIC REVIEW
-    const newReview = await dispatch(createOneReview(rev,94, user))
+    const newReview = await dispatch(createOneReview(rev,spot.id, user))
       .then(closeModal)
       .catch(async (res) => {
           const data = await res.json();
@@ -65,13 +55,23 @@ function PostAReviewModal({spot}) {
               </label>
             </div>
           </div>
-          <StarsRatingInput changeStars={setStars} rating={stars}>
+          <input 
+            type="number"
+            value={stars}
+            onChange={e=> setStars(e.target.value)}
+            max={5}
+            min={1} 
+          />
+          <StarsRatingInput 
+            changeStars={setStars} 
+            rating={stars}
+            value={stars}
+            onChange={setStars}
+          >
           </StarsRatingInput>
           <button
             type="submit"
             id="button"
-            disabled={Boolean(Object.keys(errors).length)}
-            onClick={() => {console.log('hi')}}
           >
             Post Your Review
           </button>
