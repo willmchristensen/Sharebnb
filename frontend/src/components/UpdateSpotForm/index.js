@@ -2,27 +2,27 @@ import {useState,useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 // import './CreateNewSpot.css'
-// import { createOneSpot } from '../../store/spots';
+import { updateOneSpot } from '../../store/spots';
 import { useModal } from "../../context/Modal";
 
 function UpdateSpot({spot}) {
   const info = useSelector(state=> state.spots);
   console.log('------------------------------TEST TOWN', info);
     // TODO: UPDATE WITH CURRENT VALS FROM SPOT
-  const [country,setCountry] = useState('');
-  const [address,setAddress] = useState('');
-  const [city,setCity] = useState('');
-  const [state,setState] = useState('');
-  const [description, setDescription] = useState('');
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState();
-  const [previewImage,setPreviewImage] = useState('');
-  const [photoOne,setPhotoOne] = useState('');
-  const [photoTwo,setPhotoTwo] = useState('');
-  const [photoThree,setPhotoThree] = useState('');
-  const [photoFour,setPhotoFour] = useState('');
-  const [lat, setLat] = useState(0.1);
-  const [lng, setLng] = useState(0.2);
+  const [country,setCountry] = useState(spot.country);
+  const [address,setAddress] = useState(spot.address);
+  const [city,setCity] = useState(spot.city);
+  const [state,setState] = useState(spot.state);
+  const [description, setDescription] = useState(spot.description);
+  const [name, setName] = useState(spot.name);
+  const [price, setPrice] = useState(spot.price);
+  const [previewImage,setPreviewImage] = useState(spot.previewImage);
+  const [photoOne,setPhotoOne] = useState(spot.photoOne ? spot.photoOne : "");
+  const [photoTwo,setPhotoTwo] = useState(spot.photoTwo ? spot.photoTwo : "");
+  const [photoThree,setPhotoThree] = useState(spot.photoThree ? spot.photoThree : "");
+  const [photoFour,setPhotoFour] = useState(spot.photoFour ? spot.photoFour : "");
+  const [lat, setLat] = useState(spot.lat);
+  const [lng, setLng] = useState(spot.lng);
   const { closeModal } = useModal();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -89,11 +89,12 @@ function UpdateSpot({spot}) {
     if(photoThree){spotImages.push({url: photoThree, preview: false});}
     if(photoFour){spotImages.push({url: photoFour, preview: false});}
     // FIXME: UPDATED SPOT
-    // let updatedSpot = await dispatch(updateSpot(vals,spotImages));
-    // console.log('UPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOT',createdSpot)
-    // history.push(`/spots/${createdSpot.id}`)
+    let updatedSpot = await dispatch(updateOneSpot(vals,spotImages));
+    console.log('UPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOT',updatedSpot)
+    history.push(`/spots/${updatedSpot.id}`)
     closeModal()
   }
+  console.log(spot);
   return (
     <form
       className="create-spot-form"
