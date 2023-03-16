@@ -7,20 +7,6 @@ import './DeleteReview.css'
 function DeleteReviewModal() {
   const { closeModal } = useModal();
 
-  // TODO: REFACTOR TO DELETE A SPOT
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   setErrors([]);
-  //   return dispatch(sessionActions.login({ credential, password }))
-  //     .then(closeModal)
-  //     .catch(
-  //       async (res) => {
-  //         const data = await res.json();
-  //         if (data && data.errors) setErrors(data.errors);
-  //       }
-  //     );
-  // };
-
   return (
     <>
       <div className="delete-a-spot">

@@ -9,10 +9,8 @@ import { loadUserSpots } from '../../store/spots';
 function DeleteSpotModal({spot}) {
   const { closeModal } = useModal();
   const dispatch = useDispatch();
-  // TODO: NOT UPDATING STATE, 400 CUZ TRYING TO DELETE A SPOT THAT HAS BEEN DELETED
   const handleDelete = (e) => {
     e.preventDefault();
-    // setErrors([]);
     console.log('this will dispatch delete');
     dispatch(loadUserSpots())
     return dispatch(deleteOneSpot(spot.id))

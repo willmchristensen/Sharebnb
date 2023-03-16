@@ -37,19 +37,19 @@ const SpotDetails = () => {
     const {spotId} = useParams();
     const dispatch = useDispatch();
     const spot = useSelector(state => state.spots.singleSpot);
+    const spotImages = spot.SpotImages;
+    const previewImage = spot.SpotImages[0];
     const reviews = useSelector(state => state.reviews.spot);
     const allReviews = Object.values(reviews);
     const sessionUser = useSelector(state => state.session.user);
-    console.log('------------------------------sessionUser',sessionUser);
     // ---------------data------------------
-
     const handleReservation = () => window.alert('Feature in progress');
-    
     useEffect(() => {
         dispatch(loadSpotDetails(spotId));
+    }, [dispatch,spotId])
+    useEffect(() => {
         dispatch(loadSpotReviews(spotId));
-    }, [spotId])
-    
+    }, [dispatch,spotId])
   return (
     <div className="spot-details">
         <div className="spot-details-header">
@@ -65,13 +65,17 @@ const SpotDetails = () => {
                 >
                     <div className="nav-link">
                         <div className="nav-link-image">
-                            <LargeCardImage spot={spot}></LargeCardImage>
+                            <LargeCardImage image={previewImage}></LargeCardImage>
                         </div>
                     </div>
                 </NavLink>
             </div>
+            {/* TODO: MAP OVER SPOT  */}
             <div className="spot-details-images-support">
                 <div className="spot-details-images-support-cards">
+                    {spotImages.map((image) =>
+                        <img src={`${image.url}`} alt="" />
+                    )}
                     <NavLink 
                         className="spot-card"
                         key={spot.name}
@@ -135,13 +139,22 @@ const SpotDetails = () => {
                         <div className="spot-details-info-reserve-price">
                             <h3>${spot.price} per night</h3>
                         </div>
+                        {/* TODO: CONDITIONALLY RENDER POST A REVIEW BUTTON */}
                         <div className="spot-details-info-reserve-reviews-stars">
                             <h3>{spot.avgStarRating}</h3>
-                            {spot.numReviews > 0 ? (
-                    <h3>
-                        {spot.numReviews} review(s)
-                    </h3> 
-                ) : <h3>"New"</h3>}
+                            {
+                                spot.numReviews > 0 ? 
+                                (
+                                    <h3>
+                                        {spot.numReviews} review(s)
+                                    </h3> 
+                                ) : 
+                                (
+                                    <h3>
+                                        "New"
+                                    </h3>
+                                )
+                            }
                         </div>
                     </div>
                     <div className="spot-details-info-reserve-button">
@@ -169,18 +182,9 @@ const SpotDetails = () => {
             </div>
         </div>
     </div>
-    {/* TODO: DOUBLE CHECK */}
-    {/* {console.log('-sessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.idsessionUser.id',spot.ownerId,sessionUser.id)} */}
     { sessionUser && !Boolean(allReviews.find(rev => rev.userId === sessionUser.id)) && spot.ownerId !== sessionUser.id &&
         (
             <div className="modal-material">
-                {/* <button 
-                    className="review-spot"
-                    id="button"
-                    // onClick={handleReview}
-                >
-                    Post Your Review
-                </button> */}
                <OpenModalMenuItem
                     buttonText="POST A REVIEW"
                     onItemClick={closeMenu}
