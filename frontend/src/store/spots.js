@@ -6,6 +6,7 @@ const LOAD_CURRENT = "/spots/LOAD_CURRENT"
 const ADD_ONE = "spots/ADD_ONE"
 const DELETE_ONE ="spots/DELETE_ONE"
 const ADD_IMAGE = "spots/ADD_IMAGE"
+const UPDATE_SPOT = "spots/UPDATE_SPOT" 
 
 const load = (data) => ({
     type: LOAD,
@@ -36,6 +37,14 @@ const addSpot = (data) => ({
     type: ADD_IMAGE,
     payload: data
 });
+
+const updateSpot = (data) => {
+    return {
+        type: UPDATE_SPOT,
+        payload: data
+    }
+}
+
 // /:spotId/images
 
 const normalize = (data) => data.reduce((obj,ele) => ({
@@ -75,25 +84,6 @@ export const loadUserSpots = () => async (dispatch) => {
         dispatch(loadCurrent(userSpots));
     }
 }
-
-// export const addOneSpot = (data) => async (dispatch) => {
-//     try {
-//         const response = await csrfFetch(`/api/spots`, {
-//           method: "POST",
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//           body: JSON.stringify(data),
-//         });
-//         const spot = await response.json();
-//         if(spot.ok){
-//             dispatch(addOne(spot));
-//             return spot;
-//         }
-//       } catch (error) {
-//         throw error;
-//       }
-// }
 
 export const deleteOneSpot = (id) => async (dispatch) => {
     try {
@@ -137,11 +127,39 @@ export const createOneSpot = (spot, images) => async (dispatch) => {
             const image = await imageRes.json();
             spot.SpotImages.push(image);
         });
-
-        dispatch(addSpot(spot))
+        dispatch(addOne(spot))
         return spot;
     };
 };
+
+
+export const updateOneSpot =   (spot, images) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${spot.id}`,
+    {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(spot)
+    });
+    if(response.ok){
+        const spot = await response.json();
+        spot.SpotImages = [];
+        images.forEach(async(img) => {
+            const imageRes = await csrfFetch(`/api/spots/${spot.id}/images`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(img)
+            });
+            const spotImage = await imageRes.json();
+            spot.SpotImages.push(spotImage);
+        });
+        dispatch(createOneSpot(spot));
+        return spot;
+    }
+}
 
 const initialState = {
     allSpots: {},
@@ -151,7 +169,7 @@ const initialState = {
     },
     // reviews: {}
 };
-
+// TODO: SPREAD ALLSPOTS
 const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD: {

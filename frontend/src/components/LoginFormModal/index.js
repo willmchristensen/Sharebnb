@@ -44,8 +44,9 @@ function LoginFormModal() {
   return (
     <>
       <form onSubmit={handleSubmit}>
+        {/* FIXME: conditional render */}
         {/* <ul>
-          {errors.map((error, idx) => (
+          {Object.values(errors).map((error, idx) => (
             <li key={idx}>{error}</li>
             ))}
         </ul> */}

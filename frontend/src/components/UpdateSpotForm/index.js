@@ -1,12 +1,13 @@
 import {useState,useEffect} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 // import './CreateNewSpot.css'
 // import { createOneSpot } from '../../store/spots';
 import { useModal } from "../../context/Modal";
 
 function UpdateSpot({spot}) {
-
+  const info = useSelector(state=> state.spots);
+  console.log('------------------------------TEST TOWN', info);
     // TODO: UPDATE WITH CURRENT VALS FROM SPOT
   const [country,setCountry] = useState('');
   const [address,setAddress] = useState('');
