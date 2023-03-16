@@ -28,9 +28,9 @@ const addOne = (data) => ({
     payload: data,
 });
 
-const deleteOne = (data) => ({
+const deleteOne = (id) => ({
     type: DELETE_ONE,
-    payload: data
+    payload: id
 });
 
 const addSpot = (data) => ({
@@ -189,11 +189,11 @@ const spotsReducer = (state = initialState, action) => {
         }
         case DELETE_ONE: {
             const newState = {...state, allSpots: {...state.allSpots}};
-            delete newState[action.payload.id];
+            delete newState.allSpots[action.payload.id];
             return newState;
         }
         case ADD_IMAGE: {
-            const newState = {...state,allSpots: {...state.allSpots}};
+            const newState = {...state, allSpots: {...state.allSpots}};
             newState.singleSpot[action.payload.id] = {...action.payload};
             return newState;  
         }

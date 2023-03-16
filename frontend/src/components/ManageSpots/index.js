@@ -17,12 +17,11 @@ const ManageSpots = () => {
   const dispatch = useDispatch(); 
   
   const userId = useSelector(state=> state.session.user.id);
+  const spots = useSelector(state=> state.spots.allSpots);
+  const allSpots = Object.values(spots);
   useEffect(() => {
     dispatch(loadUserSpots())
   }, [userId]) 
-  const spots = useSelector(state=> state.spots.allSpots);
-  const allSpots = Object.values(spots);
-  console.log('------------------------------spots',spots.allSpots);
 
   return (
     <main >

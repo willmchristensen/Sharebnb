@@ -37,7 +37,7 @@ function CreateNewSpot() {
   // const [lat, setLat] = useState(0.1);
   // const [lng, setLng] = useState(0.2);
 
-    const { closeModal } = useModal();
+  const { closeModal } = useModal();
 
 
   const history = useHistory();
@@ -106,7 +106,8 @@ function CreateNewSpot() {
     if(photoFour){spotImages.push({url: photoFour, preview: false});}
     let createdSpot = await dispatch(createOneSpot(vals,spotImages));
     console.log('createdSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOT',createdSpot)
-    history.push(`/spots/${createdSpot.id}`)
+
+    if(createdSpot) history.push(`/spots/${createdSpot.id}`)
     closeModal()
   }
   return (

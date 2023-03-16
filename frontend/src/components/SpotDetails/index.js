@@ -15,6 +15,7 @@ import './SpotDetails.css';
 
 const SpotDetails = () => {
     // ---------------modal------------------
+    console.log('------------------------------SPOTDETAILS');
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
     const openMenu = () => {
@@ -37,6 +38,7 @@ const SpotDetails = () => {
     const {spotId} = useParams();
     const dispatch = useDispatch();
     const spot = useSelector(state => state.spots.singleSpot);
+    console.log('------------------------------spot', spot);
     const spotImages = spot.SpotImages;
     const previewImage = spot.SpotImages[0];
     const reviews = useSelector(state => state.reviews.spot);
@@ -50,6 +52,7 @@ const SpotDetails = () => {
     useEffect(() => {
         dispatch(loadSpotReviews(spotId));
     }, [dispatch,spotId])
+    if(!previewImage) return null;
   return (
     <div className="spot-details">
         <div className="spot-details-header">
@@ -70,58 +73,63 @@ const SpotDetails = () => {
                     </div>
                 </NavLink>
             </div>
+            {/* TODO: FILL WITH TEST IMAGES? */}
             {/* TODO: MAP OVER SPOT  */}
-            <div className="spot-details-images-support">
-                <div className="spot-details-images-support-cards">
-                    {spotImages.map((image) =>
-                        <img src={`${image.url}`} alt="" />
-                    )}
-                    <NavLink 
-                        className="spot-card"
-                        key={spot.name}
-                        to={`/spots/${spot.id}`}
-                    >
-                        <div className="nav-link">
-                            <div className="nav-link-image" id="bruh">
-                                <SpotCardImage></SpotCardImage>
-                            </div>
+            {
+                spotImages.length > 1 && (
+                    <div className="spot-details-images-support">
+                        <div className="spot-details-images-support-cards">
+                            {/* {spotImages.map((image) =>
+                                <img src={`${image.url}`} alt="" />
+                            )} */}
+                            <NavLink 
+                                className="spot-card"
+                                key={spot.name}
+                                to={`/spots/${spot.id}`}
+                            >
+                                <div className="nav-link">
+                                    <div className="nav-link-image" id="bruh">
+                                        <SpotCardImage></SpotCardImage>
+                                    </div>
+                                </div>
+                            </NavLink>
+                            <NavLink 
+                                className="spot-card"
+                                key={spot.name}
+                                to={`/spots/${spot.id}`}
+                            >
+                                <div className="nav-link">
+                                    <div className="nav-link-image">
+                                        <SpotCardImage></SpotCardImage>
+                                    </div>
+                                </div>
+                            </NavLink>
+                            <NavLink 
+                                className="spot-card"
+                                key={spot.name}
+                                to={`/spots/${spot.id}`}
+                            >
+                                <div className="nav-link">
+                                    <div className="nav-link-image">
+                                        <SpotCardImage></SpotCardImage>
+                                    </div>
+                                </div>
+                            </NavLink>
+                            <NavLink 
+                                className="spot-card"
+                                key={spot.name}
+                                to={`/spots/${spot.id}`}
+                            >
+                                <div className="nav-link">
+                                    <div className="nav-link-image">
+                                        <SpotCardImage></SpotCardImage>
+                                    </div>
+                                </div>
+                            </NavLink>
                         </div>
-                    </NavLink>
-                    <NavLink 
-                        className="spot-card"
-                        key={spot.name}
-                        to={`/spots/${spot.id}`}
-                    >
-                        <div className="nav-link">
-                            <div className="nav-link-image">
-                                <SpotCardImage></SpotCardImage>
-                            </div>
-                        </div>
-                    </NavLink>
-                    <NavLink 
-                        className="spot-card"
-                        key={spot.name}
-                        to={`/spots/${spot.id}`}
-                    >
-                        <div className="nav-link">
-                            <div className="nav-link-image">
-                                <SpotCardImage></SpotCardImage>
-                            </div>
-                        </div>
-                    </NavLink>
-                    <NavLink 
-                        className="spot-card"
-                        key={spot.name}
-                        to={`/spots/${spot.id}`}
-                    >
-                        <div className="nav-link">
-                            <div className="nav-link-image">
-                                <SpotCardImage></SpotCardImage>
-                            </div>
-                        </div>
-                    </NavLink>
-                </div>
-            </div>
+                    </div>
+                )
+            }
         </div>
         <div className="spot-details-section">
             <div className="spot-details-info">

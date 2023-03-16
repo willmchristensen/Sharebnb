@@ -5,14 +5,12 @@ import { getAllSpots } from '../../store/spots';
 import SpotCards from '../SpotCards';
 const Spots = () => {
   const dispatch = useDispatch(); 
+  let spots = useSelector(state => state.spots.allSpots);
+  let allSpots = Object.values(spots)
   useEffect(() => {
     dispatch(getAllSpots())
   }, [dispatch]) 
-  let spots = useSelector(state => state.spots.allSpots);
-  // console.log('-------spots---------',spots);
-  let allSpots = Object.values(spots)
-  // console.log('-------allSpots---------',allSpots);
-
+  
   return (
     <main >
       <nav className="spot-cards-section">

@@ -7,7 +7,8 @@ const LargeCardImage = ({image}) => {
 //  TODO: REAL IMG URLS?
   return (
     <div className="large-spot-card-image">
-        <h1>img url: {image.url}</h1>
+        {console.log(image.url)}
+        {/* <h1>img url: {image.url}</h1> */}
         <img src={cabin} alt="" />
     </div>
   );
