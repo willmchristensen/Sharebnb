@@ -54,28 +54,9 @@ const SpotReview = ({review}) => {
         <p className="spot-review-description">
             {review.review}
         </p>
-        {/* {belongsToUser &&
-            <button id="spot-review-button">
-                delete
-            </button>
-        } */}
-          { sessionUser && !Boolean(review.userId === sessionUser.id) &&
+          { sessionUser && Boolean(review.userId === sessionUser.id) &&
         (
           <ManageButtons review={review}></ManageButtons>
-            // <div className="modal-material">
-            //     {/* <button 
-            //         className="review-spot"
-            //         id="button"
-            //         // onClick={handleReview}
-            //     >
-            //         Post Your Review
-            //     </button> */}
-            //    <OpenModalMenuItem
-            //         itemText="BREH"
-            //         onItemClick={closeMenu}
-            //         modalComponent={<DeleteReviewModal review={review}/>}
-            //     />
-            // </div>
             
         )
     }

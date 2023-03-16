@@ -3,6 +3,7 @@ const SPOTREVIEWS = "/api/spots/:spotId/SPOTREVIEWS"
 const LOAD_CURRENT = "/api/reviews/LOAD_CURRENT"
 const CREATE_REVIEW = "/api/reviews/new"
 
+
 const loadReviews = (data) => ({
     type: SPOTREVIEWS,
     payload: data,
@@ -36,20 +37,14 @@ export const loadSpotReviews = (id) => async (dispatch) => {
 
 export const loadUserReviews = () => async (dispatch) => {
     const response = await csrfFetch(`/api/reviews/current`);
-    // console.log('------------------------------response',response);
     if(response.ok){
         const data = await response.json();
-        // console.log('------------------------------data',data);
-        // dispatch(loadCurrent(data));
-
         const userReviews = normalize(data.Reviews);
-        // console.log('------------------------------userSpots', userSpots);
         dispatch(loadCurrent(userReviews));
     }
 }
 
 export const createOneReview = (review,spotId,user) => async(dispatch) => {
-    console.log('------------------------------review,spotId,user', review,spotId,user);
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
         headers: {"Content-Type": "application/json"},
@@ -71,12 +66,12 @@ const initialState = {
 const reviewsReducer = (state = initialState, action) => {
     switch (action.type) {
         case SPOTREVIEWS: {
-            const newState = {...state};
+            const newState = {...state, spot:{...state.spot}};
             newState.spot = {...action.payload};
             return newState
         }
         case LOAD_CURRENT: {
-            const newState = {...state};
+            const newState = {...state, user:{...state.user}};
             newState.user = {...action.payload}
             return newState;
         }

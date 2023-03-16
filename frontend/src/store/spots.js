@@ -59,6 +59,7 @@ export const getAllSpots = () => async (dispatch) => {
         const data = await response.json();
         const allSpots = normalize(data.Spots);
         dispatch(load(allSpots));
+        return response;
     }
 };
 
@@ -66,22 +67,18 @@ export const loadSpotDetails = (id) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${id}`);
     if(response.ok){
         const data = await response.json();
-        // console.log('------------------------------data',data.Owner);
         dispatch(loadOne(data));
+        return response;
     }
 }
 
 export const loadUserSpots = () => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/current`);
-    // console.log('------------------------------response',response);
     if(response.ok){
         const data = await response.json();
-        // console.log('------------------------------data',data);
-        // dispatch(loadCurrent(data));
-
         const userSpots = normalize(data.Spots);
-        // console.log('------------------------------userSpots', userSpots);
         dispatch(loadCurrent(userSpots));
+        return data;
     }
 }
 
@@ -93,9 +90,7 @@ export const deleteOneSpot = (id) => async (dispatch) => {
         if(response.ok){
             const result = await response.json();
             dispatch(deleteOne(result));
-            console.log('------------------------------res',result);
-            // console.log('------------------------------',response);
-            // return spot;
+            return result;
         }
       } catch (error) {
         throw error;
@@ -188,17 +183,17 @@ const spotsReducer = (state = initialState, action) => {
             return newState;
         }
         case ADD_ONE: {
-            const newState = {...state};
+            const newState = {...state, allSpots: {...state.allSpots}};
             newState[action.payload.id] = {...action.payload};
             return newState;  
         }
         case DELETE_ONE: {
-            const newState = {...state};
+            const newState = {...state, allSpots: {...state.allSpots}};
             delete newState[action.payload.id];
             return newState;
         }
         case ADD_IMAGE: {
-            const newState = {...state};
+            const newState = {...state,allSpots: {...state.allSpots}};
             newState.singleSpot[action.payload.id] = {...action.payload};
             return newState;  
         }
