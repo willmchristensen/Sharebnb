@@ -227,9 +227,9 @@ function CreateNewSpot() {
             placeholder="Preview Image URL"
           />
         </label>
-        <p className="errors">
+        {imageErrors.previewImage && <p className="errors">
           {imageErrors.previewImage}
-        </p>
+        </p>}
         </div>
       </div>
       <div className="form-row">

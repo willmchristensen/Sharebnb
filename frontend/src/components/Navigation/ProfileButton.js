@@ -76,8 +76,14 @@ function ProfileButton({ user }) {
         <i className="fas fa-user-circle" />
       </button>
       <ul className={ulClassName} ref={ulRef}>
-        {user && manageSpots && manageReviews ? (
+        {user ? (
           <>
+            <li>
+              Hello, {user.username}
+            </li>
+            <li>
+              {user.email}
+            </li>
             <li>
               <NavLink
                 // key={}
@@ -94,9 +100,6 @@ function ProfileButton({ user }) {
                 Manage Reviews
               </NavLink>
             </li>
-            <li>{user.username}</li>
-            <li>{user.firstName} {user.lastName}</li>
-            <li>{user.email}</li>
             <li>
               <button onClick={logout}>Log Out</button>
             </li>
