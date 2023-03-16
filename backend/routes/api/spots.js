@@ -286,7 +286,7 @@ router.post('/:spotId/reviews',requireAuth,validateReview, async(req,res) => {
     const {review,stars} = req.body;
     const {spotId} = req.params;
     let currentUser = req.user.id;
-
+    console.log('------------------------------req.body',req.body);
     const spot = await Spot.findByPk(spotId);
     const reviewed = await Review.findOne({
         where:{

@@ -28,7 +28,7 @@ function App() {
 
   return (
     <>
-      {/* <PostAReviewModal></PostAReviewModal> */}
+      <PostAReviewModal></PostAReviewModal>
       <Navigation isLoaded={isLoaded} />
         {isLoaded && (
           <Switch>

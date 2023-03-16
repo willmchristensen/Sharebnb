@@ -1,6 +1,7 @@
 import { restoreCSRF, csrfFetch } from "./csrf";
 const SPOTREVIEWS = "/api/spots/:spotId/SPOTREVIEWS"
 const LOAD_CURRENT = "/api/reviews/LOAD_CURRENT"
+const CREATE_REVIEW = "/api/reviews/new"
 
 const loadReviews = (data) => ({
     type: SPOTREVIEWS,
@@ -11,6 +12,13 @@ const loadCurrent = (data) => ({
     type:   LOAD_CURRENT,
     payload: data,
 });
+
+const createReview = (review) => {
+    return {
+        type: CREATE_REVIEW,
+        review,
+    }
+}
 
 const normalize = (data) => data.reduce((obj,ele) => ({
     ...obj,
@@ -40,6 +48,21 @@ export const loadUserReviews = () => async (dispatch) => {
     }
 }
 
+export const createOneReview = (review,spotId,user) => async(dispatch) => {
+    console.log('------------------------------review,spotId,user', review,spotId,user);
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(review)
+    });
+    if(response.ok){
+        const review = await response.json();
+        review.User = user;
+        dispatch(createReview(review));
+        return review;
+    }
+}
+
 const initialState = {
     spot: {},
     user: {}
@@ -55,6 +78,11 @@ const reviewsReducer = (state = initialState, action) => {
         case LOAD_CURRENT: {
             const newState = {...state};
             newState.user = {...action.payload}
+            return newState;
+        }
+        case CREATE_REVIEW: {
+            const newState = {...state, spot:{...state.spot}};
+            newState.spot[action.review.id] = action.review;
             return newState;
         }
         default:
