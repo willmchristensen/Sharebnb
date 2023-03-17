@@ -1,6 +1,6 @@
 .large-spot-card-image > img{
-    /* TODO: IMAGES*/
-    max-width: 40%;
-    max-height:40%;
-    padding: 5px;
+    max-width: 100%;
+    max-height:100%;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 3%;
 }
