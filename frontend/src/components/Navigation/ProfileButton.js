@@ -103,50 +103,7 @@ function ProfileButton({ user }) {
             <li>
               <button onClick={logout}>Log Out</button>
             </li>
-          </>
-        ) : user  && manageSpots ? (
-          <> 
-            <li>
-              <NavLink
-                // key={}
-                to={`/spots/current`}
-              >
-                Manage Spots
-              </NavLink>
-            </li>
-            <li>{user.username}</li>
-            <li>{user.firstName} {user.lastName}</li>
-            <li>{user.email}</li>
-            <li>
-              <button onClick={logout}>Log Out</button>
-            </li>
-          </>
-        ) : user  && manageReviews ?(
-          <> 
-            <li>
-              <NavLink
-                // key={}
-                to={`/reviews/current`}
-              >
-                Manage Reviews
-              </NavLink>
-            </li>
-            <li>{user.username}</li>
-            <li>{user.firstName} {user.lastName}</li>
-            <li>{user.email}</li>
-            <li>
-              <button onClick={logout}>Log Out</button>
-            </li>
-          </>
-        ) : user ? (
-          <> 
-            <li>{user.username}</li>
-              <li>{user.firstName} {user.lastName}</li>
-              <li>{user.email}</li>
-              <li>
-                <button onClick={logout}>Log Out</button>
-            </li>
-          </>
+          </> 
         ) : (
           <>
             <OpenModalMenuItem
