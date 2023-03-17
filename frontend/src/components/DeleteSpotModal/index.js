@@ -9,15 +9,10 @@ import { loadUserSpots } from '../../store/spots';
 function DeleteSpotModal({spot}) {
   const { closeModal } = useModal();
   const dispatch = useDispatch();
-  console.log(spot,'SPOT------------------------------------------------')
+  console.log(spot,'SPOT-IN-DELETE------------------------------------------------')
 
   const handleDelete = (e) => {
-    // e.preventDefault();
     console.log('this will dispatch delete');
-    // if(!Boolean(Object.values(spot).length)) {
-    //   console.log('------DOESNT EXIST?,', spot)
-    //   window.location.reload();
-    // }
     return dispatch(deleteOneSpot(spot.id))
       .then(closeModal)
   };

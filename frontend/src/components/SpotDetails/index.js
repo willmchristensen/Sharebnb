@@ -13,14 +13,6 @@ import PostAReviewModal from '../PostAReviewModal/index';
 import OpenModalMenuItem from '../OpenModalButton';
 import './SpotDetails.css';
 
-
-// const SpotDetails = () => {
-//     const {spotId} = useParams();
-//     const dispatch = useDispatch();
-//     const spot = useSelector(state => state.spots.singleSpot);
-//     <h1></h1>
-// };
-
 const SpotDetails = () => {
     // ---------------data------------------
     const {spotId} = useParams();

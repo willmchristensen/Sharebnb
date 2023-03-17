@@ -26,45 +26,39 @@ const ManageButtons = ({spot, review}) => {
     document.addEventListener('click', closeMenu);
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
-  // ---------------modal------------------
-  // const handleUpdate = () => {
-  //   console.log('update')
-  // }
-  // const handle = () => {
-    
-  // }
-
+// FIXME: delete rview on spot details works fine, delete review on manage reviews requires a refresh.
   return (
     <>
       { 
-        review ? (
+        review ? 
+        (
           <div className="modal-material">
-              <OpenModalMenuItem
+            {console.log(review,'review in -delete-review-modal--------------------------------------------**')}
+              {/* <OpenModalMenuItem
                 buttonText="Update Review"
-                onItemClick={closeMenu}
-                modalComponent={<UpdateReviewModal spot={spot}/>}
-              />
+                // onItemClick={closeMenu}
+                modalComponent={<UpdateReviewModal review={review}/>}
+              />*/}
               <OpenModalMenuItem
                   buttonText="Delete Review"
-                  onItemClick={closeMenu}
-                  modalComponent={<DeleteReviewModal spot={spot}/>}
-              />
-          </div>
-            
+                  // onItemClick={closeMenu}
+                  modalComponent={<DeleteReviewModal review={review}/>}
+              /> 
+          </div>  
           ) : (
-            <div className="modal-material">
-              <OpenModalMenuItem
-                buttonText="Update Spot"
-                onItemClick={closeMenu}
-                modalComponent={<UpdateSpot spot={spot}/>}
-              />
-              <OpenModalMenuItem
-                  buttonText="Delete Spot"
-                  onItemClick={closeMenu}
-                  modalComponent={<DeleteSpotModal spot={spot}/>}
-              />
+          <div className="modal-material">
+            <OpenModalMenuItem
+              buttonText="Update Spot"
+              // onItemClick={closeMenu}
+              modalComponent={<UpdateSpot spot={spot}/>}
+            />
+            <OpenModalMenuItem
+                buttonText="Delete Spot"
+                // onItemClick={closeMenu}
+                modalComponent={<DeleteSpotModal spot={spot}/>}
+            />
           </div>
-          )
+        )
       }
     </>
   );

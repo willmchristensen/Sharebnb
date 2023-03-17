@@ -1,11 +1,5 @@
 import { useEffect,useState,useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, Route } from 'react-router-dom';
-import { getAllSpots } from '../../store/spots';
-import SpotCardImage from '../SpotCardImage';
-import LargeCardImage from '../SpotCardImage/LargeCardImage';
-import OpenModalMenuItem from '../OpenModalButton';
-import DeleteReviewModal from '../DeleteReviewModal';
 import ManageButtons from '../ManageButtons'
 import './SpotReview.css';
 
@@ -31,10 +25,8 @@ const SpotReview = ({review}) => {
     // ---------------modal------------------
     const handleReservation = () => window.alert('Feature in progress');
     const sessionUser = useSelector(state => state.session.user);
-
-    // const reviews = spot.reviews;
-    // console.log('------------------------------reviews',reviews);
-    // console.log('------------------------------spot',spot);
+    console.log('-------------REVIEWS-------------',sessionUser,review);
+  
 
     let date = new Date(review.createdAt);
     let months = ["January","February","March","April","May","June","July",
@@ -55,11 +47,10 @@ const SpotReview = ({review}) => {
             {review.review}
         </p>
           { sessionUser && Boolean(review.userId === sessionUser.id) &&
-        (
-          <ManageButtons review={review}></ManageButtons>
-            
-        )
-    }
+            (
+              <ManageButtons review={review}></ManageButtons>
+            )
+          }
     </div>
   );
 };

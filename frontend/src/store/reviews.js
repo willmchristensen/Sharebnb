@@ -32,21 +32,6 @@ const normalize = (data) => data.reduce((obj,ele) => ({
     [ele.id]: ele
 }), {});
 
-export const deleteOneReview = (id) => async (dispatch) => {
-    try {
-        const response = await csrfFetch(`/api/reviews/${id}`, {
-          method: "DELETE",
-        });
-        if(response.ok){
-            const result = await response.json();
-            console.log('THUNK:------------------',id,result)
-            return dispatch(deleteOne(id));
-        }
-      } catch (error) {
-        throw error;
-      }
-}
-
 export const loadSpotReviews = (id) => async (dispatch) => {
  const response = await csrfFetch(`/api/spots/${id}/reviews`);
  if(response.ok){
@@ -79,6 +64,21 @@ export const createOneReview = (review,spotId,user) => async(dispatch) => {
     }
 }
 
+export const deleteOneReview = (id) => async (dispatch) => {
+    try {
+        const response = await csrfFetch(`/api/reviews/${id}`, {
+          method: "DELETE",
+        });
+        if(response.ok){
+            const result = await response.json();
+            console.log('THUNK:------------------',id,result)
+            return dispatch(deleteOne(id));
+        }
+      } catch (error) {
+        throw error;
+      }
+}
+
 const initialState = {
     spot: {},
     user: {}
@@ -102,8 +102,8 @@ const reviewsReducer = (state = initialState, action) => {
             return newState;
         }
         case DELETE_ONE: {
-            const newState = {...state, spot: {...state.spot}};
-            delete newState.spot[action.payload];
+            const newState = {...state, spot: {...state.spot}, user: {...state.user}};
+            delete newState.user[action.payload];
             return newState;
         }
         default:

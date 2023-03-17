@@ -7,15 +7,10 @@ import { deleteOneReview } from "../../store/reviews";
 function DeleteReviewModal({review}) {
   const { closeModal } = useModal();
   const dispatch = useDispatch();
-  console.log(review,'review------------------------------------------------')
+  console.log(review,'review in -delete-review---------------------------------------------')
 
   const handleDelete = (e) => {
-    // e.preventDefault();
     console.log('this will dispatch delete');
-    // if(!Boolean(Object.values(spot).length)) {
-    //   console.log('------DOESNT EXIST?,', spot)
-    //   window.location.reload();
-    // }
     return dispatch(deleteOneReview(review.id))
       .then(closeModal)
   };
