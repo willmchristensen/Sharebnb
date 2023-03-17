@@ -18,13 +18,15 @@ const ManageSpots = () => {
   
   const userId = useSelector(state=> state.session.user.id);
   const spots = useSelector(state=> state.spots.allSpots);
+  console.log(spots,'------------------------------------------------')
   const allSpots = Object.values(spots);
+  
   useEffect(() => {
     dispatch(loadUserSpots())
-  }, [userId]) 
+  }, [dispatch]) 
 
   return (
-    <main >
+    <main>
       <div className="manage-wrapper">
         <nav className="spot-cards-section">
           <div className="spot-cards-section-header">
@@ -37,14 +39,12 @@ const ManageSpots = () => {
             </NavLink>
           </div>
           {
-            allSpots.map(spot => {
-              return (
+            allSpots.map(spot => 
                 <>
-                  <SpotCards spot={spot}></SpotCards>
-                  <ManageButtons spot={spot}></ManageButtons>
+                  <SpotCards spot={spot}/>
+                  <ManageButtons spot={spot}/>
                 </>
-              )
-            })
+            )
           }
         </nav>
       </div>

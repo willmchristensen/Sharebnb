@@ -33,12 +33,6 @@ function App() {
         {isLoaded && (
           <Switch>
             <Route
-              path={[ "/", "/api/spots"]}
-              exact
-            >
-              <Spots />
-            </Route>
-            <Route
               path={[ "/spots/new"]}
               exact
             >
@@ -58,22 +52,25 @@ function App() {
             </Route>
             <Route
               path={[ "/spots/:spotId"]}
-              exact
             >
               <SpotDetails></SpotDetails>
             </Route>
+            <Route
+              path={[ "/", "/spots"]}
+              exact
+            >
+              <Spots />
+            </Route>
           </Switch>
         )}
-        {/* <DeleteASpot></DeleteASpot> */}
-        {/* <ManageReviews></ManageReviews>  */}
-      
-      
+      {/* <DeleteASpot></DeleteASpot> */}
+      {/* <ManageReviews></ManageReviews>  */}
       {/* <CreateNewSpot></CreateNewSpot> */}
       {/*<SignupFormModal></SignupFormModal>
       <LoginFormModal></LoginFormModal>
       
       
-      <DeleteReview></DeleteReview>*/}
+    <DeleteReview></DeleteReview>*/}
       
      {/* <UpdateReviewModal></UpdateReviewModal>  */}
     </>

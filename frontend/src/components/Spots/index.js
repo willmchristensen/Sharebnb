@@ -10,6 +10,7 @@ const Spots = () => {
   useEffect(() => {
     dispatch(getAllSpots())
   }, [dispatch]) 
+  console.log('spots in allspots-------------------------', spots);
   
   return (
     <main >
@@ -17,7 +18,7 @@ const Spots = () => {
         {
           allSpots.map(spot => {
             return (
-              <SpotCards spot={spot}></SpotCards>
+              <SpotCards spot={spot}/>
             );
           })
         }

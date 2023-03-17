@@ -13,27 +13,15 @@ import PostAReviewModal from '../PostAReviewModal/index';
 import OpenModalMenuItem from '../OpenModalButton';
 import './SpotDetails.css';
 
+
+// const SpotDetails = () => {
+//     const {spotId} = useParams();
+//     const dispatch = useDispatch();
+//     const spot = useSelector(state => state.spots.singleSpot);
+//     <h1></h1>
+// };
+
 const SpotDetails = () => {
-    // ---------------modal------------------
-    console.log('------------------------------SPOTDETAILS');
-    const [showMenu, setShowMenu] = useState(false);
-    const ulRef = useRef();
-    const openMenu = () => {
-      if (showMenu) return;
-      setShowMenu(true);
-    }
-    const closeMenu = () => setShowMenu(false);
-    useEffect(() => {
-      if (!showMenu) return;
-      const closeMenu = (e) => {
-        if (!ulRef.current.contains(e.target)) {
-          setShowMenu(false);
-        }
-      };
-      document.addEventListener('click', closeMenu);
-      return () => document.removeEventListener("click", closeMenu);
-    }, [showMenu]);
-    // ---------------modal------------------
     // ---------------data------------------
     const {spotId} = useParams();
     const dispatch = useDispatch();
@@ -52,6 +40,10 @@ const SpotDetails = () => {
     useEffect(() => {
         dispatch(loadSpotReviews(spotId));
     }, [dispatch,spotId])
+    // let var1 = dispatch(loadSpotDetails(spotId));
+    // let var2 = dispatch(loadSpotReviews(spotId));
+    // console.log('var1,var2',var1
+    // ,var2)
     if(!previewImage) return null;
   return (
     <div className="spot-details">
@@ -190,16 +182,14 @@ const SpotDetails = () => {
             </div>
         </div>
     </div>
-    { sessionUser && !Boolean(allReviews.find(rev => rev.userId === sessionUser.id)) && spot.ownerId !== sessionUser.id &&
+    { sessionUser && !allReviews.find(rev => rev.userId === sessionUser.id) && spot.ownerId !== sessionUser.id &&
         (
             <div className="modal-material">
-               <OpenModalMenuItem
+                <OpenModalMenuItem
                     buttonText="POST A REVIEW"
-                    onItemClick={closeMenu}
                     modalComponent={<PostAReviewModal spot={spot}/>}
                 />
             </div>
-            
         )
     }
     </div>

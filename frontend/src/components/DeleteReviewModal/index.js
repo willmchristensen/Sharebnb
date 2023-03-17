@@ -3,10 +3,22 @@ import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import './DeleteReview.css'
-
-function DeleteReviewModal() {
+import { deleteOneReview } from "../../store/reviews";
+function DeleteReviewModal({review}) {
   const { closeModal } = useModal();
+  const dispatch = useDispatch();
+  console.log(review,'review------------------------------------------------')
 
+  const handleDelete = (e) => {
+    // e.preventDefault();
+    console.log('this will dispatch delete');
+    // if(!Boolean(Object.values(spot).length)) {
+    //   console.log('------DOESNT EXIST?,', spot)
+    //   window.location.reload();
+    // }
+    return dispatch(deleteOneReview(review.id))
+      .then(closeModal)
+  };
   return (
     <>
       <div className="delete-a-spot">
@@ -15,13 +27,13 @@ function DeleteReviewModal() {
         <div className="delete-buttons">
           <button 
             id="delete-button"
-            // onClick={handleDelete}
+            onClick={handleDelete}
           >
             Yes (Delete Review)
           </button>
           <button 
             id="keep-button"
-            // onClick={closeModal}
+            onClick={closeModal}
           >
             No (Keep Review)
           </button>

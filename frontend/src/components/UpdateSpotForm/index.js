@@ -6,8 +6,7 @@ import { updateOneSpot } from '../../store/spots';
 import { useModal } from "../../context/Modal";
 
 function UpdateSpot({spot}) {
-  const info = useSelector(state=> state.spots);
-  console.log('------------------------------TEST TOWN', info);
+  console.log('------------------------------TEST TOWN', spot);
     // TODO: UPDATE WITH CURRENT VALS FROM SPOT
   const [country,setCountry] = useState(spot.country);
   const [address,setAddress] = useState(spot.address);
@@ -17,10 +16,10 @@ function UpdateSpot({spot}) {
   const [name, setName] = useState(spot.name);
   const [price, setPrice] = useState(spot.price);
   const [previewImage,setPreviewImage] = useState(spot.previewImage);
-  const [photoOne,setPhotoOne] = useState(spot.photoOne ? spot.photoOne : "");
-  const [photoTwo,setPhotoTwo] = useState(spot.photoTwo ? spot.photoTwo : "");
-  const [photoThree,setPhotoThree] = useState(spot.photoThree ? spot.photoThree : "");
-  const [photoFour,setPhotoFour] = useState(spot.photoFour ? spot.photoFour : "");
+  const [photoOne,setPhotoOne] = useState(spot.photoOne);
+  const [photoTwo,setPhotoTwo] = useState(spot.photoTwo);
+  const [photoThree,setPhotoThree] = useState(spot.photoThree);
+  const [photoFour,setPhotoFour] = useState(spot.photoFour);
   const [lat, setLat] = useState(spot.lat);
   const [lng, setLng] = useState(spot.lng);
   const { closeModal } = useModal();
@@ -29,6 +28,7 @@ function UpdateSpot({spot}) {
   const [errors,setValidationErrors] = useState({});
   const [imageErrors, setImageErrors] = useState({});
   const [photoErrors, setPhotoErrors] = useState({});
+  const [id] = useState(spot.id);
 
   // console.log(photos);
   // console.log(previewImage);
@@ -48,39 +48,49 @@ function UpdateSpot({spot}) {
     setValidationErrors(errors) 
   }, [country,address,city,state,description,name,price]);
 
-  useEffect(() => {
-    let acceptedFiles = ['png','jpg','peg'];
-    const errors = {}
-    if(!previewImage){
-      errors.previewImage = "Preview image is required.";
-    }else if(!acceptedFiles.includes(previewImage.slice(previewImage.length - 3))){
-      errors.previewImage = "Image URL must end in .png, .jpg, or .jpeg"
-    }
-    setImageErrors(errors);
-  }, [previewImage]);
+  // useEffect(() => {
+  //   let acceptedFiles = ['png','jpg','peg'];
+  //   const errors = {}
+  //   if(!previewImage){
+  //     errors.previewImage = "Preview image is required.";
+  //   }else if(!acceptedFiles.includes(previewImage.slice(previewImage.length - 3))){
+  //     errors.previewImage = "Image URL must end in .png, .jpg, or .jpeg"
+  //   }
+  //   setImageErrors(errors);
+  // }, [previewImage]);
   
-  useEffect(() => {
-    let acceptedFiles = ['png','jpg','peg'];
-    const errors = {}
-    if(!acceptedFiles.includes(photoOne.slice(photoOne.length - 3))){
-      errors.photoOne = "Image URL must end in .png, .jpg, or .jpeg"
-    }
-    if(!acceptedFiles.includes(photoTwo.slice(photoTwo.length - 3))){
-      errors.photoTwo = "Image URL must end in .png, .jpg, or .jpeg"
-    }
-    if(!acceptedFiles.includes(photoThree.slice(photoThree.length - 3))){
-      errors.photoThree = "Image URL must end in .png, .jpg, or .jpeg"
-    }
-    if(!acceptedFiles.includes(photoFour.slice(photoFour.length - 3))){
-      errors.photoOne = "Image URL must end in .png, .jpg, or .jpeg"
-    }
-    setPhotoErrors(errors);
-  }, [photoOne,photoTwo,photoThree,photoFour]);
+  // useEffect(() => {
+  //   let acceptedFiles = ['png','jpg','peg'];
+  //   const errors = {}
+  //   if(photoOne.length > 1){
+  //     if(!acceptedFiles.includes(photoOne.slice(photoOne.length - 3))){
+  //       errors.photoOne = "Image URL must end in .png, .jpg, or .jpeg"
+  //     }
+  //   }
+  //   if(photoTwo.length > 1){
+  //     if(!acceptedFiles.includes(photoTwo.slice(photoTwo.length - 3))){
+  //       errors.photoTwo = "Image URL must end in .png, .jpg, or .jpeg"
+  //     }
+
+  //   }
+  //   if(photoThree.length > 1){
+  //     if(!acceptedFiles.includes(photoThree.slice(photoThree.length - 3))){
+  //       errors.photoThree = "Image URL must end in .png, .jpg, or .jpeg"
+  //     }
+
+  //   }
+  //   if(photoFour.length > 1){
+  //     if(!acceptedFiles.includes(photoFour.slice(photoFour.length - 3))){
+  //       errors.photoFour = "Image URL must end in .png, .jpg, or .jpeg"
+  //     }
+  //   }
+  //   setPhotoErrors(errors);
+  // }, [photoOne,photoTwo,photoThree,photoFour]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
     const vals = {
-      country,address,city,state,description,price,lat,lng,name
+      id,country,address,city,state,description,price,lat,lng,name
     };
     const spotImages = [];
     spotImages.push({url: previewImage, preview: true});
@@ -89,10 +99,14 @@ function UpdateSpot({spot}) {
     if(photoThree){spotImages.push({url: photoThree, preview: false});}
     if(photoFour){spotImages.push({url: photoFour, preview: false});}
     // FIXME: UPDATED SPOT
-    let updatedSpot = await dispatch(updateOneSpot(vals,spotImages));
+    let updatedSpot = await dispatch(updateOneSpot(vals, spotImages));
     console.log('UPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOTUPDATEDSPOT',updatedSpot)
-    history.push(`/spots/${updatedSpot.id}`)
-    closeModal()
+    
+    if(updatedSpot) { 
+      closeModal()
+      console.log('---updatedSpert-------------------------------------------',updatedSpot);
+      history.push(`/spots/${updatedSpot.id}`)
+    }
   }
   console.log(spot);
   return (
@@ -101,7 +115,7 @@ function UpdateSpot({spot}) {
       onSubmit={onSubmit}
     >
      <div className="user-information-create-spot">
-      <h2>Create a Spot</h2>
+      <h2>Update a Spot</h2>
       <div className="form-row">
         <div className="form-row-data">
         <label>
@@ -200,88 +214,9 @@ function UpdateSpot({spot}) {
           </p>
         </div>
       </div>
-      <h2>Liven up your spot with photos</h2>
-      <h3>Submit a link to at least one photo to publish your spot.</h3>
-      <div className="form-row">
-        <div className="form-row-data">
-        <label>
-          <input
-            type="text"
-            name="country"
-            value={previewImage}
-            onChange={e=>setPreviewImage(e.target.value)}
-            placeholder="Preview Image URL"
-          />
-        </label>
-        <p className="errors">
-          {imageErrors.previewImage}
-        </p>
-        </div>
-      </div>
-      <div className="form-row">
-        <div className="form-row-data">
-        <label>
-          <input
-            type="text"
-            name="country"
-            value={photoOne}
-            onChange={e=>setPhotoOne(e.target.value)}
-            placeholder="Image URL"
-          />
-        </label>
-        <p className="errors">
-          {photoErrors.photoOne}
-        </p>
-        </div>
-      </div>
-      <div className="form-row">
-        <div className="form-row-data">
-        <label>
-          <input
-            type="text"
-            name="country"
-            value={photoTwo}
-            onChange={e=>setPhotoTwo(e.target.value)}
-            placeholder="Image URL"
-          />
-        </label>
-        <p className="errors">
-          {photoErrors.photoTwo}
-        </p>
-        </div>
-      </div>
-      <div className="form-row">
-        <div className="form-row-data">
-        <label>
-          <input
-            type="text"
-            name="country"
-            value={photoThree}
-            onChange={e=>setPhotoThree(e.target.value)}
-            placeholder="Image URL"
-          />
-        </label>
-        <p className="errors">
-          {photoErrors.photoThree}
-        </p>
-        </div>
-      </div>
-      <div className="form-row">
-        <div className="form-row-data">
-        <label>
-          <input
-            type="text"
-            name="country"
-            value={photoFour}
-            onChange={e=>setPhotoFour(e.target.value)}
-            placeholder="Image URL"
-          />
-        </label>
-        <p className="errors">
-          {photoErrors.photoFour}
-        </p>
-        </div>
-      </div>
+      {/* TODO: IMPLEMENT PRICE IN BOTH FORMS!!!!!!!!!!!!!!!!!!!!!!!! */}
+      {/* price
+      setPrice */}
       <button
         type="submit"
         disabled={Boolean(Object.keys(errors).length) || Boolean(Object.keys(imageErrors).length)}

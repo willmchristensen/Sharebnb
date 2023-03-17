@@ -2,6 +2,7 @@ import { restoreCSRF, csrfFetch } from "./csrf";
 const SPOTREVIEWS = "/api/spots/:spotId/SPOTREVIEWS"
 const LOAD_CURRENT = "/api/reviews/LOAD_CURRENT"
 const CREATE_REVIEW = "/api/reviews/new"
+const DELETE_ONE ="spots/DELETE_ONE"
 
 
 const loadReviews = (data) => ({
@@ -21,10 +22,30 @@ const createReview = (review) => {
     }
 }
 
+const deleteOne = (id) => ({
+    type: DELETE_ONE,
+    payload: id
+});
+
 const normalize = (data) => data.reduce((obj,ele) => ({
     ...obj,
     [ele.id]: ele
 }), {});
+
+export const deleteOneReview = (id) => async (dispatch) => {
+    try {
+        const response = await csrfFetch(`/api/reviews/${id}`, {
+          method: "DELETE",
+        });
+        if(response.ok){
+            const result = await response.json();
+            console.log('THUNK:------------------',id,result)
+            return dispatch(deleteOne(id));
+        }
+      } catch (error) {
+        throw error;
+      }
+}
 
 export const loadSpotReviews = (id) => async (dispatch) => {
  const response = await csrfFetch(`/api/spots/${id}/reviews`);
@@ -78,6 +99,11 @@ const reviewsReducer = (state = initialState, action) => {
         case CREATE_REVIEW: {
             const newState = {...state, spot:{...state.spot}};
             newState.spot[action.review.id] = action.review;
+            return newState;
+        }
+        case DELETE_ONE: {
+            const newState = {...state, spot: {...state.spot}};
+            delete newState.spot[action.payload];
             return newState;
         }
         default:

@@ -6,15 +6,15 @@ import { createOneSpot } from '../../store/spots';
 
 import { useModal } from "../../context/Modal";
 
-
+// TODO: IMPLEMENT PRICE
 function CreateNewSpot() {
 
-  const [country,setCountry] = useState('Actual Country');
-  const [address,setAddress] = useState('123 Address');
-  const [city,setCity] = useState('SomeCity');
-  const [state,setState] = useState('AState');
-  const [description, setDescription] = useState('This is me describing this spotThis is me describing this spotThis is me describing this spot');
-  const [name, setName] = useState('Spot Name Here');
+  const [country,setCountry] = useState('');
+  const [address,setAddress] = useState('');
+  const [city,setCity] = useState('');
+  const [state,setState] = useState('');
+  const [description, setDescription] = useState('');
+  const [name, setName] = useState('');
   const [price, setPrice] = useState(100.0);
   const [previewImage,setPreviewImage] = useState('');
   const [photoOne,setPhotoOne] = useState('');
@@ -299,7 +299,7 @@ function CreateNewSpot() {
       </div>
       <button
         type="submit"
-        disabled={Boolean(Object.keys(errors).length) || Boolean(Object.keys(imageErrors).length)}
+        // disabled={Boolean(Object.keys(errors).length) || Boolean(Object.keys(imageErrors).length)}
       >
         Create Spot
       </button>

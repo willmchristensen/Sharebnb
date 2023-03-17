@@ -37,7 +37,7 @@ function LoginFormModal() {
   };
 
   const handleDemoUser = () => {
-    return dispatch(sessionActions.login({ credential:'Demo-lition', password:'password'}))
+    return dispatch(sessionActions.login({ credential:'testUserName', password:'password'}))
       .then(closeModal);
   }
 

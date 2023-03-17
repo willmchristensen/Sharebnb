@@ -6,7 +6,7 @@ import SpotCardImage from '../SpotCardImage';
 import './SpotCards.css';
 // TODO: TOOLTIP!!!!!!!!!!!!!!!!
 const SpotCards = ({spot}) => {
-
+    
   return (
     <NavLink 
         className="spot-card"
