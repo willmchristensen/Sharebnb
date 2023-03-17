@@ -13,15 +13,15 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
       {
         reviewId :1,
-        url :'a',
+        url :'https://hensleyhomes.com/wp-content/uploads/2022/04/IMG_6215-1-1024x693.jpg',
       },
       {
         reviewId:2,
-        url:'b',
+        url:'https://hensleyhomes.com/wp-content/uploads/2022/04/IMG_6215-1-1024x693.jpg',
       },
       {
         reviewId:3,
-        url:'c',
+        url:'https://hensleyhomes.com/wp-content/uploads/2022/04/IMG_6215-1-1024x693.jpg',
       }
 
     ], {});

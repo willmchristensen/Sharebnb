@@ -14,19 +14,19 @@ module.exports = {
       {
         spotId:1,
         userId:1,
-        review:'good',
+        review:'probably the nicest place i have ever seen in my life',
         stars:5
       },
       {
         spotId:2,
         userId:2,
-        review:'bad',
+        review:'Without a doub,t definitely, comfiest place i have ever been in my life',
         stars:4.1
       },
       {
         spotId:3,
         userId:3,
-        review:'decent',
+        review:'Disgusting, i hated every second of the experience.',
         stars:4.3
       }
 
