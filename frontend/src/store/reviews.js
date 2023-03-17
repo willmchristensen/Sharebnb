@@ -104,6 +104,7 @@ const reviewsReducer = (state = initialState, action) => {
         case DELETE_ONE: {
             const newState = {...state, spot: {...state.spot}, user: {...state.user}};
             delete newState.user[action.payload];
+            delete newState.spot[action.payload];
             return newState;
         }
         default:
