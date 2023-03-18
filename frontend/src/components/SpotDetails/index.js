@@ -30,10 +30,6 @@ const SpotDetails = () => {
     useEffect(() => {
         dispatch(loadSpotReviews(spotId));
     }, [dispatch,spotId])
-    // let var1 = dispatch(loadSpotDetails(spotId));
-    // let var2 = dispatch(loadSpotReviews(spotId));
-    // console.log('var1,var2',var1
-    // ,var2)
     if(!previewImage) return null;
   return (
     <div className="spot-details">
