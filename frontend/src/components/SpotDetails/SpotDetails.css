@@ -44,17 +44,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border:10px solid pink;
+    border:10px solid rgb(255, 68, 99);
     width: 100%;
 }
 .spot-details-images-support-cards{
-    border: 1px solid blue;
+    padding: 10px;
+    border: 11px solid rgb(255, 136, 0);
     display: grid;
-    grid-template-areas:             
+    grid-template-areas:            
         "b a"            
         "b a"            
         "b a";
     width: 100%;
+}
+#support-image{
+    border: 10px solid rgb(153, 255, 0);
+    width: 20rem;
 }
 .spot-details-info{
     grid-area: c;

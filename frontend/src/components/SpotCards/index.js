@@ -1,6 +1,5 @@
 import {useSelector} from 'react-redux';
 import { NavLink, Route } from 'react-router-dom';
-import SpotCardImage from '../SpotCardImage';
 import './SpotCards.css';
 
 const SpotCards = ({spot}) => {
@@ -18,10 +17,7 @@ const SpotCards = ({spot}) => {
                 TOOLTIP
             </div>
             <div className="nav-link-image" >
-                <SpotCardImage 
-                    // image={spotImages[0]}
-                    spot={spot}
-                ></SpotCardImage>
+                <img src={spot.previewImage} alt="" />
             </div>
             <div className="nav-link-info-primary">
                 <h4>{spot.city}</h4>

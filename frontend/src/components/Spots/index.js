@@ -18,7 +18,9 @@ const Spots = () => {
         {
           allSpots.map(spot => {
             return (
-              <SpotCards spot={spot}/>
+              <SpotCards 
+                spot={spot}
+              />
             );
           })
         }

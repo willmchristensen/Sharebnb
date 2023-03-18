@@ -49,8 +49,7 @@ function CreateNewSpot() {
   // console.log(photos);
   // console.log(previewImage);
   useEffect(() => {
-    const errors = {};
-    
+    const errors = {}; 
     if(!country) errors.country = "Country is required"
     if(!address) errors.address = "Address is required"
     if(!city) errors.city = "City is required"
@@ -59,8 +58,6 @@ function CreateNewSpot() {
     if(description.length < 30) errors.description = "Description needs 30 or more characters";
     if(!name) errors.name = "Title is required"
     if(!price) errors.price = "BasePrice is required"
-
-
     setValidationErrors(errors) 
   }, [country,address,city,state,description,name,price]);
 
