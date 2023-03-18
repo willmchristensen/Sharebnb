@@ -119,6 +119,8 @@ export const createOneSpot = (spot, images) => async (dispatch) => {
           const image = await imageRes.json();
           spot.SpotImages.push(image);
         }
+        let preview = spot.SpotImages.shift();
+        spot.previewImage = preview
         dispatch(addOne(spot));
         return spot;
       }
