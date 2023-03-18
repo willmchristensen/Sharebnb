@@ -96,7 +96,8 @@ export const deleteOneSpot = (id) => async (dispatch) => {
 }
 
 export const createOneSpot = (spot, images) => async (dispatch) => {
-    console.log(spot,images);
+    console.log('----------spotimages in  create thunk----------',images)
+    console.log('------------------------------spot in create thunk, ',spot);
     const response = await csrfFetch("/api/spots", {
         method: "POST",
         headers: {
@@ -104,24 +105,23 @@ export const createOneSpot = (spot, images) => async (dispatch) => {
         },
         body: JSON.stringify(spot)
     });
-    if(response.ok){
+    if (response.ok) {
         const spot = await response.json();
         spot.SpotImages = [];
-        images.forEach(async (img) => {
-            console.log(img);
-            const imageRes = await csrfFetch(`/api/spots/${spot.id}/images`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(img)
-            });
-            const image = await imageRes.json();
-            spot.SpotImages.push(image);
-        });
-        dispatch(addOne(spot))
+        for (const img of images) {
+          const imageRes = await csrfFetch(`/api/spots/${spot.id}/images`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(img),
+          });
+          const image = await imageRes.json();
+          spot.SpotImages.push(image);
+        }
+        dispatch(addOne(spot));
         return spot;
-    };
+      }
 };
 
 export const updateOneSpot =   (spot, images) => async (dispatch) => {
@@ -177,9 +177,10 @@ const spotsReducer = (state = initialState, action) => {
             return newState;
         }
         case ADD_ONE: {
-            const newState = {...state, allSpots: {...state.allSpots}};
+            const newState = {...state, allSpots: {...state.allSpots}, singleSpot: { SpotImages:[...state.singleSpot.SpotImages], Owner: {...state.singleSpot.Owner}}};
             console.log('------------------------------actionn-payload',action.payload);
             newState.allSpots[action.payload.id] = {...action.payload};
+            newState.singleSpot = {...action.payload}
             return newState;  
         }
         case DELETE_ONE: {

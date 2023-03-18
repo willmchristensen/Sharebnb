@@ -1,9 +1,13 @@
+import {useSelector} from 'react-redux';
 import './SpotCardImage.css';
-const SpotCardImage = ({image}) => {
+const SpotCardImage = ({spot}) => {
+  const singleSpot = useSelector(state=>state.spots.singleSpot)
   return (
     <>
       <div className="spot-card-image">
-            <img src={image.url} alt="spot-image" />
+            {console.log('----------------------------------SPOTDETAILS',singleSpot)}
+            {/* {console.log(image)}*/}
+            <img src={spot.previewImage} alt="spot-image" /> 
       </div>
     </>
   );

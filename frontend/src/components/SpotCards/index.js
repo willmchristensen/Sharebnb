@@ -5,7 +5,7 @@ import './SpotCards.css';
 
 const SpotCards = ({spot}) => {
     
-    const spotImages = useSelector(state=>state.spots.singleSpot.SpotImages);
+    console.log('------------------------------spot',spot);
 
   return (
     <NavLink 
@@ -18,7 +18,10 @@ const SpotCards = ({spot}) => {
                 TOOLTIP
             </div>
             <div className="nav-link-image" >
-                <SpotCardImage image={spotImages[0]}></SpotCardImage>
+                <SpotCardImage 
+                    // image={spotImages[0]}
+                    spot={spot}
+                ></SpotCardImage>
             </div>
             <div className="nav-link-info-primary">
                 <h4>{spot.city}</h4>

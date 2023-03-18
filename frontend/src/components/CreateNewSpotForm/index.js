@@ -100,10 +100,11 @@ function CreateNewSpot() {
     };
     const spotImages = [];
     spotImages.push({url: previewImage, preview: true});
-    if(photoOne){spotImages.push({url: photoOne, preview: false});}
-    if(photoTwo){spotImages.push({url: photoTwo, preview: false});}
-    if(photoThree){spotImages.push({url: photoThree, preview: false});}
-    if(photoFour){spotImages.push({url: photoFour, preview: false});}
+    if(photoOne){spotImages.push({url: photoOne, preview: true})};
+    if(photoTwo){spotImages.push({url: photoTwo, preview: true})};
+    if(photoThree){spotImages.push({url: photoThree, preview: true})};
+    if(photoFour){spotImages.push({url: photoFour, preview: true})};
+    console.log('----------spotimages in form, before dispatch----------',spotImages);
     let createdSpot = await dispatch(createOneSpot(vals,spotImages));
     console.log('createdSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOT',createdSpot)
 
