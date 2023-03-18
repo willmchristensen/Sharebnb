@@ -10,18 +10,19 @@ const Spots = () => {
   useEffect(() => {
     dispatch(getAllSpots())
   }, [dispatch]) 
-  console.log('spots in allspots-------------------------', spots);
-  
   return (
     <main >
       <nav className="spot-cards-section">
-        {
-          allSpots.map(spot => {
-            return (
-              <SpotCards spot={spot}/>
-            );
-          })
-        }
+          {
+            allSpots.map(spot => {
+              return (
+                <SpotCards 
+                  spot={spot}
+                  className="spot-card"
+                />
+              );
+            })
+          }
       </nav>
     </main>
   );

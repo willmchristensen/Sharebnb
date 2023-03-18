@@ -7,24 +7,7 @@
 }
 /* TODO: MEDIA QUERIES? */
 .spot-card-image > img{
-    /* TODO: IMAGES*/
-    max-width: 200px;
-    max-height: 200px;
+    width: 10rem;
+    height: 10rem;
     padding: 5px;
 }
-/* TODO: TOOLTIP! */
-/* .tooltip{
-    visibility:hidden;
-    position: absolute;
-    display: inline-block;
-    border: #CEEDC7 1px solid;
-    width: 100px;
-    max-height: 20px;
-    font-size: 10px;
-    background-color: black;
-    z-index: inherit;
-}
-
-.tooltip:hover{
-    visibility: visible;
-} */

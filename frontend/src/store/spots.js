@@ -147,7 +147,6 @@ export const addSpotImage = (id, url, preview) => async () => {
     return response;
 };
 
-
 export const updateOneSpot =   (spot, images) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spot.id}`,
     {

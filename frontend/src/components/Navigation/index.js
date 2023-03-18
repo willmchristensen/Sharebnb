@@ -21,7 +21,6 @@ function Navigation({ isLoaded }){
             <>
               <li>
                 <NavLink
-                  className="spot-card"
                   // key={}
                   to={`/spots/new`}
                 >
