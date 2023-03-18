@@ -50,18 +50,12 @@ function PostAReviewModal({spot}) {
                   onChange={e=>setReview(e.target.value)}  
                   cols="30" 
                   rows="10"
+                  placeHolder="Leave your review here..."
                 >
                 </textarea>
               </label>
             </div>
           </div>
-          <input 
-            type="number"
-            value={stars}
-            onChange={e=> setStars(e.target.value)}
-            max={5}
-            min={1} 
-          />
           <StarsRatingInput 
             changeStars={setStars} 
             rating={stars}

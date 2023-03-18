@@ -127,11 +127,14 @@ const SpotDetails = () => {
                 </div>
             </div>
             <div className="spot-details-reviews-content-reviews">
-                {spot.numReviews > 0 ? (
-                    <h3>
-                        {spot.numReviews} review(s)
-                    </h3> 
-                ) : <h3>"New"</h3>}
+                {
+                    spot.numReviews > 1 ? (
+                        // TODO: REVIEWS/W
+                        <h3>
+                            {spot.numReviews} review(s)
+                        </h3> 
+                    ) : <h3>"New"</h3>
+                }
             </div>
         </div>
     </div>

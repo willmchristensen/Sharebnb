@@ -7,16 +7,15 @@ import { createOneSpot } from '../../store/spots';
 import { useModal } from "../../context/Modal";
 import { addSpotImage } from '../../store/spots';
 
-// TODO: IMPLEMENT PRICE
 function CreateNewSpot() {
 
-  const [country,setCountry] = useState('TESTNAME');
-  const [address,setAddress] = useState('TESTNAME');
-  const [city,setCity] = useState('TESTNAME');
-  const [state,setState] = useState('TESTNAME');
-  const [description, setDescription] = useState('TESTNAMETESTNAMETESTNAMETESTNAMETESTNAMETESTNAME');
-  const [name, setName] = useState('TESTNAME');
-  const [price, setPrice] = useState(1110);
+  const [country,setCountry] = useState('');
+  const [address,setAddress] = useState('');
+  const [city,setCity] = useState('');
+  const [state,setState] = useState('');
+  const [description, setDescription] = useState('');
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState();
   const [previewImage,setPreviewImage] = useState('');
   const [photoOne,setPhotoOne] = useState('');
   const [photoTwo,setPhotoTwo] = useState('');
@@ -24,31 +23,14 @@ function CreateNewSpot() {
   const [photoFour,setPhotoFour] = useState('');
   const [lat, setLat] = useState(0.1);
   const [lng, setLng] = useState(0.2);
-
-  // ------------------------------------------
-  // const [country,setCountry] = useState('');
-  // const [address,setAddress] = useState('');
-  // const [city,setCity] = useState('');
-  // const [state,setState] = useState('');
-  // const [description, setDescription] = useState('');
-  // const [name, setName] = useState('');
-  // const [price, setPrice] = useState();
-  // const [previewImage,setPreviewImage] = useState('');
-  // const [photos, setPhotos] = useState([]);
-  // const [lat, setLat] = useState(0.1);
-  // const [lng, setLng] = useState(0.2);
-
-  const { closeModal } = useModal();
-
-
-  const history = useHistory();
-  const dispatch = useDispatch();
   const [errors,setValidationErrors] = useState({});
   const [imageErrors, setImageErrors] = useState({});
   const [photoErrors, setPhotoErrors] = useState({});
 
-  // console.log(photos);
-  // console.log(previewImage);
+  const { closeModal } = useModal();
+  const history = useHistory();
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const errors = {};
     
@@ -125,8 +107,8 @@ function CreateNewSpot() {
       onSubmit={onSubmit}
     >
      <div className="user-information-create-spot">
-      <h2>Create a Spot</h2>
-      {/* <div className="form-row">
+      <h2>Create a New Spot</h2>
+      <div className="form-row">
         <div className="form-row-data">
         <label>
           <div className="form-row-data-label">
@@ -239,7 +221,7 @@ function CreateNewSpot() {
             {errors.price}
           </p>
         </div>
-      </div> */}
+      </div>
       <h2>Liven up your spot with photos</h2>
       <h3>Submit a link to at least one photo to publish your spot.</h3>
       <div className="form-row">
@@ -324,7 +306,7 @@ function CreateNewSpot() {
       </div>
       <button
         type="submit"
-        // disabled={Boolean(Object.keys(errors).length) || Boolean(Object.keys(imageErrors).length)}
+        disabled={Boolean(Object.keys(errors).length) || Boolean(Object.keys(imageErrors).length)}
       >
         Create Spot
       </button>
