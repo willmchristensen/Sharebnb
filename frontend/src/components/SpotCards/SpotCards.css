@@ -21,14 +21,15 @@
 .spot-cards-section{
     width: 1000px;
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex: 1 0 21%;
+    margin: 15px;
 }
 .spot-card{
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: 1 0 21%;
     margin: 15px;
     border:1px solid #CEEDC7;
 }
@@ -46,6 +47,9 @@
     justify-content: center;
     /* width: 100%; */
     border:1px solid #CEEDC7;
+}
+#spot-card-preview{
+    height: 20rem;
 }
 .nav-link-info-primary{
     border: 1px dotted rgb(234, 0, 255);

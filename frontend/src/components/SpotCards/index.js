@@ -16,9 +16,7 @@ const SpotCards = ({spot}) => {
             <div className="tooltip-text">
                 TOOLTIP
             </div>
-            <div className="nav-link-image" >
-                <img src={spot.previewImage} alt="" />
-            </div>
+                <img src={spot.previewImage} id="spot-card-preview" />
             <div className="nav-link-info-primary">
                 <h4>{spot.city}</h4>
                 <div>

@@ -16,9 +16,9 @@ const SpotDetails = () => {
     const dispatch = useDispatch();
     const spot = useSelector(state => state.spots.singleSpot);
     const spotImages = spot.SpotImages;
+    const images = spotImages.filter(img => img.preview === false);
     const previewImage = spot.SpotImages[0];
-    console.log('------------------------------spot', spot,spotImages
-    ,previewImage);
+    console.log('------------------------------IMAGES:', images);
     const reviews = useSelector(state => state.reviews.spot);
     const allReviews = Object.values(reviews);
     const sessionUser = useSelector(state => state.session.user);
@@ -30,6 +30,10 @@ const SpotDetails = () => {
     useEffect(() => {
         dispatch(loadSpotReviews(spotId));
     }, [dispatch,spotId])
+    // let var1 = dispatch(loadSpotDetails(spotId));
+    // let var2 = dispatch(loadSpotReviews(spotId));
+    // console.log('var1,var2',var1
+    // ,var2)
     if(!previewImage) return null;
   return (
     <div className="spot-details">
@@ -39,33 +43,25 @@ const SpotDetails = () => {
         </div>
         <div className="spot-details-images">
             <div className="spot-details-images-hero">
-                <NavLink 
-                    className="spot-card"
-                    key={spot.name}
-                    to={`/spots/${spot.id}`}
-                >
-                    <div className="nav-link">
-                        <div className="nav-link-image">
-                            <img src={previewImage.url} alt="prev-img" />
-                        </div>
-                    </div>
-                </NavLink>
+                <img 
+                    src={previewImage.url} 
+                    alt="hero-img" 
+                    id="hero-img"
+                />
             </div>
+            <div className="spot-details-images-support">
                 {
                     spotImages.length > 1 && (
-                        <div className="spot-details-images-support">
-                            <div className="spot-details-images-support-cards">
-                                {
-                                    spotImages.map(image => {
-                                        return (
-                                            <img src={image.url} alt="supp-img" id="support-image"/>
-                                        );
-                                    })
-                                }
-                            </div>
-                        </div>
+                        images.map(image => {
+                            return (
+                                <img 
+                                    src={image.url} alt="supp-img" id="support-image"
+                                />
+                            );
+                        })
                     )
                 }
+            </div>
         </div>
         <div className="spot-details-section">
             <div className="spot-details-info">
