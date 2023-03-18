@@ -64,7 +64,8 @@ const SpotDetails = () => {
                             <div className="spot-details-images-support-cards">
                                 {spotImages.map((image) =>
                                     <img 
-                                    src={`${image.url}`} alt="support-image" 
+                                        src={image.url} 
+                                        alt="support-image" 
                                     />
                                 )}
                             </div>
@@ -89,7 +90,6 @@ const SpotDetails = () => {
                         <div className="spot-details-info-reserve-price">
                             <h3>${spot.price} per night</h3>
                         </div>
-                        {/* TODO: CONDITIONALLY RENDER POST A REVIEW BUTTON */}
                         <div className="spot-details-info-reserve-reviews-stars">
                             <h3>{spot.avgStarRating}</h3>
                             {
@@ -122,6 +122,9 @@ const SpotDetails = () => {
             <div className="spot-details-reviews-content-stars">
                 <i class="fas fa-star"></i>
                 <h3>{spot.avgStarRating}</h3>
+                <div className="dot">
+                    <i class="fas fa-dot-circle" id="dot"></i>
+                </div>
             </div>
             <div className="spot-details-reviews-content-reviews">
                 {spot.numReviews > 0 ? (

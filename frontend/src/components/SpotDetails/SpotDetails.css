@@ -106,15 +106,20 @@
     justify-content: left;
 }
 .spot-details-reviews-content{
-    border: 1px solid rgb(68, 0, 255);
     display: flex;
     justify-content: space-between;
 }
 .spot-details-reviews-content-stars{
-    border: 1px solid blue;
     display: flex;
     justify-content: left;
     align-content: center;
+}
+.dot{
+    padding: 1rem;
+    width: 1rem;
+}
+#dot{
+    font-size: 1rem;
 }
 .spot-details-reviews-content-stars > *{
     display: flex;
