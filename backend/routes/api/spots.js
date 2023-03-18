@@ -405,7 +405,7 @@ const validateImage = [
         .exists({checkFalsy: true})
         .withMessage("Url is required"),
     check('preview')
-        .exists({checkFalsy: true})
+        .exists()
         .withMessage("Preview is required"),
     handleValidationErrors
 ];

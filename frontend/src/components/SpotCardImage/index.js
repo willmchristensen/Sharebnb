@@ -3,7 +3,7 @@ const SpotCardImage = ({image}) => {
   return (
     <>
       <div className="spot-card-image">
-            {/* <img src={image.url} alt="spot-image" /> */}
+            <img src={image} alt="spot-image" />
       </div>
     </>
   );

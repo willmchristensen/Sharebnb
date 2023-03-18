@@ -5,17 +5,18 @@ import './CreateNewSpot.css'
 import { createOneSpot } from '../../store/spots';
 
 import { useModal } from "../../context/Modal";
+import { addSpotImage } from '../../store/spots';
 
 // TODO: IMPLEMENT PRICE
 function CreateNewSpot() {
 
-  const [country,setCountry] = useState('');
-  const [address,setAddress] = useState('');
-  const [city,setCity] = useState('');
-  const [state,setState] = useState('');
-  const [description, setDescription] = useState('');
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState(100.0);
+  const [country,setCountry] = useState('TESTNAME');
+  const [address,setAddress] = useState('TESTNAME');
+  const [city,setCity] = useState('TESTNAME');
+  const [state,setState] = useState('TESTNAME');
+  const [description, setDescription] = useState('TESTNAMETESTNAMETESTNAMETESTNAMETESTNAMETESTNAME');
+  const [name, setName] = useState('TESTNAME');
+  const [price, setPrice] = useState(1110);
   const [previewImage,setPreviewImage] = useState('');
   const [photoOne,setPhotoOne] = useState('');
   const [photoTwo,setPhotoTwo] = useState('');
@@ -98,17 +99,25 @@ function CreateNewSpot() {
     const vals = {
       country,address,city,state,description,price,lat,lng,name
     };
-    const spotImages = [];
-    spotImages.push({url: previewImage, preview: true});
-    if(photoOne){spotImages.push({url: photoOne, preview: false});}
-    if(photoTwo){spotImages.push({url: photoTwo, preview: false});}
-    if(photoThree){spotImages.push({url: photoThree, preview: false});}
-    if(photoFour){spotImages.push({url: photoFour, preview: false});}
-    let createdSpot = await dispatch(createOneSpot(vals,spotImages));
-    console.log('createdSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOTcreatedSPOT',createdSpot)
-
-    if(createdSpot) history.push(`/spots/${createdSpot.id}`)
-    closeModal()
+    
+    let createdSpot = await dispatch(createOneSpot(vals));
+    if(createdSpot){
+      let prevImg = await dispatch(addSpotImage(createdSpot.id,previewImage,true));
+      if(photoOne){
+        await dispatch(addSpotImage(createdSpot.id,photoOne,false));
+      }
+      if(photoTwo){
+        await dispatch(addSpotImage(createdSpot.id,photoTwo,false));
+      }
+      if(photoThree){
+        await dispatch(addSpotImage(createdSpot.id,photoThree,false));
+      }
+      if(photoFour){
+        await dispatch(addSpotImage(createdSpot.id,photoFour,false));
+      }
+      if(prevImg) history.push(`/spots/${createdSpot.id}`)
+      closeModal()
+    }
   }
   return (
     <form
@@ -117,7 +126,7 @@ function CreateNewSpot() {
     >
      <div className="user-information-create-spot">
       <h2>Create a Spot</h2>
-      <div className="form-row">
+      {/* <div className="form-row">
         <div className="form-row-data">
         <label>
           <div className="form-row-data-label">
@@ -215,6 +224,22 @@ function CreateNewSpot() {
           </p>
         </div>
       </div>
+      <div className="form-row">
+        <div className="form-row-data">
+        <label>
+          <input
+            type="text"
+            name="price"
+            value={price}
+            onChange={e=>setPrice(e.target.value)}
+            placeholder="price"
+          />
+        </label>
+          <p className="errors">
+            {errors.price}
+          </p>
+        </div>
+      </div> */}
       <h2>Liven up your spot with photos</h2>
       <h3>Submit a link to at least one photo to publish your spot.</h3>
       <div className="form-row">
@@ -244,9 +269,9 @@ function CreateNewSpot() {
             placeholder="Image URL"
           />
         </label>
-        <p className="errors">
-          {photoErrors.photoOne}
-        </p>
+          <p className="errors">
+            {photoErrors.photoOne}
+          </p>
         </div>
       </div>
       <div className="form-row">
