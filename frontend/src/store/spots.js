@@ -107,9 +107,6 @@ export const createOneSpot = (spot, images) => async (dispatch) => {
     });
     if (response.ok) {
         const spot = await response.json();
-        // console.log(spot)
-        // let spotImages = [];
-        // let prevImg = images[0];
         spot.SpotImages = [];
         for (const img of images) {
           const imageRes = await csrfFetch(`/api/spots/${spot.id}/images`, {
@@ -122,8 +119,6 @@ export const createOneSpot = (spot, images) => async (dispatch) => {
           const image = await imageRes.json();
           spot.SpotImages.push(image);
         }
-        let prevImg = spot.SpotImages.shift();
-        spot.previewImage = prevImg;
         dispatch(addOne(spot));
         return spot;
       }

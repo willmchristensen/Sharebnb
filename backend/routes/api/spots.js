@@ -404,9 +404,6 @@ const validateImage = [
     check('url')
         .exists({checkFalsy: true})
         .withMessage("Url is required"),
-    check('preview')
-        .exists({checkFalsy: true})
-        .withMessage("Preview is required"),
     handleValidationErrors
 ];
 router.post('/:spotId/images',requireAuth,validateImage, async(req,res) => {
