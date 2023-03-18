@@ -13,20 +13,65 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
       {
         spotId:1,
-        url:'https://hensleyhomes.com/wp-content/uploads/2022/04/IMG_6215-1-1024x693.jpg',
-        preview:true,
+        url:'https://www.greenbuilt.org/images/SamselCabin4.jpg',
+        preview:false,
+      },
+      {
+        spotId:1,
+        url:'https://www.greenbuilt.org/images/SamselCabin4.jpg',
+        preview:false,
+      },
+      {
+        spotId:1,
+        url:'https://www.greenbuilt.org/images/SamselCabin4.jpg',
+        preview:false,
+      },
+      {
+        spotId:1,
+        url:'https://www.greenbuilt.org/images/SamselCabin4.jpg',
+        preview:false,
       },
       {
         spotId:2,
-        url:'https://hensleyhomes.com/wp-content/uploads/2022/04/IMG_6215-1-1024x693.jpg',
+        url:'https://media.architecturaldigest.com/photos/56f9add568aa959e79f353f4/master/w_5870,h_3889,c_limit/beach-houses-11.jpg',
+        preview:false,
+      },
+      {
+        spotId:2,
+        url:'https://media.architecturaldigest.com/photos/56f9add568aa959e79f353f4/master/w_5870,h_3889,c_limit/beach-houses-11.jpg',
+        preview:false,
+      },
+      {
+        spotId:2,
+        url:'https://media.architecturaldigest.com/photos/56f9add568aa959e79f353f4/master/w_5870,h_3889,c_limit/beach-houses-11.jpg',
+        preview:false,
+      },
+      {
+        spotId:2,
+        url:'https://media.architecturaldigest.com/photos/56f9add568aa959e79f353f4/master/w_5870,h_3889,c_limit/beach-houses-11.jpg',
         preview:true,
       },
       {
         spotId:3,
-        url:'https://hensleyhomes.com/wp-content/uploads/2022/04/IMG_6215-1-1024x693.jpg',
-        preview:true,
-      }
-
+        url:'https://www.urbnlivn.com/wp-content/uploads/2016/10/urbnlivn-yard-sign-800x576.jpg',
+        preview:false,
+      },
+      {
+        spotId:3,
+        url:'https://www.urbnlivn.com/wp-content/uploads/2016/10/urbnlivn-yard-sign-800x576.jpg',
+        preview:false,
+      },
+      {
+        spotId:3,
+        url:'https://www.urbnlivn.com/wp-content/uploads/2016/10/urbnlivn-yard-sign-800x576.jpg',
+        preview:false,
+      },
+      {
+        spotId:3,
+        url:'https://www.urbnlivn.com/wp-content/uploads/2016/10/urbnlivn-yard-sign-800x576.jpg',
+        preview:false,
+      },
+      
     ], {});
   },
 

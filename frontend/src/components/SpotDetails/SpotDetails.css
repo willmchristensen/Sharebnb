@@ -56,6 +56,9 @@
         "b a";
     width: 100%;
 }
+.spot-details-images-support-cards > img{
+    width: 20rem
+}
 .spot-details-info{
     grid-area: c;
     display: grid;

@@ -21,7 +21,7 @@ const SpotCards = ({ spot }) => {
           </div>
         </div>
         <div className="nav-link-info-secondary">
-          <h4>{spot.price}</h4>
+          <h4>$ {spot.price}</h4>
         </div>
       </div>
     </NavLink>

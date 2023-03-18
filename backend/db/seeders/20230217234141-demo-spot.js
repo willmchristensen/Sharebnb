@@ -15,14 +15,15 @@ module.exports = {
         id: 1,
         ownerId: 1,
         address: "123 Cabin Woods",
-        city: "Big Sur",
+        city: "Cabin City",
         state: "California",
         country: "United States of America",
         lat: 36.2704,
         lng: -121.8081,
-        name: "Cabby by the Beachy",
-        description: "Where the wild things are",
+        name: "Cabin Heaven",
+        description: "Where the cabin things are",
         price: 123,
+        previewImage: "https://www.greenbuilt.org/images/SamselCabin4.jpg"
       },
       {
         id: 2,
@@ -36,6 +37,7 @@ module.exports = {
         name: "Sandy",
         description: "Sally sells seashells here",
         price: 200,
+        previewImage: "https://media.architecturaldigest.com/photos/56f9add568aa959e79f353f4/master/w_5870,h_3889,c_limit/beach-houses-11.jpg"
       },
       {
         id: 3,
@@ -49,6 +51,7 @@ module.exports = {
         name: "Rainy",
         description: "It rains here",
         price: 999,
+        previewImage: "https://www.urbnlivn.com/wp-content/uploads/2016/10/urbnlivn-yard-sign-800x576.jpg"
       }
     ], {});
   },

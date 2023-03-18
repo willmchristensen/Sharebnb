@@ -52,69 +52,26 @@ const SpotDetails = () => {
                 >
                     <div className="nav-link">
                         <div className="nav-link-image">
-                            <LargeCardImage image={previewImage}></LargeCardImage>
+                            <LargeCardImage image={previewImage}>
+                            </LargeCardImage>
                         </div>
                     </div>
                 </NavLink>
             </div>
-            {/* TODO: FILL WITH TEST IMAGES? */}
-            {/* TODO: MAP OVER SPOT  */}
                 {
-                    // spotImages.length > 1 && (
-                    //     <div className="spot-details-images-support">
-                    //         <div className="spot-details-images-support-cards">
-                    //             {/* {spotImages.map((image) =>
-                    //                 <img src={`${image.url}`} alt="" />
-                    //             )} */}
-                    //             <NavLink 
-                    //                 className="spot-card"
-                    //                 key={spot.name}
-                    //                 to={`/spots/${spot.id}`}
-                    //             >
-                    //                 <div className="nav-link">
-                    //                     <div className="nav-link-image" id="bruh">
-                    //                         <SpotCardImage></SpotCardImage>
-                    //                     </div>
-                    //                 </div>
-                    //             </NavLink>
-                    //             <NavLink 
-                    //                 className="spot-card"
-                    //                 key={spot.name}
-                    //                 to={`/spots/${spot.id}`}
-                    //             >
-                    //                 <div className="nav-link">
-                    //                     <div className="nav-link-image">
-                    //                         <SpotCardImage></SpotCardImage>
-                    //                     </div>
-                    //                 </div>
-                    //             </NavLink>
-                    //             <NavLink 
-                    //                 className="spot-card"
-                    //                 key={spot.name}
-                    //                 to={`/spots/${spot.id}`}
-                    //             >
-                    //                 <div className="nav-link">
-                    //                     <div className="nav-link-image">
-                    //                         <SpotCardImage></SpotCardImage>
-                    //                     </div>
-                    //                 </div>
-                    //             </NavLink>
-                    //             <NavLink 
-                    //                 className="spot-card"
-                    //                 key={spot.name}
-                    //                 to={`/spots/${spot.id}`}
-                    //             >
-                    //                 <div className="nav-link">
-                    //                     <div className="nav-link-image">
-                    //                         <SpotCardImage></SpotCardImage>
-                    //                     </div>
-                    //                 </div>
-                    //             </NavLink>
-                    //         </div>
-                    //     </div>
-                    // )
+                    spotImages.length > 1 && (
+                        <div className="spot-details-images-support">
+                            <div className="spot-details-images-support-cards">
+                                {spotImages.map((image) =>
+                                    <img 
+                                    src={`${image.url}`} alt="support-image" 
+                                    />
+                                )}
+                            </div>
+                        </div>
+                    )
                 }
-            {/* FIXME: more spot images */}
+
         </div>
         <div className="spot-details-section">
             <div className="spot-details-info">
