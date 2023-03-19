@@ -7,23 +7,22 @@ import { loadUserSpots } from '../../store/spots';
 import SpotCards from '../SpotCards';
 
 const ManageSpots = () => {
+
   const dispatch = useDispatch(); 
-  const userId = useSelector(state=> state.session.user.id);
   const spots = useSelector(state=> state.spots.allSpots);
-  console.log(spots,'-spots-----------------------------------------------');
-  console.log(userId,'-userId in manage spots-----------------------------------------------')
   const allSpots = Object.values(spots);
   
   useEffect(() => {
     dispatch(loadUserSpots())
-  }, [dispatch]) 
+  }, [dispatch]); 
+  
 
   return (
     <main>
       <div className="manage-wrapper">
         <nav className="spot-cards-section">
           <div className="spot-cards-section-header">
-            <h3>Manage Your Spots</h3>
+            <h3>Manage Spots</h3>
             <NavLink
               className="spot-card"
               to={`/spots/new`}

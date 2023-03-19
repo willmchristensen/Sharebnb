@@ -20,7 +20,7 @@
  border: 1px solid rgba(202, 231, 202, 0.205);
  background-color: rgba(167, 185, 187, 0.623);
  color: rgba(0, 0, 0, 0.89);
- font-size: 5px;
+ font-size: 1em;
  height: fit-content;
 }
 #manage-button:hover{
