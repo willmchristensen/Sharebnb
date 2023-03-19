@@ -32,10 +32,6 @@ const SpotDetails = () => {
     useEffect(() => {
         dispatch(loadSpotReviews(spotId));
     }, [dispatch,spotId])
-    // let var1 = dispatch(loadSpotDetails(spotId));
-    // let var2 = dispatch(loadSpotReviews(spotId));
-    // console.log('var1,var2',var1
-    // ,var2)
     if(!previewImage) return null;
   return (
     <div className="spot-details">
@@ -58,21 +54,17 @@ const SpotDetails = () => {
                     </div>
                 </NavLink>
             </div>
-                {
-                    spotImages.length > 1 && (
-                        <div className="spot-details-images-support">
-                            <div className="spot-details-images-support-cards">
-                                {spotImages.map((image) =>
-                                    <img 
-                                        src={image.url} 
-                                        alt="support-image" 
-                                    />
-                                )}
-                            </div>
+            {
+                spotImages.length > 1 && (
+                    <div className="spot-details-images-support">
+                        <div className="spot-details-images-support-cards">
+                            {spotImages.map((image) =>
+                                <SpotCardImage image={image.url}/>
+                            )}
                         </div>
-                    )
-                }
-
+                    </div>
+                )
+            }
         </div>
         <div className="spot-details-section">
             <div className="spot-details-info">
