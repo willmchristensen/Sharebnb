@@ -1,3 +1,7 @@
+.fa-yin-yang{
+    color: rgb(0, 255, 132);
+    padding-right: 1rem;
+}
 .hidden{
     display: none;
 }
@@ -8,12 +12,8 @@
     font-family: 'Roboto', sans-serif;
     width: 100%;
     margin: 0px;
-    padding: 10px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.247);
     margin-bottom: 1rem;
-}
-.nav-bar > *{
-    
 }
 .nav-bar-conditional-content{
     display: flex;
@@ -26,7 +26,6 @@ ul > *{
     text-align: center;
     display: flex;
     align-items: center;
-    padding: 10px;
 }
 a{
     color: var(--red);
@@ -37,11 +36,13 @@ a{
     align-items: center;
 }
 li{
-    color: var(--red);
-    padding: 1rem;
+    padding: .5rem;
     font-size: 1.1rem;
     text-decoration: none;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 i{
     color: var(--red);
