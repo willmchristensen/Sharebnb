@@ -12,42 +12,71 @@ function SignupFormModal() {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState([]);
+  const [isDisabled,setIsDisabled] = useState(true);
   const { closeModal } = useModal();
 
   useEffect(() => {
-    const errors = {};
-    if(username.length < 4){
-      errors.username = "Username Must Contain 4+ Letters"
-    }else if(password.length < 6){
-      errors.password = "Password Must Contain 6+ Letters"
-    }else if(confirmPassword !== password){
-      errors.confirmPassword = "Passwords must match"
-    }
-    setErrors(errors)
-  }, [errors ,username ,password ,confirmPassword])
+    if(
+        email.length === 0 ||
+        username.length === 0 ||
+        firstName.length === 0 ||
+        lastName.length === 0 ||
+        password.length === 0 ||
+        confirmPassword.length === 0
+      ){
+        setIsDisabled(true)
+      }else{
+        setIsDisabled(false)
+      }
+
+  },[email,username,firstName,lastName,password,confirmPassword])
+
+  useEffect(() => {
+    if(
+        username.length < 4 ||
+        password.length < 6
+      ){
+        setIsDisabled(true)
+      }else{
+        setIsDisabled(false)
+      }
+  },[username,password])
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setErrors([]);
     if (password === confirmPassword) {
-      setErrors([]);
-      return dispatch(sessionActions.signup({ email, username, firstName, lastName, password }))
-        .then(closeModal)
-        .catch(async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
-          console.log('-----------',errors,data && data.errors)
-        });
+        setIsDisabled(false)
+        setErrors([]);
+        return dispatch(sessionActions.signup({ email, username, firstName, lastName, password }))
+            .then(async () => {
+                closeModal();
+            })
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) {
+                    setIsDisabled(true)
+                    setErrors(Object.values(data.errors));
+                    if (data.message === 'User already exists') {
+                        let newErrors = errors;
+                        newErrors.push('Username must be unique')
+                        setErrors(newErrors);
+                    }
+                }
+            });
     }
-    return setErrors(['Confirm Password field must be the same as the Password field']);
+    setIsDisabled(true)
+    return setErrors(['Password does not match confirmation password']);
   };
+
 
   return (
     <>
       <form onSubmit={handleSubmit}>
-        {/* <ul>
+        {errors && <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-        </ul> */}
+        </ul>}
         <div className="user-information">
           <h1>Sign Up</h1>
           <label>
@@ -109,14 +138,11 @@ function SignupFormModal() {
               required
             />
           </label>
-          {<p className="errors">{errors.confirmPassword}</p>}
           <button 
             type="submit" 
             id="sign-me-up"
-            disabled={Boolean(Object.values(errors).length)}
-          >
-            Sign Up
-          </button>
+            disabled={isDisabled}
+          >Sign Up</button>
         </div>
       </form>
     </>

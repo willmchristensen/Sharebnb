@@ -16,6 +16,8 @@
     grid-template-columns: repeat(4,1fr);
 }
 .spot-card{
+    height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,6 +34,8 @@
     background-color: rgba(255, 240, 240, 0.425);
 }
 .nav-link{
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -40,7 +44,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.432);
     margin: 1rem;
 }
-.nav-link-info-primary{
+.primary{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -48,11 +52,11 @@
     font-size: 10px;
     height: 20px;
 }
-.nav-link-info-primary > div > i{
+.primary > div > i{
     font-size: 10px;
     color: red;
 }
-.nav-link-info-secondary{
+.secondary{
     display: flex;
     justify-content: flex-start;
     font-size: 10px;
