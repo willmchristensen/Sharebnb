@@ -13,15 +13,17 @@ const SpotCards = ({ spot }) => {
           <div className="tooltip-text">{spot.name}</div>
           <SpotCardImage image={spot.previewImage}></SpotCardImage>
         </div>
-        <div className="nav-link-info primary">
-          <h4>{spot.city}</h4>
-          <div>
-            <i class="fas fa-star"></i>
-            {Boolean(spot.avgRating) ? spot.avgRating : 'New'}
+        <div className="nav-link-info">
+          <div className="nav-link-info primary">
+            <h4>{spot.city}</h4>
+            <div>
+              <i class="fas fa-star"></i>
+              {Boolean(spot.avgRating) ? spot.avgRating : 'New'}
+            </div>
           </div>
-        </div>
-        <div className="nav-link-info secondary">
-          <span>${spot.price} night</span>
+          <div className="nav-link-info secondary">
+            <span>${spot.price} night</span>
+          </div>
         </div>
       </div>
     </NavLink>
