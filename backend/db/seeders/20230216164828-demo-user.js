@@ -31,6 +31,13 @@ module.exports = {
         firstName: 'Vincent',
         lastName: 'Bob',
         hashedPassword: bcrypt.hashSync('password3')
+      },
+      {
+        email: 'SEEDEMAIL.com',
+        username: 'SEEDAccount',
+        firstName: 'SEEDFIRST',
+        lastName: 'SEEDLAST',
+        hashedPassword: bcrypt.hashSync('SEEDPASS')
       }
     ], {});
   },

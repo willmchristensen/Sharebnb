@@ -28,7 +28,13 @@ module.exports = {
         userId:3,
         startDate:"2021-10-19 20:39:36",
         endDate:"2021-11-19 20:39:36",
-      }
+      },
+      {
+        spotId:4,
+        userId:4,
+        startDate:"2021-1-19 20:39:36",
+        endDate:"2021-11-19 20:39:36",
+      },
 
     ], {});
   },
@@ -37,7 +43,7 @@ module.exports = {
     options.tableName = 'Bookings';
     return queryInterface.bulkDelete(options, {
       id: {
-        [Op.in]: [1,2,3]
+        [Op.in]: [1,2,3,4]
       }
     })
   }

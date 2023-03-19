@@ -11,9 +11,8 @@
     padding: .2em;
 }
 .spot-cards-section{
-    width: 1000px;
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(7,1fr);
 }
 .spot-card{
     height: 100%;
@@ -76,17 +75,19 @@
     flex-direction: column;
     align-items: center;
 }
-@media screen and (max-width: 1250px){
+@media screen and (max-width: 1440px){
     .spot-cards-section{
-        width: 1000px;
         display: grid;
         grid-template-columns: repeat(3,1fr);
     } 
 }
 @media screen and (max-width: 1055px){
     .spot-cards-section{
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
+    .spot-card{
+        width: 70%;
     } 
 }
 @media screen and (max-width: 768px){

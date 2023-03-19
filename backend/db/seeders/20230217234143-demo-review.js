@@ -28,7 +28,13 @@ module.exports = {
         userId:3,
         review:'Disgusting, i hated every second of the experience.',
         stars:4.3
-      }
+      },
+      {
+        spotId:4,
+        userId:4,
+        review:'probably the nicest place i have ever seen in my life',
+        stars:4
+      },
 
     ], {});
   },

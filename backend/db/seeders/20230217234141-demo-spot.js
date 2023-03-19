@@ -52,6 +52,20 @@ module.exports = {
         description: "It rains here",
         price: 999,
         previewImage: "https://www.urbnlivn.com/wp-content/uploads/2016/10/urbnlivn-yard-sign-800x576.jpg"
+      },
+      {
+        id: 4,
+        ownerId: 1,
+        address: "1123 West Way",
+        city: "Tacoma",
+        state: "Washington",
+        country: "United States of America",
+        lat: 11.7645358,
+        lng: -11.4730327,
+        name: "Every Backpacker's Dream",
+        description: "Dont forget to go on hike while you spend some time exploring the beautiful scenery.",
+        price: 234,
+        previewImage: "https://ap.rdcpix.com/f0d0680dab13b932f240428717495d57l-m904203565od-w480_h360_x2.jpg"
       }
     ], {});
   },
@@ -60,7 +74,7 @@ module.exports = {
     options.tableName = 'Spots';
     return queryInterface.bulkDelete(options, {
       id: {
-        [Op.in]: [1,2,3]
+        [Op.in]: [1,2,3,4]
       }
     })
   }
