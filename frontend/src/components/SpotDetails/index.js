@@ -93,7 +93,7 @@ const SpotDetails = () => {
                                 ) : spot.numReviews > 0 ? 
                                 (
                                     <h3>
-                                        {spot.numReviews} review(s)
+                                        {spot.numReviews} reviews
                                     </h3> 
                                 ) : 
                                 (
@@ -119,29 +119,32 @@ const SpotDetails = () => {
             <div className="spot-details-reviews-content-stars">
                 <i class="fas fa-star"></i>
                 <h3>{spot.avgStarRating}</h3>
-                <div className="dot">
-                    <i class="fas fa-dot-circle" id="dot"></i>
-                </div>
+                {
+                    spot.numReviews > 0 &&
+                    <div className="dot">
+                        <i class="fas fa-dot-circle" id="dot"></i>
+                    </div>
+                }
             </div>
             <div className="spot-details-reviews-content-reviews">
-            {
-                spot.numReviews === 1 ? 
-                (
-                    <h3>
-                        {spot.numReviews} review
-                    </h3> 
-                ) : spot.numReviews > 0 ? 
-                (
-                    <h3>
-                        {spot.numReviews} review(s)
-                    </h3> 
-                ) : 
-                (
-                    <h3>
-                        "New"
-                    </h3>
-                )
-            }
+                {
+                    spot.numReviews === 1 ? 
+                    (
+                        <h3>
+                            {spot.numReviews} review
+                        </h3> 
+                    ) : spot.numReviews > 0 ? 
+                    (
+                        <h3>
+                            {spot.numReviews} reviews
+                        </h3> 
+                    ) : 
+                    (
+                        <h3>
+                            "New"
+                        </h3>
+                    )
+                }
             </div>
         </div>
     </div>
