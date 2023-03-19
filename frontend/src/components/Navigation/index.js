@@ -21,6 +21,7 @@ function Navigation({ isLoaded }){
             <>
               <li>
                 <NavLink
+                  className
                   to={`/spots/new`}
                 >
                   Create A New Spot

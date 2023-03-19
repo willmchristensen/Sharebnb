@@ -66,7 +66,10 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
+      <button 
+        onClick={openMenu}
+        className="profile-menu"
+      >
         <i className="fas fa-user-circle" />
       </button>
       <ul 
