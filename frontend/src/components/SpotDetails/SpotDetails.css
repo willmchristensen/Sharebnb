@@ -93,12 +93,17 @@
 }
 .spot-details-info-reserve-reviews-stars{
     width: 10rem;
-    border: 1px solid rgb(255, 82, 82);
+    border: 1px solid var(--red);
     padding: 10px;
     display: flex;
     justify-content: space-between;
 }
-
+.reserve-spot{
+    margin: 10px;
+    border: 1px solid var(--grey);
+    background-color: var(--red);
+    border-radius: 1rem;
+}
 .spot-details-reviews{
     grid-area: d;
     border: 1px solid rgb(255, 183, 0);

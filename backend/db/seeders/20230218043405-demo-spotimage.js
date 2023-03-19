@@ -88,7 +88,31 @@ module.exports = {
       },
       {
         spotId:4,
-        url:'https://www.tripsavvy.com/thmb/9xJysslKpW4l_IqqwlkvX715rZQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/mount-rainier-611725458-5b10b1901d640400363473bd.jpg',
+        url:'https://cdn.daffodilstorage.com/wp-content/uploads/2022/04/Sunset-view-of-mountains-and-water-in-Tacoma-1200x836.jpg',
+        preview:false,
+      },
+      {
+        spotId:4,
+        url:'https://cdn.daffodilstorage.com/wp-content/uploads/2022/04/Sunset-view-of-mountains-and-water-in-Tacoma-1200x836.jpg',
+        preview:false,
+      },
+      {
+        spotId:5,
+        url:'https://www.oregonlive.com/resizer/Hg6syFhb76SKIbi0ZrzlLnA3I58=/arc-anglerfish-arc2-prod-advancelocal/public/3BY5AEDLBZCL3BDDJ54SX7JWDU.jpg',
+        preview:false,
+      },
+      {
+        spotId:5,
+        url:'https://www.oregonlive.com/resizer/Hg6syFhb76SKIbi0ZrzlLnA3I58=/arc-anglerfish-arc2-prod-advancelocal/public/3BY5AEDLBZCL3BDDJ54SX7JWDU.jpg',
+        preview:false,
+      },{
+        spotId:5,
+        url:'https://cdn.daffodilstorage.com/wp-content/uploads/2022/04/Sunset-view-of-mountains-and-water-in-Tacoma-1200x836.jpg',
+        preview:false,
+      },
+      {
+        spotId:5,
+        url:'https://www.oregonlive.com/resizer/Hg6syFhb76SKIbi0ZrzlLnA3I58=/arc-anglerfish-arc2-prod-advancelocal/public/3BY5AEDLBZCL3BDDJ54SX7JWDU.jpg',
         preview:false,
       },
       

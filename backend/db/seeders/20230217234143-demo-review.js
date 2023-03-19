@@ -14,25 +14,31 @@ module.exports = {
       {
         spotId:1,
         userId:1,
-        review:'probably the nicest place i have ever seen in my life',
+        review:'The fanciest place i have ever seen in my life',
         stars:5
       },
       {
         spotId:2,
         userId:2,
-        review:'Without a doub,t definitely, comfiest place i have ever been in my life',
+        review:'Definitely, comfiest place i have ever been in my life',
         stars:4.1
       },
       {
         spotId:3,
         userId:3,
-        review:'Disgusting, i hated every second of the experience.',
+        review:'Not my slice of pie.',
         stars:4.3
       },
       {
         spotId:4,
         userId:4,
-        review:'probably the nicest place i have ever seen in my life',
+        review:'Probably the nicest place i have ever seen in my life',
+        stars:4
+      },
+      {
+        spotId:5,
+        userId:4,
+        review:'The coziest place i have ever seen in my life',
         stars:4
       },
 

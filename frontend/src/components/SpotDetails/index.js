@@ -79,17 +79,26 @@ const SpotDetails = () => {
                             <h3>${spot.price} per night</h3>
                         </div>
                         <div className="spot-details-info-reserve-reviews-stars">
-                            <h3>{spot.avgStarRating}</h3>
+                        <div className="spot-details-reviews-content-stars">
+                            <i class="fas fa-star"></i>
+                            <h3>{Number(spot.avgStarRating).toFixed(1)}</h3>
+                            {
+                                spot.numReviews > 0 &&
+                                <div className="dot">
+                                    <i class="fas fa-dot-circle" id="dot"></i>
+                                </div>
+                            }
+                        </div>
                             {
                                 spot.numReviews === 1 ? 
                                 (
                                     <h3>
-                                        {Number(spot.numReviews).toFixed(2)} review
+                                        {Number(spot.numReviews).toFixed(0)} review
                                     </h3> 
                                 ) : spot.numReviews > 0 ? 
                                 (
                                     <h3>
-                                        {Number(spot.numReviews).toFixed(2)} reviews
+                                        {Number(spot.numReviews).toFixed(0)} reviews
                                     </h3> 
                                 ) : 
                                 (
@@ -114,7 +123,7 @@ const SpotDetails = () => {
         <div className="spot-details-reviews-content">
             <div className="spot-details-reviews-content-stars">
                 <i class="fas fa-star"></i>
-                <h3>{spot.avgStarRating}</h3>
+                <h3>{Number(spot.avgStarRating).toFixed(1)}</h3>
                 {
                     spot.numReviews > 0 &&
                     <div className="dot">
@@ -127,12 +136,12 @@ const SpotDetails = () => {
                     spot.numReviews === 1 ? 
                     (
                         <h3>
-                            {Number(spot.numReviews).toFixed(2)} review
+                            {Number(spot.numReviews).toFixed(0)} review
                         </h3> 
                     ) : spot.numReviews > 0 ? 
                     (
                         <h3>
-                            {Number(spot.numReviews).toFixed(2)} reviews
+                            {Number(spot.numReviews).toFixed(0)} reviews
                         </h3> 
                     ) : 
                     (

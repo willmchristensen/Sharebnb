@@ -34,7 +34,7 @@ module.exports = {
         country: "United States of America",
         lat: 35.4428,
         lng: -120.8921,
-        name: "Sandy",
+        name: "Sand and",
         description: "Sally sells seashells here",
         price: 200,
         previewImage: "https://media.architecturaldigest.com/photos/56f9add568aa959e79f353f4/master/w_5870,h_3889,c_limit/beach-houses-11.jpg"
@@ -48,7 +48,7 @@ module.exports = {
         country: "United States of America",
         lat: 37.7645358,
         lng: -122.4730327,
-        name: "Rainy",
+        name: "Inspiration",
         description: "It rains here",
         price: 999,
         previewImage: "https://www.urbnlivn.com/wp-content/uploads/2016/10/urbnlivn-yard-sign-800x576.jpg"
@@ -66,6 +66,20 @@ module.exports = {
         description: "Dont forget to go on hike while you spend some time exploring the beautiful scenery.",
         price: 234,
         previewImage: "https://ap.rdcpix.com/f0d0680dab13b932f240428717495d57l-m904203565od-w480_h360_x2.jpg"
+      },
+      {
+        id: 5,
+        ownerId: 2,
+        address: "9999 North West",
+        city: "Portland",
+        state: "Oregon",
+        country: "United States of America",
+        lat: 11.7645358,
+        lng: -11.4730327,
+        name: "What!?",
+        description: "How does a place as beautiful as this even exist?",
+        price: 337,
+        previewImage: "https://www.oregonlive.com/resizer/Hg6syFhb76SKIbi0ZrzlLnA3I58=/arc-anglerfish-arc2-prod-advancelocal/public/3BY5AEDLBZCL3BDDJ54SX7JWDU.jpg"
       }
     ], {});
   },
