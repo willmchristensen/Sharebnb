@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import {NavLink} from 'react-router-dom';
 import OpenModalMenuItem from '../OpenModalButton'
 import DeleteReviewModal from '../DeleteReviewModal'
 import UpdateReviewModal from '../UpdateReviewModal'
@@ -26,7 +27,6 @@ const ManageButtons = ({spot, review}) => {
     document.addEventListener('click', closeMenu);
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
-// FIXME: delete rview on spot details works fine, delete review on manage reviews requires a refresh.
   return (
     <>
       { 

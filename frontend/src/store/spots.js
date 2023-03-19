@@ -106,34 +106,12 @@ export const createOneSpot = (spot) => async (dispatch) => {
     });
     if (response.ok) {
         const spot = await response.json();
-        // const uploadedImages = await Promise.all(
-        //     images.map(async (img) => {
-        //         let url = img.url;
-        //         let preview = img.preview;
-        //         const imageRes = await csrfFetch(`/api/spots/${spot.id}/images`, {
-        //             method: "POST",
-        //             headers: {
-        //                 "Content-Type": "application/json",
-        //             },
-        //             body: JSON.stringify({
-        //                 url,
-        //                 preview
-        //             })
-        //         });
-        //         console.log('------------------------------imageRes',imageRes);
-        //         console.log('------------------------------imageRes.json', imageRes.json());
-        //         return imageRes;
-        //     })
-        // );
-        // spot.SpotImages = uploadedImages;
-        // console.log('------------------------------spot.SpotImages',spot.SpotImages);
         dispatch(addOne(spot));
         return spot;
     }
 };
 
 export const addSpotImage = (id, url, preview) => async () => {
-    console.log('--------------ITEMS IN ADD SPOT IMAGE--------------',id, url, preview);
     const response = await csrfFetch(`/api/spots/${id}/images`, {
         method: "post",
         headers: {
@@ -158,18 +136,18 @@ export const updateOneSpot =   (spot, images) => async (dispatch) => {
     });
     if(response.ok){
         const spot = await response.json();
-        spot.SpotImages = [];
-        images.forEach(async(img) => {
-            const imageRes = await csrfFetch(`/api/spots/${spot.id}/images`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(img)
-            });
-            const spotImage = await imageRes.json();
-            spot.SpotImages.push(spotImage);
-        });
+        // spot.SpotImages = [];
+        // images.forEach(async(img) => {
+        //     const imageRes = await csrfFetch(`/api/spots/${spot.id}/images`, {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json"
+        //         },
+        //         body: JSON.stringify(img)
+        //     });
+        //     const spotImage = await imageRes.json();
+        //     spot.SpotImages.push(spotImage);
+        // });
         dispatch(addOne(spot));
         return spot;
     }

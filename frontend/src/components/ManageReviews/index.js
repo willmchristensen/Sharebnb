@@ -8,30 +8,27 @@ const ManageReviews = () => {
   const dispatch = useDispatch(); 
   let reviews = useSelector(state => state.reviews.user);
   const sessionUser = useSelector(state => state.session.user);
-  console.log('------------------------------reviews-IN-MANAGE-REVIEWS',reviews);
   let allReviews = Object.values(reviews);
   useEffect(() => {
     dispatch(loadUserReviews())
   }, [dispatch,sessionUser]) 
   
-
   return (
     <main >
       <div className="manage-wrapper">
         <nav className="spot-cards-section">
           <div className="spot-cards-section-header">
             <h3>Manage Your Reviews</h3>
-            {/* <h2>{allReviews[0].Spot.address}</h2>     */}
           </div>
-            {
-              allReviews.map(review => {
-                return (
-                  <>
-                    <SpotReview review={review}></SpotReview>
-                  </>
-                )
-              })
-            }
+          {
+            allReviews.map(review => {
+              return (
+                <>
+                  <SpotReview review={review}></SpotReview>
+                </>
+              )
+            })
+          }
         </nav>
       </div>
     </main>

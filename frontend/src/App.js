@@ -12,6 +12,7 @@ import SpotCards from "./components/SpotCards";
 import SpotDetails from "./components/SpotDetails"
 import CreateNewSpot from "./components/CreateNewSpotForm";
 import PostAReviewModal from './components/PostAReviewModal'
+import UpdateSpot from './components/UpdateSpotForm'
 import ManageSpots from './components/ManageSpots'
 import ManageReviews from "./components/ManageReviews";
 import DeleteASpot from './components/DeleteSpotModal'
