@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
@@ -11,21 +11,28 @@ function PostAReviewModal({spot}) {
   const [stars, setStars] = useState(0);
   const { closeModal } = useModal();
   const [errors,setErrors] = useState({});
+  const [isDisabled, setIsDisabled] = useState(true)
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector(state => state.session.user);
 
+  useEffect(() => {
+    if(stars <= 0 || review.length < 10){
+      setIsDisabled(true)
+    }else{
+      setIsDisabled(false)
+    }
+  }, [stars,review])
+
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log('description,starsdescription,starsdescription,starsdescription,starsdescription,starsdescription,,stars',review,stars)
     const rev = {review,stars};
     const newReview = await dispatch(createOneReview(rev,spot.id, user))
       .then(closeModal)
       .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
-    });
-    console.log({newReview});
+      });
     if (newReview) history.push(`/spots/${spot.id}`);
   };
 
@@ -66,8 +73,9 @@ function PostAReviewModal({spot}) {
           <button
             type="submit"
             id="button"
+            disabled={isDisabled}
           >
-            Post Your Review
+            Submit Your Review
           </button>
         </div>
      </form>

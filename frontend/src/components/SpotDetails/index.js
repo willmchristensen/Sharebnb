@@ -18,7 +18,7 @@ const SpotDetails = () => {
     const {spotId} = useParams();
     const dispatch = useDispatch();
     const spot = useSelector(state => state.spots.singleSpot);
-    console.log('------------------------------spot', spot);
+    // const [hasReviews,setHasReviews] = useState(false);
     const spotImages = spot.SpotImages;
     const previewImage = spot.SpotImages[0];
     const reviews = useSelector(state => state.reviews.spot);
@@ -28,7 +28,7 @@ const SpotDetails = () => {
     const handleReservation = () => window.alert('Feature in progress');
     useEffect(() => {
         dispatch(loadSpotDetails(spotId));
-    }, [dispatch,spotId])
+    }, [dispatch,spotId,reviews])
     useEffect(() => {
         dispatch(loadSpotReviews(spotId));
     }, [dispatch,spotId])
@@ -85,7 +85,12 @@ const SpotDetails = () => {
                         <div className="spot-details-info-reserve-reviews-stars">
                             <h3>{spot.avgStarRating}</h3>
                             {
-                                spot.numReviews > 0 ? 
+                                spot.numReviews === 1 ? 
+                                (
+                                    <h3>
+                                        {spot.numReviews} review
+                                    </h3> 
+                                ) : spot.numReviews > 0 ? 
                                 (
                                     <h3>
                                         {spot.numReviews} review(s)
