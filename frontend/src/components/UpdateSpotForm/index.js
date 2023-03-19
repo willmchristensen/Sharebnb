@@ -314,7 +314,7 @@ function UpdateSpot({spot}) {
         type="submit"
         disabled={Boolean(Object.keys(errors).length) || Boolean(Object.keys(imageErrors).length)}
       >
-        Create Spot
+        Update Your Spot
       </button>
      </div>
     </form>
