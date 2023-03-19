@@ -2,7 +2,6 @@
     display: none;
 }
 .nav-bar{
-    border: 1px solid rgb(255, 217, 112);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -10,6 +9,8 @@
     width: 100%;
     margin: 0px;
     padding: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.247);
+    margin-bottom: 1rem;
 }
 ul > *{
     list-style: none;

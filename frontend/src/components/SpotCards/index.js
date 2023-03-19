@@ -9,8 +9,10 @@ const SpotCards = ({ spot }) => {
   return (
     <NavLink className="spot-card" key={spot.name} to={`/spots/${spot.id}`}>
       <div className="nav-link">
-        <div className="tooltip-text">{spot.name}</div>
-        <SpotCardImage image={spot.previewImage}></SpotCardImage>
+        <div className="tooltip">
+          <div className="tooltip-text">{spot.name}</div>
+          <SpotCardImage image={spot.previewImage}></SpotCardImage>
+        </div>
         <div className="nav-link-info-primary">
           <h4>{spot.city}</h4>
           <div>
