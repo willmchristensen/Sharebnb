@@ -12,6 +12,9 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.247);
     margin-bottom: 1rem;
 }
+.nav-bar > *{
+    
+}
 .nav-bar-conditional-content{
     display: flex;
     justify-content: space-between;
@@ -26,6 +29,7 @@ ul > *{
     padding: 10px;
 }
 a{
+    color: var(--red);
     font-size: 1.1rem;
     text-decoration: none;
     text-align: center;
@@ -33,12 +37,14 @@ a{
     align-items: center;
 }
 li{
+    color: var(--red);
     padding: 1rem;
     font-size: 1.1rem;
     text-decoration: none;
     text-align: center;
 }
 i{
+    color: var(--red);
     padding: 0.3rem;
     font-size: 1.8rem;
     text-decoration: none;
