@@ -109,8 +109,8 @@ function CreateNewSpot() {
       <div className="form-section one">
         <div className="form-row">
           <div className="form-row-data">
-            <h2>Create a New Spot</h2>
-            <h3>Where's your place located?</h3>
+            <h1>Create a New Spot</h1>
+            <h2>Where's your place located?</h2>
             <p>Guests will only get your exact address once they booked a reservation</p>
           </div>
         </div>
@@ -159,13 +159,15 @@ function CreateNewSpot() {
               </span>
             </div>
             <div className="form-row-data-input">
-              <input
-                type="text"
-                name="country"
-                value={city}
-                onChange={e=>setCity(e.target.value)}
-                placeholder="City"
-              />
+              <label>
+                <input
+                  type="text"
+                  name="country"
+                  value={city}
+                  onChange={e=>setCity(e.target.value)}
+                  placeholder="City"
+                />
+              </label>
             </div>
           </label>
             <label>
@@ -196,14 +198,13 @@ function CreateNewSpot() {
         <div className="form-row">
           <div className="form-row-data">
           <label>
-          Description
             <textarea
             name="review" 
             value={description} 
             onChange={e=>setDescription(e.target.value)}  
             cols="30" 
             rows="5"
-            placeHolder="Leave your review here..."
+            placeHolder="Please write at least 30 characters"
             />
           </label>
           <p className="errors">
@@ -213,14 +214,19 @@ function CreateNewSpot() {
         </div>
         <div className="form-row">
           <div className="form-row-data">
+            <h2>Create a title for your spot</h2>
+            <p>
+              Catch guests' attention with a spot title that highlights what makes your place special.
+            </p>
+          </div>
+          <div className="form-row-data">
             <label>
-            Name
               <input
                 type="text"
                 name="name"
                 value={name}
                 onChange={e=>setName(e.target.value)}
-                placeholder="Name"
+                placeholder="Name of your spot"
               />
             </label>
             <p className="errors">
@@ -229,6 +235,13 @@ function CreateNewSpot() {
           </div>
         </div>
         <div className="form-row">
+          <div className="form-row-data">
+            <h2>Set a base price for your spot</h2>
+            <p>
+              Competitive pricing can help your listing stand out and rank higher 
+              in search results.
+            </p>
+          </div>
           <div className="form-row-data">
             <label>
               <input
