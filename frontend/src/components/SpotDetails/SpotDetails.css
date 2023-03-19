@@ -3,7 +3,6 @@
 }
 .spot-details-section{
     width: 100%;
-    border: 10px solid black;
 }
 @media screen and (max-width: 1250px){
     .spot-details > *{
@@ -17,10 +16,13 @@
 }
 .spot-details-header{
     width: 100%;
+    padding: 1rem;
+    margin-bottom: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: left;
+    border-bottom: 0.01rem solid var(--red);
 }
 .spot-details-header > *{
     padding-left: 20px;
@@ -28,14 +30,12 @@
     margin-bottom: 5px;
 }
 .spot-details-images{
-    border: 10px solid purple;
     display: flex;
     justify-content: space-around;
     align-items: center;
     width: 100%;
 }
 .spot-details-images-hero{
-    border: 10px solid yellow;
     display: flex;
     align-items: center;justify-content: center;
     width: 70%;
@@ -44,11 +44,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border:10px solid pink;
     width: 100%;
 }
 .spot-details-images-support-cards{
-    border: 1px solid blue;
     display: grid;
     grid-template-areas:             
         "b a"            
@@ -56,31 +54,30 @@
         "b a";
     width: 100%;
 }
-.spot-details-images-support-cards > img{
-    width: 20rem
-}
 .spot-details-info{
     grid-area: c;
     display: grid;
     grid-template-areas: 
         "a b"
-        "c b";
+        "a b";
     margin: 20px;
 }
-.spot-details-info-title{
+.spot-details-info-section-one{
     grid-area: a;
-}
-.spot-details-info-description{
-    grid-area: c;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
 }
 .spot-details-info-reserve{
     grid-area: b;
+    margin: 1rem;
+    border: 1px solid var(--grey);
+    border-radius: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid burlywood;
-    border-radius: 4%;
     font-weight: 10;
     color: rgba(0, 0, 0, 0.733);
     padding: 20px;
@@ -91,9 +88,14 @@
     justify-content: space-between;
     align-items: center;
 }
+.spot-details-info-reserve-price{
+    border-bottom: 1px solid var(--grey);
+}
 .spot-details-info-reserve-reviews-stars{
+    border: 1px solid var(--grey);
+    border-radius: 1rem;
     width: 10rem;
-    border: 1px solid var(--red);
+    border-radius: 4%;
     padding: 10px;
     display: flex;
     justify-content: space-between;

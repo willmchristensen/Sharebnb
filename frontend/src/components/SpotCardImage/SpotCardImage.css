@@ -2,8 +2,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 18rem;
-    height: 18rem;
     padding: 1rem;
 }
 img{

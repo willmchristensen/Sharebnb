@@ -67,6 +67,9 @@
     justify-content: flex-start;
     font-size: 10px;
 }
+.spot-details-images-support-cards > .image-container > img{
+    box-shadow: 0 .1rem .1rem rgba(0, 0, 0, 0.432);
+}
 /* ------------SPOT CARDS------------ */
 /* MANAGE CARD */
 .manage-card{

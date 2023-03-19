@@ -64,14 +64,15 @@ const SpotDetails = () => {
         </div>
         <div className="spot-details-section">
             <div className="spot-details-info">
-                <hr />
-                <div className="spot-details-info-title">
-                    <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
-                </div>
-                <div className="spot-details-info-description">
-                    <p>
-                        {spot.description}
-                    </p>
+                <div className="spot-details-info-section-one">
+                    <div className="spot-details-info-title">
+                        <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
+                    </div>
+                    <div className="spot-details-info-description">
+                        <p>
+                            {spot.description}
+                        </p>
+                    </div>
                 </div>
                 <div className="spot-details-info-reserve">
                     <div className="spot-details-info-reserve-info">

@@ -1,5 +1,4 @@
 import {useEffect, useState} from 'react';
-import './stars.css'
 
 function StarsRatingInput({changeStars,rating}) {
 
