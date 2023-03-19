@@ -3,7 +3,6 @@ import {useDispatch} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import './CreateNewSpot.css'
 import { createOneSpot } from '../../store/spots';
-
 import { useModal } from "../../context/Modal";
 import { addSpotImage } from '../../store/spots';
 
@@ -107,201 +106,233 @@ function CreateNewSpot() {
       onSubmit={onSubmit}
     >
      <div className="user-information-create-spot">
-      <h2>Create a New Spot</h2>
-      <div className="form-row">
-        <div className="form-row-data">
-        <label>
-          <div className="form-row-data-label">
-            <span>Country</span>
-            <span className="errors">{errors.country}</span>
+      <div className="form-section one">
+        <div className="form-row">
+          <div className="form-row-data">
+            <h2>Create a New Spot</h2>
+            <h3>Where's your place located?</h3>
+            <p>Guests will only get your exact address once they booked a reservation</p>
           </div>
-          <input
-            type="text"
-            name="country"
-            value={country}
-            onChange={e=>setCountry(e.target.value)}
-            placeholder="Country"
-          />
-        </label>
         </div>
       </div>
-      <div className="form-row">
-        <div className="form-row-data">
-        <label>
-          <div className="form-row-data-label">
-            <span>Address</span>
-            {errors.address && (<span className="errors">{errors.address}</span>)}
-          </div>
-          <input
-            type="text"
-            name="country"
-            value={address}
-            onChange={e=>setAddress(e.target.value)}
-            placeholder="Address"
-          />
-        </label>
-        </div>
-      </div>
-      <div className="form-row">
-        <div className="form-row-data-city-state">
-        <label>
-          <div className="form-row-data-label">
-            <span>City</span>
-            <span className="errors">{errors.country}</span>
-          </div>
-          <input
-            type="text"
-            name="country"
-            value={city}
-            onChange={e=>setCity(e.target.value)}
-            placeholder="city"
-          />
-        </label>
+      <div className="form-section two">
+        <div className="form-row">
+          <div className="form-row-data">
           <label>
             <div className="form-row-data-label">
-              <span>State</span>
-              <span className="errors">{errors.state}</span>
+              <span>Country</span>
+              <span className="errors">{errors.country}</span>
             </div>
-          <input
-            type="text"
-            name="country"
-            value={state}
-            onChange={e=>setState(e.target.value)}
-            placeholder="state"
-          />
-        </label>
+            <input
+              type="text"
+              name="country"
+              value={country}
+              onChange={e=>setCountry(e.target.value)}
+              placeholder="Country"
+            />
+          </label>
+          </div>
+        </div>
+        <div className="form-row">
+          <div className="form-row-data">
+          <label>
+            <div className="form-row-data-label">
+              <span>Address</span>
+              <span className="errors">{errors.address}</span>
+            </div>
+            <input
+              type="text"
+              name="country"
+              value={address}
+              onChange={e=>setAddress(e.target.value)}
+              placeholder="Address"
+            />
+          </label>
+          </div>
+        </div>
+        <div className="form-row city-state">
+          <div className="form-row-data-city-state">
+          <label>
+            <div className="form-row-data-label">
+              <span>City</span>
+              <span className="errors">{errors.city}
+              </span>
+            </div>
+            <div className="form-row-data-input">
+              <input
+                type="text"
+                name="country"
+                value={city}
+                onChange={e=>setCity(e.target.value)}
+                placeholder="City"
+              />
+            </div>
+          </label>
+            <label>
+              <div className="form-row-data-label">
+                <span>State</span>
+                <span className="errors">{errors.state}</span>
+              </div>
+            <input
+              type="text"
+              name="country"
+              value={state}
+              onChange={e=>setState(e.target.value)}
+              placeholder="State"
+            />
+          </label>
+          </div>
         </div>
       </div>
-      <div className="form-row">
-        <div className="form-row-data">
-        <label>
-        Description
-          <input
-            type="text"
-            name="country"
-            value={description}
-            onChange={e=>setDescription(e.target.value)}
-            placeholder="description"
-          />
-        </label>
-        <p className="errors">
-          {errors.description}
-        </p>
+      <div className="form-section three">
+        <div className="form-row">
+          <div className="form-row-data">
+            <h2>Describe your place to guests</h2>
+            <p>
+              Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.
+            </p>
+          </div>
         </div>
-      </div>
-      <div className="form-row">
-        <div className="form-row-data">
-        <label>
-        Name
-          <input
-            type="text"
-            name="name"
-            value={name}
-            onChange={e=>setName(e.target.value)}
-            placeholder="name"
-          />
-        </label>
-        <p className="errors">
-          {errors.name}
-          </p>
-        </div>
-      </div>
-      <div className="form-row">
-        <div className="form-row-data">
-        <label>
-          <input
-            type="text"
-            name="price"
-            value={price}
-            onChange={e=>setPrice(e.target.value)}
-            placeholder="price"
-          />
-        </label>
+        <div className="form-row">
+          <div className="form-row-data">
+          <label>
+          Description
+            <textarea
+            name="review" 
+            value={description} 
+            onChange={e=>setDescription(e.target.value)}  
+            cols="30" 
+            rows="5"
+            placeHolder="Leave your review here..."
+            />
+          </label>
           <p className="errors">
-            {errors.price}
+            {errors.description}
           </p>
+          </div>
+        </div>
+        <div className="form-row">
+          <div className="form-row-data">
+            <label>
+            Name
+              <input
+                type="text"
+                name="name"
+                value={name}
+                onChange={e=>setName(e.target.value)}
+                placeholder="Name"
+              />
+            </label>
+            <p className="errors">
+              {errors.name}
+            </p>
+          </div>
+        </div>
+        <div className="form-row">
+          <div className="form-row-data">
+            <label>
+              <input
+                type="text"
+                name="price"
+                value={price}
+                onChange={e=>setPrice(e.target.value)}
+                placeholder="Price"
+              />
+            </label>
+              <p className="errors">
+                {errors.price}
+              </p>
+          </div>
         </div>
       </div>
-      <h2>Liven up your spot with photos</h2>
-      <h3>Submit a link to at least one photo to publish your spot.</h3>
-      <div className="form-row">
-        <div className="form-row-data">
-        <label>
-          <input
-            type="text"
-            name="country"
-            value={previewImage}
-            onChange={e=>setPreviewImage(e.target.value)}
-            placeholder="Preview Image URL"
-          />
-        </label>
-        {imageErrors.previewImage && <p className="errors">
-          {imageErrors.previewImage}
-        </p>}
+      <div className="form-section four">
+        <div className="form-row">
+          <div className="form-row-data">
+            <h2>Liven up your spot with photos</h2>
+            <p>
+              Submit a link to at least one photo to publish your spot.
+            </p>
+          </div>
         </div>
-      </div>
-      <div className="form-row">
-        <div className="form-row-data">
-        <label>
-          <input
-            type="text"
-            name="country"
-            value={photoOne}
-            onChange={e=>setPhotoOne(e.target.value)}
-            placeholder="Image URL"
-          />
-        </label>
+        <div className="form-row">
+          <div className="form-row-data">
+          <label>
+            <input
+              type="text"
+              name="country"
+              value={previewImage}
+              onChange={e=>setPreviewImage(e.target.value)}
+              placeholder="Preview Image URL"
+            />
+          </label>
+          {imageErrors.previewImage && <p className="errors">
+            {imageErrors.previewImage}
+          </p>}
+          </div>
+        </div>
+        <div className="form-row">
+          <div className="form-row-data">
+          <label>
+            <input
+              type="text"
+              name="country"
+              value={photoOne}
+              onChange={e=>setPhotoOne(e.target.value)}
+              placeholder="Image URL"
+            />
+          </label>
+            <p className="errors">
+              {photoErrors.photoOne}
+            </p>
+          </div>
+        </div>
+        <div className="form-row">
+          <div className="form-row-data">
+          <label>
+            <input
+              type="text"
+              name="country"
+              value={photoTwo}
+              onChange={e=>setPhotoTwo(e.target.value)}
+              placeholder="Image URL"
+            />
+          </label>
           <p className="errors">
-            {photoErrors.photoOne}
+            {photoErrors.photoTwo}
           </p>
+          </div>
         </div>
-      </div>
-      <div className="form-row">
-        <div className="form-row-data">
-        <label>
-          <input
-            type="text"
-            name="country"
-            value={photoTwo}
-            onChange={e=>setPhotoTwo(e.target.value)}
-            placeholder="Image URL"
-          />
-        </label>
-        <p className="errors">
-          {photoErrors.photoTwo}
-        </p>
+        <div className="form-row">
+          <div className="form-row-data">
+          <label>
+            <input
+              type="text"
+              name="country"
+              value={photoThree}
+              onChange={e=>setPhotoThree(e.target.value)}
+              placeholder="Image URL"
+            />
+          </label>
+          <p className="errors">
+            {photoErrors.photoThree}
+          </p>
+          </div>
         </div>
-      </div>
-      <div className="form-row">
-        <div className="form-row-data">
-        <label>
-          <input
-            type="text"
-            name="country"
-            value={photoThree}
-            onChange={e=>setPhotoThree(e.target.value)}
-            placeholder="Image URL"
-          />
-        </label>
-        <p className="errors">
-          {photoErrors.photoThree}
-        </p>
-        </div>
-      </div>
-      <div className="form-row">
-        <div className="form-row-data">
-        <label>
-          <input
-            type="text"
-            name="country"
-            value={photoFour}
-            onChange={e=>setPhotoFour(e.target.value)}
-            placeholder="Image URL"
-          />
-        </label>
-        <p className="errors">
-          {photoErrors.photoFour}
-        </p>
+        <div className="form-row">
+          <div className="form-row-data">
+          <label>
+            <input
+              type="text"
+              name="country"
+              value={photoFour}
+              onChange={e=>setPhotoFour(e.target.value)}
+              placeholder="Image URL"
+            />
+          </label>
+          <p className="errors">
+            {photoErrors.photoFour}
+          </p>
+          </div>
         </div>
       </div>
       <button
