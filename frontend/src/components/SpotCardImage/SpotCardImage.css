@@ -14,3 +14,8 @@ img{
     padding: 5px;
     object-fit: cover;
 }
+@media screen and (max-width: 330px){
+    img{
+        width: 70%;
+    }
+}

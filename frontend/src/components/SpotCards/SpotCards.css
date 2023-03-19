@@ -13,6 +13,7 @@
 .spot-cards-section{
     display: grid;
     grid-template-columns: repeat(7,1fr);
+    grid-gap: 1rem;
 }
 .spot-card{
     height: 100%;
@@ -22,7 +23,7 @@
     align-items: center;
 }
 .spot-card:hover .tooltip-text{
-    background-color: rgb(233, 233, 233);
+    background: radial-gradient(#d68c8c, #c7ccff);
     filter:brightness(150%);
     color: rgb(0, 0, 0);
     font-weight: bold;
@@ -30,8 +31,7 @@
     visibility: visible;
 }
 .nav-link:hover{
-    background-color: rgba(255, 255, 255, 0.425);
-    filter:brightness(101%);
+    filter:brightness(111%);
     box-shadow: 0 1rem 2rem rgb(133, 127, 127);
     font-weight: bold;
 }
@@ -86,13 +86,28 @@
         display: grid;
         grid-template-columns: repeat(2,1fr);
     }
-    .spot-card{
-        width: 70%;
-    } 
 }
 @media screen and (max-width: 768px){
     .spot-cards-section{
         display: flex;
         flex-direction: column;
-    } 
+        align-items: center;
+        justify-content: center;
+    }
+}
+@media screen and (max-width: 425px){
+    .spot-cards-section{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .spot-card{
+        width: ;
+    }
+}
+@media screen and (max-width: 330px){
+    .spot-card{
+        width: 70%;
+    }
 }
