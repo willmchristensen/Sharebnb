@@ -1,13 +1,8 @@
-
-.spot-card-image{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+img{
+    border-radius: 1rem;
+    display: block;
+    width: 11rem; 
+    height: 11rem; 
     padding: 5px;
-}
-/* TODO: MEDIA QUERIES? */
-.spot-card-image > img{
-    width: 10rem;
-    height: 10rem;
-    padding: 5px;
+    object-fit: cover;
 }
