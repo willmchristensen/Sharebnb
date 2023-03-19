@@ -30,3 +30,10 @@ i{
     font-size: 25px;
     text-align: center;
 }
+@media screen and (max-width: 1250px){
+    .nav-bar{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    } 
+}
