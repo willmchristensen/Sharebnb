@@ -4,10 +4,11 @@
     justify-content: center;
 }
 .tooltip-text{
-    border-radius: 0.5em;
+    border-radius: 0.1em;
     visibility: hidden;
     position: absolute;
     z-index: 1;
+    padding: .2em;
 }
 .spot-cards-section{
     width: 1000px;
@@ -20,8 +21,11 @@
     align-items: center;
 }
 .spot-card:hover .tooltip-text{
-    color: rgb(255, 123, 0);
-    font-weight: bolder;
+    background-color: rgb(233, 233, 233);
+    filter:brightness(150%);
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 1.1rem;
     visibility: visible;
 }
 .nav-link:hover{

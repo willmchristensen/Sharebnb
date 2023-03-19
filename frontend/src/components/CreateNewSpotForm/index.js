@@ -114,8 +114,6 @@ function CreateNewSpot() {
             <p>Guests will only get your exact address once they booked a reservation</p>
           </div>
         </div>
-      </div>
-      <div className="form-section two">
         <div className="form-row">
           <div className="form-row-data">
           <label>
@@ -152,24 +150,22 @@ function CreateNewSpot() {
         </div>
         <div className="form-row city-state">
           <div className="form-row-data-city-state">
-          <label>
-            <div className="form-row-data-label">
-              <span>City</span>
-              <span className="errors">{errors.city}
-              </span>
-            </div>
-            <div className="form-row-data-input">
-              <label>
-                <input
-                  type="text"
-                  name="country"
-                  value={city}
-                  onChange={e=>setCity(e.target.value)}
-                  placeholder="City"
-                />
-              </label>
-            </div>
-          </label>
+            <label>
+              <div className="form-row-data-label">
+                <span>City</span>
+                <span className="errors">{errors.city}
+                </span>
+              </div>
+                <label>
+                  <input
+                    type="text"
+                    name="country"
+                    value={city}
+                    onChange={e=>setCity(e.target.value)}
+                    placeholder="City"
+                  />
+                </label>
+            </label>
             <label>
               <div className="form-row-data-label">
                 <span>State</span>
@@ -182,9 +178,9 @@ function CreateNewSpot() {
               onChange={e=>setState(e.target.value)}
               placeholder="State"
             />
-          </label>
+            </label>
+            </div>
           </div>
-        </div>
       </div>
       <div className="form-section three">
         <div className="form-row">
