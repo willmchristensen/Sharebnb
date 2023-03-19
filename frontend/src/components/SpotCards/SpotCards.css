@@ -82,7 +82,14 @@
     .spot-cards-section{
         display: grid;
         grid-template-columns: repeat(3,1fr);
+    }
+    .spot-details-images-support-cards{
+        display: flex;
+        flex-direction: column;
     } 
+    .spot-details-images-support-cards > .image-container > img{
+        width: 75%;
+    }
 }
 @media screen and (max-width: 1055px){
     .spot-cards-section{
@@ -104,9 +111,6 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-    }
-    .spot-card{
-        width: ;
     }
 }
 @media screen and (max-width: 330px){

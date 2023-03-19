@@ -41,17 +41,8 @@
     width: 70%;
 }
 .spot-details-images-support{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-}
-.spot-details-images-support-cards{
     display: grid;
-    grid-template-areas:             
-        "b a"            
-        "b a"            
-        "b a";
+    grid-template-columns: repeat(2,1fr);
     width: 100%;
 }
 .spot-details-info{

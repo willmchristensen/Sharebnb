@@ -53,11 +53,9 @@ const SpotDetails = () => {
             {
                 spotImages.length > 1 && (
                     <div className="spot-details-images-support">
-                        <div className="spot-details-images-support-cards">
-                            {spotImages.map((image) =>
-                                <SpotCardImage image={image.url}/>
-                            )}
-                        </div>
+                        {spotImages.map((image) =>
+                            <SpotCardImage image={image.url}/>
+                        )}
                     </div>
                 )
             }
