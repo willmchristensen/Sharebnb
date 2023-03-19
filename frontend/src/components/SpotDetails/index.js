@@ -1,9 +1,6 @@
-// TODO: double check dependencies
-// TODO: WIDTH 1000PX??
 import { useEffect,useState,useRef } from 'react';
 import { useSelector, useDispatch,  } from 'react-redux';
 import { NavLink, Route, useParams} from 'react-router-dom';
-import { getAllSpots } from '../../store/spots';
 import SpotCardImage from '../SpotCardImage';
 import LargeCardImage from '../SpotCardImage/LargeCardImage';
 import SpotReview from '../SpotReview';
@@ -18,7 +15,6 @@ const SpotDetails = () => {
     const {spotId} = useParams();
     const dispatch = useDispatch();
     const spot = useSelector(state => state.spots.singleSpot);
-    // const [hasReviews,setHasReviews] = useState(false);
     const spotImages = spot.SpotImages;
     const previewImage = spot.SpotImages[0];
     const reviews = useSelector(state => state.reviews.spot);
@@ -88,12 +84,12 @@ const SpotDetails = () => {
                                 spot.numReviews === 1 ? 
                                 (
                                     <h3>
-                                        {spot.numReviews} review
+                                        {Number(spot.numReviews).toFixed(2)} review
                                     </h3> 
                                 ) : spot.numReviews > 0 ? 
                                 (
                                     <h3>
-                                        {spot.numReviews} reviews
+                                        {Number(spot.numReviews).toFixed(2)} reviews
                                     </h3> 
                                 ) : 
                                 (
@@ -131,12 +127,12 @@ const SpotDetails = () => {
                     spot.numReviews === 1 ? 
                     (
                         <h3>
-                            {spot.numReviews} review
+                            {Number(spot.numReviews).toFixed(2)} review
                         </h3> 
                     ) : spot.numReviews > 0 ? 
                     (
                         <h3>
-                            {spot.numReviews} reviews
+                            {Number(spot.numReviews).toFixed(2)} reviews
                         </h3> 
                     ) : 
                     (

@@ -25,8 +25,6 @@ function CreateNewSpot() {
   const [errors,setValidationErrors] = useState({});
   const [imageErrors, setImageErrors] = useState({});
   const [photoErrors, setPhotoErrors] = useState({});
-  const [isDisabled,setIsDisabled] = useState(true);
-  const [isSubmitted,setIsSubmitted] = useState(false);
 
   const { closeModal } = useModal();
   const history = useHistory();
@@ -34,47 +32,24 @@ function CreateNewSpot() {
 
   useEffect(() => {
     const errors = {};
-    if(isSubmitted && !country) {
-      errors.country = "Country is required"
-      setIsDisabled(true);
-    }
-    if(isSubmitted && !address) errors.address = "Address is required"
-    if(isSubmitted && !city) {
-      errors.city = "City is required"
-      setIsDisabled(true);
-    }
-    if(isSubmitted && !state) {
-      errors.state = "State is required"
-      setIsDisabled(true);
-    }
-    if(isSubmitted && !description) {
-      errors.description = "Description is required"
-      setIsDisabled(true);
-    }
-    if(isSubmitted && description.length < 30) {
-      errors.description = "Description needs 30 or more characters";
-      setIsDisabled(true);
-    }
-    if(isSubmitted && !name) {
-      errors.name = "Title is required"
-      setIsDisabled(true);
-    }
-    if(isSubmitted && !price) {
-      errors.price = "BasePrice is required"
-      setIsDisabled(true);
-    }
+    if(!country) errors.country = "Country is required"
+    if(!address) errors.address = "Address is required"
+    if(!city) errors.city = "City is required"
+    if(!state) errors.state = "State is required"
+    if(!description) errors.description = "Description is required"
+    if(description.length < 30) errors.description = "Description needs 30 or more characters";
+    if(!name) errors.name = "Title is required"
+    if(!price) errors.price = "BasePrice is required"
     setValidationErrors(errors) 
   }, [country,address,city,state,description,name,price]);
 
   useEffect(() => {
     let acceptedFiles = ['png','jpg','peg'];
     const errors = {}
-    if(isSubmitted && !previewImage){
+    if(!previewImage){
       errors.previewImage = "Preview image is required.";
-      setIsDisabled(true);
-    }else if(isSubmitted && !acceptedFiles.includes(previewImage.slice(previewImage.length - 3))){
+    }else if(!acceptedFiles.includes(previewImage.slice(previewImage.length - 3))){
       errors.previewImage = "Image URL must end in .png, .jpg, or .jpeg"
-      setIsDisabled(true);
     }
     setImageErrors(errors);
   }, [previewImage]);
@@ -82,28 +57,23 @@ function CreateNewSpot() {
   useEffect(() => {
     let acceptedFiles = ['png','jpg','peg'];
     const errors = {}
-    if(isSubmitted && !acceptedFiles.includes(photoOne.slice(photoOne.length - 3))){
+    if(!acceptedFiles.includes(photoOne.slice(photoOne.length - 3))){
       errors.photoOne = "Image URL must end in .png, .jpg, or .jpeg"
-      setIsDisabled(true);
     }
-    if(isSubmitted && !acceptedFiles.includes(photoTwo.slice(photoTwo.length - 3))){
+    if(!acceptedFiles.includes(photoTwo.slice(photoTwo.length - 3))){
       errors.photoTwo = "Image URL must end in .png, .jpg, or .jpeg"
-      setIsDisabled(true);
     }
-    if(isSubmitted && !acceptedFiles.includes(photoThree.slice(photoThree.length - 3))){
+    if(!acceptedFiles.includes(photoThree.slice(photoThree.length - 3))){
       errors.photoThree = "Image URL must end in .png, .jpg, or .jpeg"
-      setIsDisabled(true);
     }
-    if(isSubmitted && !acceptedFiles.includes(photoFour.slice(photoFour.length - 3))){
+    if(!acceptedFiles.includes(photoFour.slice(photoFour.length - 3))){
       errors.photoOne = "Image URL must end in .png, .jpg, or .jpeg"
-      setIsDisabled(true);
     }
     setPhotoErrors(errors);
   }, [photoOne,photoTwo,photoThree,photoFour]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitted(true);
     const vals = {
       country,address,city,state,description,price,lat,lng,name
     };
@@ -373,7 +343,7 @@ function CreateNewSpot() {
       </div>
       <button
         type="submit"
-        disabled={isDisabled}
+        disabled={Boolean(Object.keys(errors).length) || Boolean(Object.keys(imageErrors).length)}
       >
         Create Spot
       </button>
