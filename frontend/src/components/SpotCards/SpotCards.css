@@ -25,14 +25,14 @@
 .spot-card:hover .tooltip-text{
     background: radial-gradient(#d68c8c, #c7ccff);
     filter:brightness(150%);
-    color: rgb(0, 0, 0);
+    color: rgb(36, 0, 79);
     font-weight: bold;
     font-size: 1.1rem;
     visibility: visible;
 }
 .nav-link:hover{
-    filter:brightness(111%);
-    box-shadow: 0 1rem 2rem rgb(133, 127, 127);
+    filter:brightness(101%);
+    box-shadow: 0 .7rem 1.2rem rgb(133, 127, 127);
     font-weight: bold;
 }
 .nav-link{

@@ -21,10 +21,9 @@ function Navigation({ isLoaded }){
             <>
               <li>
                 <NavLink
-                  // key={}
                   to={`/spots/new`}
                 >
-                  create spot
+                  Create A New Spot
                 </NavLink>
               </li>
             </>

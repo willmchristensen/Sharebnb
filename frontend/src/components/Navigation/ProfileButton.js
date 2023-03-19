@@ -14,21 +14,19 @@ function ProfileButton({ user }) {
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
   const history = useHistory();
-
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
   };
-  
   let spots = useSelector(state => state.spots.allSpots);
   let allSpots = Object.values(spots);
   let reviews = useSelector(state => state.reviews.user);
   let allReviews = Object.values(reviews);
-  // console.log('------------------------------allSpots',allSpots);
+  let User = useSelector(state => state.session.user);
   useEffect(() => {
-    if(user){
-      let isOwner = allSpots.find(spot => spot.ownerId === user.id);
-      let opinionated = allReviews.find(review => review.userId === user.id);
+    if(User){
+      let isOwner = allSpots.find(spot => spot.ownerId === User.id);
+      let opinionated = allReviews.find(review => review.userId === User.id);
       if(isOwner){
         showManageSpots(true);
       }else if(!isOwner){
@@ -39,8 +37,7 @@ function ProfileButton({ user }) {
         showManageReviews(false);
       }
     }
-   }, [user]);
-
+   }, [User]);
   useEffect(() => {
     if (!showMenu) return;
     const closeMenu = (e) => {
@@ -77,13 +74,13 @@ function ProfileButton({ user }) {
         ref={ulRef}
       >
         {
-          user ? (
+          User ? (
             <>
               <li>
-                Hello, {user.username}
+                Hello, {User.username}
               </li>
               <li>
-                {user.email}
+                {User.email}
               </li>
               <li>
                 <NavLink
@@ -107,18 +104,19 @@ function ProfileButton({ user }) {
                 <button onClick={logout}>Log Out</button>
               </li>
             </> 
-        ) : (
-          <>
-            <OpenModalMenuItem
-              itemText="Log In"
-              modalComponent={<LoginFormModal />}
-            />
-            <OpenModalMenuItem
-              itemText="Sign Up"
-              modalComponent={<SignupFormModal />}
-            />
-          </>
-        )}
+          ) : (
+            <>
+              <OpenModalMenuItem
+                itemText="Log In"
+                modalComponent={<LoginFormModal />}
+              />
+              <OpenModalMenuItem
+                itemText="Sign Up"
+                modalComponent={<SignupFormModal />}
+              />
+            </>
+          )
+        }
       </ul>
     </>
   );

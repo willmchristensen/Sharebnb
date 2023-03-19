@@ -12,23 +12,42 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.247);
     margin-bottom: 1rem;
 }
+.nav-bar-conditional-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 ul > *{
     list-style: none;
     text-decoration: none;
-    border: 1px solid rgb(119, 223, 255);
     text-align: center;
     display: flex;
     align-items: center;
     padding: 10px;
 }
 a{
+    font-size: 1.1rem;
+    text-decoration: none;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+li{
+    padding: 1rem;
+    font-size: 1.1rem;
     text-decoration: none;
     text-align: center;
 }
 i{
-    border: 1px solid greenyellow;
-    font-size: 25px;
+    padding: 0.3rem;
+    font-size: 1.8rem;
+    text-decoration: none;
     text-align: center;
+    display: flex;
+    align-items: center;
+}
+.profile-dropdown > *{
+    border-bottom: 1px solid var(--red);
 }
 @media screen and (max-width: 1250px){
     .nav-bar{

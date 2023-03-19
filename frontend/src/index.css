@@ -1,5 +1,12 @@
+:root {
+    --red: rgb(255,56,92);
+    --blue: #89b5ef;
+    --grey: #777777;
+    --purple: #bcb3dd;
+}
 *{
     font-family: 'Roboto', sans-serif;
+    color:var(--red)
 }
 #root{
     display: flex;
@@ -27,8 +34,6 @@ form{
 #button{
     margin: 10px;
     border-radius: 7%;
-    border: 1px solid rgb(230, 231, 202);
-    background-color: rgba(123, 123, 123, 0.623);
     color: rgb(65, 65, 65);
     height: fit-content;
 }
@@ -37,5 +42,5 @@ form{
     filter: brightness(150%);
 }
 .errors{
-    color: red
+    color: var(--red)
 }
