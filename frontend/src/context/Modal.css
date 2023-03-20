@@ -3,8 +3,13 @@
   justify-content: center;
  }
 .modal-material > *{
-  border: 2px solid rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.446);
+  border: none;
+  width: 7rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: var(--grey);
+  color: var(--red);
+  height: fit-content;
 }
 #modal {
     position: fixed;

@@ -65,12 +65,12 @@ i{
     border: none;
     margin: .5rem;
 }
-#manage-reviews{
+#manage{
     border: none;
-    width: 100%;
+    width: 90%;
     padding: 1rem;
     border-radius: 1rem;
-    background-color: var(--red);
+    background: var(--grey);
     color: var(--green);
     height: fit-content;
 }

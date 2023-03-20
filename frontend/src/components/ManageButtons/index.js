@@ -33,7 +33,6 @@ const ManageButtons = ({spot, review}) => {
         review ? 
         (
           <div className="modal-material">
-            {console.log(review,'review in -delete-review-modal--------------------------------------------**')}
               {/* <OpenModalMenuItem
                 buttonText="Update Review"
                 // onItemClick={closeMenu}

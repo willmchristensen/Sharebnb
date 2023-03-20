@@ -85,7 +85,9 @@ function ProfileButton({ user }) {
               <li>
                 {User.email}
               </li>
-              <li>
+              <li
+                id="manage"
+              >
                 <NavLink
                   // key={}
                   to={`/spots/current`}
@@ -95,7 +97,7 @@ function ProfileButton({ user }) {
                 </NavLink>
               </li>
               <li
-                id="manage-reviews"
+                id="manage"
               >
                 <NavLink
                   // key={}
