@@ -94,7 +94,9 @@ function ProfileButton({ user }) {
                   Manage Spots
                 </NavLink>
               </li>
-              <li>
+              <li
+                id="manage-reviews"
+              >
                 <NavLink
                   // key={}
                   to={`/reviews/current`}
@@ -103,8 +105,15 @@ function ProfileButton({ user }) {
                   Manage Reviews
                 </NavLink>
               </li>
-              <li>
-                <button onClick={logout}>Log Out</button>
+              <li
+                id="logout"
+              >
+                <button 
+                  onClick={logout}
+                  className="logout"
+                >
+                  Log Out
+                </button>
               </li>
             </> 
           ) : (

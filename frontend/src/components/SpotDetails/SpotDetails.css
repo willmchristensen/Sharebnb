@@ -99,8 +99,8 @@
     width: 18rem;
     padding: .7rem;
     margin: 2rem;
-    border: .2rem solid var(--grey);
-    background: radial-gradient(var(--green), var(--red),var(--grey));
+    border-bottom: .2rem solid var(--grey);
+    background-color: var(--red);
     border-radius: 1rem;
 }
 .post-review{

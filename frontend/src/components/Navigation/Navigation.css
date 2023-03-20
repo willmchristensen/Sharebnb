@@ -8,7 +8,6 @@
 }
 .profile-menu > *{
     color: var(--green);
-    padding: 1rem;
 }
 .hidden{
     display: none;
@@ -59,6 +58,33 @@ i{
 }
 .profile-dropdown > *{
     border-bottom: 1px solid var(--red);
+    padding: 0.5rem;
+    margin: .5rem;
+}
+#logout{
+    border: none;
+    margin: .5rem;
+}
+#manage-reviews{
+    border: none;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: var(--red);
+    color: var(--green);
+    height: fit-content;
+}
+.logout{
+    border: none;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: var(--red);
+    height: fit-content;
+}
+.logout:hover{
+    box-shadow: 1px 1px 1px rgb(202, 231, 202);
+    filter: brightness(150%);
 }
 @media screen and (max-width: 1250px){
     .nav-bar{
