@@ -16,7 +16,11 @@ const SpotDetails = () => {
     const dispatch = useDispatch();
     const spot = useSelector(state => state.spots.singleSpot);
     const spotImages = spot.SpotImages;
-    const previewImage = spot.SpotImages[0];
+    const sperts = useSelector(state => state.spots.allSpots);
+    const allSpots = Object.values(sperts);
+    const spotPreviewImg = allSpots.find(spt => spt.id === spot.id);
+    const previewImage = spotPreviewImg.previewImage;
+    console.log(previewImage)
     const reviews = useSelector(state => state.reviews.spot);
     const allReviews = Object.values(reviews);
     const sessionUser = useSelector(state => state.session.user);
@@ -172,8 +176,7 @@ const SpotDetails = () => {
                     "Post Your Review!"
                 </h3> 
             ): (
-                allReviews.map(rev => 
-                    <SpotReview review={rev}/>)
+                allReviews.map(rev => <SpotReview review={rev}/>)
             )
         }
     </div>
