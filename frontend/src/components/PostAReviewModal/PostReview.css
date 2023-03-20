@@ -17,5 +17,9 @@
     width: 90%;
 }
 #review-button{
-    border: 1rem solid var(--red);
+    color:var(--red);
+    border: .1rem solid var(--red);
+    border-radius: 1rem;
+    padding: .5rem;
+    margin-bottom:1rem;
 }
