@@ -18,7 +18,6 @@
         flex-direction: column;
     }
     .spot-details-header{
-        width: 1000px;
         display: flex;
         align-items: center;
     }
@@ -47,6 +46,41 @@
     }
 }
 @media screen and (max-width: 768px){
+    .spot-details{
+        max-width: 1000px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .spot-details-images{
+        display: flex;
+        flex-direction: column;
+    }
+    .spot-details-header{
+        display: flex;
+        align-items: center;
+    }
+    .spot-details-reviews{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .post-review{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .spot-details-section{
+        display: flex;
+        flex-direction: column;
+    }
+    .spot-details-info{
+        display: flex;
+        flex-direction: column;
+    }
 }
 .spot-details-header{
     width: 100%;

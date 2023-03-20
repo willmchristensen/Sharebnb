@@ -96,7 +96,8 @@ i{
 #manage{
     border: none;
     width: 90%;
-    padding: 1rem;
+    padding: .5rem; 
+    margin: .5rem;
     border-radius: 1rem;
     background: var(--grey);
     color: var(--green);
