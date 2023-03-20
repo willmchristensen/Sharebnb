@@ -1,6 +1,7 @@
 # AirBnB Clone
 #TECH USED:
 * html css javascript react redux express sequelize 
+https://will-api-project.onrender.com/
 
 Feature: Landing Page - List of All Spots
 User Stories
