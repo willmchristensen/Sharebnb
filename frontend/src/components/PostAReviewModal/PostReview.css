@@ -16,3 +16,6 @@
 .user-information > label > input{
     width: 90%;
 }
+#review-button{
+    border: 1rem solid var(--red);
+}

@@ -31,16 +31,6 @@ form{
     width: 100%;
     width: fit-content;
 }
-#button{
-    margin: 10px;
-    border-radius: 1rem;
-    color: var(--grey);
-    height: fit-content;
-}
-#button:hover{
-    box-shadow: 1px 1px 1px rgb(202, 231, 202);
-    filter: brightness(150%);
-}
 .errors{
     color: var(--red)
 }

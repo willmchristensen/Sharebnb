@@ -23,7 +23,7 @@ module.exports = {
         name: "Cabin Heaven",
         description: "Dream House in the Redwoods with hot tub and sauna",
         price: 535,
-        previewImage: "https://www.greenbuilt.org/images/SamselCabin4.jpg"
+        previewImage: "https://a0.muscache.com/im/pictures/03d885fe-8255-4556-9b89-dca81ddef77e.jpg"
       },
       {
         id: 2,

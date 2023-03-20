@@ -1,17 +1,24 @@
 .spot-details{
     width: 1000px;
-}
-.spot-details-section{
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 @media screen and (max-width: 1250px){
     .spot-details > *{
+        width: 1000px;
         display: flex;
         flex-direction: column;
     }
     .spot-details-images{
         display: flex;
         flex-direction: column;
+    }
+    .spot-details-header{
+        width: 1000px;
+        display: flex;
+        align-items: center;
     }   
 }
 .spot-details-header{
@@ -45,7 +52,6 @@
     display: grid;
     grid-gap: 1rem;
     grid-template-columns: repeat(2,1fr);
-    width: 90%;
 }
 .spot-details-info{
     grid-area: c;

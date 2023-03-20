@@ -72,7 +72,7 @@ function PostAReviewModal({spot}) {
           </StarsRatingInput>
           <button
             type="submit"
-            id="button"
+            id="review-button"
             disabled={isDisabled}
           >
             Submit Your Review
