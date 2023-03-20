@@ -14,36 +14,16 @@
         justify-content: center;
     }
     .spot-details-images{
+        border: solid 1px red;
         display: flex;
         flex-direction: column;
-    }
-    .spot-details-header{
-        display: flex;
-        align-items: center;
     }
     .spot-details-images-hero{
         width: 50%;
+    }
+    .spot-details-header{
+        text-align: center;
     }   
-    .spot-details-reviews{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    .post-review{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    .spot-details-section{
-        display: flex;
-        flex-direction: column;
-    }
-    .spot-details-info{
-        display: flex;
-        flex-direction: column;
-    }
 }
 @media screen and (max-width: 768px){
     .spot-details{
@@ -53,31 +33,16 @@
         align-items: center;
         justify-content: center;
     }
-    .spot-details-images{
-        display: flex;
-        flex-direction: column;
-    }
-    .spot-details-header{
-        display: flex;
-        align-items: center;
-    }
-    .spot-details-reviews{
+    .spot-details-info-section-one{
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-    }
-    .post-review{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    .spot-details-section{
-        display: flex;
-        flex-direction: column;
     }
     .spot-details-info{
+        display: flex;
+        flex-direction: column;
+    }
+    .spot-details-info-reserve > *{
         display: flex;
         flex-direction: column;
     }
@@ -114,24 +79,11 @@
     grid-template-columns: repeat(2,1fr);
 }
 .spot-details-info{
-    grid-area: c;
-    display: grid;
-    grid-template-areas: 
-        "a b"
-        "a b";
-    margin: 20px;
-    padding: 1rem;
-    margin: 2rem;
-}
-.spot-details-info-section-one{
-    grid-area: a;
     display: flex;
-    align-items: flex-start;
-    flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
 .spot-details-info-reserve{
-    grid-area: b;
     margin: 1rem;
     border: 1px solid var(--grey);
     border-radius: 1rem;
