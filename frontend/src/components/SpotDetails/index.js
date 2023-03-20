@@ -44,7 +44,7 @@ const SpotDetails = () => {
                 >
                     <div className="nav-link">
                         <div className="nav-link-image">
-                            <LargeCardImage image={previewImage}>
+                            <LargeCardImage image={previewImage.url}>
                             </LargeCardImage>
                         </div>
                     </div>
@@ -53,7 +53,7 @@ const SpotDetails = () => {
             {
                 spotImages.length > 1 && (
                     <div className="spot-details-images-support">
-                        {spotImages.map((image) =>
+                        {spotImages.slice(1).map((image) =>
                             <SpotCardImage image={image.url}/>
                         )}
                     </div>
