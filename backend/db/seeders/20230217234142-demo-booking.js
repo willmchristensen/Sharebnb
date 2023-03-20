@@ -41,6 +41,18 @@ module.exports = {
         startDate:"2021-1-19 20:39:36",
         endDate:"2021-11-19 20:39:36",
       },
+      {
+        spotId:6,
+        userId:4,
+        startDate:"2021-1-19 20:39:36",
+        endDate:"2021-11-19 20:39:36",
+      },
+      {
+        spotId:7,
+        userId:4,
+        startDate:"2020-1-19 20:39:36",
+        endDate:"2020-11-19 20:39:36",
+      },
     ], {});
   },
 
