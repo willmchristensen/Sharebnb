@@ -56,22 +56,22 @@
 .nav-link-info{
     width: 90%;
 }
+#card-stars{
+    display: flex;
+    align-items: center;
+}
 .primary{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px;
-    font-size: 10px;
-    height: 20px;
 }
 .primary > div > i{
     font-size: 10px;
-    color: red;
+    color: var(--red);
 }
 .secondary{
     display: flex;
     justify-content: flex-start;
-    font-size: 10px;
 }
 .spot-details-images-support-cards > .image-container > img{
     box-shadow: 0 .1rem .1rem rgba(0, 0, 0, 0.432);

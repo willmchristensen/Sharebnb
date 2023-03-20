@@ -62,9 +62,8 @@ i{
     padding: .37rem;
 }
 #logo:hover{
-    filter: brightness(120%);
-    background: repeating-radial-gradient(var(--green), var(--purple));
-    box-shadow: 1px 1px 1px 1px var(--green);
+    font-weight: bold;
+    filter: saturate(4);
 }
 .fa-yin-yang{
     height: 1rem;
