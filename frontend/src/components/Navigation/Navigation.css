@@ -1,13 +1,12 @@
 .fa-yin-yang{
-    color: var(--green);
-    padding: 1rem;
+    color: var(--grey);
 }
 .profile-menu{
     background-color: white;
     border: none;
 }
 .profile-menu > *{
-    color: var(--green);
+    color: var(--grey);
 }
 .hidden{
     display: none;
@@ -58,8 +57,7 @@ i{
 }
 .profile-dropdown > *{
     border-bottom: 1px solid var(--red);
-    padding: 0.5rem;
-    margin: .5rem;
+    margin-right: 2rem;
 }
 #logout{
     border: none;

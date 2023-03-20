@@ -15,7 +15,7 @@ const SpotCards = ({ spot }) => {
         </div>
         <div className="nav-link-info">
           <div className="nav-link-info primary">
-            <h4>{spot.city}</h4>
+            <h4>{spot.city}, {spot.state}</h4>
             <div>
               <i class="fas fa-star"></i>
               {Boolean(spot.avgRating) ? Number(spot.avgRating).toFixed(1) : 'New'}

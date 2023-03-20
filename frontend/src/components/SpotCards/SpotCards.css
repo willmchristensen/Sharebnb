@@ -35,8 +35,11 @@
 }
 .nav-link:hover{
     filter:brightness(101%);
-    box-shadow: 0 .7rem 1.2rem rgb(133, 127, 127);
+    box-shadow: 0 .7rem 1.2rem var(--grey);
     font-weight: bold;
+}
+.nav-link:hover .image-container img{
+    filter:brightness(110%);
 }
 .nav-link{
     height: 100%;
