@@ -58,17 +58,23 @@ i{
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 1rem;
+    padding: .37rem;
+}
+#logo:hover{
+    filter: brightness(120%);
+    background: repeating-radial-gradient(var(--green), var(--purple));
+    box-shadow: 1px 1px 1px 1px var(--green);
 }
 .fa-yin-yang{
     height: 1rem;
     width: 1rem;
     padding-right: 1rem;
-    margin-right: 1rem;
     margin-left: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--green);
+    color: var(--grey);
 }
 .fa-user-circle{
     height: 1rem;
@@ -106,7 +112,6 @@ i{
     height: fit-content;
 }
 .logout:hover{
-    box-shadow: 1px 1px 1px rgb(202, 231, 202);
     filter: brightness(150%);
 }
 @media screen and (max-width: 1250px){
