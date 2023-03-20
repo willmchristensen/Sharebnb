@@ -14,7 +14,7 @@ module.exports = {
     [
       {
         spotId:1,
-        url:'https://www.greenbuilt.org/images/SamselCabin4.jpg',
+        url:'https://a0.muscache.com/im/pictures/03d885fe-8255-4556-9b89-dca81ddef77e.jpg',
         preview: true,
       },
       {
@@ -244,7 +244,7 @@ module.exports = {
     options.tableName = 'SpotImages';
     return queryInterface.bulkDelete(options, {
       id: {
-        [Op.in]: [1,2,3,4,5,6,7]
+        [Op.in]: [1,2,3,4,5,6,7,8,9]
       }
     })
   }
