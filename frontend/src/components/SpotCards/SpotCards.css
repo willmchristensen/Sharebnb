@@ -12,8 +12,11 @@
 }
 .spot-cards-section{
     display: grid;
-    grid-template-columns: repeat(7,1fr);
-    grid-gap: 1rem;
+    grid-template-columns: repeat(4,1fr);
+    row-gap: 3rem;
+    column-gap: 2rem;
+    align-items: center;
+    justify-content: center;
 }
 .spot-card{
     height: 100%;

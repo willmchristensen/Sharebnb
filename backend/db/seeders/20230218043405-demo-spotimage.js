@@ -139,7 +139,7 @@ module.exports = {
       },
       {
         spotId:6,
-        url:'https://a0.muscache.com/im/pictures/miso/Hosting-21739874/original/29aae9c7-3143-4547-8b6c-9338af02e098.jpeg',
+        url:'https://a0.muscache.com/im/pictures/miso/Hosting-16905264/original/2c06e930-ceaf-4b20-951f-a49aea1081e7.jpeg',
         preview: true,
       },
       {
@@ -186,6 +186,56 @@ module.exports = {
         spotId:7,
         url:'https://a0.muscache.com/im/pictures/miso/Hosting-21739874/original/5ef235c4-8534-441a-973f-4491ad396eec.jpeg',
         preview:false,
+      },
+      {
+        spotId:8,
+        url:'https://www.greenbuilt.org/images/SamselCabin4.jpg',
+        preview: true,
+      },
+      {
+        spotId:8,
+        url:'https://a0.muscache.com/im/pictures/5cc0abe4-8eb5-4fc6-b06d-f881e28d17bb.jpg',
+        preview:false,
+      },
+      {
+        spotId:8,
+        url:'https://a0.muscache.com/im/pictures/miso/Hosting-36198980/original/85ba9f30-b1c5-4ace-9901-a55222862165.jpeg',
+        preview:false,
+      },
+      {
+        spotId:8,
+        url:'https://a0.muscache.com/im/pictures/miso/Hosting-36198980/original/83ac2a7f-e9a1-4b56-9e2b-89303a4a55c6.jpeg',
+        preview:false,
+      },
+      {
+        spotId:8,
+        url:'https://a0.muscache.com/im/pictures/b35816f0-1b23-4d93-bedc-a67da2c53324.jpg',
+        preview:false,
+      },
+      {
+        spotId:9,
+        url:'https://a0.muscache.com/im/pictures/62790a3f-41a1-4cbf-b27f-6122713740ad.jpg',
+        preview: true,
+      },
+      {
+        spotId:9,
+        url:'https://a0.muscache.com/im/pictures/b6580942-5a6e-452e-bba5-c619a7e960ce.jpg',
+        preview:false,
+      },
+      {
+        spotId:9,
+        url:'https://a0.muscache.com/im/pictures/17767f80-b37d-428d-a056-5154f49d7b36.jpg',
+        preview:false,
+      },
+      {
+        spotId:9,
+        url:'https://a0.muscache.com/im/pictures/ab6f7fa7-c946-42f5-876f-ee62325476b9.jpg',
+        preview:false,
+      },
+      {
+        spotId:9,
+        url:'https://a0.muscache.com/im/pictures/2eb98f26-a348-42cf-bd04-acdf9a51a403.jpg',
+        preview:true,
       },
     ], {});
   },

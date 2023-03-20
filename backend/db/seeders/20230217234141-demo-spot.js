@@ -17,7 +17,7 @@ module.exports = {
         address: "1739 RedWoods Lane",
         city: "Trinidad",
         state: "California",
-        country: "United States of America",
+        country: "United States",
         lat: 36.2704,
         lng: -121.8081,
         name: "Cabin Heaven",
@@ -31,7 +31,7 @@ module.exports = {
         address: "456 Beach House",
         city: "Carpinteria",
         state: "California",
-        country: "United States of America",
+        country: "United States",
         lat: 35.4428,
         lng: -120.8921,
         name: "Sand",
@@ -45,7 +45,7 @@ module.exports = {
         address: "789 Big City",
         city: "Seattle",
         state: "Washington",
-        country: "United States of America",
+        country: "United States",
         lat: 37.7645358,
         lng: -122.4730327,
         name: "Inspire",
@@ -59,7 +59,7 @@ module.exports = {
         address: "1123 West Way",
         city: "Vashon",
         state: "Washington",
-        country: "United States of America",
+        country: "United States ",
         lat: 11.7645358,
         lng: -11.4730327,
         name: "Waterfront",
@@ -85,30 +85,58 @@ module.exports = {
         id: 6,
         ownerId: 2,
         address: "1123 West North",
-        city: "Boulder",
-        state: "Utah",
-        country: "United States Of America",
+        city: "Raray",
+        state: "Hauts-de-France",
+        country: "France",
         lat: 11.7645358,
         lng: -11.4730327,
-        name: "Rock",
+        name: "Tree",
         description: "Original Spa Cabin sleeps 2 people",
-        price: 355,
-        previewImage: "https://a0.muscache.com/im/pictures/miso/Hosting-21739874/original/29aae9c7-3143-4547-8b6c-9338af02e098.jpeg"
+        price: 373,
+        previewImage: "https://a0.muscache.com/im/pictures/miso/Hosting-16905264/original/2c06e930-ceaf-4b20-951f-a49aea1081e7.jpeg"
       },
       {
         id: 7,
         ownerId: 2,
         address: "1123 South Bay",
-        city: "James",
-        state: "Barbados",
+        city: "Boulder",
+        state: "Utah",
         country: "United States of America",
         lat: 11.7645358,
         lng: -11.4730327,
         name: "How!?",
-        description: "Dont touch or buy anything",
+        description: "BedrocK Homestead Cave West End",
         price: 355,
         previewImage: "https://a0.muscache.com/im/pictures/miso/Hosting-21739874/original/29aae9c7-3143-4547-8b6c-9338af02e098.jpeg"
-      }
+      },
+      {
+        id: 8,
+        ownerId: 1,
+        address: "1739 RedWoods Lane",
+        city: "Trinidad",
+        state: "California",
+        country: "United States",
+        lat: 36.2704,
+        lng: -121.8081,
+        name: "Cabin Heaven",
+        description: "Dream House in the Redwoods with hot tub and sauna",
+        price: 535,
+        previewImage: "https://www.greenbuilt.org/images/SamselCabin4.jpg"
+      },
+      {
+        id: 9,
+        ownerId: 3,
+        address: "456 Beach House",
+        city: "Carpinteria",
+        state: "California",
+        country: "United States",
+        lat: 35.4428,
+        lng: -120.8921,
+        name: "Sand",
+        description: "New Beach Loft at Padero Beach. On the water in SB",
+        price: 571,
+        previewImage: "https://a0.muscache.com/im/pictures/62790a3f-41a1-4cbf-b27f-6122713740ad.jpg"
+      },
     ], {});
   },
 
@@ -116,7 +144,7 @@ module.exports = {
     options.tableName = 'Spots';
     return queryInterface.bulkDelete(options, {
       id: {
-        [Op.in]: [1,2,3,4]
+        [Op.in]: [1,2,3,4,5,6,7]
       }
     })
   }
