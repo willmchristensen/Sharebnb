@@ -96,10 +96,17 @@
     justify-content: space-between;
 }
 .reserve-spot{
-    margin: 10px;
-    border: .1rem solid var(--grey);
-    background-color: var(--red);
+    width: 18rem;
+    padding: .7rem;
+    margin: 2rem;
+    border: .2rem solid var(--grey);
+    background: radial-gradient(var(--green), var(--red),var(--grey));
     border-radius: 1rem;
+}
+.post-review{
+    display: flex;
+    margin: 1rem;
+    padding: .7rem;
 }
 .spot-details-reviews{
     grid-area: d;

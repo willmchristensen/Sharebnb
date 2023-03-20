@@ -154,21 +154,27 @@ const SpotDetails = () => {
     </div>
     { sessionUser && !allReviews.find(rev => rev.userId === sessionUser.id) && spot.ownerId !== sessionUser.id &&
         (
-            <div className="modal-material">
-                <OpenModalMenuItem
-                    buttonText="POST A REVIEW"
-                    modalComponent={<PostAReviewModal spot={spot}/>}
-                />
+            <div className="post-review">
+                <div className="modal-material">
+                    <OpenModalMenuItem
+                        buttonText="Post Your Review"
+                        modalComponent={<PostAReviewModal spot={spot}/>}
+                    />
+                </div>
             </div>
         )
     }
     </div>
-        { 
-            allReviews.map(review => {
-                return (
-                    <SpotReview review={review}></SpotReview>
-                );
-            })
+        {
+            spot.numReviews === 0 ? 
+            (
+                <h3>
+                    "Post Your Review!"
+                </h3> 
+            ): (
+                allReviews.map(rev => 
+                    <SpotReview review={rev}/>)
+            )
         }
     </div>
   );
