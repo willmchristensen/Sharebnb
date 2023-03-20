@@ -14,7 +14,6 @@
         justify-content: center;
     }
     .spot-details-images{
-        border: solid 1px red;
         display: flex;
         flex-direction: column;
     }
