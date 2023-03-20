@@ -9,7 +9,9 @@ function Navigation({ isLoaded }){
 
   return (
     <ul className="nav-bar">
-      <li>
+      <li
+        id="logo"
+      >
         <NavLink exact to="/">
           <i class="fas fa-yin-yang"></i>
           <span className="logo">ShareBnb</span>

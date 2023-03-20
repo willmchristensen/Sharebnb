@@ -1,6 +1,4 @@
-.fa-yin-yang{
-    color: var(--grey);
-}
+
 .profile-menu{
     background-color: white;
     border: none;
@@ -17,6 +15,7 @@
     align-items: center;
     font-family: 'Roboto', sans-serif;
     width: 100%;
+    padding-bottom: 1rem;
 }
 .nav-bar-conditional-content{
     display: flex;
@@ -54,6 +53,32 @@ i{
     text-align: center;
     display: flex;
     align-items: center;
+}
+#logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.fa-yin-yang{
+    height: 1rem;
+    width: 1rem;
+    padding-right: 1rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--green);
+}
+.fa-user-circle{
+    height: 1rem;
+    width: 1rem;
+    padding-right: 1rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .profile-dropdown > *{
     border-bottom: 1px solid var(--red);
