@@ -12,7 +12,7 @@ function Navigation({ isLoaded }){
       <li>
         <NavLink exact to="/">
           <i class="fas fa-yin-yang"></i>
-          ShareBnb
+          <span className="logo">ShareBnb</span>
         </NavLink>
       </li>
       <div className="nav-bar-conditional-content">

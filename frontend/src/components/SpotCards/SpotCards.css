@@ -44,7 +44,7 @@
     align-items: center;
     border-radius: 1rem;
     border: 0.1px solid rgba(0, 0, 0, 0.151);
-    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.432);
+    box-shadow: 0 .2rem .2rem rgba(0, 0, 0, 0.432);
     margin: 1rem;
 }
 .nav-link-info{

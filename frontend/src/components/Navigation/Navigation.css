@@ -22,6 +22,7 @@
     margin: 0px;
     padding: 0px;
     border-bottom: 1px solid var(--green);
+    border-radius: 1rem;
     margin-bottom: 1rem;
 }
 .nav-bar-conditional-content{
