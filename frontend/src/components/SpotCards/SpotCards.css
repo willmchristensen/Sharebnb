@@ -13,6 +13,7 @@
 .spot-cards-section{
     display: grid;
     grid-template-columns: repeat(4,1fr);
+    margin: 1rem;
     row-gap: 3rem;
     column-gap: 3rem;
     align-items: center;

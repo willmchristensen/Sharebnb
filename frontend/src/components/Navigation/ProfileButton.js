@@ -120,6 +120,7 @@ function ProfileButton({ user }) {
             </> 
           ) : (
             <>
+            <div className="conditional-content">
               <OpenModalMenuItem
                 itemText="Log In"
                 modalComponent={<LoginFormModal />}
@@ -128,6 +129,7 @@ function ProfileButton({ user }) {
                 itemText="Sign Up"
                 modalComponent={<SignupFormModal />}
               />
+            </div>
             </>
           )
         }

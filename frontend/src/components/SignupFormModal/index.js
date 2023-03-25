@@ -140,7 +140,7 @@ function SignupFormModal() {
           </label>
           <button 
             type="submit" 
-            id="sign-me-up"
+            id="button"
             disabled={isDisabled}
           >Sign Up</button>
         </div>

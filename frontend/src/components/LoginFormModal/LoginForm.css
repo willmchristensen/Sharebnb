@@ -4,7 +4,7 @@
     justify-content:space-evenly;
     align-items: center;
     width: 35rem;
-    min-height: 25rem;
+    min-height: 30rem;
     height: fit-content;
 }
 .user-information > label{
@@ -14,9 +14,9 @@
 }
 .user-information > label > input{
     width: 90%;
-    height: 2.5rem;
+    padding: 1rem;
 }
-#login{
+/* #login{
     border-radius: 7%;
     border: 1px solid var(--grey);
     background-color: white;
@@ -30,7 +30,7 @@
 }
 #login:hover{
     box-shadow: 1px 1px 1px var(--grey);
-}
+} */
 .login-buttons{
     width: 100%;
     display: flex;
@@ -38,7 +38,7 @@
     align-items: center;
     justify-content: space-evenly;
 }
-#demo-user{
+/* #demo-user{
     border-radius: 7%;
     border: 1px solid var(--grey);
     background-color: white;
@@ -49,4 +49,4 @@
     padding: .77rem;
     margin: 1rem;
     width: 70%;
-}
+} */

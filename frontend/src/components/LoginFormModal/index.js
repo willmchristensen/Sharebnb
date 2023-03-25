@@ -38,12 +38,10 @@ function LoginFormModal() {
         }
       );
   };
-
   const handleDemoUser = () => {
     return dispatch(sessionActions.login({ credential:'testUserName', password:'password'}))
       .then(closeModal);
   }
-
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -70,12 +68,12 @@ function LoginFormModal() {
               placeholder="Password"
             />
           </label>
-        </div>
         <div className="login-buttons">
-          <button type="submit" disabled={isDisabled} id="login">Log In</button>
-          <button type="submit" onClick={handleDemoUser} id="demo-user">
+          <button type="submit" disabled={isDisabled} id="button">Log In</button>
+          <button type="submit" onClick={handleDemoUser} id="button">
             Demo User
           </button>
+        </div>
         </div>
       </form>
     </>

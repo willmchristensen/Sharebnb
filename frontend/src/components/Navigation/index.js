@@ -11,9 +11,12 @@ function Navigation({ isLoaded }){
     <ul className="nav-bar">
       <li
         id="logo"
+        className="nav-bar-conditional-content"
       >
         <NavLink exact to="/">
-          <i class="fas fa-yin-yang"></i>
+          <div className="nav-item">
+            <i class="fas fa-yin-yang"></i>
+          </div>
           <span className="logo">ShareBnB</span>
         </NavLink>
       </li>
@@ -36,7 +39,9 @@ function Navigation({ isLoaded }){
           isLoaded && (
           <>
             <li>
-              <ProfileButton user={sessionUser} />
+              <div className="nav-item">
+                <ProfileButton user={sessionUser} />
+              </div>
             </li>
           </>
           )

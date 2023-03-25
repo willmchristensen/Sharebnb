@@ -18,18 +18,14 @@ import ManageReviews from "./components/ManageReviews";
 import DeleteASpot from './components/DeleteSpotModal'
 import DeleteReview from "./components/DeleteReviewModal";
 import UpdateReviewModal from "./components/UpdateReviewModal";
-
-// TODO: UPDATE ROUTES
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
-
   return (
     <>
-      {/* <PostAReviewModal></PostAReviewModal> */}
       <Navigation isLoaded={isLoaded} />
         {isLoaded && (
           <Switch>
@@ -64,16 +60,6 @@ function App() {
             </Route>
           </Switch>
         )}
-      {/* <DeleteASpot></DeleteASpot> */}
-      {/* <ManageReviews></ManageReviews>  */}
-      {/* <CreateNewSpot></CreateNewSpot> */}
-      {/*<SignupFormModal></SignupFormModal>
-      <LoginFormModal></LoginFormModal>
-      
-      
-    <DeleteReview></DeleteReview>*/}
-      
-     {/* <UpdateReviewModal></UpdateReviewModal>  */}
     </>
   );
 }
