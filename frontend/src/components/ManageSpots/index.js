@@ -27,7 +27,9 @@ const ManageSpots = () => {
               className="spot-card"
               to={`/spots/new`}
             >
-              <button>create a new spot</button>
+              <button
+                className="create-button manage"
+              >create a new spot</button>
             </NavLink>
           </div>
             {

@@ -113,7 +113,7 @@ module.exports = {
         id: 8,
         ownerId: 1,
         address: "1739 RedWoods Lane",
-        city: "Trinidad",
+        city: "Visalia",
         state: "California",
         country: "United States",
         lat: 36.2704,
@@ -126,16 +126,16 @@ module.exports = {
       {
         id: 9,
         ownerId: 3,
-        address: "456 Beach House",
-        city: "Carpinteria",
+        address: "123 Beach House",
+        city: "Cayucos",
         state: "California",
         country: "United States",
         lat: 35.4428,
         lng: -120.8921,
         name: "Sand",
         description: "New Beach Loft at Padero Beach. On the water in SB",
-        price: 571,
-        previewImage: "https://a0.muscache.com/im/pictures/62790a3f-41a1-4cbf-b27f-6122713740ad.jpg"
+        price: 523,
+        previewImage: "https://a0.muscache.com/im/pictures/miso/Hosting-44106940/original/66a4178c-8c97-4a18-80fb-1da7842a2f9a.jpeg"
       },
     ], {});
   },

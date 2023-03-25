@@ -136,18 +136,7 @@ export const updateOneSpot =   (spot, images) => async (dispatch) => {
     });
     if(response.ok){
         const spot = await response.json();
-        // spot.SpotImages = [];
-        // images.forEach(async(img) => {
-        //     const imageRes = await csrfFetch(`/api/spots/${spot.id}/images`, {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json"
-        //         },
-        //         body: JSON.stringify(img)
-        //     });
-        //     const spotImage = await imageRes.json();
-        //     spot.SpotImages.push(spotImage);
-        // });
+        console.log(spot);
         dispatch(addOne(spot));
         return spot;
     }
@@ -179,8 +168,7 @@ const spotsReducer = (state = initialState, action) => {
         }
         case ADD_ONE: {
             const newState = {...state, allSpots: {...state.allSpots}};
-            console.log('------------------------------actionn-payload',action.payload);
-            newState.allSpots[action.payload.id] = {...action.payload};
+            newState.allSpots[action.payload.id] = {...newState.allSpots[action.payload.id],...action.payload};
             return newState;  
         }
         // case UPDATE_SPOT: {

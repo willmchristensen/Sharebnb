@@ -2,18 +2,9 @@ import {useEffect, useState} from 'react';
 import './stars.css'
 
 function StarsRatingInput({changeStars,rating}) {
-
- // const handleClick = (newRating) => {
- //    onChange(newRating);
- //  }
-  // TODO: ACTIVERATING => rating in backen
-  // const [activeRating,setActiveRating] = useState({rating});
   const [activeRating,setActiveRating] = useState(rating);
   let empty = <i className="far fa-star"></i>;
   let filled = <i className="fas fa-star"></i>;
- //  // useEffect(() => {
- //  //   setActiveRating()
- //  // }, [activeRating])
   return (
     <div className="stars">
       <div 
@@ -56,6 +47,7 @@ function StarsRatingInput({changeStars,rating}) {
       >
         {activeRating >= 5 ? filled : empty}
       </div>
+      <label>stars</label>
     </div>
   ); 
 };

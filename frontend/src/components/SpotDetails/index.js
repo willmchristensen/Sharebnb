@@ -175,7 +175,7 @@ const SpotDetails = () => {
             spot.numReviews === 0 ? 
             (
                 <h3>
-                    "Post Your Review!"
+                    Be the first to post a review!
                 </h3> 
             ): (
                 allReviews.map(rev => <SpotReview review={rev}/>)

@@ -179,7 +179,7 @@ function CreateNewSpot() {
             </div>
           </div>
       </div>
-      <div className="form-section three">
+      <div className="form-section two">
         <div className="form-row">
           <div className="form-row-data">
             <h2>Describe your place to guests</h2>
@@ -192,6 +192,7 @@ function CreateNewSpot() {
           <div className="form-row-data">
           <label>
             <textarea
+            className="text-area"
             name="review" 
             value={description} 
             onChange={e=>setDescription(e.target.value)}  
@@ -251,7 +252,7 @@ function CreateNewSpot() {
           </div>
         </div>
       </div>
-      <div className="form-section four">
+      <div className="form-section three">
         <div className="form-row">
           <div className="form-row-data">
             <h2>Liven up your spot with photos</h2>
@@ -343,6 +344,7 @@ function CreateNewSpot() {
       </div>
       <button
         type="submit"
+        className="create-button"
         disabled={Boolean(Object.keys(errors).length) || Boolean(Object.keys(imageErrors).length)}
       >
         Create Spot

@@ -47,9 +47,10 @@ function UpdateSpot({spot}) {
     const vals = {
       id,country,address,city,state,description,price,lat,lng,name
     };
+    const images = {}
     let createdSpot = await dispatch(updateOneSpot(vals));
     if(createdSpot){
-      let prevImg = await dispatch(addSpotImage(createdSpot.id,previewImage,true));
+      // let prevImg = await dispatch(addSpotImage(createdSpot.id,previewImage,true));
       // if(photoOne){
       //   await dispatch(addSpotImage(createdSpot.id,photoOne,false));
       // }
@@ -62,7 +63,8 @@ function UpdateSpot({spot}) {
       // if(photoFour){
       //   await dispatch(addSpotImage(createdSpot.id,photoFour,false));
       // }
-      if(prevImg) history.push(`/spots/${createdSpot.id}`)
+      // if(prevImg) history.push(`/spots/${createdSpot.id}`)
+      history.push(`/spots/${createdSpot.id}`);
       closeModal()
     }
   }
