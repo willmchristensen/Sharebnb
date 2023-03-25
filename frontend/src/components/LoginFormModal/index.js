@@ -12,14 +12,14 @@ function LoginFormModal() {
   const { closeModal } = useModal();
   useEffect(() => {
     if(
-        username.length < 4 ||
+        credential.length < 4 ||
         password.length < 6
       ){
         setIsDisabled(true)
       }else{
         setIsDisabled(false)
       }
-  },[username,password])
+  },[credential,password])
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors({});
@@ -48,7 +48,7 @@ function LoginFormModal() {
     <>
       <form onSubmit={handleSubmit}>
         <ul>
-          {Object.values(errors)}
+          {<div className="errors">{Object.values(errors)}</div>}
         </ul>
         <div className="user-information">
           <h1>Log In</h1>
@@ -70,10 +70,10 @@ function LoginFormModal() {
               placeholder="Password"
             />
           </label>
-          <button type="submit" disabled={Boolean(Object.values(errors).length)}>Log In</button>
+          <button type="submit" disabled={isDisabled}>Log In</button>
         </div>
       </form>
-      <button type="submit" onClick={isDisabled}>
+      <button type="submit" onClick={handleDemoUser}>
         Demo User
       </button>
     </>
