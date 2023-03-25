@@ -70,12 +70,14 @@ function LoginFormModal() {
               placeholder="Password"
             />
           </label>
-          <button type="submit" disabled={isDisabled}>Log In</button>
+        </div>
+        <div className="login-buttons">
+          <button type="submit" disabled={isDisabled} id="login">Log In</button>
+          <button type="submit" onClick={handleDemoUser} id="demo-user">
+            Demo User
+          </button>
         </div>
       </form>
-      <button type="submit" onClick={handleDemoUser}>
-        Demo User
-      </button>
     </>
   );
 }

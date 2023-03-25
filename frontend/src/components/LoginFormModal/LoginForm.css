@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content:space-evenly;
     align-items: center;
-    width: 30rem;
+    width: 35rem;
     min-height: 25rem;
     height: fit-content;
 }
@@ -14,22 +14,39 @@
 }
 .user-information > label > input{
     width: 90%;
-}
-#sign-me-up{
-    margin: 2rem;
-    border-radius: 1rem;
-    padding: .77rem;
-    width: 30%;
+    height: 2.5rem;
 }
 #login{
     border-radius: 7%;
-    border: 1px solid rgba(202, 231, 202, 0.205);
-    background-color: rgba(167, 185, 187, 0.623);
-    color: rgba(0, 0, 0, 0.89);
-    font-size: 15px;
+    border: 1px solid var(--grey);
+    background-color: white;
+    color: var(--red);
+    font-size: 1rem;
     height: fit-content;
+    border-radius: 1rem;
+    padding: .77rem;
+    margin: 1rem;
+    width: 70%;
 }
 #login:hover{
-    box-shadow: 1px 1px 1px rgb(202, 231, 202);
-    filter: brightness(150%)
+    box-shadow: 1px 1px 1px var(--grey);
+}
+.login-buttons{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+#demo-user{
+    border-radius: 7%;
+    border: 1px solid var(--grey);
+    background-color: white;
+    color: var(--red);
+    font-size: 1rem;
+    height: fit-content;
+    border-radius: 1rem;
+    padding: .77rem;
+    margin: 1rem;
+    width: 70%;
 }
