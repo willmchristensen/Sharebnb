@@ -117,9 +117,21 @@ i{
 .fa-user-circle:hover{
     cursor: pointer;
 }
-.conditional-content> *{
-    border-bottom: 1px solid var(--red);
-    margin-right: 2rem;
+#new-spot:hover{
+    font-weight: bold;
+    filter: saturate(4);
+}
+#new-spot:hover >{
+    font-weight: bold;
+    filter: saturate(4);
+}
+.nav-bar-conditional-content:has(#new-spot:hover) { 
+    font-weight: bold;
+    filter: saturate(4);
+}
+.nav-bar-conditional-content:has(.fa-user-circle:hover) { 
+    font-weight: bold;
+    filter: saturate(4);
 }
 #logout{
     border: none;
