@@ -48,22 +48,17 @@ function ProfileButton({ user }) {
     document.addEventListener('click', closeMenu);
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
-
   useEffect(() => {
     dispatch(getAllSpots())
   }, [dispatch]);
-
   const closeMenu = () => setShowMenu(false);
-
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
     history.push('/');
     closeMenu();
   };
-
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
-
   return (
     <>
       <button 

@@ -24,7 +24,9 @@ function Navigation({ isLoaded }){
         {
           sessionUser && (
             <>
-              <li>
+              <li
+                id="new-spot"
+              >
                 <NavLink
                   className
                   to={`/spots/new`}
@@ -38,7 +40,9 @@ function Navigation({ isLoaded }){
         {
           isLoaded && (
           <>
-            <li>
+            <li
+              id="profile"
+            >
               <div className="nav-item">
                 <ProfileButton user={sessionUser} />
               </div>

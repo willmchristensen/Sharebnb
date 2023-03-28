@@ -27,7 +27,7 @@
     align-items: center;
 }
 .spot-card:hover .tooltip-text{
-    filter:brightness(110%);
+    filter:brightness(100.00000000001%);
     background-color: var(--grey);
     color: var(--red);
     font-weight: bold;
