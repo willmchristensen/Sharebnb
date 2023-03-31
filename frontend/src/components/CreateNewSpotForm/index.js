@@ -25,11 +25,14 @@ function CreateNewSpot() {
   const [errors,setValidationErrors] = useState({});
   const [imageErrors, setImageErrors] = useState({});
   const [photoErrors, setPhotoErrors] = useState({});
-
+  // TODO: -----------isSubmitted and valid -----------
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
+  // --------------------------------------------------
   const { closeModal } = useModal();
   const history = useHistory();
   const dispatch = useDispatch();
-
+  // -----------------------------------------------------
   useEffect(() => {
     const errors = {};
     if(!country) errors.country = "Country is required"
@@ -42,7 +45,7 @@ function CreateNewSpot() {
     if(!price) errors.price = "BasePrice is required"
     setValidationErrors(errors) 
   }, [country,address,city,state,description,name,price]);
-
+  // -----------------------------------------------------
   useEffect(() => {
     let acceptedFiles = ['png','jpg','peg'];
     const errors = {}
@@ -53,7 +56,7 @@ function CreateNewSpot() {
     }
     setImageErrors(errors);
   }, [previewImage]);
-  
+  // -----------------------------------------------------
   useEffect(() => {
     let acceptedFiles = ['png','jpg','peg'];
     const errors = {}
@@ -71,13 +74,24 @@ function CreateNewSpot() {
     }
     setPhotoErrors(errors);
   }, [photoOne,photoTwo,photoThree,photoFour]);
+  // -----------------------------------------------------
+  useEffect(() => {
+    if(Boolean(Object.keys(errors).length === 0) && Boolean(Object.keys(imageErrors).length === 0)){
+      setIsDisabled(false);
+    }
+  }, [errors,imageErrors]);
+  // -----------------------------------------------------
 
+  const validate = () => {
+    if(Boolean(Object.keys(errors).length === 0) && Boolean(Object.keys(imageErrors).length === 0)){
+      setIsDisabled(false);
+    }
+  }
   const onSubmit = async (e) => {
     e.preventDefault();
     const vals = {
       country,address,city,state,description,price,lat,lng,name
     };
-    
     let createdSpot = await dispatch(createOneSpot(vals));
     if(createdSpot){
       let prevImg = await dispatch(addSpotImage(createdSpot.id,previewImage,true));
@@ -239,7 +253,7 @@ function CreateNewSpot() {
           <div className="form-row-data">
             <label>
               <input
-                type="text"
+                type="number"
                 name="price"
                 value={price}
                 onChange={e=>setPrice(e.target.value)}
@@ -288,9 +302,9 @@ function CreateNewSpot() {
               placeholder="Image URL"
             />
           </label>
-            <p className="errors">
+            {imageErrors.photoOne && <p className="errors">
               {photoErrors.photoOne}
-            </p>
+            </p>}
           </div>
         </div>
         <div className="form-row">
@@ -304,9 +318,9 @@ function CreateNewSpot() {
               placeholder="Image URL"
             />
           </label>
-          <p className="errors">
-            {photoErrors.photoTwo}
-          </p>
+          {imageErrors.photoTwo && <p className="errors">
+              {photoErrors.photoTwo}
+            </p>}
           </div>
         </div>
         <div className="form-row">
@@ -320,9 +334,9 @@ function CreateNewSpot() {
               placeholder="Image URL"
             />
           </label>
-          <p className="errors">
-            {photoErrors.photoThree}
-          </p>
+          {imageErrors.photoThree && <p className="errors">
+              {photoErrors.photoThree}
+            </p>}
           </div>
         </div>
         <div className="form-row">
@@ -336,16 +350,16 @@ function CreateNewSpot() {
               placeholder="Image URL"
             />
           </label>
-          <p className="errors">
-            {photoErrors.photoFour}
-          </p>
+          {imageErrors.photoFour && <p className="errors">
+              {photoErrors.photoFour}
+            </p>}
           </div>
         </div>
       </div>
       <button
         type="submit"
         className="create-button"
-        disabled={Boolean(Object.keys(errors).length) || Boolean(Object.keys(imageErrors).length)}
+        disabled={isDisabled}
       >
         Create Spot
       </button>
