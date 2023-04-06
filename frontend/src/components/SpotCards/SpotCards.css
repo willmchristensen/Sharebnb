@@ -48,8 +48,8 @@
     justify-content: center;
     align-items: center;
     border-radius: 1rem;
-    border: 0.1rem solid rgba(0, 0, 0, 0.151);
-    box-shadow: 0 .2rem .2rem rgba(0, 0, 0, 0.432);
+    border: 0.1rem solid var(--blue);
+    box-shadow: 0 .2rem .2rem var(--green);
 }
 .nav-link-info{
     width: 90%;

@@ -1,9 +1,9 @@
 :root {
-    --red: rgb(255,56,92);
-    --blue: #89b5ef;
-    --grey: #a6a6a6b4;
+    --red: #EA5455;
+    --blue: #002B5B;
+    --grey: #E4DCCF;
     --purple: #bcb3dd91;
-    --green:  rgb(210, 255, 174);
+    --green:  #E4DCCF;
 }
 *{
     font-family: 'Roboto', sans-serif;
