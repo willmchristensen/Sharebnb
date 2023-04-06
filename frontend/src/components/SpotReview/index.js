@@ -25,9 +25,6 @@ const SpotReview = ({review}) => {
     // ---------------modal------------------
     const handleReservation = () => window.alert('Feature in progress');
     const sessionUser = useSelector(state => state.session.user);
-    console.log('-------------REVIEWS-------------',sessionUser,review);
-  
-
     let date = new Date(review.createdAt);
     let months = ["January","February","March","April","May","June","July",
     "August","September","October","November","December"];

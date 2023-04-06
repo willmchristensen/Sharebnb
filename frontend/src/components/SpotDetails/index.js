@@ -4,7 +4,7 @@ import { NavLink, Route, useParams} from 'react-router-dom';
 import SpotCardImage from '../SpotCardImage';
 import LargeCardImage from '../SpotCardImage/LargeCardImage';
 import SpotReview from '../SpotReview';
-import { loadSpotDetails } from '../../store/spots';
+import { loadSpotDetails, getSpotDetails } from '../../store/spots';
 import {loadSpotReviews} from '../../store/reviews';
 import PostAReviewModal from '../PostAReviewModal/index';
 import OpenModalMenuItem from '../OpenModalButton';
@@ -14,17 +14,13 @@ const SpotDetails = () => {
     // ---------------data------------------
     const {spotId} = useParams();
     const dispatch = useDispatch();
-    const spot = useSelector(state => state.spots.singleSpot);
-    const spotImages = spot.SpotImages;
-    const previewImage = spot.SpotImages[0];
-    const reviews = useSelector(state => state.reviews.spot);
-    const allReviews = Object.values(reviews);
-    const sessionUser = useSelector(state => state.session.user);
+    const { singleSpot, spotImages, previewImage, allReviews, sessionUser } = useSelector(getSpotDetails);
+    const spot = singleSpot;
     // ---------------data------------------
     const handleReservation = () => window.alert('Feature in progress');
     useEffect(() => {
         dispatch(loadSpotDetails(spotId));
-    }, [dispatch,spotId,reviews])
+    }, [dispatch,spotId])
     useEffect(() => {
         dispatch(loadSpotReviews(spotId));
     }, [dispatch,spotId])

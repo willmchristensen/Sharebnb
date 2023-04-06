@@ -1,5 +1,5 @@
 import { csrfFetch } from "./csrf";
-
+import { createSelector } from 'reselect'
 const LOAD = "spots";
 const LOAD_ONE = "spots/LOAD_ONE"
 const LOAD_CURRENT = "/spots/LOAD_CURRENT"
@@ -43,8 +43,6 @@ const updateSpot = (data) => ({
     payload: data
 });
 
-// /:spotId/images
-
 const normalize = (data) => data.reduce((obj,ele) => ({
     ...obj,
     [ele.id]: ele
@@ -52,7 +50,7 @@ const normalize = (data) => data.reduce((obj,ele) => ({
 
 export const getAllSpots = () => async (dispatch) => {
     const response = await csrfFetch(`/api/spots`);
-
+    
     if (response.ok) {
         const data = await response.json();
         const allSpots = normalize(data.Spots);
@@ -83,16 +81,16 @@ export const loadUserSpots = () => async (dispatch) => {
 export const deleteOneSpot = (id) => async (dispatch) => {
     try {
         const response = await csrfFetch(`/api/spots/${id}`, {
-          method: "DELETE",
+            method: "DELETE",
         });
         if(response.ok){
             const result = await response.json();
             console.log('THUNK:------------------',id,result)
             return dispatch(deleteOne(id));
         }
-      } catch (error) {
+    } catch (error) {
         throw error;
-      }
+    }
 }
 
 export const createOneSpot = (spot) => async (dispatch) => {
@@ -118,8 +116,8 @@ export const addSpotImage = (id, url, preview) => async () => {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-                url,
-                preview
+            url,
+            preview
         })
     });
     return response;
@@ -149,6 +147,22 @@ const initialState = {
         Owner: {}
     },
 };
+export const getEverySpot = createSelector(
+    (state) => state.spots.allSpots,
+    (allSpots) => Object.values(allSpots)
+);
+export const getSpotDetails = createSelector(
+    state => state.spots.singleSpot,
+    state => state.reviews.spot,
+    state => state.session.user,
+    (singleSpot, reviews, sessionUser) => {
+      const spotImages = singleSpot.SpotImages;
+      const previewImage = spotImages[0];
+      const allReviews = Object.values(reviews);
+  
+      return { singleSpot, spotImages, previewImage, allReviews, sessionUser };
+    }
+);  
 const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD: {
