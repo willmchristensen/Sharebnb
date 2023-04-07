@@ -46,7 +46,7 @@ h1{
 #subtitle{
     font-weight: 550;
     color: var(--blue);
-    box-shadow: 
+    /* box-shadow: 
     -0.1rem -.1rem .1rem var(--black),
     -0.12rem -.12rem .11rem var(--green),
     -0.13rem -.13rem .12rem var(--red),
@@ -54,8 +54,9 @@ h1{
     -.18rem -.18rem .18rem var(--grey),
     0.1rem .1rem .1rem var(--blue),
     .2rem .2rem .2rem .1rem var(--grey),
-    .23rem .23rem .23rem .1rem var(--red);
-    background-color: var(--beige);
+    .23rem .23rem .23rem .1rem var(--red); */
+    border-bottom: 1px solid var(--black);
+    /* background-color: var(--beige); */
     padding:.2rem;
 }
 h2{
