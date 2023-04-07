@@ -7,7 +7,7 @@ import './Navigation.css';
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
   const [search,setSearch] = useState('');
-  const handleChange = () 
+  const handleChange = ()
   return (
     <ul className="nav-bar">
       <li
