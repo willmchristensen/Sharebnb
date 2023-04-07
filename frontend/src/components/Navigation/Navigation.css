@@ -120,22 +120,9 @@ i{
     cursor: pointer;
     filter: saturate(2);
 }
-#manage:hover{
-    filter: saturate(2);
-}
 #logout{
     border: none;
     margin: .5rem;
-}
-#manage{
-    border: none;
-    padding: .5rem; 
-    margin: .5rem;
-    border-radius: 1rem;
-    background: var(--grey);
-    color: var(--red);
-    height: fit-content;
-    box-shadow: .21rem .21rem  .1rem var(--blue);
 }
 .logout{
     border: none;

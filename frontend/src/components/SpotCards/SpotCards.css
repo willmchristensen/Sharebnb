@@ -49,7 +49,7 @@
     align-items: center;
     border-radius: 1rem;
     border: 0.1rem solid var(--blue);
-    box-shadow: 0 .2rem .2rem var(--green);
+    box-shadow: 0 .2rem .2rem var(--grey);
 }
 .nav-link-info{
     width: 90%;
