@@ -28,7 +28,6 @@ function Navigation({ isLoaded }){
                 id="new-spot"
               >
                 <NavLink
-                  className
                   to={`/spots/new`}
                 >
                   Create A New Spot

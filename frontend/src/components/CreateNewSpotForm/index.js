@@ -122,7 +122,7 @@ function CreateNewSpot() {
             id="top"  
           >
             <h1>Create a New Spot</h1>
-            <h2>Where's your place located?</h2>
+            <h2 id="subtitle">Where's your place located?</h2>
             <p>Guests will only get your exact address once they booked a reservation</p>
           </div>
         </div>

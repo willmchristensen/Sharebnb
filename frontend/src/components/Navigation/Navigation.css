@@ -28,21 +28,29 @@
 }
 .nav-bar-conditional-content{
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid var(--green);
+    border: .3rem solid var(--green);
     border-radius: 1rem;
     margin: 1rem;
+    transition: transform .23s;    
+}
+.nav-bar-conditional-content:hover{
+    transform: translateY(-.23rem);
+    border: .35rem solid var(--green);
+    filter: saturate(3);
+}
+.nav-bar-conditional-content:hover .fa-user-circle{
+    transform: scale(1.1);
 }
 .nav-bar-conditional-content > *{
     padding: 1rem;
+    width: 100%;
 }
 .profile-dropdown{
     padding: 0;
 }
 #profile{
-    padding: 1rem;
     margin: 0;
     width: 100%;
 }
@@ -89,9 +97,15 @@ i{
     align-items: center;
     justify-content: center;
     border-radius: 1rem;
+    transition: transform .23s;
 }
 #logo:hover{
     filter: saturate(3);
+    transform: translateY(-.23rem);
+    border: .35rem solid var(--green);
+}
+#logo:hover .fa-yin-yang{
+    transform: scale(1.1);
 }
 .fa-yin-yang{
     height: 1rem;
@@ -102,6 +116,10 @@ i{
     align-items: center;
     justify-content: center;
     color: var(--grey);
+    transition: transform .23s;
+}
+.fa-yin-yang:hover{
+    filter: saturate(2);
 }
 .fa-user-circle{
     height: 1rem;
@@ -112,13 +130,17 @@ i{
     display: flex;
     align-items: center;
     justify-content: center;
-}
-#new-spot:hover{
-    filter: saturate(2);
+    transition: transform .23s;
 }
 .fa-user-circle:hover{
     cursor: pointer;
     filter: saturate(2);
+}
+#new-spot > a{
+    transition: transform .23s;
+}
+#new-spot > a:hover{
+    transform: scale(1.1);
 }
 #logout{
     border: none;

@@ -24,6 +24,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: transform .23s;
+}
+.spot-card:hover{
+    transform: translateY(-.23rem);
 }
 .spot-card:hover .tooltip-text{
     filter:brightness(100.00000000001%);
@@ -32,14 +36,6 @@
     font-weight: bold;
     font-size: .9rem;
     visibility: visible;
-}
-.nav-link:hover{
-    filter:brightness(101%);
-    box-shadow: 0 .7rem 1.2rem var(--grey);
-    font-weight: bold;
-}
-.nav-link:hover .image-container img{
-    filter:brightness(110%);
 }
 .nav-link{
     height: 105%;
@@ -50,6 +46,14 @@
     border-radius: 1rem;
     border: 0.1rem solid var(--blue);
     box-shadow: 0 .2rem .2rem var(--grey);
+}
+.nav-link:hover{
+    filter:brightness(100.1%);
+    box-shadow: 0 .7rem 1.2rem var(--grey);
+    font-weight: bold;
+}
+.nav-link:hover .image-container img{
+    filter:brightness(105%);
 }
 .nav-link-info{
     width: 90%;
