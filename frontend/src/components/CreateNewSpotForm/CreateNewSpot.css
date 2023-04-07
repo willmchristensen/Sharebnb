@@ -37,6 +37,11 @@
   margin-top: 0.5em;
   box-shadow: -0.1rem -.1rem .1rem var(--green),-0.2rem -.2rem .1rem var(--red),-0.3rem -.3rem .3rem var(--grey),0.1rem .1rem .1rem var(--grey),0.1rem .1rem .2rem var(--green),0.1rem .1rem .1rem var(--red),.23rem .23rem .1rem var(--blue);
   background-color: var(--grey-too);
+  transition: transform 0.23s ease-in-out;
+}
+.form-section:hover{
+  filter: brightness(101%);
+  transform: translateY(.1rem);
 }
 .form-row{
   width: 100%;

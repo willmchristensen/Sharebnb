@@ -8,7 +8,9 @@
  font-weight: bolder;
  height: fit-content;
  box-shadow: .21rem .21rem  .1rem var(--blue);
+ transition: transform .23s ease-in-out;
 }
 #manage:hover{
  filter: saturate(2);
+ transform: scale(1.07);
 }

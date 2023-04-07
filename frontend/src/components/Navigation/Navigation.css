@@ -147,15 +147,16 @@ i{
     margin: .5rem;
 }
 .logout{
-    border: none;
+    border: 0.1rem solid var(--red);
     width: 100%;
     padding: 1rem;
     border-radius: 1rem;
-    background-color: var(--red);
     height: fit-content;
+    transition: transform .23s ease-in-out;
 }
 .logout:hover{
     filter: saturate(2);
+    transform: scale(1.04);
 }
 @media screen and (max-width: 1250px){
     .nav-bar{
