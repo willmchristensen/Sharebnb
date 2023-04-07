@@ -155,6 +155,9 @@ const initialState = {
 // -------------------------------memoization of allspots and spot details-------------------------------
 export const getEverySpot = createSelector(
     state => state.spots.allSpots,
+    (spots) => {
+        
+    }
     allSpots => Object.values(allSpots)
 );
 export const getSpotDetails = createSelector(
