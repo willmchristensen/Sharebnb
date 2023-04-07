@@ -14,43 +14,37 @@ const load = (data) => ({
     type: LOAD,
     payload: data,
 });
-
 const loadOne = (data) => ({
     type: LOAD_ONE,
     data,
 });
-
 const loadCurrent = (data) => ({
     type:   LOAD_CURRENT,
     payload: data,
 });
-
 const addOne = (data) => ({
     type: ADD_ONE,
     payload: data,
 });
-
 const deleteOne = (id) => ({
     type: DELETE_ONE,
     payload: id
 });
-
 const addSpot = (data) => ({
     type: ADD_IMAGE,
     payload: data
 });
-
 const updateSpot = (data) => ({
     type: UPDATE_SPOT,
     payload: data
 });
-// ---------------------------action creator--------------------------
-
+// -----------------------END action creator--------------------------
+// -----------------------START normalize data---------------------------
 const normalize = (data) => data.reduce((obj,ele) => ({
     ...obj,
     [ele.id]: ele
 }), {});
-
+// ---------------------------END normalize data---------------------------
 // --------------------- THUNKS: thunk action creators allow us to make async calls  ---------------------
 export const getAllSpots = () => async (dispatch) => {
     const response = await csrfFetch(`/api/spots`);
@@ -62,7 +56,6 @@ export const getAllSpots = () => async (dispatch) => {
         return response;
     }
 };
-
 export const loadSpotDetails = (id) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${id}`);
     if(response.ok){
@@ -70,8 +63,7 @@ export const loadSpotDetails = (id) => async (dispatch) => {
         dispatch(loadOne(data));
         return response;
     }
-}
-
+};
 export const loadUserSpots = () => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/current`);
     if(response.ok){
@@ -98,7 +90,6 @@ export const deleteOneSpot = (id) => async (dispatch) => {
 }
 
 export const createOneSpot = (spot) => async (dispatch) => {
-    console.log(spot);
     const response = await csrfFetch("/api/spots", {
         method: "POST",
         headers: {
@@ -113,9 +104,9 @@ export const createOneSpot = (spot) => async (dispatch) => {
     }
 };
 
-export const addSpotImage = (id, url, preview) => async () => {
+export const addSpotImage = (id, url, preview) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${id}/images`, {
-        method: "post",
+        method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
@@ -143,7 +134,7 @@ export const updateOneSpot =   (spot, images) => async (dispatch) => {
         return spot;
     }
 }
-// --------------------- THUNKS: thunk action creators allow us to make async calls  ---------------------
+// --------------------- END OF THUNKS  ---------------------
 
 const initialState = {
     allSpots: {},
@@ -169,7 +160,7 @@ export const getSpotDetails = createSelector(
       return { singleSpot, spotImages, previewImage, allReviews, sessionUser };
     }
 );  
-// -------------------------------memoization of allspots and spot details-------------------------------
+// -------------------------------END memoization of allspots and spot details-------------------------------
 // -----------------------------------------speaks to the store-----------------------------------------
 const spotsReducer = (state = initialState, action) => {
     switch (action.type) {

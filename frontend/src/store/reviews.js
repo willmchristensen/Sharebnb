@@ -1,38 +1,36 @@
 import { csrfFetch } from "./csrf";
 import { createSelector } from 'reselect'
+// ----------------START action string type literals--------------------
 const SPOTREVIEWS = "/api/spots/:spotId/SPOTREVIEWS"
 const LOAD_CURRENT = "/api/reviews/LOAD_CURRENT"
 const CREATE_REVIEW = "/api/reviews/new"
 const DELETE_ONE ="spots/DELETE_ONE"
-
-
+// ----------------END action string type literals--------------------
+// -----------------------START action creator--------------------------
 const loadReviews = (data) => ({
     type: SPOTREVIEWS,
     payload: data,
 });
-
 const loadCurrent = (data) => ({
     type:   LOAD_CURRENT,
     payload: data,
 });
-
-const createReview = (review) => {
-    return {
-        type: CREATE_REVIEW,
-        review,
-    }
-}
-
+const createReview = (review) => ({
+    type: CREATE_REVIEW,
+    review,
+});
 const deleteOne = (id) => ({
     type: DELETE_ONE,
     payload: id
 });
-
+// -----------------------END action creator--------------------------
+// -----------------------START normalize data---------------------------
 const normalize = (data) => data.reduce((obj,ele) => ({
     ...obj,
     [ele.id]: ele
 }), {});
-
+// ---------------------------END normalize data---------------------------
+// --------------------- THUNKS: thunk action creators allow us to make async calls  ---------------------
 export const loadSpotReviews = (id) => async (dispatch) => {
  const response = await csrfFetch(`/api/spots/${id}/reviews`);
  if(response.ok){
@@ -41,7 +39,6 @@ export const loadSpotReviews = (id) => async (dispatch) => {
      dispatch(loadReviews(reviews));
  }
 }
-
 export const loadUserReviews = () => async (dispatch) => {
     const response = await csrfFetch(`/api/reviews/current`);
     if(response.ok){
@@ -50,11 +47,12 @@ export const loadUserReviews = () => async (dispatch) => {
         dispatch(loadCurrent(userReviews));
     }
 }
-
 export const createOneReview = (review,spotId,user) => async(dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
-        headers: {"Content-Type": "application/json"},
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify(review)
     });
     if(response.ok){
@@ -64,7 +62,6 @@ export const createOneReview = (review,spotId,user) => async(dispatch) => {
         return review;
     }
 }
-
 export const deleteOneReview = (id) => async (dispatch) => {
     try {
         const response = await csrfFetch(`/api/reviews/${id}`, {
@@ -78,7 +75,8 @@ export const deleteOneReview = (id) => async (dispatch) => {
         throw error;
       }
 }
-
+// --------------------- END OF THUNKS  ---------------------
+// ---------------------memoization---------------------
 export const deleteReviewsMemo = createSelector(
     state=>state.reviews.user,
     state => state.session.user,
@@ -87,7 +85,7 @@ export const deleteReviewsMemo = createSelector(
         return {allReviews,sessionUser}
     }
 );
-
+// ---------------------memoization---------------------
 const initialState = {
     spot: {},
     user: {}

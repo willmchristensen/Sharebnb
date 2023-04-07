@@ -91,8 +91,7 @@ i{
     border-radius: 1rem;
 }
 #logo:hover{
-    font-weight: bold;
-    filter: saturate(4);
+    filter: saturate(3);
 }
 .fa-yin-yang{
     height: 1rem;
@@ -114,24 +113,15 @@ i{
     align-items: center;
     justify-content: center;
 }
+#new-spot:hover{
+    filter: saturate(2);
+}
 .fa-user-circle:hover{
     cursor: pointer;
+    filter: saturate(2);
 }
-#new-spot:hover{
-    font-weight: bold;
-    filter: saturate(4);
-}
-#new-spot:hover >{
-    font-weight: bold;
-    filter: saturate(4);
-}
-.nav-bar-conditional-content:has(#new-spot:hover) { 
-    font-weight: bold;
-    filter: saturate(4);
-}
-.nav-bar-conditional-content:has(.fa-user-circle:hover) { 
-    font-weight: bold;
-    filter: saturate(4);
+#manage:hover{
+    filter: saturate(2);
 }
 #logout{
     border: none;
@@ -156,7 +146,7 @@ i{
     height: fit-content;
 }
 .logout:hover{
-    filter: brightness(150%);
+    filter: saturate(2);
 }
 @media screen and (max-width: 1250px){
     .nav-bar{
