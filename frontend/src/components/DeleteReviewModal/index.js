@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import * as sessionActions from "../../store/session";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { deleteOneReview } from "../../store/reviews";
@@ -7,7 +6,6 @@ function DeleteReviewModal({review}) {
   const { closeModal } = useModal();
   const dispatch = useDispatch();
   const handleDelete = (e) => {
-    console.log('this will dispatch delete');
     return dispatch(deleteOneReview(review.id))
       .then(closeModal)
   };

@@ -1,4 +1,5 @@
-import { restoreCSRF, csrfFetch } from "./csrf";
+import { csrfFetch } from "./csrf";
+import { createSelector } from 'reselect'
 const SPOTREVIEWS = "/api/spots/:spotId/SPOTREVIEWS"
 const LOAD_CURRENT = "/api/reviews/LOAD_CURRENT"
 const CREATE_REVIEW = "/api/reviews/new"
@@ -71,13 +72,21 @@ export const deleteOneReview = (id) => async (dispatch) => {
         });
         if(response.ok){
             const result = await response.json();
-            console.log('THUNK:------------------',id,result)
             return dispatch(deleteOne(id));
         }
       } catch (error) {
         throw error;
       }
 }
+
+export const deleteReviewsMemo = createSelector(
+    state=>state.reviews.user,
+    state => state.session.user,
+    (reviews,sessionUser) => {
+        const allReviews = Object.values(reviews);
+        return {allReviews,sessionUser}
+    }
+);
 
 const initialState = {
     spot: {},

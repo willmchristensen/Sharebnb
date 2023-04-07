@@ -34,10 +34,10 @@ const ManageSpots = () => {
           </div>
             {
               allSpots.map(spot => 
-                <>
-                  <SpotCards spot={spot}/>
+                <div className="manage-container">
+                  <SpotCards spot={spot} />
                   <ManageButtons spot={spot}/>
-                </>
+                </div>
               )
             }
         </nav>

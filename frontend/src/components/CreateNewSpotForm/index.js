@@ -32,7 +32,7 @@ function CreateNewSpot() {
   const { closeModal } = useModal();
   const history = useHistory();
   const dispatch = useDispatch();
-  // -----------------------------------------------------
+  // --------------------validation errors---------------------------------
   useEffect(() => {
     const errors = {};
     if(!country) errors.country = "Country is required"
@@ -42,10 +42,11 @@ function CreateNewSpot() {
     if(!description) errors.description = "Description is required"
     if(description.length < 30) errors.description = "Description needs 30 or more characters";
     if(!name) errors.name = "Title is required"
-    if(!price) errors.price = "BasePrice is required"
+    if(!price) errors.price = "Price is required"
     setValidationErrors(errors) 
   }, [country,address,city,state,description,name,price]);
-  // -----------------------------------------------------
+  // --------------------validation errors---------------------------------
+  // --------------------image errors--------------------------------------
   useEffect(() => {
     let acceptedFiles = ['png','jpg','peg'];
     const errors = {}
@@ -56,7 +57,6 @@ function CreateNewSpot() {
     }
     setImageErrors(errors);
   }, [previewImage]);
-  // -----------------------------------------------------
   useEffect(() => {
     let acceptedFiles = ['png','jpg','peg'];
     const errors = {}
@@ -74,7 +74,7 @@ function CreateNewSpot() {
     }
     setPhotoErrors(errors);
   }, [photoOne,photoTwo,photoThree,photoFour]);
-  // -----------------------------------------------------
+  // --------------------image errors--------------------------------------
   useEffect(() => {
     if(Boolean(Object.keys(errors).length === 0) && Boolean(Object.keys(imageErrors).length === 0)){
       setIsDisabled(false);
@@ -89,6 +89,7 @@ function CreateNewSpot() {
   }
   const onSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitted(true);
     const vals = {
       country,address,city,state,description,price,lat,lng,name
     };
@@ -130,7 +131,7 @@ function CreateNewSpot() {
           <label>
             <div className="form-row-data-label">
               <span>Country</span>
-              <span className="errors">{errors.country}</span>
+              {isSubmitted && <span className="errors">{errors.country}</span>}
             </div>
             <input
               type="text"
@@ -147,7 +148,7 @@ function CreateNewSpot() {
           <label>
             <div className="form-row-data-label">
               <span>Address</span>
-              <span className="errors">{errors.address}</span>
+              {isSubmitted && <span className="errors">{errors.address}</span>}
             </div>
             <input
               type="text"
@@ -164,8 +165,7 @@ function CreateNewSpot() {
             <label>
               <div className="form-row-data-label">
                 <span>City</span>
-                <span className="errors">{errors.city}
-                </span>
+                {isSubmitted && <span className="errors">{errors.city}</span>}
               </div>
                 <label>
                   <input
@@ -180,7 +180,7 @@ function CreateNewSpot() {
             <label>
               <div className="form-row-data-label">
                 <span>State</span>
-                <span className="errors">{errors.state}</span>
+                {isSubmitted && <span className="errors">{errors.state}</span>}
               </div>
             <input
               type="text"
@@ -215,9 +215,9 @@ function CreateNewSpot() {
             placeHolder="Please write at least 30 characters"
             />
           </label>
-          <p className="errors">
+          {isSubmitted && <p className="errors">
             {errors.description}
-          </p>
+          </p>}
           </div>
         </div>
         <div className="form-row">
@@ -237,9 +237,9 @@ function CreateNewSpot() {
                 placeholder="Name of your spot"
               />
             </label>
-            <p className="errors">
+            {isSubmitted && <p className="errors">
               {errors.name}
-            </p>
+            </p>}
           </div>
         </div>
         <div className="form-row">
@@ -260,9 +260,9 @@ function CreateNewSpot() {
                 placeholder="Price"
               />
             </label>
-              <p className="errors">
+              {isSubmitted && <p className="errors">
                 {errors.price}
-              </p>
+              </p>}
           </div>
         </div>
       </div>
@@ -286,7 +286,7 @@ function CreateNewSpot() {
               placeholder="Preview Image URL"
             />
           </label>
-          {imageErrors.previewImage && <p className="errors">
+          {isSubmitted && <p className="errors">
             {imageErrors.previewImage}
           </p>}
           </div>
@@ -358,7 +358,8 @@ function CreateNewSpot() {
       </div>
       <button
         type="submit"
-        className="create-button"
+        // className="create-button"
+        id="manage"
         disabled={isDisabled}
       >
         Create Spot

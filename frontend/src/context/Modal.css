@@ -4,12 +4,16 @@
  }
 .modal-material > *{
   border: none;
-  width: 7rem;
+  width: 100%;
   padding: 1rem;
-  border-radius: 1rem;
+  border-radius: .21rem;
   background: var(--grey);
   color: var(--red);
+  border: .11rem solid var(--blue);
   height: fit-content;
+}
+.modal-material > button{
+  height: 4rem;
 }
 #modal {
     position: fixed;

@@ -1,5 +1,6 @@
 import { csrfFetch } from "./csrf";
 import { createSelector } from 'reselect'
+// --------------------action string type literals--------------------
 const LOAD = "spots";
 const LOAD_ONE = "spots/LOAD_ONE"
 const LOAD_CURRENT = "/spots/LOAD_CURRENT"
@@ -7,7 +8,8 @@ const ADD_ONE = "spots/ADD_ONE"
 const DELETE_ONE ="spots/DELETE_ONE"
 const ADD_IMAGE = "spots/ADD_IMAGE"
 const UPDATE_SPOT = "spots/UPDATE_SPOT" 
-
+// --------------------action string type literals--------------------
+// ---------------------------action creator--------------------------
 const load = (data) => ({
     type: LOAD,
     payload: data,
@@ -42,12 +44,14 @@ const updateSpot = (data) => ({
     type: UPDATE_SPOT,
     payload: data
 });
+// ---------------------------action creator--------------------------
 
 const normalize = (data) => data.reduce((obj,ele) => ({
     ...obj,
     [ele.id]: ele
 }), {});
 
+// --------------------- THUNKS: thunk action creators allow us to make async calls  ---------------------
 export const getAllSpots = () => async (dispatch) => {
     const response = await csrfFetch(`/api/spots`);
     
@@ -139,6 +143,7 @@ export const updateOneSpot =   (spot, images) => async (dispatch) => {
         return spot;
     }
 }
+// --------------------- THUNKS: thunk action creators allow us to make async calls  ---------------------
 
 const initialState = {
     allSpots: {},
@@ -147,9 +152,10 @@ const initialState = {
         Owner: {}
     },
 };
+// -------------------------------memoization of allspots and spot details-------------------------------
 export const getEverySpot = createSelector(
-    (state) => state.spots.allSpots,
-    (allSpots) => Object.values(allSpots)
+    state => state.spots.allSpots,
+    allSpots => Object.values(allSpots)
 );
 export const getSpotDetails = createSelector(
     state => state.spots.singleSpot,
@@ -163,6 +169,8 @@ export const getSpotDetails = createSelector(
       return { singleSpot, spotImages, previewImage, allReviews, sessionUser };
     }
 );  
+// -------------------------------memoization of allspots and spot details-------------------------------
+// -----------------------------------------speaks to the store-----------------------------------------
 const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD: {

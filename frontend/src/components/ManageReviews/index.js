@@ -3,12 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import SpotReview from '../SpotReview';
 import ManageButtons from '../ManageButtons'
 import { loadUserReviews } from '../../store/reviews';
-
+import { deleteReviewsMemo } from '../../store/reviews';
 const ManageReviews = () => {
   const dispatch = useDispatch(); 
-  let reviews = useSelector(state => state.reviews.user);
-  const sessionUser = useSelector(state => state.session.user);
-  let allReviews = Object.values(reviews);
+  const {allReviews,sessionUser} = useSelector(deleteReviewsMemo);
+
   useEffect(() => {
     dispatch(loadUserReviews())
   }, [dispatch,sessionUser]) 

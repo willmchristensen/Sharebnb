@@ -143,8 +143,9 @@ i{
     margin: .5rem;
     border-radius: 1rem;
     background: var(--grey);
-    color: var(--green);
+    color: var(--red);
     height: fit-content;
+    box-shadow: .21rem .21rem  .1rem var(--blue);
 }
 .logout{
     border: none;

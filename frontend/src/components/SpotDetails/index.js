@@ -1,6 +1,6 @@
-import { useEffect,useState,useRef } from 'react';
-import { useSelector, useDispatch,  } from 'react-redux';
-import { NavLink, Route, useParams} from 'react-router-dom';
+import { useEffect} from 'react';
+import { useSelector, useDispatch} from 'react-redux';
+import { NavLink, useParams} from 'react-router-dom';
 import SpotCardImage from '../SpotCardImage';
 import LargeCardImage from '../SpotCardImage/LargeCardImage';
 import SpotReview from '../SpotReview';
@@ -11,21 +11,22 @@ import OpenModalMenuItem from '../OpenModalButton';
 import './SpotDetails.css';
 
 const SpotDetails = () => {
-    // ---------------data------------------
+    // ---------------data: memoization ------------------
     const {spotId} = useParams();
     const dispatch = useDispatch();
     const { singleSpot, spotImages, previewImage, allReviews, sessionUser } = useSelector(getSpotDetails);
     const spot = singleSpot;
-    // ---------------data------------------
+    // ---------------data: memoization ------------------
     const handleReservation = () => window.alert('Feature in progress');
     useEffect(() => {
         dispatch(loadSpotDetails(spotId));
-    }, [dispatch,spotId])
+    }, [dispatch,spotId]);
     useEffect(() => {
         dispatch(loadSpotReviews(spotId));
-    }, [dispatch,spotId])
+    }, [dispatch,spotId]);
     if(!previewImage) return null;
   return (
+    // --------------------------conditional rendering galore--------------------------
     <div className="spot-details">
         <div className="spot-details-header">
             <h1>{spot.name}</h1>
