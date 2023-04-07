@@ -15,15 +15,6 @@
     align-items: center;
     justify-content: center;
 }
-#modal-content{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    border-radius: 23%;
-    font-weight: 10;
-    color: rgba(0, 0, 0, 0.733);
-}
 label > input{
     border: 3px solid rgb(0, 0, 0);
     border-radius: 0.2em;
@@ -34,7 +25,6 @@ label > input{
   }
 h1{
     font-weight: 550;
-    padding: .7rem;
     color: var(--blue);
     box-shadow: -0.4rem -.4rem .1rem var(--green),-0.4rem -.4rem .1rem var(--red),-0.4rem -.4rem .1rem var(--blue),-.42rem -.42rem .12rem var(--blue), 0.4rem .4rem .1rem var(--green),0.4rem .4rem .1rem var(--red),0.4rem .4rem .1rem var(--blue),0.41rem .41rem .5rem var(--blue);
 }

@@ -113,14 +113,14 @@ function CreateNewSpot() {
     }
   }
   return (
-    <form
-      className="create-spot-form"
-      onSubmit={onSubmit}
-    >
+    <form className="create-spot-form" onSubmit={onSubmit}>
      <div className="user-information-create-spot">
       <div className="form-section one">
         <div className="form-row">
-          <div className="form-row-data">
+          <div 
+            className="form-row-data"
+            id="top"  
+          >
             <h1>Create a New Spot</h1>
             <h2>Where's your place located?</h2>
             <p>Guests will only get your exact address once they booked a reservation</p>
@@ -195,7 +195,7 @@ function CreateNewSpot() {
       </div>
       <div className="form-section two">
         <div className="form-row">
-          <div className="form-row-data">
+          <div className="form-row-data" id="top">
             <h2>Describe your place to guests</h2>
             <p>
               Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.
@@ -268,7 +268,7 @@ function CreateNewSpot() {
       </div>
       <div className="form-section three">
         <div className="form-row">
-          <div className="form-row-data">
+          <div className="form-row-data" id="top">
             <h2>Liven up your spot with photos</h2>
             <p>
               Submit a link to at least one photo to publish your spot.
