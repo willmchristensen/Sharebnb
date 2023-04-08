@@ -77,10 +77,12 @@ form{
     width: fit-content;
 }
 .errors{
-    color: var(--red)
+    color: var(--red);
+    margin-top: 1rem;
+    padding:1rem;
+    /* border: .1rem solid var(--red) */
 }
 #button{
-    border-radius: 7%;
     border: 1px solid var(--grey);
     background-color: white;
     color: var(--red);
@@ -88,7 +90,7 @@ form{
     height: fit-content;
     border-radius: 1rem;
     padding: .77rem;
-    margin: 1rem;
+    margin-bottom: 1rem;
     width: 70%;
 }
 #button:hover{

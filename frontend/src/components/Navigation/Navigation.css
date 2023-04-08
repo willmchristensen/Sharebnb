@@ -3,7 +3,7 @@
     border: none;
 }
 .nav-item{
-    width: 3rem;
+    
 }
 .profile-menu > *{
     color: var(--grey);
@@ -17,22 +17,18 @@
     align-items: center;
     font-family: 'Roboto', sans-serif;
     width: 100%;
-    margin:0;
     padding: 0;
-}
-.conditional-content{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+    margin: 0;
 }
 .nav-bar-conditional-content{
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 25%;
     border: .3rem solid var(--green);
     border-radius: 1rem;
     margin: 1rem;
+    margin-bottom: 5rem;
     transition: transform .23s;    
 }
 .nav-bar-conditional-content:hover{
@@ -47,27 +43,46 @@
     padding: 1rem;
     width: 100%;
 }
-.profile-dropdown{
+.conditional-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.conditional-content > *{
+    box-shadow: -0.1rem -.1rem .1rem var(--green),-0.11rem -.11rem .1rem var(--red),-0.3rem -.3rem .3rem var(--grey),0.1rem .1rem .1rem var(--grey),0.1rem .1rem .2rem var(--green),0.1rem .1rem .1rem var(--red),.23rem .23rem .1rem var(--blue);
+    background-color: var(--grey-too);
+    border-radius: 1rem;
+    margin: 1rem;
+    padding: 1.3rem .7rem;
+    transition: transform .23s ease-in-out;
+}
+.conditional-content > *:hover{
+    background-color: var(--green);
+    filter: saturate(1.1);
+    transform: scale(1.001);
+}
+.profile-dropdown {
     padding: 0;
 }
-#profile{
+#profile {
     margin: 0;
     width: 100%;
 }
-.nav-item{
+.nav-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-ul > *{
+ul > * {
     list-style: none;
     text-decoration: none;
     text-align: center;
     display: flex;
     align-items: center;
 }
-a{
+a {
     color: var(--red);
     font-size: 1.1rem;
     text-decoration: none;
@@ -75,7 +90,7 @@ a{
     display: flex;
     align-items: center;
 }
-li{
+li {
     font-size: 1.1rem;
     text-decoration: none;
     text-align: center;
@@ -83,7 +98,7 @@ li{
     align-items: center;
     justify-content: center;
 }
-i{
+i {
     color: var(--red);
     padding: 0.3rem;
     font-size: 1.8rem;
@@ -92,14 +107,14 @@ i{
     display: flex;
     align-items: center;
 }
-#logo{
+#logo {
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 1rem;
     transition: transform .23s;
 }
-#logo:hover{
+#logo:hover {
     filter: saturate(3);
     transform: translateY(-.23rem);
     border: .35rem solid var(--green);
@@ -124,7 +139,6 @@ i{
 .fa-user-circle{
     height: 1rem;
     width: 1rem;
-    padding-right: 1rem;
     margin-right: 1rem;
     margin-left: 1rem;
     display: flex;
