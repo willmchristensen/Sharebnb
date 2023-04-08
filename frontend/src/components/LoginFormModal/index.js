@@ -17,6 +17,8 @@ function LoginFormModal() {
         password.length < 6
       ){
         setIsDisabled(true)
+        errors.password = 'Password must be longer than 6 characters.';
+        errors.username = 'Credential must be longer than 4 characters.';
       }else{
         setIsDisabled(false)
       }
@@ -50,10 +52,7 @@ function LoginFormModal() {
       <form onSubmit={handleSubmit}>
         <div className="user-information">
           <h1>Log In</h1>
-          {Object.values(errors).length > 0 && <p className="errors">{errors.credential}</p>}
-          {/* <div>
-            {errors && <p className="errors">{errors}</p>}
-          </div> */}
+          {isSubmitted && Object.values(errors).length > 0 && <p className="errors">{errors.credential}</p>}
           <label>
             <input
               type="text"
