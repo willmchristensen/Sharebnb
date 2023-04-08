@@ -2,11 +2,13 @@ import React, { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
+import { useModal } from "../../context/Modal";
 
 function SignupFormPage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
+  const [credential, setCredential] = useState("");
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -14,6 +16,9 @@ function SignupFormPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [backEndErrors,setBackEndErrors] = useState([]);
+  const { closeModal } = useModal();
+
   // -------------------------enable if valid-------------------------
   useEffect(() => {
     setIsDisabled(
@@ -25,6 +30,26 @@ function SignupFormPage() {
   // -------------------------enable if valid-------------------------
  if (sessionUser) return <Redirect to="/" />;
  // --------------------------dynamic errors!--------------------------
+//  ----------------------error handling / controlled inputs----------------------
+// tried using onMouseLeave but was rendering errors on mouse leave lol 
+// switched onMouseLeave to onBlur, which is dependent on user leaving the input field
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+    setErrors((errors) => ({
+      ...errors,
+      email: e.target.value.split('@').length !== 2 || e.target.value.length < 6
+      ? 'Email must be valid.'
+      : null,
+    }));
+  };
+  const handleEmailMouseLeave = () => {
+    setErrors((errors) => ({
+      ...errors,
+      email: email.length <= 2
+      ? 'Email is required.'
+      : null,
+    }));
+  };
  const handlePassword = (e) => {
   setPassword(e.target.value)
   setErrors((errors) => ({
@@ -56,23 +81,6 @@ function SignupFormPage() {
    ...errors,
    confirmPassword: confirmPassword.length === 0
    ? 'Confirm Password is required.'
-   : null,
-  }));
- };
- const handleEmail = (e) => {
-   setEmail(e.target.value);
-   setErrors((errors) => ({
-     ...errors,
-     email: e.target.value.split('@').length !== 2 || e.target.value.length < 6
-     ? 'Email must be valid.'
-     : null,
-   }));
- };
- const handleEmailMouseLeave = () => {
-  setErrors((errors) => ({
-   ...errors,
-   email: email.length <= 2
-   ? 'Email is required.'
    : null,
   }));
  };
@@ -131,6 +139,7 @@ function SignupFormPage() {
    e.preventDefault();
    if (password === confirmPassword) {
      setErrors({});
+     const credentials = email ? email : username;
      return dispatch(
        sessionActions.signup({
          email,
@@ -139,12 +148,20 @@ function SignupFormPage() {
          lastName,
          password,
        })
-     ).catch(async (res) => {
-       const data = await res.json();
-       if (data && data.errors) {
-         setErrors(data.errors);
-       }
-     });
+     ).then(() => {
+        return dispatch(
+          sessionActions.login({
+            credential: credentials,
+            password
+          })
+          ).then(closeModal);
+     }).catch(async (res) => {
+          const data = await res.json();
+          if (data && data.errors) {
+            setBackEndErrors(data.errors);
+            console.log(backEndErrors);
+          }
+      });
    }
    return setErrors({
      confirmPassword: "Confirm Password field must be the same as the Password field"
@@ -154,6 +171,11 @@ function SignupFormPage() {
   return (
     <>
       <h1>Sign Up</h1>
+      {backEndErrors.length > 0 && backEndErrors.map(e => {
+        return ( 
+        <p className="errors">{e}</p>
+        );
+      })}
       <form onSubmit={handleSubmit}>
         <div className="user-information">
           <label>
@@ -162,7 +184,7 @@ function SignupFormPage() {
               type="text"
               value={email}
               onChange={handleEmail}
-              onMouseLeave={handleEmailMouseLeave}
+              onBlur={handleEmailMouseLeave}
               required
             />
           </label>
@@ -173,7 +195,7 @@ function SignupFormPage() {
               type="text"
               value={username}
               onChange={handleUsername}
-              onMouseLeave={handleUsernameMouseLeave}
+              onBlur={handleUsernameMouseLeave}
               required
             />
           </label>
@@ -184,7 +206,7 @@ function SignupFormPage() {
               type="text"
               value={firstName}
               onChange={handleFirstName}
-              onMouseLeave={handleFirstNameMouseLeave}
+              onBlur={handleFirstNameMouseLeave}
               required
             />
           </label>
@@ -195,7 +217,7 @@ function SignupFormPage() {
               type="text"
               value={lastName}
               onChange={handleLastName}
-              onMouseLeave={handleLastNameMouseLeave}
+              onBlur={handleLastNameMouseLeave}
               required
             />
           </label>
@@ -206,7 +228,7 @@ function SignupFormPage() {
               type="password"
               value={password}
               onChange={handlePassword}
-              onMouseLeave={handlePasswordMouseLeave}
+              onBlur={handlePasswordMouseLeave}
               required
             />
           </label>
@@ -217,7 +239,7 @@ function SignupFormPage() {
               type="password"
               value={confirmPassword}
               onChange={handleConfirmPassword}
-              onMouseLeave={handleConfirmMouseLeave}
+              onBlur={handleConfirmMouseLeave}
               required
             />
           </label>

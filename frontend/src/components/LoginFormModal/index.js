@@ -37,7 +37,7 @@ function LoginFormModal() {
         async (res) => {
           const data = await res.json();
           if (data && data.message){
-            setErrors({...errors,credential:'The provided credentials were invalid.'});
+            setErrors({...errors, credential:'The provided credentials were invalid.'});
           } 
         }
       );
