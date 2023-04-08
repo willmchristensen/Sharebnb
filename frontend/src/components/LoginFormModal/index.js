@@ -22,7 +22,7 @@ function LoginFormModal() {
       }else{
         setIsDisabled(false)
       }
-  },[credential,password]);
+  },[errors,credential,password]);
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors({});

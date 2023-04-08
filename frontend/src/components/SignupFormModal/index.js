@@ -10,76 +10,147 @@ function SignupFormPage() {
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [isDisabled, setIsDisabled] = useState(true);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [isDisabled, setIsDisabled] = useState(true);
-  const [isSubmitted,setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
-  // ----TODO: ERRORS FROM BACKEND: ASK FOR CLARIFICATION!----
-  // display password !== confirmpassword front*backend
+  // -------------------------enable if valid-------------------------
   useEffect(() => {
-    if(
-        username.length < 4 ||
-        password.length < 6 ||
-        password !== confirmPassword
-      ){
-        setIsDisabled(true)
-      }else{
-        setIsDisabled(false)
-      }
-  },[username,confirmPassword,password]);
-  
-  // FIXME: show error if user has not met condition, remove once 
-  useEffect(() => {
-    console.log('------------------------------password checkerBEGIN');
-    console.log('------------------------------password',password);
-    if(password.length >= 1 && password.length < 6) {
-      console.log('------------------------------password checkerIF'); 
-      errors.password = 'Password must be longer than 6 characters.'
-      console.log('------------------------------errors.password',errors.password);
-    }else{
-      console.log('------------------------------password checkerELSE');
-      errors.password = null;
-    }
-    if(username.length >= 1 && username.length < 4) {
-      errors.username = 'Credential must be longer than 4 characters.';  
-    } else{
-      errors.username = null;
-    }
-  },[username,password])
-  
-
-  if (sessionUser) return <Redirect to="/" />;
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setErrors({});
-    setIsSubmitted(true);
-    const errors = {};
-    if(password !== confirmPassword){errors.confirmPassword = "Confirm Password field must be the same as the Password field"}
-    setErrors(errors);
-    if (password === confirmPassword) {
-      setErrors({});
-      return dispatch(
-        sessionActions.signup({
-          email,
-          username,
-          firstName,
-          lastName,
-          password,
-        })
-      ).catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) {
-          setErrors(data.errors);
-        }
-      });
-    }else{
-      setErrors({
-        confirmPassword: "Confirm Password field must be the same as the Password field"
-      });
-    }
-  };
-
+    setIsDisabled(
+      username.length < 4 ||
+      password.length < 6 ||
+      password !== confirmPassword
+    );
+  }, [username, password, confirmPassword]);
+  // -------------------------enable if valid-------------------------
+ if (sessionUser) return <Redirect to="/" />;
+ // --------------------------dynamic errors!--------------------------
+ const handlePassword = (e) => {
+  setPassword(e.target.value)
+  setErrors((errors) => ({
+    ...errors,
+    password: e.target.value.length >= 1 && password.length < 6 
+    ? 'Password must be longer than 6 characters.'
+    : null,
+   }));
+ };
+ const handlePasswordMouseLeave = (e) => {
+  setErrors((errors) => ({
+   ...errors,
+   password: password.length === 0
+   ? 'Password is required.'
+   : null,
+  }));
+ };
+ const handleConfirmPassword = (e) => {
+   setConfirmPassword(e.target.value)
+  setErrors((errors) => ({
+    ...errors,
+    confirmPassword: e.target.value !== password 
+    ? 'Confirm Password field must be the same as the Password field.'
+    : null,
+  }));
+ };
+ const handleConfirmMouseLeave = (e) => {
+  setErrors((errors) => ({
+   ...errors,
+   confirmPassword: confirmPassword.length === 0
+   ? 'Confirm Password is required.'
+   : null,
+  }));
+ };
+ const handleEmail = (e) => {
+   setEmail(e.target.value);
+   setErrors((errors) => ({
+     ...errors,
+     email: e.target.value.split('@').length !== 2 || e.target.value.length < 6
+     ? 'Email must be valid.'
+     : null,
+   }));
+ };
+ const handleEmailMouseLeave = () => {
+  setErrors((errors) => ({
+   ...errors,
+   email: email.length <= 2
+   ? 'Email is required.'
+   : null,
+  }));
+ };
+ const handleUsername = (e) => {
+  setUsername(e.target.value);
+  setErrors((errors) => ({
+    ...errors,
+    username: e.target.value.length < 4 && e.target.value.length > 1
+      ? 'Credential must be longer than 4 characters.'
+      : null,
+  }));
+ };
+ const handleUsernameMouseLeave = () => {
+  setErrors((errors) => ({
+   ...errors,
+   username: username.length === 0
+   ? 'Username is required.'
+   : null,
+  }));
+ };
+ const handleFirstName = (e) => {
+  setFirstName(e.target.value)
+  setErrors((errors) => ({
+   ...errors,
+   firstName: e.target.value.length < 2
+     ? 'First name must be longer than 2 characters.'
+     : null,
+ }));
+ };
+ const handleFirstNameMouseLeave = () => {
+  setErrors((errors) => ({
+   ...errors,
+   firstName: firstName.length < 2
+   ? 'First Name is required.'
+   : null,
+  }));
+ };
+ const handleLastName = (e) => {
+  setLastName(e.target.value)
+  setErrors((errors) => ({
+   ...errors,
+   lastName: e.target.value.length < 2
+     ? 'Last name must be longer than 2 characters.'
+     : null,
+ }));
+ };
+ const handleLastNameMouseLeave = () => {
+  setErrors((errors) => ({
+   ...errors,
+   lastName: lastName.length < 2
+   ? 'Last Name is required.'
+   : null,
+  }));
+ };
+ const handleSubmit = (e) => {
+   e.preventDefault();
+   if (password === confirmPassword) {
+     setErrors({});
+     return dispatch(
+       sessionActions.signup({
+         email,
+         username,
+         firstName,
+         lastName,
+         password,
+       })
+     ).catch(async (res) => {
+       const data = await res.json();
+       if (data && data.errors) {
+         setErrors(data.errors);
+       }
+     });
+   }
+   return setErrors({
+     confirmPassword: "Confirm Password field must be the same as the Password field"
+   });
+ };
+ // --------------------------dynamic errors!--------------------------
   return (
     <>
       <h1>Sign Up</h1>
@@ -90,7 +161,8 @@ function SignupFormPage() {
               placeholder="Email"
               type="text"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleEmail}
+              onMouseLeave={handleEmailMouseLeave}
               required
             />
           </label>
@@ -100,7 +172,8 @@ function SignupFormPage() {
               placeholder="Username"
               type="text"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={handleUsername}
+              onMouseLeave={handleUsernameMouseLeave}
               required
             />
           </label>
@@ -110,7 +183,8 @@ function SignupFormPage() {
               placeholder="First Name"
               type="text"
               value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              onChange={handleFirstName}
+              onMouseLeave={handleFirstNameMouseLeave}
               required
             />
           </label>
@@ -120,7 +194,8 @@ function SignupFormPage() {
               placeholder="Last Name"
               type="text"
               value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
+              onChange={handleLastName}
+              onMouseLeave={handleLastNameMouseLeave}
               required
             />
           </label>
@@ -130,28 +205,28 @@ function SignupFormPage() {
               placeholder="Password"
               type="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handlePassword}
+              onMouseLeave={handlePasswordMouseLeave}
               required
             />
           </label>
-          {errors.password && 
-          <p
-            className="errors"
-          >{errors.password}</p>}
+          {errors.password && <p className="errors">{errors.password}</p>}
           <label>
             <input
               placeholder="Confirm Password"
               type="password"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={handleConfirmPassword}
+              onMouseLeave={handleConfirmMouseLeave}
               required
             />
           </label>
-          {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+          {errors.confirmPassword && <p className="errors">{errors.confirmPassword}</p>}
           <button 
             type="submit"
             id="button"
             disabled={isDisabled}
+            onClick={handleSubmit} 
           >Sign Up</button>
         </div>
       </form>
