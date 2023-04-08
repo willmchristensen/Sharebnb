@@ -8,35 +8,34 @@ function LoginFormModal() {
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
-  // const [isDisabled,setIsDisabled] = useState(true);
+  const [isDisabled,setIsDisabled] = useState(true);
+  const [isSubmitted,setIsSubmitted] = useState(false);
   const { closeModal } = useModal();
-  // useEffect(() => {
-  //   if(
-  //       credential.length < 4 ||
-  //       password.length < 6
-  //     ){
-  //       setIsDisabled(true)
-  //     }else{
-  //       setIsDisabled(false)
-  //     }
-  // },[credential,password])
+  useEffect(() => {
+    if(
+        credential.length < 4 ||
+        password.length < 6
+      ){
+        setIsDisabled(true)
+      }else{
+        setIsDisabled(false)
+      }
+  },[credential,password]);
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors({});
-    // const errors = {};
-    // if(password.length < 6) errors.password = 'Password must be longer than 6 characters.';
-    // if(credential.length < 4) errors.credential = 'Credential must be longer than 4 characters.';
-    // setErrors(errors);
+    setIsSubmitted(true);
+    const errors = {};
+    if(password.length < 6) errors.password = 'Password must be longer than 6 characters.';
+    if(credential.length < 4) errors.username = 'Credential must be longer than 4 characters.';
+    setErrors(errors);
     return dispatch(sessionActions.login({ credential, password }))
       .then(closeModal)
       .catch(
         async (res) => {
           const data = await res.json();
           if (data && data.message){
-            setErrors(data.message);
-            // setErrors(data.message);
-            console.log(data);
-            console.log('ERRORS:',errors);
+            setErrors({...errors,credential:'The provided credentials were invalid.'});
           } 
         }
       );
@@ -50,7 +49,7 @@ function LoginFormModal() {
       <form onSubmit={handleSubmit}>
         <div className="user-information">
           <h1>Log In</h1>
-          <p className="errors">{errors}</p>
+          {Object.values(errors).length > 0 && <p className="errors">{errors.credential}</p>}
           {/* <div>
             {errors && <p className="errors">{errors}</p>}
           </div> */}
@@ -63,6 +62,7 @@ function LoginFormModal() {
               placeholder="Username or Email"
             />
           </label>
+          {isSubmitted && Object.values(errors).length > 0 && <p className="errors">{errors.username}</p>}
           <label>
             <input
               type="password"
@@ -72,6 +72,7 @@ function LoginFormModal() {
               placeholder="Password"
             />
           </label>
+          {isSubmitted && Object.values(errors).length > 0 && <p className="errors">{errors.password}</p>}
           <div className="login-buttons">
             <button 
               type="submit" 

@@ -1,152 +1,119 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useModal } from "../../context/Modal";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
-import './SignupForm.css';
 
-function SignupFormModal() {
+function SignupFormPage() {
   const dispatch = useDispatch();
+  const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState([]);
-  const [isDisabled,setIsDisabled] = useState(true);
-  const { closeModal } = useModal();
+  const [errors, setErrors] = useState({});
 
-  useEffect(() => {
-    if(
-        email.length === 0 ||
-        username.length === 0 ||
-        firstName.length === 0 ||
-        lastName.length === 0 ||
-        password.length === 0 ||
-        confirmPassword.length === 0
-      ){
-        setIsDisabled(true)
-      }else{
-        setIsDisabled(false)
-      }
-
-  },[email,username,firstName,lastName,password,confirmPassword])
-
-  useEffect(() => {
-    if(
-        username.length < 4 ||
-        password.length < 6
-      ){
-        setIsDisabled(true)
-      }else{
-        setIsDisabled(false)
-      }
-  },[username,password])
+  if (sessionUser) return <Redirect to="/" />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors([]);
     if (password === confirmPassword) {
-        setIsDisabled(false)
-        setErrors([]);
-        return dispatch(sessionActions.signup({ email, username, firstName, lastName, password }))
-            .then(async () => {
-                closeModal();
-            })
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) {
-                    setIsDisabled(true)
-                    setErrors(Object.values(data.errors));
-                    if (data.message === 'User already exists') {
-                        let newErrors = errors;
-                        newErrors.push('Username must be unique')
-                        setErrors(newErrors);
-                    }
-                }
-            });
+      setErrors({});
+      return dispatch(
+        sessionActions.signup({
+          email,
+          username,
+          firstName,
+          lastName,
+          password,
+        })
+      ).catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) {
+          setErrors(data.errors);
+        }
+      });
     }
-    setIsDisabled(true)
-    return setErrors(['Password does not match confirmation password']);
+    return setErrors({
+      confirmPassword: "Confirm Password field must be the same as the Password field"
+    });
   };
-
 
   return (
     <>
+      <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
-        {errors && <ul>
-          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-        </ul>}
         <div className="user-information">
-          <h1>Sign Up</h1>
           <label>
             <input
-              placeHolder="Email"
+              placeholder="Email"
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </label>
-          {<p className="errors">{errors.credentials}</p>}
+          {errors.email && <p>{errors.email}</p>}
           <label>
+
             <input
-              placeHolder="Username"
+              placeholder="Username"
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
             />
           </label>
-          {<p className="errors">{errors.username}</p>}
+          {errors.username && <p>{errors.username}</p>}
           <label>
+            
             <input
-              placeHolder="First Name"
+              placeholder="First Name"
               type="text"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               required
             />
           </label>
-          {<p className="errors">{errors.firstName}</p>}
+          {errors.firstName && <p>{errors.firstName}</p>}
           <label>
+            
             <input
-              placeHolder="Last Name"
+              placeholder="Last Name"
               type="text"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               required
             />
           </label>
-          {<p className="errors">{errors.lastName}</p>}
+          {errors.lastName && <p>{errors.lastName}</p>}
           <label>
+
             <input
-              placeHolder="Password"
+              placeholder="Password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </label>
-          {<p className="errors">{errors.password}</p>}
+          {errors.password && <p>{errors.password}</p>}
           <label>
             <input
-              placeHolder="Confirm Password"
+              placeholder="Confirm Password"
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
           </label>
-          <button 
-            type="submit" 
-            id="button"
-            disabled={isDisabled}
-          >Sign Up</button>
+          {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+          <button type="submit">Sign Up</button>
         </div>
       </form>
     </>
   );
 }
 
-export default SignupFormModal;
+export default SignupFormPage;
