@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
@@ -12,7 +12,21 @@ function SignupFormPage() {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isDisabled, setIsDisabled] = useState(true);
   const [errors, setErrors] = useState({});
+  // TODO: ERRORS FROM BACKEND: 
+  // display password !== confirmpassword front*backend
+  useEffect(() => {
+    if(
+        username.length < 4 ||
+        password.length < 6 ||
+        password !== confirmPassword
+      ){
+        setIsDisabled(true)
+      }else{
+        setIsDisabled(false)
+      }
+  },[username,confirmPassword,password]);
 
   if (sessionUser) return <Redirect to="/" />;
 
@@ -54,7 +68,7 @@ function SignupFormPage() {
               required
             />
           </label>
-          {errors.email && <p>{errors.email}</p>}
+          {errors.email && <p className="errors">{errors.email}</p>}
           <label>
 
             <input
@@ -65,7 +79,7 @@ function SignupFormPage() {
               required
             />
           </label>
-          {errors.username && <p>{errors.username}</p>}
+          {errors.username && <p className="errors">{errors.username}</p>}
           <label>
             
             <input
@@ -76,9 +90,8 @@ function SignupFormPage() {
               required
             />
           </label>
-          {errors.firstName && <p>{errors.firstName}</p>}
+          {errors.firstName && <p className="errors">{errors.firstName}</p>}
           <label>
-            
             <input
               placeholder="Last Name"
               type="text"
@@ -87,7 +100,7 @@ function SignupFormPage() {
               required
             />
           </label>
-          {errors.lastName && <p>{errors.lastName}</p>}
+          {errors.lastName && <p className="errors">{errors.lastName}</p>}
           <label>
 
             <input
@@ -98,7 +111,10 @@ function SignupFormPage() {
               required
             />
           </label>
-          {errors.password && <p>{errors.password}</p>}
+          {errors.password && 
+          <p
+            className="errors"
+          >{errors.password}</p>}
           <label>
             <input
               placeholder="Confirm Password"
@@ -109,7 +125,11 @@ function SignupFormPage() {
             />
           </label>
           {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-          <button type="submit">Sign Up</button>
+          <button 
+            type="submit"
+            id="button"
+            disabled={isDisabled}
+          >Sign Up</button>
         </div>
       </form>
     </>

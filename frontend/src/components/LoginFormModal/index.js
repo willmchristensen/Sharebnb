@@ -44,6 +44,7 @@ function LoginFormModal() {
     return dispatch(sessionActions.login({ credential:'testUserName', password:'password'}))
       .then(closeModal);
   }
+  // TODO: ERRORS FROM BACKEND: 
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -78,6 +79,7 @@ function LoginFormModal() {
               type="submit" 
               id="button" 
               onClick={handleSubmit}
+              disabled={isDisabled}
             >
               Log In
             </button>
