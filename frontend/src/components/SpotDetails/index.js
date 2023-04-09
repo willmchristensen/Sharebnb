@@ -11,19 +11,28 @@ import OpenModalMenuItem from '../OpenModalButton';
 import './SpotDetails.css';
 
 const SpotDetails = () => {
-    // ---------------data: memoization ------------------
-    const {spotId} = useParams();
     const dispatch = useDispatch();
+    const {spotId} = useParams();
+    // --------------------------useSelectors--------------------------
+    // const spot = useSelector(state => state.spots.singleSpot);
+    // const reviews = useSelector(state => state.reviews.spot);
+    // const sessionUser = useSelector(state => state.session.user);
+    // const spotImages = spot.SpotImages;
+    // const previewImage = spotImages[0];
+    // const allReviews = Object.values(reviews);
+    // --------------------------useSelectors--------------------------
+    // ----------------------data: memoization -------------------------
     const { singleSpot, spotImages, previewImage, allReviews, sessionUser } = useSelector(getSpotDetails);
     const spot = singleSpot;
-    // ---------------data: memoization ------------------
+    // ----------------------data: memoization------- ------------------
     const handleReservation = () => window.alert('Feature in progress');
+    console.log(allReviews, 'BEFOORE USE EFFECT')
+    console.log('------------------------------spot.numreviews',spot.numReviews);
     useEffect(() => {
         dispatch(loadSpotDetails(spotId));
-    }, [dispatch,spotId]);
-    useEffect(() => {
         dispatch(loadSpotReviews(spotId));
     }, [dispatch,spotId]);
+    console.log(allReviews, 'AFTER USE EFFECT')
     if(!previewImage) return null;
   return (
     // --------------------------conditional rendering galore--------------------------
@@ -61,7 +70,9 @@ const SpotDetails = () => {
             <div className="spot-details-info">
                 <div className="spot-details-info-section-one">
                     <div className="spot-details-info-title">
-                        <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
+                        <h2>
+                            Hosted by {spot.Owner.firstName} {spot.Owner.lastName}
+                        </h2>
                     </div>
                     <div className="spot-details-info-description">
                         <p>
@@ -70,106 +81,107 @@ const SpotDetails = () => {
                     </div>
                 </div>
                 <div className="spot-details-info-reserve">
-                    <div className="spot-details-info-reserve-info">
-                        <div className="spot-details-info-reserve-price">
-                            <h3>${spot.price} per night</h3>
-                        </div>
-                        <div className="spot-details-info-reserve-reviews-stars">
-                        <div className="spot-details-reviews-content-stars">
-                            <i class="fas fa-star"></i>
-                            {
-                                spot.numReviews > 0 &&
-                                <>
-                                    <h3>{Number(spot.avgStarRating).toFixed(1)}
-                                    </h3>
-                                    <div className="dot">
-                                        <i class="fas fa-dot-circle" id="dot"></i>
-                                    </div>
-                                </>
-                            }
-                        </div>
-                            {
-                                spot.numReviews === 1 ? 
-                                (
-                                    <h3>
-                                        {Number(spot.numReviews).toFixed(0)} review
-                                    </h3> 
-                                ) : spot.numReviews > 0 ? 
-                                (
-                                    <h3>
-                                        {Number(spot.numReviews).toFixed(0)} reviews
-                                    </h3> 
-                                ) : 
-                                (
-                                    <h3>
-                                        "New"
-                                    </h3>
-                                )
-                            }
-                        </div>
-                    </div>
-                    <div className="spot-details-info-reserve-button">
-                        <button 
-                            className="reserve-spot"
-                            onClick={handleReservation}
-                        >
-                            Reserve
-                        </button>
-                    </div>
+                <div className="spot-details-info-reserve-info">
+                <div className="spot-details-info-reserve-price">
+                <h3>${spot.price} per night</h3>
                 </div>
-        </div>
-        <div className="spot-details-reviews">
-        <div className="spot-details-reviews-content">
-            <div className="spot-details-reviews-content-stars">
+                <div className="spot-details-info-reserve-reviews-stars">
+                <div className="spot-details-reviews-content-stars">
                 <i class="fas fa-star"></i>
                 {
-                    spot.numReviews > 0 &&
-                    <>
-                        <h3>{Number(spot.avgStarRating).toFixed(1)}
-                        </h3>
-                        <div className="dot">
-                            <i class="fas fa-dot-circle" id="dot"></i>
-                        </div>
-                    </>
+                spot.numReviews > 0 &&
+                <>
+                <h3>{Number(spot.avgStarRating).toFixed(1)}
+                </h3>
+                <div className="dot">
+                    <i class="fas fa-dot-circle" id="dot"></i>
+                </div>
+                </>
                 }
-            </div>
-            <div className="spot-details-reviews-content-reviews">
+                </div>
                 {
-                    spot.numReviews === 1 ? 
-                    (
-                        <h3>
-                            {Number(spot.numReviews).toFixed(0)} review
-                        </h3> 
-                    ) : spot.numReviews > 0 ? 
-                    (
-                        <h3>
-                            {Number(spot.numReviews).toFixed(0)} reviews
-                        </h3> 
-                    ) : 
-                    (
-                        <h3>
-                            "New"
-                        </h3>
-                    )
+                spot.numReviews === 1 ? 
+                (
+                <h3>
+                    {Number(spot.numReviews).toFixed(0)} review
+                </h3> 
+                ) : spot.numReviews > 0 ? 
+                (
+                <h3>
+                    {Number(spot.numReviews).toFixed(0)} reviews
+                </h3> 
+                ) : 
+                (
+                <h3>
+                    "New"
+                </h3>
+                )
                 }
-            </div>
-        </div>
-    </div>
-    { sessionUser && !allReviews.find(rev => rev.userId === sessionUser.id) && spot.ownerId !== sessionUser.id &&
-        (
-            <div className="post-review">
-                <div className="modal-material">
-                    <OpenModalMenuItem
-                        buttonText="Post Your Review"
-                        modalComponent={<PostAReviewModal spot={spot}/>}
-                    />
+                </div>
+                </div>
+                <div className="spot-details-info-reserve-button">
+                <button 
+                className="reserve-spot"
+                onClick={handleReservation}
+                >
+                Reserve
+                </button>
+                </div>
                 </div>
             </div>
-        )
-    }
+        <div className="spot-details-reviews">
+            <div className="spot-details-reviews-content">
+                <div className="spot-details-reviews-content-stars">
+                    <i class="fas fa-star"></i>
+                    {
+                        spot.numReviews > 0 &&
+                        <>
+                            <h3>{Number(spot.avgStarRating).toFixed(1)}
+                            </h3>
+                            <div className="dot">
+                                <i class="fas fa-dot-circle" id="dot"></i>
+                            </div>
+                        </>
+                    }
+                </div>
+                <div className="spot-details-reviews-content-reviews">
+                    {
+                        allReviews.length === 1 ? 
+                        (
+                            <h3>
+                                {Number(allReviews.length).toFixed(0)} review
+                            </h3> 
+                        ) : spot.numReviews > 0 ? 
+                        (
+                            <h3>
+                                {Number(allReviews.length).toFixed(0)} reviews
+                            </h3> 
+                        ) : 
+                        (
+                            <h3>
+                                "New"
+                            </h3>
+                        )
+                    }
+                </div>
+            </div>
+        </div>
+        { sessionUser && !allReviews.find(rev => rev.userId === sessionUser.id) && spot.ownerId !== sessionUser.id &&
+            (
+                <div className="post-review">
+                    <div className="modal-material">
+                        <OpenModalMenuItem
+                            buttonText="Post Your Review"
+                            modalComponent={<PostAReviewModal spot={spot}/>}
+                        />
+                    </div>
+                </div>
+            )
+        }
     </div>
+    {console.log('BRUH THIS IS SPOT REVIEWS',spot.numReviews)}
         {
-            spot.numReviews === 0 ? 
+            allReviews.length === 0 ? 
             (
                 <h3>
                     Be the first to post a review!
