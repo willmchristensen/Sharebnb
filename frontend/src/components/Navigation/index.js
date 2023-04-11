@@ -17,7 +17,9 @@ function Navigation({ isLoaded }){
           <div className="nav-item">
             <i class="fas fa-yin-yang"></i>
           </div>
-          <span className="logo">ShaareBnB</span>
+          <span className="logo">
+            ShareBnB
+          </span>
         </NavLink>
       </li>
       <div className="nav-bar-conditional-content">

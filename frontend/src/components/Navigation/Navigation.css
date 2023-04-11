@@ -3,7 +3,7 @@
     border: none;
 }
 .nav-item{
-    
+
 }
 .profile-menu > *{
     color: var(--grey);
@@ -29,7 +29,7 @@
     border-radius: 1rem;
     margin: 1rem;
     margin-bottom: 5rem;
-    transition: transform .23s;    
+    transition: transform .23s;
 }
 .nav-bar-conditional-content:hover{
     transform: translateY(-.23rem);
@@ -44,6 +44,7 @@
     width: 100%;
 }
 .conditional-content{
+    position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -177,5 +178,5 @@ i {
         display: flex;
         justify-content: space-between;
         align-items: center;
-    } 
+    }
 }
