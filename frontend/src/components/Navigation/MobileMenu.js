@@ -11,11 +11,11 @@ function MobileMenu({ isLoaded }){
         <li
             className="nav-bar-conditional-content-mobile"
         >
+            <i class="fas fa-yin-yang"></i>
             <NavLink
                 id="logo-mobile"
                 exact to="/"
             >
-                <i class="fas fa-yin-yang"></i>
                 <span className="logo">
                     ShareBnB
                 </span>
