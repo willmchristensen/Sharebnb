@@ -61,6 +61,7 @@ function ProfileButton({ user }) {
     history.push('/');
     closeMenu();
   };
+  //
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   return (
     <>

@@ -14,15 +14,18 @@ function Navigation({ isLoaded }){
         className="nav-bar-conditional-content"
       >
         <NavLink exact to="/">
-          <div className="nav-item">
+          {/* <div className="nav-item"> */}
             <i class="fas fa-yin-yang"></i>
-          </div>
+          {/* </div> */}
           <span className="logo">
             ShareBnB
           </span>
         </NavLink>
       </li>
-      <div className="nav-bar-conditional-content">
+      <div
+        className="nav-bar-conditional-content"
+        id="profile-bruh"
+      >
         {
           sessionUser && (
             <>
