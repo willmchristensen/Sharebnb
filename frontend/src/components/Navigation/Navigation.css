@@ -23,6 +23,10 @@
     padding: 0;
     margin: 0;
 }
+.mobile-nav{
+    border: 10px solid purple;
+    display: none;
+}
 .nav-bar-conditional-content{
     display: flex;
     justify-content: center;
@@ -178,15 +182,30 @@ i {
         align-items: center;
     }
 }
-@media screen and (max-width: 700px){
+@media screen and (max-width: 426px){
     #profile-bruh{
         display: flex;
         flex-direction: column;
     }
     .nav-bar{
-        margin: 0;
-
+        display: none;
+    }
+    .mobile-nav{
         display: flex;
-        flex-direction: column;
+    }
+    .baby-menu{
+        border: 10px solid yellow;
+        margin: 0;
+        padding: 0;
+    }
+    .baby-menu > *{
+        border: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+    }
+    #profile-bruh{
+        border: none;
     }
 }
