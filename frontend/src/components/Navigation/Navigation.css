@@ -19,8 +19,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: 'Roboto', sans-serif;
-    width: 100%;
+    width: 75%;
     padding: 0;
     margin: 0;
 }
@@ -177,5 +176,17 @@ i {
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+}
+@media screen and (max-width: 700px){
+    #profile-bruh{
+        display: flex;
+        flex-direction: column;
+    }
+    .nav-bar{
+        margin: 0;
+
+        display: flex;
+        flex-direction: column;
     }
 }
