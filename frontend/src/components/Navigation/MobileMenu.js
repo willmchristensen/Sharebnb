@@ -2,29 +2,27 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import './Navigation.css';
+import './MobileMenu.css';
 
 function MobileMenu({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
-
   return (
-    <div className="mobile-nav">
-        <ul className="mobile-menu">
+    <ul className="mobile-menu">
         <li
-            id="logo"
-            className="nav-bar-conditional-content"
+            className="nav-bar-conditional-content-mobile"
         >
-            <NavLink exact to="/">
-            {/* <div className="nav-item"> */}
+            <NavLink
+                id="logo-mobile"
+                exact to="/"
+            >
                 <i class="fas fa-yin-yang"></i>
-            {/* </div> */}
-            <span className="logo">
-                ShareBnB
-            </span>
+                <span className="logo">
+                    ShareBnB
+                </span>
             </NavLink>
         </li>
         <div
-            className="nav-bar-conditional-content"
+            className="nav-bar-conditional-content-mobile"
             id="create-spot-button"
         >
             {
@@ -56,8 +54,7 @@ function MobileMenu({ isLoaded }){
             )
             }
         </div>
-        </ul>
-    </div>
+    </ul>
   );
 }
 

@@ -251,16 +251,21 @@ function CreateNewSpot() {
                 placeholder="Price"
               />
             </label>
-              {isSubmitted && <p className="errors">
-                {errors.price}
-              </p>}
+              {
+                isSubmitted &&
+                <p className="errors">
+                  {errors.price}
+                </p>
+              }
           </div>
         </div>
       </div>
       <div className="form-section three">
         <div className="form-row">
           <div className="form-row-data" id="top">
-            <h2 id="subtitle">Liven up your spot with photos</h2>
+            <h2 id="subtitle">
+              Liven up your spot with photos
+            </h2>
             <p>
               Submit a link to at least one photo to publish your spot.
             </p>
@@ -270,8 +275,8 @@ function CreateNewSpot() {
           <div className="form-row-data">
           <label>
             <input
-              type="text"
-              name="country"
+              type="url"
+              name="previewImage"
               value={previewImage}
               onChange={e=>setPreviewImage(e.target.value)}
               placeholder="Preview Image URL"
@@ -286,8 +291,8 @@ function CreateNewSpot() {
           <div className="form-row-data">
           <label>
             <input
-              type="text"
-              name="country"
+              type="url"
+              name="photoOne"
               value={photoOne}
               onChange={e=>setPhotoOne(e.target.value)}
               placeholder="Image URL"
@@ -302,8 +307,8 @@ function CreateNewSpot() {
           <div className="form-row-data">
           <label>
             <input
-              type="text"
-              name="country"
+              type="url"
+              name="photoTwo"
               value={photoTwo}
               onChange={e=>setPhotoTwo(e.target.value)}
               placeholder="Image URL"
@@ -318,8 +323,8 @@ function CreateNewSpot() {
           <div className="form-row-data">
           <label>
             <input
-              type="text"
-              name="country"
+              type="url"
+              name="photoThree"
               value={photoThree}
               onChange={e=>setPhotoThree(e.target.value)}
               placeholder="Image URL"
@@ -334,8 +339,8 @@ function CreateNewSpot() {
           <div className="form-row-data">
           <label>
             <input
-              type="text"
-              name="country"
+              type="url"
+              name="photoFour"
               value={photoFour}
               onChange={e=>setPhotoFour(e.target.value)}
               placeholder="Image URL"

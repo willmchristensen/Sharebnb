@@ -41,6 +41,7 @@ function ProfileButton({ user }) {
       }
     }
    }, [User]);
+  //  if user clicks out of profileButton component (useRef()), hideMenu
   useEffect(() => {
     if (!showMenu) return;
     const closeMenu = (e) => {
@@ -51,9 +52,6 @@ function ProfileButton({ user }) {
     document.addEventListener('click', closeMenu);
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
-  // useEffect(() => {
-  //   dispatch(getAllSpots())
-  // }, [dispatch]);
   const closeMenu = () => setShowMenu(false);
   const logout = (e) => {
     e.preventDefault();
@@ -61,7 +59,6 @@ function ProfileButton({ user }) {
     history.push('/');
     closeMenu();
   };
-  //
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   return (
     <>

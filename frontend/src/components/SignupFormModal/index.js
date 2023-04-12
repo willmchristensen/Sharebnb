@@ -30,7 +30,7 @@ function SignupFormPage() {
  if (sessionUser) return <Redirect to="/" />;
  // --------------------------dynamic errors!--------------------------
 //  ----------------------error handling / controlled inputs----------------------
-// tried using onMouseLeave but was rendering errors on mouse leave lol 
+// tried using onMouseLeave but was rendering errors on mouse leave lol
 // switched onMouseLeave to onBlur, which is dependent on user leaving the input field
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -45,7 +45,7 @@ function SignupFormPage() {
     setErrors((errors) => ({
       ...errors,
       email: email.length <= 2
-      ? 'Email is required.'
+      ? 'Email must be more than 2 characters.'
       : null,
     }));
   };
@@ -53,7 +53,7 @@ function SignupFormPage() {
   setPassword(e.target.value)
   setErrors((errors) => ({
     ...errors,
-    password: e.target.value.length >= 1 && password.length < 6 
+    password: e.target.value.length >= 1 && password.length < 6
     ? 'Password must be longer than 6 characters.'
     : null,
    }));
@@ -70,7 +70,7 @@ function SignupFormPage() {
    setConfirmPassword(e.target.value)
   setErrors((errors) => ({
     ...errors,
-    confirmPassword: e.target.value !== password 
+    confirmPassword: e.target.value !== password
     ? 'Confirm Password field must be the same as the Password field.'
     : null,
   }));
@@ -171,7 +171,7 @@ function SignupFormPage() {
     <>
       <h1>Sign Up</h1>
       {backEndErrors.length > 0 && backEndErrors.map(e => {
-        return ( 
+        return (
         <p className="errors">{e}</p>
         );
       })}
@@ -243,11 +243,11 @@ function SignupFormPage() {
             />
           </label>
           {errors.confirmPassword && <p className="errors">{errors.confirmPassword}</p>}
-          <button 
+          <button
             type="submit"
             id="button"
             disabled={isDisabled}
-            onClick={handleSubmit} 
+            onClick={handleSubmit}
           >Sign Up</button>
         </div>
       </form>
