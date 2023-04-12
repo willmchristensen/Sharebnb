@@ -182,7 +182,7 @@ i {
         align-items: center;
     }
 }
-@media screen and (max-width: 426px){
+@media screen and (max-width: 768px){
     #profile-bruh{
         display: flex;
         flex-direction: column;
