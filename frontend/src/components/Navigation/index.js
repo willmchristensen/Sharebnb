@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import MobileMenu from './MobileMenu';
 import './Navigation.css';
 
 function Navigation({ isLoaded }){
@@ -55,56 +56,7 @@ function Navigation({ isLoaded }){
           }
         </div>
       </ul>
-      <div className="mobile-nav">
-        <ul className="baby-menu">
-          <li
-            id="logo"
-            className="nav-bar-conditional-content"
-          >
-            <NavLink exact to="/">
-              {/* <div className="nav-item"> */}
-                <i class="fas fa-yin-yang"></i>
-              {/* </div> */}
-              <span className="logo">
-                ShareBnB
-              </span>
-            </NavLink>
-          </li>
-          <div
-            className="nav-bar-conditional-content"
-            id="create-spot-button"
-          >
-            {
-              sessionUser && (
-                <>
-                  <li
-                    id="new-spot"
-                  >
-                    <NavLink
-                      to={`/spots/new`}
-                    >
-                      Create A New Spot
-                    </NavLink>
-                  </li>
-                </>
-              )
-            }
-            {
-              isLoaded && (
-              <>
-                <li
-                  id="profile"
-                >
-                  <div className="nav-item">
-                    <ProfileButton user={sessionUser} />
-                  </div>
-                </li>
-              </>
-              )
-            }
-          </div>
-        </ul>
-      </div>
+      <MobileMenu isLoaded={isLoaded}/>
     </>
 
   );

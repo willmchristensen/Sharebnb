@@ -1,11 +1,11 @@
 :root {
-    --red: #94AF9F;
-    --blue: #DBE4C6;
+    --red: #EA5455;
+    --blue: #002B5B;
     --grey: #E4DCCF;
-    --beige: #0044ff05;
+    --beige: #fff5e453;
     --grey-too: #0044ff05;
     --purple: #bcb3dd91;
-    --green:  #BBD6B8;
+    --green:  #F9F5EB;
     --black: #EA9E54;
 }
 *{
@@ -67,6 +67,9 @@ h1{
 h2{
     font-weight: 450;
     color: var(--blue)
+}
+h3:hover{
+    filter: saturate(3);
 }
 form{
     display: flex;

@@ -31,7 +31,6 @@
     margin: 0;
 }
 .mobile-nav{
-    border: 10px solid purple;
     display: none;
 }
 .nav-bar-conditional-content{
@@ -200,12 +199,15 @@ i {
     .mobile-nav{
         display: flex;
     }
-    .baby-menu{
-        border: 10px solid yellow;
-        margin: 0;
-        padding: 0;
+    .mobile-menu{
+        border: .11rem solid var(--blue);
+        box-shadow: -0.1rem -.1rem .1rem var(--green),-0.11rem -.11rem .1rem var(--red),-0.3rem -.3rem .3rem var(--grey),0.1rem .1rem .1rem var(--grey),0.1rem .1rem .2rem var(--green),0.1rem .1rem .1rem var(--red),.23rem .23rem .1rem var(--blue);
+        border-radius: 9%;
+        margin: 1rem;
+        padding: 2rem;
+        width: 90%;
     }
-    .baby-menu > *{
+    .mobile-menu > *{
         border: none;
         margin: 0;
         padding: 0;

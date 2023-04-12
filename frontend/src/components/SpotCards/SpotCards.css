@@ -19,8 +19,6 @@
     justify-content: center;
 }
 .spot-card{
-    height: 100%;
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -94,10 +92,10 @@
     .spot-details-images-support-cards{
         display: flex;
         flex-direction: column;
-    } 
-    .spot-details-images-support-cards > .image-container > img{
-        width: 75%;
     }
+    /* .spot-details-images-support-cards > .image-container > img{
+        width: 75%;
+    } */
 }
 @media screen and (max-width: 1055px){
     .spot-cards-section{
@@ -121,8 +119,8 @@
         justify-content: center;
     }
 }
-@media screen and (max-width: 330px){
+/* @media screen and (max-width: 330px){
     .spot-card{
         width: 70%;
     }
-}
+} */
