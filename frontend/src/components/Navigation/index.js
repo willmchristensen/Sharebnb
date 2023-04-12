@@ -48,9 +48,7 @@ function Navigation({ isLoaded }){
               <li
                 id="profile"
               >
-                <div className="nav-item">
-                  <ProfileButton user={sessionUser} />
-                </div>
+                <ProfileButton user={sessionUser} />
               </li>
             </>
             )
@@ -74,7 +72,7 @@ function Navigation({ isLoaded }){
           </li>
           <div
             className="nav-bar-conditional-content"
-            id="profile-bruh"
+            id="create-spot-button"
           >
             {
               sessionUser && (

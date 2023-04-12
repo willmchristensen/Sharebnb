@@ -1,11 +1,11 @@
 :root {
-    --red: #EA5455;
-    --blue: #002B5B;
+    --red: #94AF9F;
+    --blue: #DBE4C6;
     --grey: #E4DCCF;
-    --beige: #fff5e453;
+    --beige: #0044ff05;
     --grey-too: #0044ff05;
     --purple: #bcb3dd91;
-    --green:  #F9F5EB;
+    --green:  #BBD6B8;
     --black: #EA9E54;
 }
 *{
@@ -32,7 +32,7 @@ label > input{
 h1{
     font-weight: 550;
     color: var(--blue);
-    box-shadow: 
+    box-shadow:
     -0.1rem -.1rem .1rem var(--black),
     -0.4rem -.4rem .1rem var(--green),
     -0.5rem -.5rem .1rem var(--red),
@@ -51,7 +51,7 @@ h1{
 #subtitle{
     font-weight: 550;
     color: var(--blue);
-    /* box-shadow: 
+    /* box-shadow:
     -0.1rem -.1rem .1rem var(--black),
     -0.12rem -.12rem .11rem var(--green),
     -0.13rem -.13rem .12rem var(--red),
