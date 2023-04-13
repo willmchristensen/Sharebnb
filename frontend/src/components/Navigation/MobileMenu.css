@@ -11,6 +11,16 @@
 .profile-dropdown-mobile{
     color: var(--grey);
 }
+.profile-dropdown-mobile{
+    position: absolute;
+    z-index: 1;
+    top:0;
+    right: 1px;
+    border: 1px solid red;
+    width: 11rem;
+    padding: 1rem;
+    margin-right: 3rem;
+}
 #logout > a{
     background-color: var(--green);
 }

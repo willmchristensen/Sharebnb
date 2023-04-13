@@ -5,13 +5,13 @@ import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
-import { getAllSpots } from '../../store/spots';
+import './MobileMenu.css'
 
 function MobileProfileButton({ user }) {
   // ---------------------state---------------------
   const [manageSpots,showManageSpots] = useState(false);
   const [manageReviews,showManageReviews] = useState(false);
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [hidden, setHidden] = useState(false);
 
   // ---------------------state---------------------
@@ -41,16 +41,16 @@ function MobileProfileButton({ user }) {
    }, [user]);
   //  if user clicks out of profileButton component (useRef()), hideMenu
   useEffect(() => {
-    if (!showMenu) return;
+    if (!showMobileMenu) return;
     const closeMenu = (e) => {
       if (!ulRef.current.contains(e.target)) {
-        setShowMenu(false);
+        showMobileMenu(false);
       }
     };
     document.addEventListener('click', closeMenu);
     return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu]);
-  const closeMenu = () => setShowMenu(false);
+  }, [showMobileMenu]);
+  const closeMenu = () => showMobileMenu(false);
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
@@ -58,19 +58,22 @@ function MobileProfileButton({ user }) {
     closeMenu();
   };
   const handleMenuClick = () => {
-    setShowMenu(!showMenu);
+    setShowMobileMenu(!showMobileMenu);
     setHidden(!hidden);
   }
-  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
-  const profileClassName = (showMenu ? "hidden" : "fas fa-user-circle");
-  const conditionalContent = (showMenu ? "hidden" : "conditional-content");
+//   const ulClassName = "profile-dropdown-mobile" + (showMobileMenu ? "" : " hidden");
+//   const mobileUserIcon = (!showMobileMenu ? "hidden" : "fas fa-user-circle");
+//   const mobileConditionalContent = (showMobileMenu ? "hidden" : "conditional-content-mobile");
+  const ulClassName = "profile-dropdown-mobile";
+  const mobileUserIcon = "fas fa-user-circle"
+  const mobileConditionalContent = "conditional-content-mobile";
   return (
     <>
       <button
         onClick={handleMenuClick}
         className="profile-menu"
       >
-        <i className={profileClassName}/>
+        <i className={mobileUserIcon}/>
       </button>
       <ul
         className={ulClassName}
@@ -121,7 +124,7 @@ function MobileProfileButton({ user }) {
             </>
           ) : (
             <>
-              <div className={conditionalContent}>
+              <div className={mobileConditionalContent}>
                 <OpenModalMenuItem
                   itemText="Log In"
                   modalComponent={<LoginFormModal />}
