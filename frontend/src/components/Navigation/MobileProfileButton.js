@@ -7,7 +7,7 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { getAllSpots } from '../../store/spots';
 
-function ProfileButton({ user }) {
+function MobileProfileButton({ user }) {
   // ---------------------state---------------------
   const [manageSpots,showManageSpots] = useState(false);
   const [manageReviews,showManageReviews] = useState(false);
@@ -139,4 +139,4 @@ function ProfileButton({ user }) {
   );
 }
 
-export default ProfileButton;
+export default MobileProfileButton;

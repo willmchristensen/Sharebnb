@@ -10,7 +10,6 @@
 .nav-right{
     display: flex;
     flex-direction: row;
-    width: 25rem;
 }
 .logo{
     font-size: 2rem;
