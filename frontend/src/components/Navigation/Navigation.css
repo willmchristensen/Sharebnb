@@ -17,6 +17,7 @@
 }
 .profile-dropdown{
     border: 1px solid red;
+    padding: 0;
 }
 .profile-menu > *{
     color: var(--grey);
@@ -38,7 +39,7 @@
     align-items: center;
     border-radius: 1rem;
     margin: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
     transition: transform .23s;
 }
 .nav-bar-conditional-content:hover{
@@ -67,9 +68,6 @@
 .nav-bar-conditional-content > *:hover{
     filter: saturate(1.1);
     transform: scale(1.001);
-}
-.profile-dropdown {
-    padding: 0;
 }
 #profile {
     margin: 0;

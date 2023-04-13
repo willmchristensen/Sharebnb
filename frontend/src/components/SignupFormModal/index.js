@@ -29,6 +29,14 @@ function SignupFormPage() {
   // -------------------------enable if valid-------------------------
  if (sessionUser) return <Redirect to="/" />;
  // --------------------------dynamic errors!--------------------------
+//  useEffect(()=>{
+//   if(email.length) errors.email = ""
+//   if(username.length) errors.username = ""
+//   if(firstName.length) errors.firstName = ""
+//   if(lastName.length) errors.lastName = ""
+//   if(password.length) errors.password = ""
+//   if(confirmPassword.length) errors.confirmPassword = ""
+//  },[])
 //  ----------------------error handling / controlled inputs----------------------
 // tried using onMouseLeave but was rendering errors on mouse leave lol
 // switched onMouseLeave to onBlur, which is dependent on user leaving the input field
@@ -37,15 +45,15 @@ function SignupFormPage() {
     setErrors((errors) => ({
       ...errors,
       email: e.target.value.split('@').length !== 2 || e.target.value.length < 6
-      ? 'Email must be valid.'
+      ? 'Invalid email format.'
       : null,
     }));
   };
   const handleEmailMouseLeave = () => {
     setErrors((errors) => ({
       ...errors,
-      email: email.length <= 2
-      ? 'Email must be more than 2 characters.'
+      email: email.length < 2
+      ? 'Minimum 3 characters required.'
       : null,
     }));
   };
@@ -53,8 +61,8 @@ function SignupFormPage() {
   setPassword(e.target.value)
   setErrors((errors) => ({
     ...errors,
-    password: e.target.value.length >= 1 && password.length < 6
-    ? 'Password must be longer than 6 characters.'
+    password: password.length < 5
+    ? 'Minimum 6 characters required.'
     : null,
    }));
  };
@@ -87,8 +95,8 @@ function SignupFormPage() {
   setUsername(e.target.value);
   setErrors((errors) => ({
     ...errors,
-    username: e.target.value.length < 4 && e.target.value.length > 1
-      ? 'Credential must be longer than 4 characters.'
+    username: username.length < 3
+      ? 'Minimum 4 characters required.'
       : null,
   }));
  };
@@ -104,8 +112,8 @@ function SignupFormPage() {
   setFirstName(e.target.value)
   setErrors((errors) => ({
    ...errors,
-   firstName: e.target.value.length < 2
-     ? 'First name must be longer than 2 characters.'
+   firstName: firstName.length < 2
+     ? 'Minimum 3 characters required.'
      : null,
  }));
  };

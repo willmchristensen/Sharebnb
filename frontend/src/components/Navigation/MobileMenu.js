@@ -9,7 +9,7 @@ function MobileMenu({ isLoaded }){
   return (
     <ul className="mobile-menu">
         <li
-            className="nav-bar-conditional-content-mobile"
+            className="nav-bar-conditional-content mobile"
         >
             <i class="fas fa-yin-yang"></i>
             <NavLink
@@ -22,7 +22,7 @@ function MobileMenu({ isLoaded }){
             </NavLink>
         </li>
         <div
-            className="nav-bar-conditional-content-mobile"
+            className="nav-bar-conditional-content mobile"
             id="create-spot-button"
         >
             {
