@@ -34,12 +34,6 @@ function Navigation({ isLoaded }){
           </NavLink>
         </li>
         <ProfileButton user={sessionUser} />
-        <li
-          className={profile}
-        >
-          {/* <h1>gi</h1> */}
-
-        </li>
       </ul>
       <MobileMenu isLoaded={isLoaded} />
     </>
