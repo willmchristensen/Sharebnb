@@ -59,78 +59,75 @@ function ProfileButton({ user }) {
     closeMenu();
   };
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
-  const profileClassName = (showMenu ? "hidden" : "fas fa-user-circle");
+  // FIXME: dynamic class names, pic disappears after click but reappears when user exits the modal etc.... just need more coffee
+  // const profileClassName = (showMenu ? "hidden" : "fas fa-user-circle");
+  const conditionalContent = (!showMenu ? "hidden" : "conditional-content");
+  const userContent = (!user ? "hidden" : "user-content");
   return (
     <>
       <button
         onClick={openMenu}
         className="profile-menu"
       >
-        <i className={profileClassName}/>
+        <i className="fas fa-user-circle"/>
       </button>
-      <ul
+      { user &&
+        <ul
         className={ulClassName}
         ref={ulRef}
       >
-        {
-          user ? (
-            <>
-              <li
-              >
-                Hello, {user.username}
-              </li>
-              <li>
-                {user.email}
-              </li>
-              <li
-                id="manage"
-              >
-                <NavLink
-                  // key={}
-                  to={`/spots/current`}
-                  onClick={closeMenu}
-                >
-                  Manage Spots
-                </NavLink>
-              </li>
-              <li
-                id="manage"
-              >
-                <NavLink
-                  // key={}
-                  to={`/reviews/current`}
-                  onClick={closeMenu}
-                >
-                  Manage Reviews
-                </NavLink>
-              </li>
-              <li
-                id="logout"
-              >
-                <button
-                  onClick={logout}
-                  className="logout"
-                >
-                  Log Out
-                </button>
-              </li>
-            </>
-          ) : (
-            <>
-              <div className="conditional-content">
-                <OpenModalMenuItem
-                  itemText="Log In"
-                  modalComponent={<LoginFormModal />}
-                />
-                <OpenModalMenuItem
-                  itemText="Sign Up"
-                  modalComponent={<SignupFormModal />}
-                />
-              </div>
-            </>
-          )
-        }
+        <div className={userContent}>
+          <li>
+            Hello, {user.username}
+          </li>
+          <li>
+            {user.email}
+          </li>
+          <li
+            id="manage"
+          >
+            <NavLink
+              // key={}
+              to={`/spots/current`}
+              onClick={closeMenu}
+            >
+              Manage Spots
+            </NavLink>
+          </li>
+          <li
+            id="manage"
+          >
+            <NavLink
+              // key={}
+              to={`/reviews/current`}
+              onClick={closeMenu}
+            >
+              Manage Reviews
+            </NavLink>
+          </li>
+          <li
+            id="logout"
+          >
+            <button
+              onClick={logout}
+              className="logout"
+            >
+              Log Out
+            </button>
+          </li>
+        </div>
       </ul>
+}
+<div className={conditionalContent}>
+  <OpenModalMenuItem
+    itemText="Log In"
+    modalComponent={<LoginFormModal />}
+  />
+  <OpenModalMenuItem
+    itemText="Sign Up"
+    modalComponent={<SignupFormModal />}
+  />
+</div>
     </>
   );
 }

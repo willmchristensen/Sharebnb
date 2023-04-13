@@ -4,8 +4,7 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './MobileMenu.css';
 
-function MobileMenu({ isLoaded }){
-  const sessionUser = useSelector(state => state.session.user);
+function MobileMenu({ isLoaded, sessionUser}){
   return (
     <ul className="mobile-menu">
         <li

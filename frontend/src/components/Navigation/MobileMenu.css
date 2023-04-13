@@ -1,4 +1,5 @@
 .mobile-menu{
+    border: .2rem solid var(--blue);
     display: none;
     /* padding: 1.7rem 1rem 1.7rem 1rem; */
     padding: 0;
@@ -6,6 +7,12 @@
     width: 100vh;
     height: 25vh;
     box-shadow: -0.1rem -.1rem .1rem var(--green),-0.11rem -.11rem .1rem var(--red),-0.3rem -.3rem .3rem var(--grey),0.1rem .1rem .1rem var(--grey),0.1rem .1rem .2rem var(--green),0.1rem .1rem .1rem var(--red),.23rem .23rem .1rem var(--blue);
+}
+.profile-dropdown-mobile{
+    color: var(--grey);
+}
+#logout > a{
+    background-color: var(--green);
 }
 #logo-mobile{
     border: 1px solid red;

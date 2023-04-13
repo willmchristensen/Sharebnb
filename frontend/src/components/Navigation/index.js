@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
@@ -7,13 +7,13 @@ import './Navigation.css';
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
-
+  const newSpot = (sessionUser ? "new-spot" : "hidden");
+  const profile = (isLoaded ? "profile" : "hidden");
   return (
     <>
       <ul className="nav-bar">
         <li
           id="logo"
-          className="nav-bar-conditional-content"
         >
           <NavLink exact to="/">
             <button className="logo-button">
@@ -24,39 +24,24 @@ function Navigation({ isLoaded }){
             </span>
           </NavLink>
         </li>
-        <div
-          className="nav-bar-conditional-content"
-          id="profile-bruh"
+        <li
+          className={newSpot}
         >
-          {
-            sessionUser && (
-              <>
-                <li
-                  id="new-spot"
-                >
-                  <NavLink
-                    to={`/spots/new`}
-                  >
-                    Create A New Spot
-                  </NavLink>
-                </li>
-              </>
-            )
-          }
-          {
-            isLoaded && (
-            <>
-              <li
-                id="profile"
-              >
-                <ProfileButton user={sessionUser} />
-              </li>
-            </>
-            )
-          }
-        </div>
+          <NavLink
+            to={`/spots/new`}
+          >
+            Create A New Spot
+          </NavLink>
+        </li>
+        <ProfileButton user={sessionUser} />
+        <li
+          className={profile}
+        >
+          {/* <h1>gi</h1> */}
+
+        </li>
       </ul>
-      <MobileMenu isLoaded={isLoaded}/>
+      <MobileMenu isLoaded={isLoaded} />
     </>
 
   );
