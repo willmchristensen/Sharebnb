@@ -16,7 +16,9 @@ function Navigation({ isLoaded }){
           className="nav-bar-conditional-content"
         >
           <NavLink exact to="/">
-            <i class="fas fa-yin-yang"></i>
+            <button className="logo-button">
+              <i class="fas fa-yin-yang"></i>
+            </button>
             <span className="logo">
               ShareBnB
             </span>

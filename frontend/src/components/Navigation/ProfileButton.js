@@ -8,28 +8,27 @@ import SignupFormModal from '../SignupFormModal';
 import { getAllSpots } from '../../store/spots';
 
 function ProfileButton({ user }) {
-  const dispatch = useDispatch();
+  // ---------------------state---------------------
   const [manageSpots,showManageSpots] = useState(false);
   const [manageReviews,showManageReviews] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  // ---------------------state---------------------
+  const dispatch = useDispatch();
   const ulRef = useRef();
   const history = useHistory();
-  // const openMenu = () => {
-  //   if (showMenu) return;
-  //   setShowMenu(true);
-  // };
   const openMenu = () => {
     setShowMenu(!showMenu);
   }
+  // ---------------------data---------------------
   let spots = useSelector(state => state.spots.allSpots);
   let allSpots = Object.values(spots);
   let reviews = useSelector(state => state.reviews.user);
   let allReviews = Object.values(reviews);
-  let User = useSelector(state => state.session.user);
+  // ---------------------data---------------------
   useEffect(() => {
-    if(User){
-      let isOwner = allSpots.find(spot => spot.ownerId === User.id);
-      let opinionated = allReviews.find(review => review.userId === User.id);
+    if(user){
+      let isOwner = allSpots.find(spot => spot.ownerId === user.id);
+      let opinionated = allReviews.find(review => review.userId === user.id);
       if(isOwner){
         showManageSpots(true);
       }else if(!isOwner){
@@ -40,7 +39,7 @@ function ProfileButton({ user }) {
         showManageReviews(false);
       }
     }
-   }, [User]);
+   }, [user]);
   //  if user clicks out of profileButton component (useRef()), hideMenu
   useEffect(() => {
     if (!showMenu) return;
@@ -60,27 +59,28 @@ function ProfileButton({ user }) {
     closeMenu();
   };
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+  const profileClassName = (showMenu ? "hidden" : "fas fa-user-circle");
   return (
     <>
       <button
         onClick={openMenu}
         className="profile-menu"
       >
-        <i className="fas fa-user-circle" />
+        <i className={profileClassName}/>
       </button>
       <ul
         className={ulClassName}
         ref={ulRef}
       >
         {
-          User ? (
+          user ? (
             <>
               <li
               >
-                Hello, {User.username}
+                Hello, {user.username}
               </li>
               <li>
-                {User.email}
+                {user.email}
               </li>
               <li
                 id="manage"

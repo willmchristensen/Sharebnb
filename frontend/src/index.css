@@ -21,6 +21,16 @@ body{
     align-items: center;
     justify-content: center;
 }
+button{
+    border: none;
+    background: none;
+    transition: transform .23s;
+}
+button:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    filter: saturate(3);
+}
 label > input{
     border: 3px solid rgb(0, 0, 0);
     border-radius: 0.2em;

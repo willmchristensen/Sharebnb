@@ -183,7 +183,10 @@ function SignupFormPage() {
         <p className="errors">{e}</p>
         );
       })}
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        className="sign-up-form"
+      >
         <div className="user-information">
           <label>
             <input

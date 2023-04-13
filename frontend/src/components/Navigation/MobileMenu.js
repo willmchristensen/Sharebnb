@@ -9,20 +9,23 @@ function MobileMenu({ isLoaded }){
   return (
     <ul className="mobile-menu">
         <li
-            className="nav-bar-conditional-content mobile"
         >
-            <i class="fas fa-yin-yang"></i>
+            <NavLink
+                id="logo-button"
+                exact to="/"
+            >
+                <i class="fas fa-yin-yang"></i>
+            </NavLink>
             <NavLink
                 id="logo-mobile"
                 exact to="/"
             >
-                <span className="logo">
+                <span className="logo logo-mobile">
                     ShareBnB
                 </span>
             </NavLink>
         </li>
         <div
-            className="nav-bar-conditional-content mobile"
             id="create-spot-button"
         >
             {
@@ -44,11 +47,11 @@ function MobileMenu({ isLoaded }){
             isLoaded && (
             <>
                 <li
-                id="profile"
+                    id="profile"
                 >
-                <div className="nav-item">
-                    <ProfileButton user={sessionUser} />
-                </div>
+                    <div className="nav-item logo-mobile">
+                        <ProfileButton user={sessionUser} />
+                    </div>
                 </li>
             </>
             )

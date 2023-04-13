@@ -2,7 +2,10 @@
     display: none;
     /* padding: 1.7rem 1rem 1.7rem 1rem; */
     padding: 0;
-    font-size: .01rem;
+    margin: 0;
+    width: 100vh;
+    height: 25vh;
+    box-shadow: -0.1rem -.1rem .1rem var(--green),-0.11rem -.11rem .1rem var(--red),-0.3rem -.3rem .3rem var(--grey),0.1rem .1rem .1rem var(--grey),0.1rem .1rem .2rem var(--green),0.1rem .1rem .1rem var(--red),.23rem .23rem .1rem var(--blue);
 }
 #logo-mobile{
     border: 1px solid red;
@@ -11,11 +14,12 @@
     align-items: center;
     justify-content: center;
 }
-.mobile{
+.logo-mobile{
     margin: 0;
-    /* padding: 1.7rem 1rem 1.7rem 1rem; */
+    padding: 0;
     display: flex;
     flex-direction: column;
+    font-size: 1rem;
 }
 @media screen and (max-width: 768px){
     .mobile-menu{
@@ -24,11 +28,5 @@
         align-items: center;
         justify-content: center;
         height: fit-content;
-    }
-    .mobile-menu{
-        box-shadow: -0.1rem -.1rem .1rem var(--green),-0.11rem -.11rem .1rem var(--red),-0.3rem -.3rem .3rem var(--grey),0.1rem .1rem .1rem var(--grey),0.1rem .1rem .2rem var(--green),0.1rem .1rem .1rem var(--red),.23rem .23rem .1rem var(--blue);
-        /* border: .21rem solid var(--red); */
-        border-radius: 23%;
-        width: 55vh;
     }
 }
