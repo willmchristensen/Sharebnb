@@ -60,13 +60,13 @@ function ProfileButton({ user }) {
   };
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   // FIXME: dynamic class names, pic disappears after click but reappears when user exits the modal etc.... just need more coffee
-  // const profileClassName = (showMenu ? "hidden" : "fas fa-user-circle");
+  const profileClassName = (showMenu ? "hidden" : "fas fa-user-circle");
   const conditionalContent = (showMenu ? "hidden" : "conditional-content");
   const userContent = (!user ? "hidden" : "user-content");
   return (
     <>
       <button
-        onClick={openMenu}
+        onClick={()=>setShowMenu(!showMenu)}
         className="profile-menu"
       >
         <i className="fas fa-user-circle"/>

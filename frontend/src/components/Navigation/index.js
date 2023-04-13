@@ -8,7 +8,6 @@ import './Navigation.css';
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
   const newSpot = (sessionUser ? "new-spot" : "hidden");
-  const profile = (isLoaded ? "profile" : "hidden");
   return (
     <>
       <ul className="nav-bar">
@@ -24,15 +23,17 @@ function Navigation({ isLoaded }){
             </span>
           </NavLink>
         </li>
-        <li
-          className={newSpot}
-        >
-          <NavLink
-            to={`/spots/new`}
+        <div className="nav-right">
+          <li
+            className={newSpot}
           >
-            Create A New Spot
-          </NavLink>
-        </li>
+            <NavLink
+              to={`/spots/new`}
+            >
+              Create A New Spot
+            </NavLink>
+          </li>
+        </div>
         <ProfileButton user={sessionUser} />
       </ul>
       <MobileMenu isLoaded={isLoaded} />

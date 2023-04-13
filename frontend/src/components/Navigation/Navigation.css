@@ -7,6 +7,11 @@
     padding: 0;
     margin: 0;
 }
+.nav-right{
+    display: flex;
+    flex-direction: row;
+    width: 25rem;
+}
 .logo{
     font-size: 2rem;
     font-weight: bolder;
@@ -35,7 +40,8 @@
     right: 1px;
     border: 1px solid red;
     width: 11rem;
-    padding: 0;
+    padding: 1rem;
+    margin-right: 3rem;
 }
 .profile-menu{
     border: none;
