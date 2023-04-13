@@ -46,9 +46,9 @@ function MobileMenu({ isLoaded }){
                 <li
                 id="profile"
                 >
-                <div className="nav-item">
-                    <ProfileButton user={sessionUser} />
-                </div>
+                    <div className="nav-item">
+                        <ProfileButton user={sessionUser} />
+                    </div>
                 </li>
             </>
             )
