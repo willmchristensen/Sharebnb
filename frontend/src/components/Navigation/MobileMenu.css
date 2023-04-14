@@ -11,6 +11,9 @@
 .profile-dropdown-mobile{
     color: var(--red);
 }
+.user-info-mobile{
+    border: 1px solid red;
+}
 .profile-dropdown-mobile{
     z-index: 1;
     top:0;

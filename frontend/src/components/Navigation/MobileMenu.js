@@ -1,44 +1,58 @@
-import React, {useState}  from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './MobileMenu.css';
-import MobileProfileButton from './MobileProfileButton';
 
-function MobileMenu({sessionUser, newSpot}){
-    const [showMobileMenu,setShowMobileMenu] = useState(false);
-    const handleClick = (e) => {
-
-    }
-    const mobileMenu = (showMobileMenu ? 'mobile-menu-items' : 'hidden')
+function MobileMenu({ isLoaded }){
+  const sessionUser = useSelector(state => state.session.user);
   return (
     <ul className="mobile-menu">
         <li
-          id="logo"
+            className="nav-bar-conditional-content mobile"
         >
-          <NavLink
-            exact to="/"
-            onClick={handleClick}
-          >
-            <button className="logo-button">
-              <i class="fas fa-yin-yang"></i>
-            </button>
-            <span className="logo">
-              ShareBnB
-            </span>
-            <MobileProfileButton user={sessionUser} />
-          </NavLink>
-        </li>
-        <div className={mobileMenu}>
-          <li
-            className={newSpot}
-          >
+            <i class="fas fa-yin-yang"></i>
             <NavLink
-              to={`/spots/new`}
+                id="logo-mobile"
+                exact to="/"
             >
-              Create A New Spot
+                <span className="logo">
+                    ShareBnB
+                </span>
             </NavLink>
-          </li>
+        </li>
+        <div
+            className="nav-bar-conditional-content mobile"
+            id="create-spot-button"
+        >
+            {
+            sessionUser && (
+                <>
+                <li
+                  id="new-spot"
+                >
+                  <NavLink
+                  to={`/spots/new`}
+                  >
+                    Create A New Spot
+                  </NavLink>
+                </li>
+                </>
+            )
+            }
+            {
+            isLoaded && (
+            <>
+                <li
+                id="profile"
+                >
+                    <div className="nav-item">
+                        <ProfileButton user={sessionUser} />
+                    </div>
+                </li>
+            </>
+            )
+            }
         </div>
     </ul>
   );

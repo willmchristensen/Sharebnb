@@ -11,7 +11,7 @@ function MobileProfileButton({ user }) {
   // ---------------------state---------------------
   const [manageSpots,showManageSpots] = useState(false);
   const [manageReviews,showManageReviews] = useState(false);
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(true);
   const [hidden, setHidden] = useState(false);
 
   // ---------------------state---------------------
@@ -61,12 +61,10 @@ function MobileProfileButton({ user }) {
     setShowMobileMenu(!showMobileMenu);
     setHidden(!hidden);
   }
-//   const ulClassName = "profile-dropdown-mobile" + (showMobileMenu ? "" : " hidden");
-//   const mobileUserIcon = (!showMobileMenu ? "hidden" : "fas fa-user-circle");
-//   const mobileConditionalContent = (showMobileMenu ? "hidden" : "conditional-content-mobile");
-  const ulClassName = "profile-dropdown-mobile";
-  const mobileUserIcon = "fas fa-user-circle"
-  const mobileConditionalContent = "conditional-content-mobile";
+  const ulClassName =  (showMobileMenu ? "profile-dropdown-mobile" : " hidden");
+  const mobileUserIcon = (!showMobileMenu ? "hidden" : "fas fa-user-circle");
+  const mobileConditionalContent = (showMobileMenu ? "hidden" : "conditional-content-mobile");
+
   return (
     <>
       <button
@@ -81,7 +79,7 @@ function MobileProfileButton({ user }) {
       >
         {
           user ? (
-            <>
+            <div className="user-info-mobile">
               <li
               >
                 Hello, {user.username}
@@ -121,20 +119,18 @@ function MobileProfileButton({ user }) {
                   Log Out
                 </button>
               </li>
-            </>
+            </div>
           ) : (
-            <>
-              <div className={mobileConditionalContent}>
-                <OpenModalMenuItem
-                  itemText="Log In"
-                  modalComponent={<LoginFormModal />}
-                />
-                <OpenModalMenuItem
-                  itemText="Sign Up"
-                  modalComponent={<SignupFormModal />}
-                />
-              </div>
-            </>
+            <div className={mobileConditionalContent}>
+              <OpenModalMenuItem
+                itemText="Log In"
+                modalComponent={<LoginFormModal />}
+              />
+              <OpenModalMenuItem
+                itemText="Sign Up"
+                modalComponent={<SignupFormModal />}
+              />
+            </div>
           )
         }
       </ul>

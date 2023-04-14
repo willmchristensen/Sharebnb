@@ -36,7 +36,7 @@ function Navigation({ isLoaded }){
         </div>
         <ProfileButton user={sessionUser} />
       </ul>
-      <MobileMenu isLoaded={isLoaded} newSpot={newSpot}/>
+      <MobileMenu sessionUser={sessionUser} isLoaded={isLoaded} newSpot={newSpot}/>
     </>
 
   );

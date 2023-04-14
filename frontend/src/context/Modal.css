@@ -1,5 +1,6 @@
 .modal-material{
   display: flex;
+  overflow:scroll;
   justify-content: center;
  }
 .modal-material > *{
