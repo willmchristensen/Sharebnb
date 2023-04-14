@@ -22,7 +22,7 @@
     }
     .spot-details-header{
         text-align: center;
-    }   
+    }
 }
 @media screen and (max-width: 768px){
     .spot-details{
@@ -106,7 +106,6 @@
 .spot-details-info-reserve-reviews-stars{
     border: 1px solid var(--grey);
     border-radius: 1rem;
-    width: 10rem;
     border-radius: 4%;
     padding: 10px;
     display: flex;
