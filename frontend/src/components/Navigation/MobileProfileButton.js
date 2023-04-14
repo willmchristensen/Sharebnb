@@ -69,7 +69,7 @@ function MobileProfileButton({ user }) {
     <>
       <button
         onClick={handleMenuClick}
-        className="profile-menu"
+        className={profileMenu}
       >
         <i className={mobileUserIcon}/>
       </button>

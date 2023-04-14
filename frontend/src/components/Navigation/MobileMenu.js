@@ -1,28 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './MobileMenu.css';
-
 function MobileMenu({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
+  const [minimenu,showminimenu] = useState(false);
+  const miniContent = ( minimenu? 'nav-bar-conditional-content mobile': 'hidden')
   return (
     <ul className="mobile-menu">
         <li
             className="nav-bar-conditional-content mobile"
         >
-            <i class="fas fa-yin-yang"></i>
             <NavLink
                 id="logo-mobile"
+                onClick={() => showminimenu(!minimenu)}
                 exact to="/"
             >
-                <span className="logo">
-                    ShareBnB
-                </span>
+                <i class="fas fa-yin-yang"></i>
             </NavLink>
         </li>
         <div
-            className="nav-bar-conditional-content mobile"
+            className={miniContent}
             id="create-spot-button"
         >
             {
