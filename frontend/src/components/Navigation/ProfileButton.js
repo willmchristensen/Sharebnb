@@ -59,10 +59,9 @@ function ProfileButton({ user }) {
   };
   const handleMenuClick = () => {
     setShowMenu(!showMenu);
-    setHidden(!hidden);
   }
-  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   const profileClassName = (showMenu ? "hidden" : "fas fa-user-circle");
+  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   const conditionalContent = (showMenu ? "hidden" : "conditional-content");
   return (
     <>
