@@ -7,7 +7,7 @@ import './Navigation.css';
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
-  const newSpot = (sessionUser ? "new-spot" : "hidden");
+  const newSpot = (sessionUser ? "new-spot" : "hidden2");
   return (
     <>
       <ul className="nav-bar">
