@@ -43,7 +43,7 @@ const SpotDetails = () => {
         </div>
         <div className="spot-details-images">
             <div className="spot-details-images-hero">
-                <NavLink 
+                <NavLink
                     className="spot-card"
                     key={spot.name}
                     to={`/spots/${spot.id}`}
@@ -66,6 +66,7 @@ const SpotDetails = () => {
                 )
             }
         </div>
+        {/* ------HOST AND STARS INFORMATION------ */}
         <div className="spot-details-section">
             <div className="spot-details-info">
                 <div className="spot-details-info-section-one">
@@ -81,62 +82,67 @@ const SpotDetails = () => {
                     </div>
                 </div>
                 <div className="spot-details-info-reserve">
-                <div className="spot-details-info-reserve-info">
-                <div className="spot-details-info-reserve-price">
-                <h3>${spot.price} per night</h3>
+                    <div className="spot-details-info-reserve-info">
+                        <div className="spot-details-info-reserve-price">
+                            <h3>${spot.price} per night</h3>
+                        </div>
+                    <div className="spot-details-info-reserve-reviews-stars">
+                    <div className="spot-details-reviews-content-stars">
+                    <i class="fas fa-star"></i>
+                    <span>Stars</span>
+                    {
+                        spot.numReviews > 0 &&
+                            <>
+                                <h3>
+                                    {Number(spot.avgStarRating).toFixed(1)}
+                                </h3>
+                                <div className="dot">
+                                    <i class="fas fa-dot-circle" id="dot"></i>
+                                </div>
+                            </>
+                    }
+                    </div>
+                    {
+                    spot.numReviews === 1 ?
+                    (
+                    <h3>
+                        {Number(spot.numReviews).toFixed(0)} review
+                    </h3>
+                    ) :
+                    spot.numReviews > 0 ?
+                    (
+                    <h3>
+                        {Number(spot.numReviews).toFixed(0)} reviews
+                    </h3>
+                    ) :
+                    (
+                    <h3>
+                        "New"
+                    </h3>
+                    )
+                    }
+                    </div>
                 </div>
-                <div className="spot-details-info-reserve-reviews-stars">
-                <div className="spot-details-reviews-content-stars">
-                <i class="fas fa-star"></i>
-                {
-                spot.numReviews > 0 &&
-                <>
-                <h3>{Number(spot.avgStarRating).toFixed(1)}
-                </h3>
-                <div className="dot">
-                    <i class="fas fa-dot-circle" id="dot"></i>
-                </div>
-                </>
-                }
-                </div>
-                {
-                spot.numReviews === 1 ? 
-                (
-                <h3>
-                    {Number(spot.numReviews).toFixed(0)} review
-                </h3> 
-                ) : spot.numReviews > 0 ? 
-                (
-                <h3>
-                    {Number(spot.numReviews).toFixed(0)} reviews
-                </h3> 
-                ) : 
-                (
-                <h3>
-                    "New"
-                </h3>
-                )
-                }
-                </div>
-                </div>
-                <div className="spot-details-info-reserve-button">
-                <button 
-                className="reserve-spot"
-                onClick={handleReservation}
-                >
-                Reserve
-                </button>
-                </div>
+                    <div className="spot-details-info-reserve-button">
+                        <button
+                            className="reserve-spot"
+                            onClick={handleReservation}
+                        >
+                            Reserve
+                        </button>
+                    </div>
                 </div>
             </div>
         <div className="spot-details-reviews">
             <div className="spot-details-reviews-content">
                 <div className="spot-details-reviews-content-stars">
                     <i class="fas fa-star"></i>
+                    <span>Stars </span>
                     {
                         spot.numReviews > 0 &&
                         <>
-                            <h3>{Number(spot.avgStarRating).toFixed(1)}
+                            <h3>
+                                {Number(spot.avgStarRating).toFixed(1)}
                             </h3>
                             <div className="dot">
                                 <i class="fas fa-dot-circle" id="dot"></i>
@@ -146,17 +152,17 @@ const SpotDetails = () => {
                 </div>
                 <div className="spot-details-reviews-content-reviews">
                     {
-                        allReviews.length === 1 ? 
+                        allReviews.length === 1 ?
                         (
                             <h3>
                                 {Number(allReviews.length).toFixed(0)} review
-                            </h3> 
-                        ) : spot.numReviews > 0 ? 
+                            </h3>
+                        ) : spot.numReviews > 0 ?
                         (
                             <h3>
                                 {Number(allReviews.length).toFixed(0)} reviews
-                            </h3> 
-                        ) : 
+                            </h3>
+                        ) :
                         (
                             <h3>
                                 "New"
@@ -179,13 +185,13 @@ const SpotDetails = () => {
             )
         }
     </div>
-    {console.log('BRUH THIS IS SPOT REVIEWS',spot.numReviews)}
+    {/* {console.log('BRUH THIS IS SPOT REVIEWS',spot.numReviews)} */}
         {
-            allReviews.length === 0 ? 
+            allReviews.length === 0 ?
             (
                 <h3>
                     Be the first to post a review!
-                </h3> 
+                </h3>
             ): (
                 allReviews.map(rev => <SpotReview review={rev}/>)
             )
