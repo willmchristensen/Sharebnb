@@ -103,16 +103,16 @@ const SpotDetails = () => {
                     }
                     </div>
                     {
-                    spot.numReviews === 1 ?
+                    allReviews.length === 1 ?
                     (
                     <h3>
-                        {Number(spot.numReviews).toFixed(0)} review
+                        {Number(allReviews.length).toFixed(0)} review
                     </h3>
                     ) :
-                    spot.numReviews > 0 ?
+                    allReviews.length > 0 ?
                     (
                     <h3>
-                        {Number(spot.numReviews).toFixed(0)} reviews
+                        {Number(allReviews.length).toFixed(0)} reviews
                     </h3>
                     ) :
                     (
