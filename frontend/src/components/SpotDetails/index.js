@@ -95,7 +95,7 @@ const SpotDetails = () => {
                                 <h3>
                                     {Number(spot.avgStarRating).toFixed(1)}
                                 </h3>
-                                <span>Stars</span>
+                                <span id="stars-label">Stars</span>
                                 <div className="dot">
                                     <i class="fas fa-dot-circle" id="dot"></i>
                                 </div>
@@ -143,7 +143,7 @@ const SpotDetails = () => {
                             <h3>
                                 {Number(spot.avgStarRating).toFixed(1)}
                             </h3>
-                            <span>Stars </span>
+                            <span id="stars-label">Stars</span>
                             <div className="dot">
                                 <i class="fas fa-dot-circle" id="dot"></i>
                             </div>

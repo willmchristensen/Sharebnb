@@ -61,6 +61,9 @@
     display: flex;
     align-items: center;
 }
+#stars-label{
+    margin: .3rem;
+}
 .primary{
     display: flex;
     justify-content: space-between;
