@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
+import MobileProfileButton from './MobileProfileButton';
 import './MobileMenu.css';
 function MobileMenu({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
   const [minimenu,showminimenu] = useState(false);
-  const miniContent = ( minimenu? 'nav-bar-conditional-content mobile': 'hidden')
+  const [logo,hideLogo] = useState(true);
+  const yinYang = ( logo? "fas fa-yin-yang" : 'hidden');
+  const miniContent = ( minimenu? 'nav-bar-conditional-content mobile': 'hidden');
   return (
     <ul className="mobile-menu">
         <li
@@ -17,7 +19,7 @@ function MobileMenu({ isLoaded }){
                 onClick={() => showminimenu(!minimenu)}
                 exact to="/"
             >
-                <i class="fas fa-yin-yang"></i>
+                <i class={yinYang}></i>
             </NavLink>
         </li>
         <div
@@ -25,19 +27,19 @@ function MobileMenu({ isLoaded }){
             id="create-spot-button"
         >
             {
-            sessionUser && (
-                <>
-                <li
-                  id="new-spot"
-                >
-                  <NavLink
-                  to={`/spots/new`}
-                  >
-                    Create A New Spot
-                  </NavLink>
-                </li>
-                </>
-            )
+                sessionUser && (
+                    <>
+                        <li
+                            id="new-spot"
+                            >
+                                <NavLink
+                                 to={`/spots/new`}
+                                >
+                                    Create A New Spot
+                                </NavLink>
+                        </li>
+                    </>
+                )
             }
             {
             isLoaded && (
@@ -46,7 +48,11 @@ function MobileMenu({ isLoaded }){
                 id="profile"
                 >
                     <div className="nav-item">
-                        <ProfileButton user={sessionUser} />
+                        <MobileProfileButton
+                            logo={logo}
+                            hideLogo={hideLogo}
+                        >
+                        </MobileProfileButton>
                     </div>
                 </li>
             </>

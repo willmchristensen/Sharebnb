@@ -7,7 +7,7 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import './MobileMenu.css'
 
-function MobileProfileButton({ user }) {
+function MobileProfileButton({ user, hideLogo, logo }) {
   // ---------------------state---------------------
   const [manageSpots,showManageSpots] = useState(false);
   const [manageReviews,showManageReviews] = useState(false);
@@ -44,7 +44,7 @@ function MobileProfileButton({ user }) {
     if (!showMobileMenu) return;
     const closeMenu = (e) => {
       if (!ulRef.current.contains(e.target)) {
-        showMobileMenu(false);
+        setShowMobileMenu(false);
       }
     };
     document.addEventListener('click', closeMenu);
@@ -59,12 +59,13 @@ function MobileProfileButton({ user }) {
   };
   const handleMenuClick = () => {
     setShowMobileMenu(!showMobileMenu);
-    setHidden(!hidden);
+    // setHidden(!hidden);
+    hideLogo(!logo)
   }
   const ulClassName =  (showMobileMenu ? "profile-dropdown-mobile" : " hidden");
   const mobileUserIcon = (!showMobileMenu ? "hidden" : "fas fa-user-circle");
-  const mobileConditionalContent = (showMobileMenu ? "hidden" : "conditional-content-mobile");
-
+  const mobileConditionalContent = (!showMobileMenu ? "hidden" : "conditional-content-mobile");
+  const profileMenu = (showMobileMenu ? "hidden" : "fas fa-user-circle");
   return (
     <>
       <button
