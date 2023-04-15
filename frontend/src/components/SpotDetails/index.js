@@ -89,13 +89,13 @@ const SpotDetails = () => {
                     <div className="spot-details-info-reserve-reviews-stars">
                     <div className="spot-details-reviews-content-stars">
                     <i class="fas fa-star"></i>
-                    <span>Stars</span>
                     {
                         spot.numReviews > 0 &&
                             <>
                                 <h3>
                                     {Number(spot.avgStarRating).toFixed(1)}
                                 </h3>
+                                <span>Stars</span>
                                 <div className="dot">
                                     <i class="fas fa-dot-circle" id="dot"></i>
                                 </div>
@@ -137,18 +137,19 @@ const SpotDetails = () => {
             <div className="spot-details-reviews-content">
                 <div className="spot-details-reviews-content-stars">
                     <i class="fas fa-star"></i>
-                    <span>Stars </span>
                     {
                         spot.numReviews > 0 &&
                         <>
                             <h3>
                                 {Number(spot.avgStarRating).toFixed(1)}
                             </h3>
+                            <span>Stars </span>
                             <div className="dot">
                                 <i class="fas fa-dot-circle" id="dot"></i>
                             </div>
                         </>
                     }
+
                 </div>
                 <div className="spot-details-reviews-content-reviews">
                     {
