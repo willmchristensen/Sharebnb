@@ -12,7 +12,6 @@ function ProfileButton({ user }) {
   const [manageSpots,showManageSpots] = useState(false);
   const [manageReviews,showManageReviews] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  const [hidden, setHidden] = useState(false);
 
   // ---------------------state---------------------
   const dispatch = useDispatch();

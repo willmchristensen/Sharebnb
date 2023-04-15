@@ -9,8 +9,8 @@ import { getAllSpots } from '../../store/spots';
 
 function ProfileDropDown({ user, ulClassName, showMenu,closeMenu,logout }) {
   // FIXME: dynamic class names, pic disappears after click but reappears when user exits the modal etc.... just need more coffee
-  const profileClassName = (showMenu ? "hidden" : "fas fa-user-circle");
-  const conditionalContent = (showMenu ? "hidden" : "conditional-content");
+  const profileClassName = (!showMenu ? "hidden" : "fas fa-user-circle");
+  const conditionalContent = (!showMenu ? "hidden" : "conditional-content");
   const userContent = (!user ? "hidden" : "user-content");
   return (
     <>
