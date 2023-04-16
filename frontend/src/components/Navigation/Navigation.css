@@ -35,6 +35,7 @@
 }
 .nav-bar-conditional-content{
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     border-radius: 1rem;
@@ -57,7 +58,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 25%;
 }
 .nav-bar-conditional-content > *{
     border-radius: 1rem;

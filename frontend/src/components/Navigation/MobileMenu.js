@@ -1,17 +1,26 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './MobileMenu.css';
 
 function MobileMenu({ isLoaded }){
+    const history = useHistory();
   const sessionUser = useSelector(state => state.session.user);
+  const handleClick = () => {
+    history.push('/')
+  }
   return (
     <ul className="mobile-menu">
         <li
             className="nav-bar-conditional-content mobile"
         >
-            <i class="fas fa-yin-yang"></i>
+            <button
+                id="button"
+                onClick={handleClick}
+            >
+                <i class="fas fa-yin-yang"></i>
+            </button>
             <NavLink
                 id="logo-mobile"
                 exact to="/"
