@@ -14,7 +14,7 @@ function CreateNewSpot() {
   const [state,setState] = useState('');
   const [description, setDescription] = useState('');
   const [name, setName] = useState('');
-  const [price, setPrice] = useState();
+  const [price, setPrice] = useState('');
   const [previewImage,setPreviewImage] = useState('');
   const [photoOne,setPhotoOne] = useState('');
   const [photoTwo,setPhotoTwo] = useState('');
@@ -203,7 +203,7 @@ function CreateNewSpot() {
             onChange={e=>setDescription(e.target.value)}
             cols="30"
             rows="5"
-            placeHolder="Please write at least 30 characters"
+            placeholder="Please write at least 30 characters"
             />
           </label>
           {isSubmitted && <p className="errors">
@@ -356,7 +356,7 @@ function CreateNewSpot() {
         type="submit"
         // className="create-button"
         id="manage"
-        // disabled={isDisabled}
+        disabled={Boolean(Object.keys(errors).length) || Boolean(Object.keys(imageErrors).length)}
       >
         Create Spot
       </button>
