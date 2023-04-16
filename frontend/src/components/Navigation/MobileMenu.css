@@ -20,23 +20,13 @@
 }
 @media screen and (max-width: 768px){
     .mobile-menu{
-        width: 300px;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
         height: fit-content;
     }
-    .nav-bar-conditional-content > *{
-        font-size: smaller;
-        width: min-content;
-    }
-    #button{
-        width: 10px;
-    }
-    .logo{
-        font-size: 1rem;
-    }
+
 }
 @media screen and (max-width: 425px){
     .mobile-menu{

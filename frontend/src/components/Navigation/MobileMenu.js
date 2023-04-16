@@ -20,12 +20,20 @@ function MobileMenu({ isLoaded }){
         <li
             className="nav-bar-conditional-content mobile"
         >
-            <NavLink exact to="/">
-            <i class="fas fa-yin-yang"></i>
-            <span className="logo">
-              ShareBnB
-            </span>
-          </NavLink>
+            <button
+                id="button"
+                onClick={handleClick}
+            >
+                <i class="fas fa-yin-yang"></i>
+            </button>
+            <NavLink
+                id="logo-mobile"
+                exact to="/"
+            >
+                <span className="logo">
+                    ShareBnB
+                </span>
+            </NavLink>
         </li>
         <div
             className="nav-bar-conditional-content mobile"
