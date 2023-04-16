@@ -77,6 +77,7 @@ function CreateNewSpot() {
   const onSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitted(true);
+    setValidationErrors(errors);
     const vals = {
       country,address,city,state,description,price,lat,lng,name
     };
