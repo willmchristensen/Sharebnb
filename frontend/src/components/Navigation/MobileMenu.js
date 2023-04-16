@@ -1,15 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './MobileMenu.css';
 
 function MobileMenu({ isLoaded }){
-    const history = useHistory();
+    const [profileButton, hideProfileButton] = useState(false);
+    const profileButtonView = (profileButton ? 'nav-item' : 'hidden');
   const sessionUser = useSelector(state => state.session.user);
+  const history = useHistory();
   const handleClick = () => {
     history.push('/')
   }
+//   const handleProfileClick = () => {
+//     hideProfileButton(!profileButton)
+//   }
   return (
     <ul className="mobile-menu">
         <li
@@ -56,7 +61,10 @@ function MobileMenu({ isLoaded }){
                 id="profile"
                 >
                     <div className="nav-item">
-                        <ProfileButton user={sessionUser} />
+                        <ProfileButton
+                            user={sessionUser}
+                            // onClick={handleProfileClick}
+                        />
                     </div>
                 </li>
             </>
