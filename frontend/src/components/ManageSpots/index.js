@@ -40,6 +40,7 @@ const ManageSpots = () => {
                 <div className="manage-container">
                   <SpotCards
                     spot={spot}
+                    previewImage={spot.previewImage}
                     className="spot-card"
                   />
                   <ManageButtons spot={spot}/>

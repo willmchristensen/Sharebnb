@@ -78,27 +78,29 @@ function CreateNewSpot() {
     e.preventDefault();
     setIsSubmitted(true);
     const vals = {
-      country,address,city,state,description,price,lat,lng,name
+      country, address, city, state, description, price, lat, lng, name
     };
     let createdSpot = await dispatch(createOneSpot(vals));
-    if(createdSpot){
-      let prevImg = await dispatch(addSpotImage(createdSpot.id,previewImage,true));
-      if(photoOne){
-        await dispatch(addSpotImage(createdSpot.id,photoOne,false));
+    if (createdSpot) {
+      let prevImg = await dispatch(addSpotImage(createdSpot.id, previewImage, true));
+      if (photoOne) {
+        await dispatch(addSpotImage(createdSpot.id, photoOne, false));
       }
-      if(photoTwo){
-        await dispatch(addSpotImage(createdSpot.id,photoTwo,false));
+      if (photoTwo) {
+        await dispatch(addSpotImage(createdSpot.id, photoTwo, false));
       }
-      if(photoThree){
-        await dispatch(addSpotImage(createdSpot.id,photoThree,false));
+      if (photoThree) {
+        await dispatch(addSpotImage(createdSpot.id, photoThree, false));
       }
-      if(photoFour){
-        await dispatch(addSpotImage(createdSpot.id,photoFour,false));
+      if (photoFour) {
+        await dispatch(addSpotImage(createdSpot.id, photoFour, false));
       }
-      if(prevImg) history.push(`/spots/${createdSpot.id}`)
-      closeModal()
+      if (prevImg) {
+        history.push(`/spots/${createdSpot.id}`);
+      }
+      closeModal();
     }
-  }
+  };
   return (
     <form className="create-spot-form" onSubmit={onSubmit}>
      <div className="user-information-create-spot">

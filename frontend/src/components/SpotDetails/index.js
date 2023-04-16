@@ -22,7 +22,7 @@ const SpotDetails = () => {
     // const allReviews = Object.values(reviews);
     // --------------------------useSelectors--------------------------
     // ----------------------data: memoization -------------------------
-    const { singleSpot, spotImages, previewImage, allReviews, sessionUser } = useSelector(getSpotDetails);
+    const {singleSpot, spotImages, previewImage, allReviews, sessionUser } = useSelector(getSpotDetails);
     const spot = singleSpot;
     // ----------------------data: memoization------- ------------------
     const handleReservation = () => window.alert('Feature in progress');
@@ -90,7 +90,7 @@ const SpotDetails = () => {
                         spot.numReviews > 0 &&
                             <>
                                 <h3>
-                                    {Number(spot.avgStarRating).toFixed(1)}
+                                    {Number(singleSpot.avgStarRating).toFixed(1)}
                                 </h3>
                                 <span id="stars-label">Stars</span>
                                 <div className="dot">
@@ -138,7 +138,7 @@ const SpotDetails = () => {
                         spot.numReviews > 0 &&
                         <>
                             <h3>
-                                {Number(spot.avgStarRating).toFixed(1)}
+                                {Number(singleSpot.avgStarRating).toFixed(1)}
                             </h3>
                             <span id="stars-label">Stars</span>
                             <div className="dot">

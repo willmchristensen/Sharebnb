@@ -198,7 +198,8 @@ router.get('/current',requireAuth, async(req,res) => {
     let Spots = await Spot.findAll({
         where: {
             ownerId: req.user.id
-        }
+        },
+        attributes: ['id', 'title', 'description', 'previewImage']
     });
     if(Spots){
         return res.status(200).json({Spots});

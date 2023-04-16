@@ -68,7 +68,10 @@ export const loadUserSpots = () => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/current`);
     if(response.ok){
         const data = await response.json();
-        const userSpots = normalize(data.Spots);
+        console.log('data',data)
+        const userSpots = normalize(data.Spots, {
+            previewImage: 'previewImage'
+        });
         dispatch(loadCurrent(userSpots));
         return data;
     }
@@ -156,10 +159,11 @@ export const getSpotDetails = createSelector(
       const spotImages = singleSpot.SpotImages;
       const previewImage = spotImages[0];
       const allReviews = Object.values(reviews);
+      const avgStarRating = singleSpot.avgStarRating;
       allReviews.sort((a, b) => {
         return new Date(b.createdAt) - new Date(a.createdAt);
       });
-      return { singleSpot, spotImages, previewImage, allReviews, sessionUser };
+      return { avgStarRating,singleSpot, spotImages, previewImage, allReviews, sessionUser };
     }
 );
 // -------------------------------END memoization of allspots and spot details-------------------------------
