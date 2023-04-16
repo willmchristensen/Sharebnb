@@ -9,15 +9,21 @@
     align-items: center;
 }
 .profile-menu{
+    position: relative;
     border: none;
+    margin: 10px;
 }
 #profile-bruh{
     display: flex;
     align-items: center;
 }
 .profile-dropdown{
-    border: 1px solid red;
-    padding: 0;
+    position: absolute;
+    top: 7rem;
+    background-color: var(--green);
+    border: 1px solid var(--blue);
+    border-radius: 1rem;
+    padding: 1rem;
 }
 .conditional-content{
     display: flex;
@@ -48,14 +54,11 @@
     margin-bottom: 3rem;
     transition: transform .23s;
 }
-.nav-bar-conditional-content:hover{
+/* .nav-bar-conditional-content:hover{
     transform: scale(1.1);
     /* border: .35rem solid var(--green); */
-    filter: saturate(3);
-}
-.nav-bar-conditional-content:hover > a{
-    box-shadow: -0.1rem -.1rem .1rem var(--green),-0.11rem -.11rem .1rem var(--red),-0.3rem -.3rem .3rem var(--grey),0.1rem .1rem .1rem var(--grey),0.1rem .1rem .2rem var(--green),0.1rem .1rem .1rem var(--red),.23rem .23rem .1rem var(--blue);
-}
+    /* filter: saturate(3); */ */
+/* } */
 .nav-bar-conditional-content > *{
     padding: 1rem;
 }
@@ -70,10 +73,10 @@
     padding: 1.3rem .7rem;
     transition: transform .23s ease-in-out;
 }
-.nav-bar-conditional-content > *:hover{
+/* .nav-bar-conditional-content > *:hover{
     filter: saturate(1.1);
     transform: scale(1.001);
-}
+} */
 #profile {
     margin: 0;
 }
@@ -122,11 +125,11 @@ i {
     border-radius: 1rem;
     transition: transform .23s;
 }
-#logo:hover {
+/* #logo:hover {
     filter: saturate(3);
     transform: translateY(-.23rem);
     border: .35rem solid var(--green);
-}
+} */
 #logo:hover .fa-yin-yang{
     transform: scale(1.1);
 }
@@ -157,9 +160,9 @@ i {
 #new-spot > a{
     transition: transform .23s;
 }
-#new-spot > a:hover{
+/* #new-spot > a:hover{
     transform: scale(1.1);
-}
+} */
 #logout{
     border: none;
     margin: .5rem;
@@ -172,10 +175,10 @@ i {
     height: fit-content;
     transition: transform .23s ease-in-out;
 }
-.logout:hover{
+/* .logout:hover{
     filter: saturate(2);
     transform: scale(1.04);
-}
+} */
 @media screen and (max-width: 1250px){
     .nav-bar{
         display: flex;
