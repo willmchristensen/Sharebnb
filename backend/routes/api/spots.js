@@ -57,7 +57,7 @@ const validateSpot = [
 // TODO: DOUBLE CHECK EVERYTHING
 // Create a spot
 router.post('/',requireAuth,validateSpot, async(req,res) => {
-    
+
     const {address,city,state,country,lat,lng,name,description,price} = req.body;
     // TESTING
         console.log('-------------------BACKEND-------------------',req.body, address,city,price);
@@ -515,6 +515,9 @@ router.get('/:spotId/reviews', async(req,res) => {
         })
     }else{
         const Reviews = await Review.findAll({
+            order:[
+                ["createdAt", "DESC"]
+            ],
             where:{
                 spotId:spotId
             },
