@@ -1,7 +1,4 @@
-.logo{
-    font-size: 2rem;
-    font-weight: bolder;
-}
+
 #profile{
     display: flex;
     flex-direction: column;
@@ -12,6 +9,7 @@
     position: relative;
     border: none;
     margin: 10px;
+    background-color: white;
 }
 #profile-bruh{
     display: flex;
