@@ -156,7 +156,9 @@ export const getSpotDetails = createSelector(
       const spotImages = singleSpot.SpotImages;
       const previewImage = spotImages[0];
       const allReviews = Object.values(reviews);
-
+      allReviews.sort((a, b) => {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      });
       return { singleSpot, spotImages, previewImage, allReviews, sessionUser };
     }
 );

@@ -26,13 +26,10 @@ const SpotDetails = () => {
     const spot = singleSpot;
     // ----------------------data: memoization------- ------------------
     const handleReservation = () => window.alert('Feature in progress');
-    console.log(allReviews, 'BEFOORE USE EFFECT')
-    console.log('------------------------------spot.numreviews',spot.numReviews);
     useEffect(() => {
         dispatch(loadSpotDetails(spotId));
         dispatch(loadSpotReviews(spotId));
     }, [dispatch,spotId]);
-    console.log(allReviews, 'AFTER USE EFFECT')
     if(!previewImage) return null;
   return (
     // --------------------------conditional rendering galore--------------------------
