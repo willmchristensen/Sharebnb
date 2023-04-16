@@ -7,7 +7,7 @@ const LOAD_CURRENT = "/spots/LOAD_CURRENT"
 const ADD_ONE = "spots/ADD_ONE"
 const DELETE_ONE ="spots/DELETE_ONE"
 const ADD_IMAGE = "spots/ADD_IMAGE"
-const UPDATE_SPOT = "spots/UPDATE_SPOT" 
+const UPDATE_SPOT = "spots/UPDATE_SPOT"
 // --------------------action string type literals--------------------
 // ---------------------------action creator--------------------------
 const load = (data) => ({
@@ -48,7 +48,7 @@ const normalize = (data) => data.reduce((obj,ele) => ({
 // --------------------- THUNKS: thunk action creators allow us to make async calls  ---------------------
 export const getAllSpots = () => async (dispatch) => {
     const response = await csrfFetch(`/api/spots`);
-    
+
     if (response.ok) {
         const data = await response.json();
         const allSpots = normalize(data.Spots);
@@ -156,10 +156,10 @@ export const getSpotDetails = createSelector(
       const spotImages = singleSpot.SpotImages;
       const previewImage = spotImages[0];
       const allReviews = Object.values(reviews);
-  
+
       return { singleSpot, spotImages, previewImage, allReviews, sessionUser };
     }
-);  
+);
 // -------------------------------END memoization of allspots and spot details-------------------------------
 // -----------------------------------------speaks to the store-----------------------------------------
 const spotsReducer = (state = initialState, action) => {
@@ -182,7 +182,7 @@ const spotsReducer = (state = initialState, action) => {
         case ADD_ONE: {
             const newState = {...state, allSpots: {...state.allSpots}};
             newState.allSpots[action.payload.id] = {...newState.allSpots[action.payload.id],...action.payload};
-            return newState;  
+            return newState;
         }
         // case UPDATE_SPOT: {
         //     const newState = {...state, allSpots: {...state.allSpots}};

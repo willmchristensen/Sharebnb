@@ -5,17 +5,20 @@ import './ManageSpots.css'
 import ManageButtons from '../ManageButtons'
 import { loadUserSpots } from '../../store/spots';
 import SpotCards from '../SpotCards';
+import { getAllSpots, getEverySpot } from '../../store/spots';
 
 const ManageSpots = () => {
+  const dispatch = useDispatch();
+  let allSpots = useSelector(getEverySpot);
+  console.log(allSpots)
+  // const dispatch = useDispatch();
+  // const spots = useSelector(state=> state.spots.allSpots);
+  // const allSpots = Object.values(spots);
 
-  const dispatch = useDispatch(); 
-  const spots = useSelector(state=> state.spots.allSpots);
-  const allSpots = Object.values(spots);
-  
   useEffect(() => {
     dispatch(loadUserSpots())
-  }, [dispatch]); 
-  
+  }, [dispatch]);
+
 
   return (
     <main>
@@ -29,13 +32,16 @@ const ManageSpots = () => {
             >
               <button
                 className="create-button manage"
-              >create a new spot</button>
+              >Create a new spot</button>
             </NavLink>
           </div>
             {
-              allSpots.map(spot => 
+              allSpots.map(spot =>
                 <div className="manage-container">
-                  <SpotCards spot={spot} />
+                  <SpotCards
+                    spot={spot}
+                    className="spot-card"
+                  />
                   <ManageButtons spot={spot}/>
                 </div>
               )

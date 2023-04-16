@@ -55,29 +55,28 @@ function CreateNewSpot() {
     }
     setImageErrors(errors);
   }, [previewImage]);
-  useEffect(() => {
-    let acceptedFiles = ['png','jpg','peg'];
-    const errors = {}
-    if(!acceptedFiles.includes(photoOne.slice(photoOne.length - 3))){
-      errors.photoOne = "Image URL must end in .png, .jpg, or .jpeg"
-    }
-    if(!acceptedFiles.includes(photoTwo.slice(photoTwo.length - 3))){
-      errors.photoTwo = "Image URL must end in .png, .jpg, or .jpeg"
-    }
-    if(!acceptedFiles.includes(photoThree.slice(photoThree.length - 3))){
-      errors.photoThree = "Image URL must end in .png, .jpg, or .jpeg"
-    }
-    if(!acceptedFiles.includes(photoFour.slice(photoFour.length - 3))){
-      errors.photoOne = "Image URL must end in .png, .jpg, or .jpeg"
-    }
-    setPhotoErrors(errors);
-  }, [photoOne,photoTwo,photoThree,photoFour]);
+  // useEffect(() => {
+  //   let acceptedFiles = ['png','jpg','peg'];
+  //   const errors = {}
+  //   if(photoOne.length > 0 && !acceptedFiles.includes(photoOne.slice(photoOne.length - 3))){
+  //     errors.photoOne = "Image URL must end in .png, .jpg, or .jpeg"
+  //   }
+  //   if(photoTwo.length > 0 && !acceptedFiles.includes(photoTwo.slice(photoTwo.length - 3))){
+  //     errors.photoTwo = "Image URL must end in .png, .jpg, or .jpeg"
+  //   }
+  //   if(photoThree.length > 0 && !acceptedFiles.includes(photoThree.slice(photoThree.length - 3))){
+  //     errors.photoThree = "Image URL must end in .png, .jpg, or .jpeg"
+  //   }
+  //   if(photoFour.length > 0 && !acceptedFiles.includes(photoFour.slice(photoFour.length - 3))){
+  //     errors.photoOne = "Image URL must end in .png, .jpg, or .jpeg"
+  //   }
+  //   setPhotoErrors(errors);
+  // }, [photoOne,photoTwo,photoThree,photoFour]);
   // --------------------image errors--------------------------------------
   // -----------------------------------------------------
   const onSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitted(true);
-    setValidationErrors(errors);
     const vals = {
       country,address,city,state,description,price,lat,lng,name
     };

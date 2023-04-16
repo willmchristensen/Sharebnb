@@ -38,24 +38,23 @@ function PostAReviewModal({spot}) {
 
   return (
     <>
-  
-      <form 
+
+      <form
         className="review-modal"
         onSubmit={onSubmit}
       >
         <div className="user-information-post-review">
-          <h2>Post a Review</h2>
+          <h2>How was your stay?</h2>
           <div className="form-row-post-review">
             <div className="form-row-data-post-review">
               <label
                 className="form-row-data-post-review-label"
               >
-                How was your stay?
-                <textarea 
-                  name="review" 
-                  value={review} 
-                  onChange={e=>setReview(e.target.value)}  
-                  cols="30" 
+                <textarea
+                  name="review"
+                  value={review}
+                  onChange={e=>setReview(e.target.value)}
+                  cols="30"
                   rows="10"
                   placeHolder="Leave your review here..."
                 >
@@ -63,8 +62,8 @@ function PostAReviewModal({spot}) {
               </label>
             </div>
           </div>
-          <StarsRatingInput 
-            changeStars={setStars} 
+          <StarsRatingInput
+            changeStars={setStars}
             rating={stars}
             value={stars}
             onChange={setStars}
