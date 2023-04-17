@@ -7,40 +7,40 @@ function StarsRatingInput({changeStars,rating}) {
   let filled = <i className="fas fa-star"></i>;
   return (
     <div className="stars">
-      <div 
-        className="star"   
+      <div
+        className="star"
         onMouseEnter={() => setActiveRating(1)}
         onMouseLeave={() => setActiveRating(rating)}
         onClick={() => changeStars(1)}
       >
         {activeRating >= 1 ? filled : empty}
       </div>
-      <div 
-        className="star"   
+      <div
+        className="star"
         onMouseEnter={() => setActiveRating(2)}
         onMouseLeave={() => setActiveRating(rating)}
         onClick={() => changeStars(2)}
       >
         {activeRating >= 2 ? filled : empty}
       </div>
-      <div 
-        className="star"   
+      <div
+        className="star"
         onMouseEnter={() => setActiveRating(3)}
         onMouseLeave={() => setActiveRating(rating)}
         onClick={() => changeStars(3)}
       >
         {activeRating >= 3 ? filled : empty}
       </div>
-      <div 
-        className="star"   
+      <div
+        className="star"
         onMouseEnter={() => setActiveRating(4)}
         onMouseLeave={() => setActiveRating(rating)}
         onClick={() => changeStars(4)}
       >
         {activeRating >= 4 ? filled : empty}
       </div>
-      <div 
-        className="star"   
+      <div
+        className="star"
         onMouseEnter={() => setActiveRating(5)}
         onMouseLeave={() => setActiveRating(rating)}
         onClick={() => changeStars(5)}
@@ -49,7 +49,7 @@ function StarsRatingInput({changeStars,rating}) {
       </div>
       <label>stars</label>
     </div>
-  ); 
+  );
 };
 
 export default StarsRatingInput;

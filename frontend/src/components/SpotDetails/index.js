@@ -24,9 +24,6 @@ const SpotDetails = () => {
         dispatch(loadSpotDetails(spotId));
         dispatch(loadSpotReviews(spotId));
     }, [dispatch,spotId]);
-    // const handleSubmitReview = () => {
-    //     dispatch(loadSpotDetails(spotId));
-    // };
     if(!previewImage) return null;
   return (
     // --------------------------conditional rendering galore--------------------------
