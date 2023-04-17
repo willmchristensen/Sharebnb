@@ -26,6 +26,8 @@ function CreateNewSpot() {
   const [imageErrors, setImageErrors] = useState({});
   const [photoErrors, setPhotoErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
+
   // --------------------------------------------------
   const { closeModal } = useModal();
   const history = useHistory();
@@ -100,6 +102,8 @@ function CreateNewSpot() {
         history.push(`/spots/${createdSpot.id}`);
       }
       closeModal();
+    }else{
+      setIsDisabled(true)
     }
   };
   return (
@@ -359,7 +363,8 @@ function CreateNewSpot() {
         type="submit"
         // className="create-button"
         id="manage"
-        disabled={Boolean(Object.keys(errors).length) || Boolean(Object.keys(imageErrors).length)}
+        // disabled={Boolean(Object.keys(errors).length) || Boolean(Object.keys(imageErrors).length)}
+        disabled={isDisabled}
       >
         Create Spot
       </button>
