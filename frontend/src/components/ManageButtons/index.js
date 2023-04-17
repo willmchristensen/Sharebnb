@@ -29,21 +29,16 @@ const ManageButtons = ({spot, review}) => {
   }, [showMenu]);
   return (
     <>
-      { 
-        review ? 
+      {
+        review ?
         (
           <div className="modal-material">
-              {/* <OpenModalMenuItem
-                buttonText="Update Review"
-                // onItemClick={closeMenu}
-                modalComponent={<UpdateReviewModal review={review}/>}
-              />*/}
               <OpenModalMenuItem
                   buttonText="Delete Review"
                   // onItemClick={closeMenu}
                   modalComponent={<DeleteReviewModal review={review}/>}
-              /> 
-          </div>  
+              />
+          </div>
           ) : (
           <div className="modal-material">
             <OpenModalMenuItem
