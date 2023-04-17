@@ -5,46 +5,22 @@
     align-items: center;
     justify-content: center;
 }
-@media screen and (max-width: 1250px){
-    .spot-details{
-        max-width: 1000px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    .spot-details-images{
-        display: flex;
-        flex-direction: column;
-    }
-    .spot-details-images-hero{
-        width: 50%;
-    }
-    .spot-details-header{
-        text-align: center;
-    }
+.spot-details-info-description {
+    word-wrap: break-word;
 }
-@media screen and (max-width: 768px){
-    .spot-details{
-        max-width: 1000px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    .spot-details-info-section-one{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .spot-details-info{
-        display: flex;
-        flex-direction: column;
-    }
-    .spot-details-info-reserve > *{
-        display: flex;
-        flex-direction: column;
-    }
+.spot-details-info{
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.spot-details-info> *{
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 .spot-details-header{
     width: 100%;
@@ -158,4 +134,65 @@
     display: flex;
     justify-content: right;
     align-content: center;
+}
+@media screen and (max-width: 1250px){
+    .spot-details{
+        max-width: 750px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .spot-details > *{
+        max-width: 1000px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .spot-details-images{
+        display: flex;
+        flex-direction: column;
+    }
+    .spot-details-images-hero{
+        width: 50%;
+    }
+    .spot-details-header{
+        text-align: center;
+    }
+    .spot-details-info-section-one{
+        max-width: 700px;
+    }
+}
+@media screen and (max-width: 768px){
+    body{
+        max-width: 400px;
+    }
+    #root{
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .spot-details{
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .spot-details-info-section-one{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .spot-details-info{
+        display: flex;
+        flex-direction: column;
+    }
+    .spot-details-info-reserve > *{
+        display: flex;
+        flex-direction: column;
+    }
 }

@@ -23,7 +23,7 @@ const ManageSpots = () => {
   let sessionUser = useSelector(state=>state.session.user);
   console.log(sessionUser)
   console.log(allSpots)
-  allSpots=allSpots.filter(spot => spot.ownerId === sessionUser.id)
+  allSpots=allSpots.filter(spot => spot.ownerId === sessionUser.id);
   useEffect(() => {
     dispatch(getAllSpots())
   }, [dispatch])
