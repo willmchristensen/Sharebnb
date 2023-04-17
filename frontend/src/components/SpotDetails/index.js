@@ -1,4 +1,4 @@
-import { useEffect} from 'react';
+import React, { useEffect} from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 import { NavLink, useParams} from 'react-router-dom';
 import SpotCardImage from '../SpotCardImage';
@@ -13,21 +13,13 @@ import './SpotDetails.css';
 const SpotDetails = () => {
     const dispatch = useDispatch();
     const {spotId} = useParams();
-    // --------------------------useSelectors--------------------------
-    // const spot = useSelector(state => state.spots.singleSpot);
-    // const reviews = useSelector(state => state.reviews.spot);
-    // const sessionUser = useSelector(state => state.session.user);
-    // const spotImages = spot.SpotImages;
-    // const previewImage = spotImages[0];
-    // const allReviews = Object.values(reviews);
-    // --------------------------useSelectors--------------------------
-    // ----------------------data: memoization -------------------------
-    const {avgStarRating,singleSpot, spotImages, previewImage, allReviews, sessionUser } = useSelector(getSpotDetails);
-    const spot = singleSpot;
-    console.log('SPWET',spot);
+    let {avgStarRating,singleSpot, spotImages, previewImage, allReviews, sessionUser } = useSelector(getSpotDetails);
+    let spot = singleSpot;
     // ----------------------data: memoization------- ------------------
     const handleReservation = () => window.alert('Feature in progress');
-
+    avgStarRating = allReviews.length > 0
+    ? allReviews.reduce((sum, review) => sum + review.stars, 0) / allReviews.length
+    : 0;
     useEffect(() => {
         dispatch(loadSpotDetails(spotId));
         dispatch(loadSpotReviews(spotId));

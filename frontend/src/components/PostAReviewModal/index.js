@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import { createOneReview } from "../../store/reviews";
+import { updateOneSpot } from "../../store/spots";
 import './PostReview.css'
 import StarsRatingInput from './stars.js'
 
@@ -30,10 +31,13 @@ function PostAReviewModal({spot}) {
     const newReview = await dispatch(createOneReview(rev,spot.id, user))
       .then(closeModal)
       .catch(async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
       });
-    if (newReview) history.push(`/spots/${spot.id}`);
+    if (newReview) {
+      await dispatch(updateOneSpot(spot.id));
+      history.push(`/spots/${spot.id}`);
+    }
   };
 
   return (

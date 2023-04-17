@@ -155,11 +155,11 @@ export const getSpotDetails = createSelector(
     state => state.spots.singleSpot,
     state => state.reviews.spot,
     state => state.session.user,
-    (singleSpot, reviews, sessionUser) => {
+    state => state.spots.singleSpot.avgStarRating,
+    (singleSpot, reviews, sessionUser,avgStarRating) => {
       const spotImages = singleSpot.SpotImages;
       const previewImage = spotImages[0];
       const allReviews = Object.values(reviews);
-      const avgStarRating = singleSpot.avgStarRating;
       allReviews.sort((a, b) => {
         return new Date(b.createdAt) - new Date(a.createdAt);
       });
@@ -181,6 +181,7 @@ const spotsReducer = (state = initialState, action) => {
         }
         case LOAD_ONE: {
             const newState = {...state};
+            console.log('reducer',action.data);
             newState.singleSpot = {...action.data};
             return newState;
         }

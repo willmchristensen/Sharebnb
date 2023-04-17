@@ -15,13 +15,13 @@ function DeleteReviewModal({review}) {
         <h2>Confirm Delete</h2>
         <h3>Are you sure you want to remove this review from the listings?</h3>
         <div className="delete-buttons">
-          <button 
+          <button
             id="delete-button"
             onClick={handleDelete}
           >
             Yes (Delete Review)
           </button>
-          <button 
+          <button
             id="keep-button"
             onClick={closeModal}
           >
