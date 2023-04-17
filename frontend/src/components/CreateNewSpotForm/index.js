@@ -83,7 +83,6 @@ function CreateNewSpot() {
     console.log(vals)
     let createdSpot = await dispatch(createOneSpot(vals));
     if (createdSpot) {
-      // Dispatch addSpotImage only if createdSpot is not null or undefined
       let prevImg = await dispatch(addSpotImage(createdSpot.id, previewImage, true));
       if (photoOne) {
         await dispatch(addSpotImage(createdSpot.id, photoOne, false));
