@@ -188,7 +188,7 @@ router.get('/', async(req,res) => {
         delete spot.Reviews;
 
     }
-
+    console.log(Spots);
     return res.status(200).json({Spots,page,size});
 
 });
@@ -199,8 +199,9 @@ router.get('/current',requireAuth, async(req,res) => {
         where: {
             ownerId: req.user.id
         },
-        attributes: ['id', 'title', 'description', 'previewImage']
+        // attributes: ['id', 'description', 'country', 'address', 'city', 'state', 'price', 'name', 'previewImage']
     });
+    console.log('spots',Spots);
     if(Spots){
         return res.status(200).json({Spots});
     }else{

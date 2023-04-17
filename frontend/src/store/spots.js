@@ -149,7 +149,7 @@ const initialState = {
 // -------------------------------memoization of allspots and spot details-------------------------------
 export const getEverySpot = createSelector(
     state => state.spots.allSpots,
-    allSpots => Object.values(allSpots)
+    allSpots => Object.values(allSpots),
 );
 export const getSpotDetails = createSelector(
     state => state.spots.singleSpot,
@@ -165,6 +165,10 @@ export const getSpotDetails = createSelector(
       });
       return { avgStarRating,singleSpot, spotImages, previewImage, allReviews, sessionUser };
     }
+);
+export const getUserSpots = createSelector(
+    state=> state.spots.allSpots,
+    allSpots => Object.values(allSpots)
 );
 // -------------------------------END memoization of allspots and spot details-------------------------------
 // -----------------------------------------speaks to the store-----------------------------------------
