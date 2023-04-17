@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import SpotCardImage from '../SpotCardImage';
 import './SpotCards.css';
+import './ManageSpots.css'
 import ManageButtons from '../ManageButtons'
 const ManageSpotsCard = ({ spot }) => {
   const spotImages = useSelector(state => state.spots.singleSpot.SpotImages);

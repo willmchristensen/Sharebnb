@@ -5,6 +5,7 @@ import './ManageSpots.css'
 import ManageButtons from '../ManageButtons'
 import { loadUserSpots,getUserSpots, getEverySpot, getAllSpots} from '../../store/spots';
 import SpotCards from '../SpotCards';
+import ManageSpotsCard from '../SpotCards/ManageSpotsCard';
 
 const ManageSpots = () => {
 
@@ -46,10 +47,11 @@ const ManageSpots = () => {
             {
               allSpots.map(spot =>
                 <div className="manage-container">
-                  <SpotCards
+                  {/* <SpotCards
                     spot={spot}
                   />
-                  <ManageButtons spot={spot}/>
+                  <ManageButtons spot={spot}/> */}
+                  <ManageSpotsCard spot={spot}></ManageSpotsCard>
                 </div>
               )
             }
