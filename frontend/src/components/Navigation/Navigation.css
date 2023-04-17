@@ -30,6 +30,12 @@
     flex-direction: column;
     margin: 1rem;
 }
+.conditional-content > li{
+  border: 1px solid var(--blue);
+  border-radius: 1rem;
+  margin: 1rem;
+  padding: 1rem;
+}
 .profile-menu > *{
     color: var(--grey);
 }
