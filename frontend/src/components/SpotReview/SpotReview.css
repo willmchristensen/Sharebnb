@@ -1,4 +1,5 @@
 .spot-review{
+    box-sizing: border-box;
     margin-top: 10px;
     border: .1rem solid var(--grey);
     border-radius: 1rem;
@@ -8,4 +9,7 @@
 }
 #spot-review-button{
     width: 10%;
+}
+.spot-review > *{
+    box-sizing: border-box;
 }

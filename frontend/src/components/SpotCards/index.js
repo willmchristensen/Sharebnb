@@ -4,8 +4,6 @@ import SpotCardImage from '../SpotCardImage';
 import './SpotCards.css';
 
 const SpotCards = ({ spot }) => {
-  const spotImages = useSelector(state => state.spots.singleSpot.SpotImages);
-
   return (
     <NavLink className="spot-card" key={spot.name} to={`/spots/${spot.id}`}>
       <div className="nav-link">

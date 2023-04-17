@@ -8,8 +8,8 @@
  flex-direction: column;
  align-items: center;
 }
-.manage-buttons > button{
- width: 10rem
+.modal-material > button{
+ width: 100%
 }
 .manage-wrapper > *{
  display: flex;

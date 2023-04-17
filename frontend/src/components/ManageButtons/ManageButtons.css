@@ -8,6 +8,9 @@
  font-weight: bolder;
  height: fit-content;
 }
+.modal-material{
+  width: 100%;
+}
 .modal-material > *{
     border: none;
     width: 100%;

@@ -22,14 +22,19 @@ const SpotDetails = () => {
     // const allReviews = Object.values(reviews);
     // --------------------------useSelectors--------------------------
     // ----------------------data: memoization -------------------------
-    const {singleSpot, spotImages, previewImage, allReviews, sessionUser } = useSelector(getSpotDetails);
+    const {avgStarRating,singleSpot, spotImages, previewImage, allReviews, sessionUser } = useSelector(getSpotDetails);
     const spot = singleSpot;
+    console.log('SPWET',spot);
     // ----------------------data: memoization------- ------------------
     const handleReservation = () => window.alert('Feature in progress');
+
     useEffect(() => {
         dispatch(loadSpotDetails(spotId));
         dispatch(loadSpotReviews(spotId));
     }, [dispatch,spotId]);
+    // const handleSubmitReview = () => {
+    //     dispatch(loadSpotDetails(spotId));
+    // };
     if(!previewImage) return null;
   return (
     // --------------------------conditional rendering galore--------------------------
@@ -90,7 +95,7 @@ const SpotDetails = () => {
                         spot.numReviews > 0 &&
                             <>
                                 <h3>
-                                    {Number(singleSpot.avgStarRating).toFixed(1)}
+                                    {Number(avgStarRating).toFixed(1)}
                                 </h3>
                                 <span id="stars-label">Stars</span>
                                 <div className="dot">
@@ -138,7 +143,7 @@ const SpotDetails = () => {
                         spot.numReviews > 0 &&
                         <>
                             <h3>
-                                {Number(singleSpot.avgStarRating).toFixed(1)}
+                                {Number(avgStarRating).toFixed(1)}
                             </h3>
                             <span id="stars-label">Stars</span>
                             <div className="dot">
@@ -176,14 +181,15 @@ const SpotDetails = () => {
                     <div className="modal-material">
                         <OpenModalMenuItem
                             buttonText="Post Your Review"
-                            modalComponent={<PostAReviewModal spot={spot}/>}
+                            modalComponent={<PostAReviewModal
+                            spot={spot}
+                        />}
                         />
                     </div>
                 </div>
             )
         }
     </div>
-    {/* {console.log('BRUH THIS IS SPOT REVIEWS',spot.numReviews)} */}
         {
             allReviews.length === 0 ?
             (
