@@ -14,10 +14,13 @@ function ProfileButton({ user }) {
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
   const history = useHistory();
+  // const openMenu = () => {
+  //   if (showMenu) return;
+  //   setShowMenu(true);
+  // };
   const openMenu = () => {
-    if (showMenu) return;
-    setShowMenu(true);
-  };
+    setShowMenu(!showMenu);
+  }
   let spots = useSelector(state => state.spots.allSpots);
   let allSpots = Object.values(spots);
   let reviews = useSelector(state => state.reviews.user);
@@ -38,6 +41,7 @@ function ProfileButton({ user }) {
       }
     }
    }, [User]);
+  //  if user clicks out of profileButton component (useRef()), hideMenu
   useEffect(() => {
     if (!showMenu) return;
     const closeMenu = (e) => {
@@ -48,9 +52,6 @@ function ProfileButton({ user }) {
     document.addEventListener('click', closeMenu);
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
-  useEffect(() => {
-    dispatch(getAllSpots())
-  }, [dispatch]);
   const closeMenu = () => setShowMenu(false);
   const logout = (e) => {
     e.preventDefault();
@@ -61,14 +62,15 @@ function ProfileButton({ user }) {
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   return (
     <>
-      <button 
+      <button
         onClick={openMenu}
         className="profile-menu"
+        id="button"
       >
         <i className="fas fa-user-circle" />
       </button>
-      <ul 
-        className={ulClassName} 
+      <ul
+        className={ulClassName}
         ref={ulRef}
       >
         {
@@ -106,14 +108,14 @@ function ProfileButton({ user }) {
               <li
                 id="logout"
               >
-                <button 
+                <button
                   onClick={logout}
                   className="logout"
                 >
                   Log Out
                 </button>
               </li>
-            </> 
+            </>
           ) : (
             <>
               <div className="conditional-content">

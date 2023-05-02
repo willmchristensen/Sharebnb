@@ -57,7 +57,7 @@ const validateSpot = [
 // TODO: DOUBLE CHECK EVERYTHING
 // Create a spot
 router.post('/',requireAuth,validateSpot, async(req,res) => {
-    
+
     const {address,city,state,country,lat,lng,name,description,price} = req.body;
     // TESTING
         console.log('-------------------BACKEND-------------------',req.body, address,city,price);
@@ -188,7 +188,7 @@ router.get('/', async(req,res) => {
         delete spot.Reviews;
 
     }
-
+    console.log(Spots);
     return res.status(200).json({Spots,page,size});
 
 });
@@ -198,8 +198,10 @@ router.get('/current',requireAuth, async(req,res) => {
     let Spots = await Spot.findAll({
         where: {
             ownerId: req.user.id
-        }
+        },
+        // attributes: ['id', 'description', 'country', 'address', 'city', 'state', 'price', 'name', 'previewImage']
     });
+    console.log('spots',Spots);
     if(Spots){
         return res.status(200).json({Spots});
     }else{
@@ -515,6 +517,9 @@ router.get('/:spotId/reviews', async(req,res) => {
         })
     }else{
         const Reviews = await Review.findAll({
+            order:[
+                ["createdAt", "DESC"]
+            ],
             where:{
                 spotId:spotId
             },

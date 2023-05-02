@@ -29,23 +29,31 @@ function SignupFormPage() {
   // -------------------------enable if valid-------------------------
  if (sessionUser) return <Redirect to="/" />;
  // --------------------------dynamic errors!--------------------------
+//  useEffect(()=>{
+//   if(email.length) errors.email = ""
+//   if(username.length) errors.username = ""
+//   if(firstName.length) errors.firstName = ""
+//   if(lastName.length) errors.lastName = ""
+//   if(password.length) errors.password = ""
+//   if(confirmPassword.length) errors.confirmPassword = ""
+//  },[])
 //  ----------------------error handling / controlled inputs----------------------
-// tried using onMouseLeave but was rendering errors on mouse leave lol 
+// tried using onMouseLeave but was rendering errors on mouse leave lol
 // switched onMouseLeave to onBlur, which is dependent on user leaving the input field
   const handleEmail = (e) => {
     setEmail(e.target.value);
     setErrors((errors) => ({
       ...errors,
       email: e.target.value.split('@').length !== 2 || e.target.value.length < 6
-      ? 'Email must be valid.'
+      ? 'Invalid email format.'
       : null,
     }));
   };
   const handleEmailMouseLeave = () => {
     setErrors((errors) => ({
       ...errors,
-      email: email.length <= 2
-      ? 'Email is required.'
+      email: email.length < 2
+      ? 'Minimum 3 characters required.'
       : null,
     }));
   };
@@ -53,8 +61,8 @@ function SignupFormPage() {
   setPassword(e.target.value)
   setErrors((errors) => ({
     ...errors,
-    password: e.target.value.length >= 1 && password.length < 6 
-    ? 'Password must be longer than 6 characters.'
+    password: password.length < 5
+    ? 'Minimum 6 characters required.'
     : null,
    }));
  };
@@ -70,7 +78,7 @@ function SignupFormPage() {
    setConfirmPassword(e.target.value)
   setErrors((errors) => ({
     ...errors,
-    confirmPassword: e.target.value !== password 
+    confirmPassword: e.target.value !== password
     ? 'Confirm Password field must be the same as the Password field.'
     : null,
   }));
@@ -87,8 +95,8 @@ function SignupFormPage() {
   setUsername(e.target.value);
   setErrors((errors) => ({
     ...errors,
-    username: e.target.value.length < 4 && e.target.value.length > 1
-      ? 'Credential must be longer than 4 characters.'
+    username: username.length < 3
+      ? 'Minimum 4 characters required.'
       : null,
   }));
  };
@@ -104,8 +112,8 @@ function SignupFormPage() {
   setFirstName(e.target.value)
   setErrors((errors) => ({
    ...errors,
-   firstName: e.target.value.length < 2
-     ? 'First name must be longer than 2 characters.'
+   firstName: firstName.length < 2
+     ? 'Minimum 3 characters required.'
      : null,
  }));
  };
@@ -171,7 +179,7 @@ function SignupFormPage() {
     <>
       <h1>Sign Up</h1>
       {backEndErrors.length > 0 && backEndErrors.map(e => {
-        return ( 
+        return (
         <p className="errors">{e}</p>
         );
       })}
@@ -243,11 +251,11 @@ function SignupFormPage() {
             />
           </label>
           {errors.confirmPassword && <p className="errors">{errors.confirmPassword}</p>}
-          <button 
+          <button
             type="submit"
             id="button"
             disabled={isDisabled}
-            onClick={handleSubmit} 
+            onClick={handleSubmit}
           >Sign Up</button>
         </div>
       </form>

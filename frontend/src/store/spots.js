@@ -7,7 +7,7 @@ const LOAD_CURRENT = "/spots/LOAD_CURRENT"
 const ADD_ONE = "spots/ADD_ONE"
 const DELETE_ONE ="spots/DELETE_ONE"
 const ADD_IMAGE = "spots/ADD_IMAGE"
-const UPDATE_SPOT = "spots/UPDATE_SPOT" 
+const UPDATE_SPOT = "spots/UPDATE_SPOT"
 // --------------------action string type literals--------------------
 // ---------------------------action creator--------------------------
 const load = (data) => ({
@@ -48,7 +48,7 @@ const normalize = (data) => data.reduce((obj,ele) => ({
 // --------------------- THUNKS: thunk action creators allow us to make async calls  ---------------------
 export const getAllSpots = () => async (dispatch) => {
     const response = await csrfFetch(`/api/spots`);
-    
+
     if (response.ok) {
         const data = await response.json();
         const allSpots = normalize(data.Spots);
@@ -68,7 +68,10 @@ export const loadUserSpots = () => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/current`);
     if(response.ok){
         const data = await response.json();
-        const userSpots = normalize(data.Spots);
+        console.log('data',data)
+        const userSpots = normalize(data.Spots, {
+            previewImage: 'previewImage'
+        });
         dispatch(loadCurrent(userSpots));
         return data;
     }
@@ -146,20 +149,27 @@ const initialState = {
 // -------------------------------memoization of allspots and spot details-------------------------------
 export const getEverySpot = createSelector(
     state => state.spots.allSpots,
-    allSpots => Object.values(allSpots)
+    allSpots => Object.values(allSpots),
 );
 export const getSpotDetails = createSelector(
     state => state.spots.singleSpot,
     state => state.reviews.spot,
     state => state.session.user,
-    (singleSpot, reviews, sessionUser) => {
+    state => state.spots.singleSpot.avgStarRating,
+    (singleSpot, reviews, sessionUser,avgStarRating) => {
       const spotImages = singleSpot.SpotImages;
       const previewImage = spotImages[0];
       const allReviews = Object.values(reviews);
-  
-      return { singleSpot, spotImages, previewImage, allReviews, sessionUser };
+      allReviews.sort((a, b) => {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      });
+      return { avgStarRating,singleSpot, spotImages, previewImage, allReviews, sessionUser };
     }
-);  
+);
+export const getUserSpots = createSelector(
+    state=> state.spots.allSpots,
+    allSpots => Object.values(allSpots)
+);
 // -------------------------------END memoization of allspots and spot details-------------------------------
 // -----------------------------------------speaks to the store-----------------------------------------
 const spotsReducer = (state = initialState, action) => {
@@ -171,6 +181,7 @@ const spotsReducer = (state = initialState, action) => {
         }
         case LOAD_ONE: {
             const newState = {...state};
+            console.log('reducer',action.data);
             newState.singleSpot = {...action.data};
             return newState;
         }
@@ -182,7 +193,7 @@ const spotsReducer = (state = initialState, action) => {
         case ADD_ONE: {
             const newState = {...state, allSpots: {...state.allSpots}};
             newState.allSpots[action.payload.id] = {...newState.allSpots[action.payload.id],...action.payload};
-            return newState;  
+            return newState;
         }
         // case UPDATE_SPOT: {
         //     const newState = {...state, allSpots: {...state.allSpots}};

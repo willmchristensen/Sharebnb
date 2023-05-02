@@ -1,16 +1,20 @@
 #manage{
  border: none;
- padding: .5rem; 
+ padding: .5rem;
  margin: .5rem;
  border-radius: 1rem;
  background: var(--grey);
  color: var(--red);
  font-weight: bolder;
  height: fit-content;
- box-shadow: .21rem .21rem  .1rem var(--blue);
- transition: transform .23s ease-in-out;
 }
-#manage:hover{
- filter: saturate(2);
- transform: scale(1.07);
+.modal-material{
+  width: 100%;
 }
+.modal-material > *{
+    border: none;
+    width: 100%;
+    padding: 1rem;
+    background: var(--grey);
+    height: fit-content;
+  }

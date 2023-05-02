@@ -8,8 +8,8 @@
  flex-direction: column;
  align-items: center;
 }
-.manage-buttons > button{
- width: 11rem
+.modal-material > button{
+ width: 100%
 }
 .manage-wrapper > *{
  display: flex;
@@ -18,6 +18,13 @@
 .manage{
  width: 100%;
 }
-#manage-spot-card > *{
- border: 1px solid red;
+.manage-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.spot-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

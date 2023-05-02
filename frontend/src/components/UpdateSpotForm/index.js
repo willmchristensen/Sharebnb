@@ -28,7 +28,6 @@ function UpdateSpot({spot}) {
   const [imageErrors, setImageErrors] = useState({});
   const [photoErrors, setPhotoErrors] = useState({});
   const [id] = useState(spot.id);
-
   useEffect(() => {
     const errors = {};
     if(!country) errors.country = "Country is required"
@@ -39,7 +38,7 @@ function UpdateSpot({spot}) {
     if(description.length < 30) errors.description = "Description needs 30 or more characters";
     if(!name) errors.name = "Title is required"
     if(!price) errors.price = "BasePrice is required"
-    setValidationErrors(errors) 
+    setValidationErrors(errors)
   }, [country,address,city,state,description,name,price]);
 
   const onSubmit = async (e) => {
@@ -163,10 +162,10 @@ function UpdateSpot({spot}) {
           <div className="form-row-data">
           <label>
             <textarea
-            name="review" 
-            value={description} 
-            onChange={e=>setDescription(e.target.value)}  
-            cols="30" 
+            name="review"
+            value={description}
+            onChange={e=>setDescription(e.target.value)}
+            cols="30"
             rows="5"
             placeHolder="Please write at least 30 characters"
             />
@@ -202,7 +201,7 @@ function UpdateSpot({spot}) {
           <div className="form-row-data">
             <h2>Set a base price for your spot</h2>
             <p>
-              Competitive pricing can help your listing stand out and rank higher 
+              Competitive pricing can help your listing stand out and rank higher
               in search results.
             </p>
           </div>

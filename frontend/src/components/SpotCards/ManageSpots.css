@@ -10,7 +10,7 @@
     z-index: 1;
     padding: .2em;
 }
-.spot-cards-section{
+.manage-wrapper{
     display: grid;
     grid-template-columns: repeat(4,1fr);
     row-gap: 3rem;

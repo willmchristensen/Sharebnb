@@ -38,7 +38,7 @@ function LoginFormModal() {
           const data = await res.json();
           if (data && data.message){
             setErrors({...errors, credential:'The provided credentials were invalid.'});
-          } 
+          }
         }
       );
   };
@@ -46,7 +46,7 @@ function LoginFormModal() {
     return dispatch(sessionActions.login({ credential:'testUserName', password:'password'}))
       .then(closeModal);
   }
-  // TODO: ERRORS FROM BACKEND: 
+  // TODO: ERRORS FROM BACKEND:
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -74,24 +74,25 @@ function LoginFormModal() {
           </label>
           {isSubmitted && Object.values(errors).length > 0 && <p className="errors">{errors.password}</p>}
           <div className="login-buttons">
-            <button 
-              type="submit" 
-              id="button" 
+            <button
+              type="submit"
+              id="button"
               onClick={handleSubmit}
               disabled={isDisabled}
             >
               Log In
             </button>
-            <button 
-              type="submit" 
-              onClick={handleDemoUser} 
-              id="button"
-            >
-              Demo User
-            </button>
+            {/* move out of form */}
           </div>
         </div>
       </form>
+      <button
+        type="submit"
+        onClick={handleDemoUser}
+        id="button"
+      >
+        Demo User
+      </button>
     </>
   );
 }
