@@ -180,7 +180,7 @@ const spotsReducer = (state = initialState, action) => {
             return newState;
         }
         case LOAD_ONE: {
-            const newState = {...state};
+            const newState = {...state, singleSpot: { ...state.singleSpot }};
             console.log('reducer',action.data);
             newState.singleSpot = {...action.data};
             return newState;
