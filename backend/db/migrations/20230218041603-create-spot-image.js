@@ -41,6 +41,7 @@ module.exports = {
     }, options);
   },
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("SpotImages");
+    options.tableName = 'SpotImages';
+    return queryInterface.bulkDelete(options, null, {});
   }
 };

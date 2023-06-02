@@ -74,7 +74,8 @@ module.exports = {
       }
     }, options);
   },
-  down: async(queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Spots');
+  down: async (queryInterface, Sequelize) => {
+    options.tableName = 'Spots';
+    return queryInterface.bulkDelete(options, null, {});
   }
 };

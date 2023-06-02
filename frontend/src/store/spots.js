@@ -175,8 +175,8 @@ export const getUserSpots = createSelector(
 const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD: {
-            const newState = {...state};
-            newState.allSpots = action.payload;
+            const newState = {...state, allSpots: { ...state.allSpots }};
+            newState.allSpots = {...action.payload};
             return newState;
         }
         case LOAD_ONE: {

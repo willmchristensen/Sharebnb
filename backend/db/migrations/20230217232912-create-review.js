@@ -42,7 +42,8 @@ module.exports = {
       }
     }, options);
   },
-  down: async(queryInterface, Sequelize) => {
-    return queryInterface.dropTable("Reviews");
+  down: async (queryInterface, Sequelize) => {
+    options.tableName = 'Reviews';
+    return queryInterface.bulkDelete(options, null, {});
   }
 };
