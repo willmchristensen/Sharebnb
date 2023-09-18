@@ -76,6 +76,9 @@ export const createOneBooking = (payload) => async (dispatch) => {
         const booking = await response.json();
         dispatch(createBooking(booking));
         return booking;
+    } else {
+        const errors = await response.json();
+        return errors;
     }
 };
 export const getAllBookings = () => async (dispatch) => {
