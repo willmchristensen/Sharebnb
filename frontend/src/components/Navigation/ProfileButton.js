@@ -25,6 +25,14 @@ function ProfileButton({ user }) {
   let allSpots = Object.values(spots);
   let reviews = useSelector(state => state.reviews.user);
   let allReviews = Object.values(reviews);
+  let bookings = useSelector(state => state.bookings.user);
+  let allBookings = Object.values(bookings);
+  const today = new Date();
+  let futureBookings = allBookings.filter(b => {
+    let start = new Date(b.startDate);
+    return start > today;
+  });
+  // console.log('------------------------------futureBookings',futureBookings);
   let User = useSelector(state => state.session.user);
   useEffect(() => {
     if(User){
@@ -41,7 +49,6 @@ function ProfileButton({ user }) {
       }
     }
    }, [User]);
-  //  if user clicks out of profileButton component (useRef()), hideMenu
   useEffect(() => {
     if (!showMenu) return;
     const closeMenu = (e) => {
@@ -105,17 +112,30 @@ function ProfileButton({ user }) {
                   Manage Reviews
                 </NavLink>
               </li>
-              {/* TODO: manage bookings edit bookings */}
-              <li
-                id="manage"
-              >
-                <NavLink
-                  // key={}
-                  to={`/bookings/current`}
-                  onClick={closeMenu}
+              {/* FIXME: manage bookings conditional rendering */}
+              {/* {
+                futureBookings.length > 0 &&
+                <li
+                  id="manage"
                 >
-                  Manage Bookings
-                </NavLink>
+                  <NavLink
+                    // key={}
+                    to={`/bookings/current`}
+                    onClick={closeMenu}
+                  >
+                    Manage Bookings
+                  </NavLink>
+                </li>
+              } */}
+              <li
+                  id="manage"
+              >
+                  <NavLink
+                    to={`/bookings/current`}
+                    onClick={closeMenu}
+                  >
+                    Manage Bookings
+                  </NavLink>
               </li>
               <li
                 id="logout"

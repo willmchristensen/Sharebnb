@@ -25,13 +25,9 @@ const SpotReservation = () => {
             setIsSubmitted(true);
             history.push('/');
         } catch (error) {
+            console.log('------------------------------error', error);
             // Handle errors from the create route and set appropriate error messages
-            if (error.response && error.response.data && error.response.data.errors) {
-                setErrors(error.response.data.errors);
-            } else {
-                // Handle any unexpected errors here
-                console.error('Unexpected error:', error);
-            }
+            console.log('------------------------------object.values(error)',Object.values(error));
         }
     };
 

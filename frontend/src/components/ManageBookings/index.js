@@ -28,6 +28,8 @@ const ManageBookings = () => {
           </div>
           {futureBookings.map(booking => (
             <div key={booking.id}>
+              <h3>Start: {booking.startDate}</h3>
+              <h3>End: {booking.endDate}</h3>
               <SpotCards spot={booking.Spot} className="spot-card" />
               <ManageButtons booking={booking} />
             </div>

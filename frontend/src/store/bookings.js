@@ -40,7 +40,7 @@ export const loadUserBookings = () => async (dispatch) => {
     if(response.ok){
         const data = await response.json();
         const userBookings = normalize(data.Bookings);
-        console.log('------------------------------loadUserBookings thunk response',userBookings);
+        // console.log('------------------------------loadUserBookings thunk response',userBookings);
         dispatch(loadCurrent(userBookings));
         return response;
     }
@@ -95,7 +95,7 @@ export const deleteOneBooking = (id) => async (dispatch) => {
         });
         if(response.ok){
             const result = await response.json();
-            console.log('THUNK:------------------',id,result)
+            console.log('DELETE BOOKING THUNK:------------------',id,result)
             return dispatch(deleteOne(id));
         }
     } catch (error) {
@@ -124,7 +124,6 @@ const bookingsReducer = (state = initialState, action) => {
             return newState
         }
         case CREATE_BOOKING: {
-            console.log('------------------------------inside CREATE booking reducer: create_booking' );
             const newState = {...state, allBookings: {...state.allBookings}};
             newState.allBookings[action.payload.id] = {...newState.allBookings[action.payload.id],...action.payload};
             return newState;
