@@ -7,7 +7,6 @@ import SpotCards from '../SpotCards';
 
 const ManageBookings = () => {
   const dispatch = useDispatch();
-  // --------------------------------------------------------------------------------------------------------------------
   const sessionUser = useSelector(state => state.session.user);
   const userBookings = useSelector(state => state.bookings.user); 
   const userBookingsArray = Object.values(userBookings);
@@ -16,12 +15,10 @@ const ManageBookings = () => {
     let start = new Date(b.startDate);
     return start > today;
   });
-  console.log('------------------------------futureBookings',futureBookings);
   useEffect(() => {
     dispatch(getAllSpots());
     dispatch(loadUserBookings()); 
   }, [dispatch, sessionUser]);
-  // console.log('------------------------------userBookingsSpots', userBookingsSpots);
   return (
     <main>
       <div className="manage-wrapper">

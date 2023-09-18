@@ -8,8 +8,8 @@ const SpotReservation = () => {
     const dispatch = useDispatch();
     const { spotId } = useParams();
     let today = new Date()
-    const formFriendlyDate = today.toISOString().split('T')[0];
-    const [startDate, setStartDate] = useState(formFriendlyDate);
+    // const formFriendlyDate = today.toISOString().split('T')[0];
+    const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState('');
     const [errors, setErrors] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);

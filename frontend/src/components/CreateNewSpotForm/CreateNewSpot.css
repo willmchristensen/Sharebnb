@@ -40,7 +40,7 @@
   transition: transform 0.23s ease-in-out;
 }
 .form-section:hover{
-  filter: brightness(101%);
+  /* filter: brightness(101%); */
   transform: translateY(.1rem);
 }
 .form-row{

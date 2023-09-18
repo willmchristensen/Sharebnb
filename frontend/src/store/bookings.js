@@ -130,8 +130,9 @@ const bookingsReducer = (state = initialState, action) => {
             return newState;
         }
         case DELETE_ONE: {
-            const newState = {...state, allSpots: {...state.allBookings}};
+            const newState = {...state, allSpots: {...state.allBookings}, user: {...state.user}};
             delete newState.allBookings[action.payload];
+            delete newState.user[action.payload];
             return newState;
         }
         default:

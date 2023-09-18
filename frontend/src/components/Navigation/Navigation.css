@@ -24,6 +24,7 @@
     border: 1px solid var(--blue);
     border-radius: 1rem;
     padding: 1rem;
+    z-index: 1;
 }
 .conditional-content{
     display: flex;
@@ -35,6 +36,9 @@
   border-radius: 1rem;
   margin: 1rem;
   padding: 1rem;
+}
+.conditional-content > li:hover{
+    cursor: pointer;
 }
 .profile-menu > *{
     color: var(--grey);
