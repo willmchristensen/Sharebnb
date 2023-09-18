@@ -8,6 +8,8 @@ import SpotDetails from "./components/SpotDetails"
 import CreateNewSpot from "./components/CreateNewSpotForm";
 import ManageSpots from './components/ManageSpots'
 import ManageReviews from "./components/ManageReviews";
+import ManageBookings from "./components/ManageBookings";
+import SpotReservation from "./components/SpotReservation";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -32,10 +34,21 @@ function App() {
               <ManageReviews></ManageReviews>
             </Route>
             <Route
+              path={[ "/bookings/current"]}
+              exact
+            >
+              <ManageBookings/>
+            </Route>
+            <Route
               path={[ "/spots/current"]}
               exact
             >
               <ManageSpots></ManageSpots>
+            </Route>
+            <Route
+              path={[ "/spots/reserve/:spotId"]}
+            >
+              <SpotReservation></SpotReservation>
             </Route>
             <Route
               path={[ "/spots/:spotId"]}

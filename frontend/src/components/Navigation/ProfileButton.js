@@ -105,6 +105,18 @@ function ProfileButton({ user }) {
                   Manage Reviews
                 </NavLink>
               </li>
+              {/* TODO: manage bookings edit bookings */}
+              <li
+                id="manage"
+              >
+                <NavLink
+                  // key={}
+                  to={`/bookings/current`}
+                  onClick={closeMenu}
+                >
+                  Manage Bookings
+                </NavLink>
+              </li>
               <li
                 id="logout"
               >

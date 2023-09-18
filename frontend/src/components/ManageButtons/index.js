@@ -4,11 +4,14 @@ import {NavLink} from 'react-router-dom';
 import OpenModalMenuItem from '../OpenModalButton'
 import DeleteReviewModal from '../DeleteReviewModal'
 import UpdateReviewModal from '../UpdateReviewModal'
+import UpdateBookingModal from '../UpdateBookingModal';
 import DeleteSpotModal from '../DeleteSpotModal'
+import DeleteBookingModal from '../DeleteBookingModal';
 import UpdateSpot from '../UpdateSpotForm';
 import './ManageButtons.css'
+import UpdateBooking from '../UpdateBookingModal';
 
-const ManageButtons = ({spot, review}) => {
+const ManageButtons = ({spot, review, booking}) => {
   // ---------------modal------------------
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
@@ -39,7 +42,7 @@ const ManageButtons = ({spot, review}) => {
                   modalComponent={<DeleteReviewModal review={review}/>}
               />
           </div>
-          ) : (
+          ) : spot ? (
           <div className="modal-material">
             <OpenModalMenuItem
               buttonText="Update"
@@ -52,7 +55,20 @@ const ManageButtons = ({spot, review}) => {
                 modalComponent={<DeleteSpotModal spot={spot}/>}
             />
           </div>
-        )
+          ): (
+            <div className="modal-material">
+              <OpenModalMenuItem
+                buttonText="Update"
+                // onItemClick={closeMenu}
+                modalComponent={<UpdateBookingModal booking={booking}/>}
+              />
+              <OpenModalMenuItem
+                  buttonText="Delete"
+                  // onItemClick={closeMenu}
+                  modalComponent={<DeleteBookingModal booking={booking}/>}
+              />
+            </div>
+          )
       }
     </>
   );

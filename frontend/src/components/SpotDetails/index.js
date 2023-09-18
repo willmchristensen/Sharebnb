@@ -1,6 +1,6 @@
 import React, { useEffect} from 'react';
 import { useSelector, useDispatch} from 'react-redux';
-import { NavLink, useParams} from 'react-router-dom';
+import { NavLink, useParams, useHistory} from 'react-router-dom';
 import SpotCardImage from '../SpotCardImage';
 import LargeCardImage from '../SpotCardImage/LargeCardImage';
 import SpotReview from '../SpotReview';
@@ -13,10 +13,14 @@ import './SpotDetails.css';
 const SpotDetails = () => {
     const dispatch = useDispatch();
     const {spotId} = useParams();
-    let {avgStarRating,singleSpot, spotImages, previewImage, allReviews, sessionUser } = useSelector(getSpotDetails);
-    let spot = singleSpot;
+    const history = useHistory();
     // ----------------------data: memoization------- ------------------
-    const handleReservation = () => window.alert('Feature in progress');
+    let {avgStarRating, singleSpot, spotImages, previewImage, allReviews, sessionUser } = useSelector(getSpotDetails);
+    let spot = singleSpot;
+    // const handleReservation = () => window.alert('Feature in progress');
+    const handleReservation = () => {
+        history.push(`/spots/reserve/${spotId}`)
+    };
     avgStarRating = allReviews.length > 0
     ? allReviews.reduce((sum, review) => sum + review.stars, 0) / allReviews.length
     : 0;
