@@ -42,18 +42,7 @@ const SpotDetails = () => {
             </div>
             <div className="spot-details-images">
                 <div className="spot-details-images-hero">
-                    <NavLink
-                        className="spot-card"
-                        key={spot.name}
-                        to={`/spots/${spot.id}`}
-                    >
-                        <div className="nav-link">
-                            <div className="nav-link-image">
-                                <LargeCardImage image={previewImage.url}>
-                                </LargeCardImage>
-                            </div>
-                        </div>
-                    </NavLink>
+                    <LargeCardImage image={previewImage.url} />
                 </div>
                 {
                     spotImages.length > 1 && (

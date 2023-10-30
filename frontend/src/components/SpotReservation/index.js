@@ -39,6 +39,7 @@ const SpotReservation = () => {
         const selectedStartDate = new Date(event.target.value);
         const today = new Date();
         const selectedEndDate = new Date(endDate)
+        // if start date is a number and greater than today
         if (!isNaN(selectedStartDate) && selectedStartDate > today) {
             if (!isNaN(selectedEndDate) && selectedEndDate > today && selectedEndDate > selectedStartDate) {
                 // Valid start date and end date
@@ -63,6 +64,7 @@ const SpotReservation = () => {
         const selectedEndDate = new Date(event.target.value);
         const today = new Date();
         const selectedStartDate = new Date(startDate);
+        // if end date is a number and greater than today
         if (!isNaN(selectedEndDate) && selectedEndDate > today) {
             if (!isNaN(selectedStartDate) && selectedStartDate > today && selectedStartDate < selectedEndDate) {
                 // Valid end date and start date
