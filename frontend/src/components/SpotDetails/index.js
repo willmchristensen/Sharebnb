@@ -6,6 +6,7 @@ import LargeCardImage from '../SpotCardImage/LargeCardImage';
 import SpotReview from '../SpotReview';
 import { loadSpotDetails, getSpotDetails } from '../../store/spots';
 import { loadSpotReviews } from '../../store/reviews';
+import SpotReviews from './SpotReviews';
 import PostAReviewModal from '../PostAReviewModal/index';
 import OpenModalMenuItem from '../OpenModalButton';
 import './SpotDetails.css';
@@ -17,15 +18,16 @@ const SpotDetails = () => {
     // ----------------------data: memoization------- ------------------
     let { avgStarRating, singleSpot, spotImages, previewImage, allReviews, sessionUser } = useSelector(getSpotDetails);
     let spot = singleSpot;
+    let numReviews = spot.numReviews;
     // TODO: without memoization
     // let bruh = useSelector(state => state.spots.singleSpot);
     // console.log(bruh);
     const handleReservation = () => {
         history.push(`/spots/reserve/${spotId}`)
     };
-    avgStarRating = allReviews.length > 0
-        ? allReviews.reduce((sum, review) => sum + review.stars, 0) / allReviews.length
-        : 0;
+    // avgStarRating = allReviews.length > 0
+    //     ? allReviews.reduce((sum, review) => sum + review.stars, 0) / allReviews.length
+    //     : 0;
     useEffect(() => {
         dispatch(loadSpotDetails(spotId));
         dispatch(loadSpotReviews(spotId));
@@ -84,40 +86,7 @@ const SpotDetails = () => {
                                 <h3>${spot.price} per night</h3>
                             </div>
                             <div className="spot-details-info-reserve-reviews-stars">
-                                <div className="spot-details-reviews-content-stars">
-                                    <i class="fas fa-star"></i>
-                                    {
-                                        spot.numReviews > 0 &&
-                                        <>
-                                            <h3>
-                                                {Number(avgStarRating).toFixed(1)}
-                                            </h3>
-                                            <span id="stars-label">Stars</span>
-                                            <div className="dot">
-                                                <i class="fas fa-dot-circle" id="dot"></i>
-                                            </div>
-                                        </>
-                                    }
-                                </div>
-                                {
-                                    allReviews.length === 1 ?
-                                        (
-                                            <h3>
-                                                {Number(allReviews.length).toFixed(0)} review
-                                            </h3>
-                                        ) :
-                                        allReviews.length > 0 ?
-                                            (
-                                                <h3>
-                                                    {Number(allReviews.length).toFixed(0)} reviews
-                                                </h3>
-                                            ) :
-                                            (
-                                                <h3>
-                                                    "New"
-                                                </h3>
-                                            )
-                                }
+                                <SpotReviews numReviews={numReviews} avgStarRating={avgStarRating} />
                             </div>
                         </div>
                         <div className="spot-details-info-reserve-button">
@@ -132,42 +101,7 @@ const SpotDetails = () => {
                 </div>
                 <div className="spot-details-reviews">
                     <div className="spot-details-reviews-content">
-                        <div className="spot-details-reviews-content-stars">
-                            <i class="fas fa-star"></i>
-                            {
-                                spot.numReviews > 0 &&
-                                <>
-                                    <h3>
-                                        {Number(avgStarRating).toFixed(1)}
-                                    </h3>
-                                    <span id="stars-label">Stars</span>
-                                    <div className="dot">
-                                        <i class="fas fa-dot-circle" id="dot"></i>
-                                    </div>
-                                </>
-                            }
-
-                        </div>
-                        <div className="spot-details-reviews-content-reviews">
-                            {
-                                allReviews.length === 1 ?
-                                    (
-                                        <h3>
-                                            {Number(allReviews.length).toFixed(0)} review
-                                        </h3>
-                                    ) : spot.numReviews > 0 ?
-                                        (
-                                            <h3>
-                                                {Number(allReviews.length).toFixed(0)} reviews
-                                            </h3>
-                                        ) :
-                                        (
-                                            <h3>
-                                                "New"
-                                            </h3>
-                                        )
-                            }
-                        </div>
+                        <SpotReviews numReviews={numReviews} avgStarRating={avgStarRating} />
                     </div>
                 </div>
                 {sessionUser && !allReviews.find(rev => rev.userId === sessionUser.id) && spot.ownerId !== sessionUser.id &&
@@ -178,6 +112,7 @@ const SpotDetails = () => {
                                     buttonText="Post Your Review"
                                     modalComponent={<PostAReviewModal
                                         spot={spot}
+                                        spotId={spotId}
                                     />}
                                 />
                             </div>
@@ -186,7 +121,7 @@ const SpotDetails = () => {
                 }
             </div>
             {
-                allReviews.length === 0 ?
+                numReviews === 0 ?
                     (
                         <h3>
                             Be the first to post a review!

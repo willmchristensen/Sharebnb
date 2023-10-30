@@ -2,13 +2,17 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { deleteOneReview } from "../../store/reviews";
+import { loadSpotDetails } from "../../store/spots";
+
 function DeleteReviewModal({review}) {
   const { closeModal } = useModal();
   const dispatch = useDispatch();
   const handleDelete = (e) => {
     return dispatch(deleteOneReview(review.id))
+      .then(dispatch(loadSpotDetails(review.spotId)))
       .then(closeModal)
   };
+  console.log(review)
   return (
     <>
       <div className="delete-a-spot">
