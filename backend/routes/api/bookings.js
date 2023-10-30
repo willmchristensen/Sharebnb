@@ -175,12 +175,6 @@ router.post('/', requireAuth, validateBooking, async (req, res) => {
     }
 });
 
-
-
-// -----------------------------------------------------------
-// TODO: edit and delete after half crud
-// -----------------------------------------------------------
-
 // Edit a booking by ID
 router.put('/:bookingId',requireAuth,validateBooking, async(req,res) => {
     const booking = await Booking.findOne({

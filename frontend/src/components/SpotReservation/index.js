@@ -19,45 +19,70 @@ const SpotReservation = () => {
         e.preventDefault();
         let realSpotId = parseInt(spotId);
         const payload = { 'spotId': realSpotId, 'startDate': startDate, 'endDate': endDate };
-        try {
-            // Dispatch the action to create a booking
-            await dispatch(createOneBooking(payload));
+        const res = await dispatch(createOneBooking(payload));
+        console.log('res in submit', res)
+        if(!res.errors) {
             setIsSubmitted(true);
             history.push('/');
-        } catch (error) {
-            console.log('------------------------------error', error);
-            // Handle errors from the create route and set appropriate error messages
-            console.log('------------------------------object.values(error)',Object.values(error));
-        }
-    };
-
-    const handleEndDateChange = (event) => {
-        const selectedEndDate = new Date(event.target.value);
-        const today = new Date();
-        if (!isNaN(selectedEndDate) && selectedEndDate > today) {
-            setErrors({});
-            setEndDate(event.target.value);
-            setIsDisabled(false);
-        } else {
-            setEndDate(event.target.value);
-            setErrors({ endDate: 'Invalid end date.' });
-            setIsDisabled(true);
+        }else{
+            console.log('Error:', res.errors)
+            if(res.errors.endDate){
+                setErrors({endDate: 'The end date cannot be on or before the startDate.'})
+            }else if(res.errors.startDate){
+                setErrors(res.errors)
+            }
+            // setErrors(res.errors)
         }
     };
 
     const handleStartDateChange = (event) => {
         const selectedStartDate = new Date(event.target.value);
         const today = new Date();
+        const selectedEndDate = new Date(endDate)
         if (!isNaN(selectedStartDate) && selectedStartDate > today) {
-            setErrors({});
-            setStartDate(event.target.value);
-            setIsDisabled(false);
+            if (!isNaN(selectedEndDate) && selectedEndDate > today && selectedEndDate > selectedStartDate) {
+                // Valid start date and end date
+                setErrors({});
+                setStartDate(event.target.value);
+                setIsDisabled(false);
+            } else {
+                // Valid start date but invalid end date
+                setStartDate(event.target.value);
+                setErrors({ endDate: 'Invalid end date, end date must be after the start date and today.' });
+                setIsDisabled(true);
+            }
         } else {
+            // Invalid start date
             setStartDate(event.target.value);
-            setErrors({ startDate: 'Invalid start date.' });
+            setErrors({ startDate: 'Invalid start date, start date must be a valid date and after today.' });
             setIsDisabled(true);
         }
     };
+    
+    const handleEndDateChange = (event) => {
+        const selectedEndDate = new Date(event.target.value);
+        const today = new Date();
+        const selectedStartDate = new Date(startDate);
+        if (!isNaN(selectedEndDate) && selectedEndDate > today) {
+            if (!isNaN(selectedStartDate) && selectedStartDate > today && selectedStartDate < selectedEndDate) {
+                // Valid end date and start date
+                setErrors({});
+                setEndDate(event.target.value);
+                setIsDisabled(false);
+            } else {
+                // Valid end date but invalid start date
+                setEndDate(event.target.value);
+                setErrors({ startDate: 'Invalid start date, start date must be before the end date and after today.' });
+                setIsDisabled(true);
+            }
+        } else {
+            // Invalid end date
+            setEndDate(event.target.value);
+            setErrors({ endDate: 'Invalid end date, end date must be a valid date and after today.' });
+            setIsDisabled(true);
+        }
+    };
+    
 
     const startDateError = errors.startDate ? (
         <div className="error-message">{errors.startDate}</div>
