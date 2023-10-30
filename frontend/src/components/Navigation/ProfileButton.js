@@ -18,9 +18,8 @@ function ProfileButton({ user }) {
   //   if (showMenu) return;
   //   setShowMenu(true);
   // };
-  const openMenu = () => {
-    setShowMenu(!showMenu);
-  }
+
+
   let spots = useSelector(state => state.spots.allSpots);
   let allSpots = Object.values(spots);
   let reviews = useSelector(state => state.reviews.user);
@@ -32,8 +31,13 @@ function ProfileButton({ user }) {
     let start = new Date(b.startDate);
     return start > today;
   });
-  // console.log('------------------------------futureBookings',futureBookings);
+
   let User = useSelector(state => state.session.user);
+
+  const openMenu = () => {
+    setShowMenu(!showMenu);
+  };
+
   useEffect(() => {
     if(User){
       let isOwner = allSpots.find(spot => spot.ownerId === User.id);
@@ -49,6 +53,7 @@ function ProfileButton({ user }) {
       }
     }
    }, [User]);
+   
   useEffect(() => {
     if (!showMenu) return;
     const closeMenu = (e) => {
@@ -59,6 +64,7 @@ function ProfileButton({ user }) {
     document.addEventListener('click', closeMenu);
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
+
   const closeMenu = () => setShowMenu(false);
   const logout = (e) => {
     e.preventDefault();
@@ -66,6 +72,7 @@ function ProfileButton({ user }) {
     history.push('/');
     closeMenu();
   };
+
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   return (
     <>

@@ -181,7 +181,6 @@ const spotsReducer = (state = initialState, action) => {
         }
         case LOAD_ONE: {
             const newState = {...state, singleSpot: { ...state.singleSpot }};
-            console.log('reducer',action.data);
             newState.singleSpot = {...action.data};
             return newState;
         }
