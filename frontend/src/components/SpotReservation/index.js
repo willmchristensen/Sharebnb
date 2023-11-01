@@ -12,7 +12,7 @@ const SpotReservation = () => {
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState('');
     const [errors, setErrors] = useState({});
-    const [isSubmitted, setIsSubmitted] = useState(false);
+    // const [isSubmitted, setIsSubmitted] = useState(false);
     const [isDisabled, setIsDisabled] = useState(true);
 
     const onSubmit = async (e) => {
@@ -20,18 +20,11 @@ const SpotReservation = () => {
         let realSpotId = parseInt(spotId);
         const payload = { 'spotId': realSpotId, 'startDate': startDate, 'endDate': endDate };
         const res = await dispatch(createOneBooking(payload));
-        console.log('res in submit', res)
         if(!res.errors) {
-            setIsSubmitted(true);
-            history.push('/');
+            // setIsSubmitted(true);
+            history.push('/bookings/current');
         }else{
-            console.log('Error:', res.errors)
-            if(res.errors.endDate){
-                setErrors({endDate: 'The end date cannot be on or before the startDate.'})
-            }else if(res.errors.startDate){
-                setErrors(res.errors)
-            }
-            // setErrors(res.errors)
+            setErrors(res.errors)            
         }
     };
 

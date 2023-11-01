@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllSpots } from '../../store/spots';
-import { loadUserBookings, getAllBookings } from '../../store/bookings'; // Import loadUserBookings
+import { loadUserBookings } from '../../store/bookings'; // Import loadUserBookings
 import BookingCard from './BookingCard';
 
 const ManageBookings = () => {
@@ -15,7 +14,6 @@ const ManageBookings = () => {
     return start > today;
   });
   useEffect(() => {
-    dispatch(getAllSpots());
     dispatch(loadUserBookings()); 
   }, [dispatch, sessionUser]);
   return (

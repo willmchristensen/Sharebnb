@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { editBooking } from '../../store/bookings';
+import { useModal } from '../../context/Modal';
+import { loadUserBookings } from '../../store/bookings';
 
 function BookingModal({ booking }) {
   let dispatch = useDispatch();
@@ -15,6 +17,7 @@ function BookingModal({ booking }) {
   const [endDate, setEndDate] = useState(booking && formFriendlyEnd);
   const [errors, setErrors] = useState({});
   const [isDisabled, setIsDisabled] = useState(true);
+  const {closeModal} = useModal();
 
   const handleStartDateChange = (event) => {
     const selectedStartDate = new Date(event.target.value);
@@ -87,7 +90,7 @@ function BookingModal({ booking }) {
       setErrors(res.errors);
       setIsDisabled(true);
     }else{
-      history.push('/bookings/current');
+      await dispatch(loadUserBookings()).then(closeModal())
     }
   }
 
