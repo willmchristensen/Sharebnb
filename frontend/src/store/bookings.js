@@ -46,24 +46,34 @@ export const loadUserBookings = () => async (dispatch) => {
     }
 };
 export const editBooking = (payload) => async (dispatch) => {
-    const {id, data} = payload;
-    const response = await csrfFetch(`/api/bookings/${id}`,
-    {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    });
-    if(response.ok){
-        const booking = await response.json();
-        console.log(booking);
-        dispatch(updateBooking(booking));
-        return booking;
+    const { id, data } = payload;
+    try {
+        const response = await csrfFetch(`/api/bookings/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+            console.log('response ok');
+            const booking = await response.json();
+            console.log(booking);
+            dispatch(updateBooking(booking));
+            return booking;
+        }
+    } catch (error) {
+        if (error instanceof Response) {
+            const errors = await error.json();
+            return errors;
+        } else {
+            return error; 
+        }
     }
 };
+
 export const createOneBooking = (payload) => async (dispatch) => {
-    console.log('------------------------------CREATE one booking thunk: payload:', payload);
     try {
         const response = await csrfFetch("/api/bookings", {
             method: "POST",
