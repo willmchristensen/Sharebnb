@@ -1,20 +1,18 @@
-import {useState,useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {useHistory} from 'react-router-dom';
+import './UpdateBookingModal.css'
+import { useState  } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { editBooking } from '../../store/bookings';
-import { useModal } from "../../context/Modal";
 
-function BookingModal({booking}) {
+function BookingModal({ booking }) {
   let dispatch = useDispatch();
   let history = useHistory();
-  let closeModal = useModal();
   const start = new Date(booking && booking.startDate);
   const end = new Date(booking && booking.endDate);
   const formFriendlyStart = start.toISOString().split('T')[0];
-  const formFriendlyEnd= end.toISOString().split('T')[0];
-  const [startDate, setStartDate] = useState(booking ? formFriendlyStart : '');
-  const [endDate, setEndDate] = useState(booking ? formFriendlyEnd : '');
-  const allspots = useSelector(state=> state.spots.allSpots);
+  const formFriendlyEnd = end.toISOString().split('T')[0];
+  const [startDate, setStartDate] = useState(booking && formFriendlyStart);
+  const [endDate, setEndDate] = useState(booking && formFriendlyEnd);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -23,21 +21,18 @@ function BookingModal({booking}) {
       endDate
     };
     const id = booking && booking.id;
-    const payload = {id: id, data: vals}
+    const payload = { id: id, data: vals }
     window.alert(`${payload.id}, ${payload.data.startDate},${payload.data.endDate}`)
-    // await dispatch(editBooking(payload))
-    history.push('/');
+    history.push('/bookings/current');
   }
 
-  console.log('booking in update booking',booking);
-  
   return (
     <form
-      className="create-spot-form"
+      className="update-booking-form"
       onSubmit={onSubmit}
     >
-     <div className="user-information-create-spot">
-      <div className="form-row">
+      <div className="update-booking-container">
+        <div className="form-row">
           <div className="form-row-data">
             <label>
               <div className="form-row-data-label">
@@ -48,13 +43,13 @@ function BookingModal({booking}) {
                 type="date"
                 name="country"
                 value={startDate}
-                onChange={e=>setStartDate(e.target.value)}
+                onChange={e => setStartDate(e.target.value)}
                 placeholder="Address"
               />
             </label>
           </div>
-      </div>
-      <div className="form-row">
+        </div>
+        <div className="form-row">
           <div className="form-row-data">
             <label>
               <div className="form-row-data-label">
@@ -65,19 +60,20 @@ function BookingModal({booking}) {
                 type="date"
                 name="country"
                 value={endDate}
-                onChange={e=>setEndDate(e.target.value)}
+                onChange={e => setEndDate(e.target.value)}
                 placeholder="Address"
               />
             </label>
           </div>
-      </div>
-      <button
-        type="submit"
+        </div>
+        <button
+          type="submit"
         // disabled={Boolean(Object.keys(errors).length) || Boolean(Object.keys(imageErrors).length)}
-      >
-        Update Your Booking
-      </button>
-     </div>
+          className='update-booking-button'
+        >
+          Update Your Booking
+        </button>
+      </div>
     </form>
   );
 }

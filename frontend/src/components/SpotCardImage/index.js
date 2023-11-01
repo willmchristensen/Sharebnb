@@ -1,10 +1,14 @@
 import './SpotCardImage.css';
-const SpotCardImage = ({image}) => {
+const SpotCardImage = ({ image }) => {
+  const defaultImg = "https://static.thenounproject.com/png/4974686-200.png";
+  const handleImageError = (event) => {
+    event.target.src = defaultImg;
+  }
   return (
     <>
-    <div className="image-container">
-      <img src={image} alt="spot-image" />
-    </div>
+      <div className="image-container">
+        <img src={image} alt="spot-image" onError={handleImageError} />
+      </div>
     </>
   );
 };

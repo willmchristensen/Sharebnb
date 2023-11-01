@@ -1,0 +1,26 @@
+.booking-card{
+    border: .2rem solid var(--blue);
+    border-radius: .21rem;
+    width: 20rem;
+}
+.booking-info{
+    width: 50%;
+}
+.booking-info-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.manage-buttons-container{
+    display: flex;
+    border-top: .2rem solid var(--blue);
+}
+.manage-buttons-container > button{
+    width: 100%;
+    border-radius: 0;
+    padding: 1rem;
+    border: none;
+}
+.manage-buttons-container > button:first-child{
+    border-right: .2rem solid var(--blue);
+}

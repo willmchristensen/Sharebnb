@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllSpots } from '../../store/spots';
 import { loadUserBookings, getAllBookings } from '../../store/bookings'; // Import loadUserBookings
-import ManageButtons from '../ManageButtons';
-import SpotCards from '../SpotCards';
+import BookingCard from './BookingCard';
 
 const ManageBookings = () => {
   const dispatch = useDispatch();
@@ -26,14 +25,11 @@ const ManageBookings = () => {
           <div className="spot-cards-section-header">
             <h3>Manage Your Bookings</h3>
           </div>
-          {futureBookings.map(booking => (
-            <div key={booking.id}>
-              <h3>Start: {booking.startDate}</h3>
-              <h3>End: {booking.endDate}</h3>
-              <SpotCards spot={booking.Spot} className="spot-card" />
-              <ManageButtons booking={booking} />
-            </div>
-          ))}
+          {futureBookings.length ? futureBookings.map(booking => (
+            <BookingCard booking={booking} key={booking.id} />
+          )) : 
+          <h1>Oops, there appears to be nothing here!</h1>
+          }
         </nav>
       </div>
     </main>

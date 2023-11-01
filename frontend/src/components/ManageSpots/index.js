@@ -40,6 +40,7 @@ const ManageSpots = () => {
             >
               <button
                 className="create-button manage"
+                id="manage"
               >Create a new spot</button>
             </NavLink>
           </div>

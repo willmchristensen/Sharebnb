@@ -45,7 +45,7 @@
     border-radius: 1rem;
     border: 0.1rem solid var(--blue);
     box-shadow: 0 .2rem .2rem var(--grey);
-    padding: 1.5rem 1rem;
+    padding: 1.5rem 1.5rem;
 }
 .nav-link:hover{
     filter:brightness(100.1%);

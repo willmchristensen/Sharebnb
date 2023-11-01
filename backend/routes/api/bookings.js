@@ -46,22 +46,6 @@ const validateBooking = [
 ];
 router.get('/all', requireAuth, async (req, res) => {
     try {
-      // Fetch all bookings and include the associated spots
-      // const Bookings = await Booking.findAll({
-      //   include: [
-      //     {
-      //       model: Spot,
-      //       attributes: {
-      //         exclude: [
-      //           'description',
-      //           'avgRating',
-      //           'createdAt',
-      //           'updatedAt'
-      //         ]
-      //       }
-      //     }
-      //   ]
-      // });
       const Bookings = await Booking.findAll({
         include: [Spot], // Include the Spot model in the query
       });
@@ -72,7 +56,7 @@ router.get('/all', requireAuth, async (req, res) => {
         error: 'Internal server error'
       });
     }
-  });
+});
 // Create a booking
 // router.post('/', requireAuth,validateBooking, async (req, res) => {
 //     const { spotId, startDate, endDate } = req.body;
