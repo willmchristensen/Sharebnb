@@ -55,9 +55,7 @@ export const editBooking = (payload) => async (dispatch) => {
             },
             body: JSON.stringify(data)
         });
-
         if (response.ok) {
-            console.log('response ok');
             const booking = await response.json();
             console.log(booking);
             dispatch(updateBooking(booking));
@@ -72,7 +70,6 @@ export const editBooking = (payload) => async (dispatch) => {
         }
     }
 };
-
 export const createOneBooking = (payload) => async (dispatch) => {
     try {
         const response = await csrfFetch("/api/bookings", {
@@ -93,16 +90,15 @@ export const createOneBooking = (payload) => async (dispatch) => {
         return res;
     }
 };
-export const getAllBookings = () => async (dispatch) => {
-    const response = await csrfFetch(`/api/bookings/all`);
-
-    if (response.ok) {
-        const data = await response.json();
-        const allBookings = normalize(data.Bookings);
-        dispatch(loadAllBookings(allBookings));
-        return response;
-    }
-};
+// export const getAllBookings = () => async (dispatch) => {
+//     const response = await csrfFetch(`/api/bookings/all`);
+//     if (response.ok) {
+//         const data = await response.json();
+//         const allBookings = normalize(data.Bookings);
+//         dispatch(loadAllBookings(allBookings));
+//         return response;
+//     }
+// };
 export const deleteOneBooking = (id) => async (dispatch) => {
     try {
         const response = await csrfFetch(`/api/bookings/${id}`, {
@@ -110,7 +106,6 @@ export const deleteOneBooking = (id) => async (dispatch) => {
         });
         if(response.ok){
             const result = await response.json();
-            console.log('DELETE BOOKING THUNK:------------------',id,result)
             return dispatch(deleteOne(id));
         }
     } catch (error) {
@@ -135,8 +130,9 @@ const bookingsReducer = (state = initialState, action) => {
         }
         case EDIT_BOOKING: {
             const newState = { ...state, user: { ...state.user } };
-            newState.events[action.payload.id] = action.payload
-            return newState
+            newState.user[action.payload.id] = action.payload
+            // newState.user[action.payload.id].Spot = {...action.payload};
+            return newState;
         }
         case CREATE_BOOKING: {
             const newState = {...state, allBookings: {...state.allBookings}};

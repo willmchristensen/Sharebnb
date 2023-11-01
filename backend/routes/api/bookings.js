@@ -57,40 +57,6 @@ router.get('/all', requireAuth, async (req, res) => {
       });
     }
 });
-// Create a booking
-// router.post('/', requireAuth,validateBooking, async (req, res) => {
-//     const { spotId, startDate, endDate } = req.body;
-//     try {
-//         const newBooking = await Booking.create(
-//           {
-//             spotId,
-//             startDate,
-//             endDate,
-//             userId: req.user.id
-//           },
-//           {
-//             include: [
-//               {
-//                   model: Spot, attributes: {
-//                       exclude:
-//                       [
-//                           "description",
-//                           "avgRating",
-//                           "createdAt",
-//                           "updatedAt"
-//                       ]
-//                   }
-//               },
-//           ]
-//           }
-//         );
-
-//         return res.status(201).json(newBooking);
-//     } catch (error) {
-//         console.error('Error creating booking:', error);
-//         return res.status(500).json({ error: 'Internal server error' });
-//     }
-// });
 router.post('/', requireAuth, validateBooking, async (req, res) => {
     const { spotId, startDate, endDate } = req.body;
 
@@ -158,17 +124,26 @@ router.post('/', requireAuth, validateBooking, async (req, res) => {
         return res.status(500).json({ error: 'Internal server error' });
     }
 });
-
 // Edit a booking by ID
 router.put('/:bookingId',requireAuth,validateBooking, async(req,res) => {
     const booking = await Booking.findOne({
         where: {
             id: req.params.bookingId,
-        }
+        },
+        include: [
+            {
+                model: Spot, attributes: {
+                    exclude:
+                    [
+                        "description",
+                        "avgRating",
+                        "createdAt",
+                        "updatedAt"
+                    ]
+                }
+            },
+        ]
     });
-    // console.log('------------------------------booking in backend', booking);
-    console.log('------------------------------req.user', req.user.id);
-    console.log('------------------------------booking.userId', booking.userId);
     if(!booking){
         return res.status(404).json({
             message: "Booking couldn't be found",
@@ -205,7 +180,7 @@ router.put('/:bookingId',requireAuth,validateBooking, async(req,res) => {
                     }
                   });
             }else{
-                const bookings = await Booking.findAll({where:{spotId: booking.spotId,}});
+                const bookings = await Booking.findAll({where:{spotId: booking.spotId}});
 
                 for(let i = 0; i < bookings.length; i++){
 
@@ -235,7 +210,7 @@ router.put('/:bookingId',requireAuth,validateBooking, async(req,res) => {
                     booking.startDate = startDate;
                     booking.endDate = endDate;
                     await booking.save();
-
+                    
                     return res.status(200).json(booking);
                 }
 

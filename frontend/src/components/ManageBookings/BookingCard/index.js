@@ -3,7 +3,6 @@ import BookingImage from './BookingImage';
 import ManageButtons from '../../ManageButtons';
 
 function BookingCard({ booking }) {
-    console.log(booking.Spot)
     return (
         <div className="booking-card">
             <div className="booking-info-container">

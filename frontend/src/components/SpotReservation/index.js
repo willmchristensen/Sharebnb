@@ -21,7 +21,6 @@ const SpotReservation = () => {
         const payload = { 'spotId': realSpotId, 'startDate': startDate, 'endDate': endDate };
         const res = await dispatch(createOneBooking(payload));
         if(!res.errors) {
-            // setIsSubmitted(true);
             history.push('/bookings/current');
         }else{
             setErrors(res.errors)            

@@ -90,7 +90,8 @@ function BookingModal({ booking }) {
       setErrors(res.errors);
       setIsDisabled(true);
     }else{
-      await dispatch(loadUserBookings()).then(closeModal())
+      // await dispatch(loadUserBookings()).then(closeModal())
+      closeModal()
     }
   }
 
