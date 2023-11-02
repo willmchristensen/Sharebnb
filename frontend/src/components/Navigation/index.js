@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import MobileMenu from './MobileMenu';
+import MobileMenu from './MobileMenu/MobileMenu';
 import './Navigation.css';
 
 function Navigation({ isLoaded }){
@@ -54,7 +54,7 @@ function Navigation({ isLoaded }){
           }
         </div>
       </ul>
-      <MobileMenu isLoaded={isLoaded}/>
+      {/* <MobileMenu isLoaded={isLoaded}/> */}
     </>
 
   );

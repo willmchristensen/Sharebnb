@@ -78,8 +78,6 @@ form{
     font-size: 1rem;
     height: fit-content;
     border-radius: 1rem;
-    padding: .77rem;
-    margin-bottom: 1rem;
     width: 70%;
 }
 #button:hover{

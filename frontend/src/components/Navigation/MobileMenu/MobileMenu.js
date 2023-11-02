@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
+import ProfileButton from '../ProfileButton';
 import './MobileMenu.css';
 
 function MobileMenu({ isLoaded }){
