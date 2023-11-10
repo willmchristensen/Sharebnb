@@ -1,6 +1,6 @@
 # AirBnB Clone
 This Airbnb clone facilitates user-generated listings, reviews, and bookings for accommodations.
-![sharebnb-splash](https://github.com/willmchristensen/Sharebnb/assets/88559384/a4137a4d-210c-453d-a1fb-731cf0e9ee8a)
+![sharebnb-splash](https://github.com/willmchristensen/Sharebnb/assets/88559384/10e5816e-508b-4103-ab87-568bef4b3a1b)
 
 #Live Link: https://sharebnb-wpig.onrender.com
 
