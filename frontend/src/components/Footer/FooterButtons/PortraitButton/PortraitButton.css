@@ -1,0 +1,9 @@
+.portrait-button{
+    border: none;
+    background-color: transparent;
+    margin: .5rem 0;
+    font-size: 2rem;
+}
+.portrait-button:hover > i{
+    color: var(--blue);
+}

@@ -1,0 +1,5 @@
+.footer-portrait-buttons-container{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+}

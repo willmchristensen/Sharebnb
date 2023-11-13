@@ -10,6 +10,8 @@ import ManageSpots from './components/ManageSpots'
 import ManageReviews from "./components/ManageReviews";
 import ManageBookings from "./components/ManageBookings";
 import SpotReservation from "./components/SpotReservation";
+import Footer from "./components/Footer";
+
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -63,6 +65,7 @@ function App() {
             </Route>
           </Switch>
         )}
+      <Footer />
     </>
   );
 }

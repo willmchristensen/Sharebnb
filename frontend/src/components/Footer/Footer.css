@@ -1,0 +1,17 @@
+.main-footer-container{
+    display: flex;
+    margin-top: 1rem;
+}
+.main-footer-wrapper{
+    width: 100%;
+}
+.footer-title{
+    margin: 0;
+    font-size: 2rem;
+}
+.footer-subtitle{
+    color: var(--blue);
+}
+.footer-content{
+    width: 50%;
+}
