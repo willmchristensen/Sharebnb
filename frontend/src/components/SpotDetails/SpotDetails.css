@@ -72,14 +72,11 @@
 .spot-details-info-reserve-info{
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
 }
-.spot-details-info-reserve-price{
-    border-bottom: 1px solid var(--grey);
-}
 .spot-details-info-reserve-reviews-stars{
-    border: 1px solid var(--grey);
     border-radius: 1rem;
     border-radius: 4%;
     padding: 10px;
