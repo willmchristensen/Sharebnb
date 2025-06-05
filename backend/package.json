@@ -33,7 +33,7 @@
     "validator": "^13.9.0"
   },
   "devDependencies": {
-    "dotenv-cli": "^7.0.0",
+    "dotenv-cli": "^7.4.4",
     "nodemon": "^2.0.20",
     "sqlite3": "^5.1.4"
   },

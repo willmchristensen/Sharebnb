@@ -13,9 +13,10 @@ const Spots = () => {
     <main >
       <nav className="spot-cards-section">
           {
-            allSpots.map(spot => {
+            allSpots.map((spot, index) => {
               return (
                 <SpotCards
+                  key={index}
                   spot={spot}
                   className="spot-card"
                 />

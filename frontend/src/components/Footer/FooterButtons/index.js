@@ -19,7 +19,11 @@ function FooterPortraitButtons(){
             {
                 icons.map((icon,index) => {
                     return(
-                        <PortraitButton icon={icon} link={links[index]} />
+                        <PortraitButton 
+                            key={index}
+                            icon={icon} 
+                            link={links[index]} 
+                        />
                     )
                 })
             }
