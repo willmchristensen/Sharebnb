@@ -47,8 +47,11 @@ const SpotDetails = () => {
                 {
                     spotImages.length > 1 && (
                         <div className="spot-details-images-support">
-                            {spotImages.slice(1).map((image) =>
-                                <SpotCardImage image={image.url} />
+                            {spotImages.slice(1).map((image,index) =>
+                                <SpotCardImage 
+                                    key={index}
+                                    image={image.url} 
+                                />
                             )}
                         </div>
                     )
@@ -116,7 +119,7 @@ const SpotDetails = () => {
                             Be the first to post a review!
                         </h3>
                     ) : (
-                        allReviews.map(rev => <SpotReview review={rev} />)
+                        allReviews.map((rev,index) => <SpotReview key={index} review={rev} />)
                     )
             }
         </div>
